@@ -1,0 +1,24 @@
+Keep these in mind along with MVPs
+  = What views are required?
+  = What do those views look like?
+  = How can these views be broken down into React components? Boxes!
+  = Which components can be reused in different components?
+  = What data does each component need to display properly?
+    - Does it need a container to connect to the store?
+    - Can the data be passed down from a parent as props?
+
+Extra Notes
+  = Any component ending in 'Container' will 'connect'
+
+General
+  = App
+    = Header
+    = Main Page
+    = Sidebar
+    = Footer
+
+Front Page
+  = Broken up into 6 sections
+    = Section 1 & 6: Sign In / Sign Up
+    = Section 2 - 6: Content
+  = 
