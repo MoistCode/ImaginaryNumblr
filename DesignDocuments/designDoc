@@ -1,0 +1,82 @@
+Keep these in mind along with MVPs
+  = What views are required?
+  = What do those views look like?
+  = How can these views be broken down into React components? Boxes!
+  = Which components can be reused in different components?
+  = What data does each component need to display properly?
+    - Does it need a container to connect to the store?
+    - Can the data be passed down from a parent as props?
+
+Extra Notes
+  = Any component ending in 'Container' will 'connect'
+
+General
+  = App
+    = Header
+    = Main Page
+    = Sidebar
+    = Footer
+
+Front Page
+  = Broken up into 6 sections
+    = Section 1 & 6: Sign In / Sign Up
+    = Section 2 - 6: Content
+  =
+
+  SCHEMA
+
+{
+  entities: {
+    users: {
+      1: {
+        id: 1,
+        username: "cowman92",
+        blog_url: "www.imaginarynumblr/users/1",
+        avatar_img_url: "www.imapicture.com/312",
+        current_user_follow: true,
+        follower_count: 324
+      }
+    },
+    blogs: {
+      5: {
+        id: 5,
+        author_id: 1,
+        type: "photo",
+        img_url: "www.imanuploadedphoto.com",
+        body: "Here is a photo of PI",
+        current_user_like: false,
+        like_count: 83
+      }
+      7: {
+        id: 7,
+        author_id: 9,
+        type: "video",
+        video_url: "www.linktovideo.com",
+        body: "Seduction by mathematics",
+        current_user_like: false,
+        like_count: 1
+      }
+      10: {
+        id: 10,
+        author_id: 7,
+        type: "text",
+        body: "I am the body of the blog. Insert LaTeX here",
+        current_user_like: true,
+        like_count: 92
+      }
+    }
+  },
+  ui: {
+    loading: true/false
+  },
+  errors: {
+    login: ["Incorrect username/password combination"],
+    signup: ["Username/password cannot be blank"],
+
+  },
+  session: {
+    id: 10,
+    username: "moistie",
+
+  }
+}
