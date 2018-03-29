@@ -21,4 +21,42 @@ Front Page
   = Broken up into 6 sections
     = Section 1 & 6: Sign In / Sign Up
     = Section 2 - 6: Content
-  = 
+  =
+
+  SCHEMA
+  {
+    entities: {
+      users: {
+        id: {
+          userId:
+        }
+      },
+      blogs: {
+        id: {
+          blodId:
+          authorId:
+        }
+      },
+      likes: {
+        likerId:
+        blogId:
+      },
+      shares: {
+        userId:
+        blogId:
+      },
+      reblogs: {
+        userId:
+        blodId:
+      },
+      follows: {
+
+      },
+      inboxMessages: {
+
+      }
+    },
+    ui: {
+
+    }
+  }
