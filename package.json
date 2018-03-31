@@ -1,5 +1,37 @@
 {
   "name": "ImaginaryNumblr",
+  "version": "1.0.0",
+  "description": "Where nerds use numbers to meet other nerds!",
+  "bugs": {
+    "url": "https://github.com/MoistCode/ImaginaryNumblr/issues"
+  },
+  "homepage": "https://github.com/MoistCode/ImaginaryNumblr#readme",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "lodash": "^4.17.5",
+    "react": "^16.3.0",
+    "react-dom": "^16.3.0",
+    "react-redux": "^5.0.7",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
+    "redux": "^3.7.2",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.2.0",
+    "webpack": "^3.4.1"
+  },
+  "engines": {
+    "node": "8.11.1",
+    "npm": "5.6.0"
+  },
+  "scripts": {
+    "webpack": "webpack --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MoistCode/ImaginaryNumblr.git"
+  }
 }
