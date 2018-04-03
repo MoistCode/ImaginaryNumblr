@@ -20,13 +20,26 @@ class SessionForm extends React.Component {
     this.props.processForm(user);
   }
 
+  errorMessages() {
+  if (this.props.errors.length !== 0) {
+    return (
+      <ul>
+        {
+          this.props.errors.map((err) => <li>{err}</li>)
+        }
+      </ul>
+    )
+  }
+}
+
   render() {
     const { formType } = this.props;
 
     return (
-      <div>
-        <h1>{ formType } Page</h1>
-        <form onSubmit={(e) => this.handleSubmit(e)}>
+      <div className='main-session-form'>
+        {this.errorMessages()}
+        <h1 className='session-form-header'>{ formType } Page</h1>
+        <form onSubmit={(e) => this.handleSubmit(e)} className='session-form'>
           <label>Username:
             <input
               type='text'
@@ -49,7 +62,7 @@ class SessionForm extends React.Component {
   _additionalFields(formType) {
     if (formType === 'Sign Up') {
       return (
-        <div>
+        <div className='session-form-add-input'>
           <label>Email:
             <input
               type='text'

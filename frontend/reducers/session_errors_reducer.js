@@ -1,6 +1,7 @@
 import {
   RECEIVE_CURRENT_USER,
-  RECEIVE_SESSION_ERRORS
+  RECEIVE_SESSION_ERRORS,
+  RECEIVE_CLEARED_ERRORS
 } from '../actions/session_actions';
 
 const _uniqueItUp = (arr) => {
@@ -27,6 +28,8 @@ const sessionErrorsReducer = (oldState = [], action) => {
     case RECEIVE_SESSION_ERRORS:
       const newState = oldState.concat(action.errors);
       return _uniqueItUp(newState);
+    case RECEIVE_CLEARED_ERRORS:
+      return [];
     default:
       return oldState;
   }

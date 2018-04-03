@@ -1,0 +1,49 @@
+.main-nav-bar input {
+  transform: translateY(-100%);
+  transition: background 75ms,color 75ms;
+  background: #fff;
+  color: #444;
+  font-weight: 400;
+  border-style: none;
+}
+
+.around-search-bar {
+  border: 1px solid black;
+  width: 100px;
+}
+
+.main-nav-icon {
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.session-form button {
+  border-radius: 4px;
+  background: #73AD21;
+  cursor: pointer;
+  border: none;
+  background-color: rgba(0,0,0,.0941176);
+  margin: 0px 6px;
+  height: 32px;
+  width: 70px;
+}
+
+.session-button {
+  float: right;
+  margin-top: 10px;
+  margin-right: 0;
+  position: relative;
+  vertical-align: top;
+  outline: 0;
+}
+
+.session-button button {
+  border-radius: 4px;
+  background: #73AD21;
+  cursor: pointer;
+  border: none;
+  background-color: rgba(0,0,0,.0941176);
+  margin: 0px 6px;
+  height: 32px;
+  width: 70px;
+}
