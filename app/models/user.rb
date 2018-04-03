@@ -32,6 +32,10 @@ class User < ApplicationRecord
     self.password_digest = BCrypt::Password.create(password)
   end
 
+  def profile_picture_url=(profile_picture_url)
+    self.profile_picture_url ||= 'defaultimage'
+  end
+
   def is_password?(password)
     BCrypt::Password.new(self.password_digest).is_password?(password)
   end
