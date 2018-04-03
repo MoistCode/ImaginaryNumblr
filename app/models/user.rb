@@ -25,15 +25,12 @@ class User < ApplicationRecord
   def self.find_by_credentials(username, password)
     user = User.find_by(username: username)
     return nil unless user && user.is_password?(password)
+    user
   end
 
   def password=(password)
     @password = password
     self.password_digest = BCrypt::Password.create(password)
-  end
-
-  def profile_picture_url=(profile_picture_url)
-    self.profile_picture_url ||= 'defaultimage'
   end
 
   def is_password?(password)
