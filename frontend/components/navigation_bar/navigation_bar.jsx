@@ -15,7 +15,6 @@ class NavigationBar extends React.Component {
   }
 
   render() {
-    console.log(this.props.currentUser);
     return (
       <div className='main-nav-bar'>
         {this._mainIcon()}
@@ -27,9 +26,21 @@ class NavigationBar extends React.Component {
             value={this.state.searchBar}
             onChange={this.update('searchBar')} />
         </div>
+        {this._showCurrentUser()}
         {this._createSessionButtons(this.props.currentUser)}
       </div>
     )
+  }
+
+  _showCurrentUser() {
+    if (this.props.currentUser) {
+      return (
+        <div
+          className="user-welcome">
+          Welcome {this.props.currentUser[0].username}!
+        </div>
+      )
+    }
   }
 
   _createSessionButtons(currentUser) {
@@ -58,15 +69,15 @@ class NavigationBar extends React.Component {
         }}>Sign Up</button>
     )
 
-    const user = {
-      username: 'username',
-      password: 'password'
+    const demoUser = {
+      username: 'Demo User',
+      password: 'Password'
     }
 
     const demoButton = (
       <button
         className='nav-button'
-        onClick={() => this.props.demoLogin(user)}
+        onClick={() => this.props.demoLogin(demoUser)}
         >Demo</button>
     )
 

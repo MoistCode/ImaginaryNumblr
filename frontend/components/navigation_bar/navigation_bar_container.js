@@ -7,8 +7,16 @@ import {
 } from '../../actions/session_actions';
 import { withRouter } from 'react-router';
 
+const _checkCurrentUser = (currentUser) => {
+  if (currentUser != null) {
+    return Object.values(currentUser.users)
+  } else {
+    return null;
+  }
+}
+
 const mapStateToProps = (state) => ({
-  currentUser: state.session.currentUser
+  currentUser: _checkCurrentUser(state.session.currentUser)
 });
 
 const mapDispatchToProps = (dispatch) => ({

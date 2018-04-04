@@ -4963,6 +4963,7 @@ var SessionForm = function (_React$Component) {
                   className: 'username-session-input',
                   type: 'text',
                   value: this.state.username,
+                  placeholder: 'Username',
                   onChange: this.update('username') })
               ),
               _react2.default.createElement('br', null),
@@ -4972,6 +4973,7 @@ var SessionForm = function (_React$Component) {
                 _react2.default.createElement('i', { className: 'fa fa-lock' }),
                 _react2.default.createElement('input', {
                   type: 'password',
+                  placeholder: 'Password',
                   value: this.state.password,
                   onChange: this.update('password') })
               ),
@@ -5007,6 +5009,7 @@ var SessionForm = function (_React$Component) {
             _react2.default.createElement('input', {
               className: 'email-session-input',
               type: 'text',
+              placeholder: 'Email',
               value: this.state.email,
               onChange: this.update('email') }),
             _react2.default.createElement('br', null)
@@ -5018,6 +5021,7 @@ var SessionForm = function (_React$Component) {
             _react2.default.createElement('input', {
               type: 'text',
               value: this.state.profile_picture_url,
+              placeholder: 'Profile Picture',
               onChange: this.update('profile_picture_url') })
           )
         );
@@ -5028,15 +5032,15 @@ var SessionForm = function (_React$Component) {
     value: function _stateSetter(formType) {
       if (formType === 'Log In') {
         return {
-          username: 'Username',
-          password: 'Password'
+          username: '',
+          password: ''
         };
       } else {
         return {
-          username: 'Username',
-          password: 'Password',
-          email: 'Email',
-          profile_picture_url: 'Profile Picture Url'
+          username: '',
+          password: '',
+          email: '',
+          profile_picture_url: ''
         };
       }
     }
@@ -30427,9 +30431,17 @@ var _reactRouter = __webpack_require__(84);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var _checkCurrentUser = function _checkCurrentUser(currentUser) {
+  if (currentUser != null) {
+    return Object.values(currentUser.users);
+  } else {
+    return null;
+  }
+};
+
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    currentUser: state.session.currentUser
+    currentUser: _checkCurrentUser(state.session.currentUser)
   };
 };
 
@@ -30502,7 +30514,6 @@ var NavigationBar = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      console.log(this.props.currentUser);
       return _react2.default.createElement(
         'div',
         { className: 'main-nav-bar' },
@@ -30517,8 +30528,23 @@ var NavigationBar = function (_React$Component) {
             value: this.state.searchBar,
             onChange: this.update('searchBar') })
         ),
+        this._showCurrentUser(),
         this._createSessionButtons(this.props.currentUser)
       );
+    }
+  }, {
+    key: '_showCurrentUser',
+    value: function _showCurrentUser() {
+      if (this.props.currentUser) {
+        return _react2.default.createElement(
+          'div',
+          {
+            className: 'user-welcome' },
+          'Welcome ',
+          this.props.currentUser[0].username,
+          '!'
+        );
+      }
     }
   }, {
     key: '_createSessionButtons',
@@ -30557,9 +30583,9 @@ var NavigationBar = function (_React$Component) {
         'Sign Up'
       );
 
-      var user = {
-        username: 'username',
-        password: 'password'
+      var demoUser = {
+        username: 'Demo User',
+        password: 'Password'
       };
 
       var demoButton = _react2.default.createElement(
@@ -30567,7 +30593,7 @@ var NavigationBar = function (_React$Component) {
         {
           className: 'nav-button',
           onClick: function onClick() {
-            return _this3.props.demoLogin(user);
+            return _this3.props.demoLogin(demoUser);
           }
         },
         'Demo'

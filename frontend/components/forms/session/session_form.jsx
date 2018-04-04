@@ -49,6 +49,7 @@ class SessionForm extends React.Component {
                   className='username-session-input'
                   type='text'
                   value={this.state.username}
+                  placeholder="Username"
                   onChange={this.update('username')} />
               </div>
               <br />
@@ -56,6 +57,7 @@ class SessionForm extends React.Component {
                 <i className="fa fa-lock"></i>
                 <input
                   type='password'
+                  placeholder="Password"
                   value={this.state.password}
                   onChange={this.update('password')} />
               </div>
@@ -79,6 +81,7 @@ class SessionForm extends React.Component {
             <input
               className='email-session-input'
               type='text'
+              placeholder="Email"
               value={this.state.email}
               onChange={this.update('email')} />
             <br />
@@ -88,6 +91,7 @@ class SessionForm extends React.Component {
             <input
               type='text'
               value={this.state.profile_picture_url}
+              placeholder="Profile Picture"
               onChange={this.update('profile_picture_url')} />
           </div>
         </div>
@@ -98,15 +102,15 @@ class SessionForm extends React.Component {
   _stateSetter(formType) {
     if (formType === 'Log In') {
       return {
-        username: 'Username',
-        password: 'Password'
+        username: '',
+        password: ''
       };
     } else {
       return {
-        username: 'Username',
-        password: 'Password',
-        email: 'Email',
-        profile_picture_url: 'Profile Picture Url'
+        username: '',
+        password: '',
+        email: '',
+        profile_picture_url: ''
       };
     }
   }
