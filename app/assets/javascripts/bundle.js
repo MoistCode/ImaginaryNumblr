@@ -4893,22 +4893,7 @@ var SessionForm = function (_React$Component) {
       var _this2 = this;
 
       return function (e) {
-        if (e.target.value == '') {
-          var defaultInput = function defaultInput() {
-            if (field == 'username') {
-              return 'Username';
-            } else if (field == 'email') {
-              return 'Email';
-            } else if (field == 'profile_picture_url') {
-              return 'Profile Picture Url';
-            } else {
-              return field;
-            }
-          };
-          _this2.setState(_defineProperty({}, field, defaultInput()));
-        } else {
-          _this2.setState(_defineProperty({}, field, e.target.value));
-        }
+        _this2.setState(_defineProperty({}, field, e.target.value));
       };
     }
   }, {
@@ -4917,6 +4902,8 @@ var SessionForm = function (_React$Component) {
       e.preventDefault();
       var user = Object.assign({}, this.state);
       this.props.processForm(user);
+      window.location.reload();
+      this.props.history.push('/');
     }
   }, {
     key: 'errorMessages',
@@ -30469,7 +30456,6 @@ var NavigationBar = function (_React$Component) {
     _this.state = {
       searchBar: 'Search ImaginaryNumblr'
     };
-
     return _this;
   }
 
@@ -30485,7 +30471,7 @@ var NavigationBar = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-
+      console.log(this.props.currentUser);
       return _react2.default.createElement(
         'div',
         { className: 'main-nav-bar' },
@@ -30508,43 +30494,65 @@ var NavigationBar = function (_React$Component) {
     value: function _createSessionButtons(currentUser) {
       var _this3 = this;
 
+      var loginButton = _react2.default.createElement(
+        'button',
+        {
+          onClick: function onClick() {
+            _this3.props.clearErrors();
+            _this3.props.history.push('/login');
+          } },
+        'Log In'
+      );
+
+      var logoutButton = _react2.default.createElement(
+        'button',
+        {
+          className: 'nav-button',
+          onClick: function onClick() {
+            return _this3.props.logout();
+          } },
+        'Log Out'
+      );
+
+      var signupButton = _react2.default.createElement(
+        'button',
+        {
+          className: 'nav-button',
+          onClick: function onClick() {
+            _this3.props.clearErrors();
+            _this3.props.history.push('/signup');
+          } },
+        'Sign Up'
+      );
+
+      if (this.props.location.pathname == '/' && !currentUser) {
+        return _react2.default.createElement(
+          'span',
+          { className: 'session-button' },
+          signupButton,
+          loginButton
+        );
+      }
+
+      var renderedButton = function renderedButton() {
+        if (_this3.props.location.pathname == '/signup') {
+          return loginButton;
+        } else if (_this3.props.location.pathname == '/login') {
+          return signupButton;
+        } else {}
+      };
+
       if (currentUser) {
         return _react2.default.createElement(
           'span',
           { className: 'session-button' },
-          _react2.default.createElement(
-            'button',
-            {
-              className: 'nav-button',
-              onClick: function onClick() {
-                return _this3.props.logout();
-              } },
-            'Log Out'
-          )
+          logoutButton
         );
       } else {
         return _react2.default.createElement(
           'span',
           { className: 'session-button' },
-          _react2.default.createElement(
-            'button',
-            {
-              className: 'nav-button',
-              onClick: function onClick() {
-                _this3.props.clearErrors();
-                _this3.props.history.push('/signup');
-              } },
-            'Sign Up'
-          ),
-          _react2.default.createElement(
-            'button',
-            {
-              onClick: function onClick() {
-                _this3.props.clearErrors();
-                _this3.props.history.push('/login');
-              } },
-            'Log In'
-          )
+          renderedButton()
         );
       }
     }

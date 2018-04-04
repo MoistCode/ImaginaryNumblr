@@ -6,7 +6,6 @@ class NavigationBar extends React.Component {
     this.state = {
       searchBar: 'Search ImaginaryNumblr'
     }
-
   }
 
   update(field) {
@@ -16,7 +15,7 @@ class NavigationBar extends React.Component {
   }
 
   render() {
-
+    console.log(this.props.currentUser);
     return (
       <div className='main-nav-bar'>
         {this._mainIcon()}
@@ -34,29 +33,60 @@ class NavigationBar extends React.Component {
   }
 
   _createSessionButtons(currentUser) {
+    const loginButton = (
+      <button
+        onClick={() => {
+          this.props.clearErrors();
+          this.props.history.push('/login')
+        }}>Log In</button>
+    );
+
+    const logoutButton = (
+      <button
+        className='nav-button'
+        onClick={() => this.props.logout()}>Log Out
+      </button>
+    );
+
+    const signupButton = (
+      <button
+        className='nav-button'
+        onClick={() => {
+          this.props.clearErrors();
+          this.props.history.push('/signup');
+        }}>Sign Up</button>
+    )
+
+    if (this.props.location.pathname == '/' && !currentUser) {
+      return (
+        <span className='session-button'>
+          { signupButton }
+          { loginButton }
+        </span>
+      )
+    }
+
+    const renderedButton = () => {
+      if (this.props.location.pathname == '/signup') {
+        return loginButton;
+      } else if (this.props.location.pathname == '/login') {
+        return signupButton;
+      } else {
+
+      }
+    }
+
+
     if (currentUser) {
       return (
         <span className='session-button'>
-          <button
-            className='nav-button'
-            onClick={() => this.props.logout()}>Log Out
-          </button>
+          { logoutButton }
         </span>
       )
     } else {
       return (
         <span className='session-button'>
-          <button
-            className='nav-button'
-            onClick={() => {
-              this.props.clearErrors();
-              this.props.history.push('/signup');
-            }}>Sign Up</button>
-          <button
-            onClick={() => {
-              this.props.clearErrors();
-              this.props.history.push('/login')
-            }}>Log In</button>
+          { renderedButton() }
         </span>
       )
     }

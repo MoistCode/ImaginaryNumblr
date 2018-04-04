@@ -2,7 +2,7 @@
   position: fixed;
   z-index: 1;
   margin: 5px 10px;
-  width: 95%;
+  width: 98%;
 }
 
 .main-nav-bar input {
@@ -63,12 +63,17 @@
   outline: 0;
 }
 
+.session-form button {
+  margin-top: 7px;
+  margin-bottom: 5px;
+  background-color: white;
+}
+
 .session-button button {
   border-radius: 4px;
-  background: #73AD21;
-  cursor: pointer;
-  border: none;
   background-color: white;
+  cursor: pointer;
+  border: 1px solid black;
   margin: 0px 6px;
   height: 32px;
   width: 70px;

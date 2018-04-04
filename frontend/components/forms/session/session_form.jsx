@@ -10,22 +10,7 @@ class SessionForm extends React.Component {
 
   update(field) {
     return (e) => {
-      if (e.target.value == '') {
-        const defaultInput = () => {
-          if (field == 'username') {
-            return 'Username';
-          } else if (field == 'email') {
-            return 'Email';
-          } else if (field == 'profile_picture_url') {
-            return 'Profile Picture Url';
-          } else {
-            return field;
-          }
-        };
-        this.setState({ [field]: defaultInput() });
-      } else {
-        this.setState({ [field]: e.target.value });
-      }
+      this.setState({ [field]: e.target.value });
     }
   }
 
@@ -33,6 +18,8 @@ class SessionForm extends React.Component {
     e.preventDefault();
     const user = Object.assign({}, this.state);
     this.props.processForm(user);
+    window.location.reload();
+    this.props.history.push('/');
   }
 
   errorMessages() {
