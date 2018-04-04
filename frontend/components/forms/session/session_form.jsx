@@ -38,20 +38,20 @@ class SessionForm extends React.Component {
     return (
       <div className='main-session-form'>
         {this.errorMessages()}
-        <h1 className='session-form-header'>{ formType } Page</h1>
+        <h1 className='session-form-header'>{ formType }!</h1>
         <form onSubmit={(e) => this.handleSubmit(e)} className='session-form'>
           <label>Username:
             <input
               type='text'
               value={this.state.username}
               onChange={this.update('username')} />
-          </label>
+          </label><br />
           <label>Password:
             <input
               type='password'
               value={this.state.password}
               onChange={this.update('password')} />
-          </label>
+          </label><br />
           {this._additionalFields(formType)}
           <button>{this.props.formType}!</button>
         </form>
@@ -68,13 +68,13 @@ class SessionForm extends React.Component {
               type='text'
               value={this.state.email}
               onChange={this.update('email')} />
-          </label>
+          </label><br />
           <label>Profile Picture Url:
             <input
               type='text'
               value={this.state.profile_picture_url}
               onChange={this.update('profile_picture_url')} />
-          </label>
+          </label><br />
         </div>
       )
     }

@@ -1,15 +1,33 @@
+.main-nav-bar {
+  opacity: 1;
+}
+
 .main-nav-bar input {
-  transform: translateY(-100%);
-  transition: background 75ms,color 75ms;
+  transform: translateY(-10%);
+  margin-left: 30px;
   background: #fff;
   color: #444;
   font-weight: 400;
   border-style: none;
+  outline: none;
+  width: 375px;
+  height: 20px;
 }
 
 .around-search-bar {
+  transform: translateY(-50%);
+  margin-top: 5px;
+  border-radius: 5px;
   border: 1px solid black;
-  width: 100px;
+  display: inline-block;
+  height: 32px;
+  width: 450px;
+}
+
+.around-search-bar i {
+  transform: translateX(80%);
+  margin-top: 5px;
+  font-size: 20px;
 }
 
 .main-nav-icon {

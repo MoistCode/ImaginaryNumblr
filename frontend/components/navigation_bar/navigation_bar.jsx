@@ -19,13 +19,14 @@ class NavigationBar extends React.Component {
     return (
       <div className='main-nav-bar'>
         {this._mainIcon()}
-        <span className='around-search-bar'>
+        <div className='around-search-bar'>
+          <i className="fa fa-search"></i>
           <input
             className='nav-search-bar'
             type='text'
             value={this.state.searchBar}
             onChange={this.update('searchBar')} />
-        </span>
+        </div>
         {this._createSessionButtons(this.props.currentUser)}
       </div>
     )
