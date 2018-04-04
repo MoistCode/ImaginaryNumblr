@@ -4896,9 +4896,16 @@ var SessionForm = function (_React$Component) {
   }
 
   _createClass(SessionForm, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      if ($('html').hasClass('fp-enabled')) {
+        $.fn.fullpage.destroy('all');
+      }
+      $('#front_page').fullpage();
+    }
+  }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      console.log('1');
       if ($('html').hasClass('fp-enabled')) {
         $.fn.fullpage.destroy('all');
       }
@@ -4919,7 +4926,9 @@ var SessionForm = function (_React$Component) {
       e.preventDefault();
       var user = Object.assign({}, this.state);
       this.props.clearErrors();
-      this.props.processForm(user);
+      this.props.processForm(user).then(function () {
+        return window.location.reload();
+      });
     }
   }, {
     key: 'errorMessages',
@@ -4946,7 +4955,6 @@ var SessionForm = function (_React$Component) {
       var _this3 = this;
 
       var formType = this.props.formType;
-
 
       return _react2.default.createElement(
         'div',
@@ -30375,15 +30383,25 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var FrontPage = function (_React$Component) {
   _inherits(FrontPage, _React$Component);
 
-  function FrontPage() {
+  function FrontPage(props) {
     _classCallCheck(this, FrontPage);
 
-    return _possibleConstructorReturn(this, (FrontPage.__proto__ || Object.getPrototypeOf(FrontPage)).apply(this, arguments));
+    return _possibleConstructorReturn(this, (FrontPage.__proto__ || Object.getPrototypeOf(FrontPage)).call(this, props));
   }
 
   _createClass(FrontPage, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
+      console.log('didmount');
+      if ($('html').hasClass('fp-enabled')) {
+        $.fn.fullpage.destroy('all');
+      }
+      $('#front_page').fullpage();
+      console.log('didmount');
+    }
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
       if ($('html').hasClass('fp-enabled')) {
         $.fn.fullpage.destroy('all');
       }
@@ -30393,7 +30411,6 @@ var FrontPage = function (_React$Component) {
     key: 'render',
     value: function render() {
       var curPath = this.props.history.location.pathname;
-      console.log(curPath);
       return _react2.default.createElement(
         'div',
         { id: 'front_page' },

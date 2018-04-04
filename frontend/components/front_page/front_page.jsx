@@ -4,9 +4,20 @@ import LoginFormContainer from '../forms/session/login_form_container';
 import SignupFormContainer from '../forms/session/signup_form_container';
 
 class FrontPage extends React.Component {
-
+  constructor(props) {
+    super(props);
+  }
 
   componentDidMount() {
+    console.log('didmount')
+    if($('html').hasClass('fp-enabled')){
+      $.fn.fullpage.destroy('all');
+    }
+    $('#front_page').fullpage();
+    console.log('didmount')
+  }
+
+  componentWillReceiveProps(nextProps) {
     if($('html').hasClass('fp-enabled')){
       $.fn.fullpage.destroy('all');
     }
@@ -15,7 +26,6 @@ class FrontPage extends React.Component {
 
   render() {
     const curPath = this.props.history.location.pathname;
-    console.log(curPath);
     return (
       <div id="front_page">
         {this._firstSection(curPath)}

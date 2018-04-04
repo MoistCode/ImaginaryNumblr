@@ -7,14 +7,19 @@ class SessionForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentDidMount() {
-    console.log('1')
+  componentWillMount() {
     if($('html').hasClass('fp-enabled')){
       $.fn.fullpage.destroy('all');
     }
     $('#front_page').fullpage();
   }
 
+  componentDidMount() {
+    if($('html').hasClass('fp-enabled')){
+      $.fn.fullpage.destroy('all');
+    }
+    $('#front_page').fullpage();
+  }
 
   update(field) {
     return (e) => {
@@ -26,7 +31,7 @@ class SessionForm extends React.Component {
     e.preventDefault();
     const user = Object.assign({}, this.state);
     this.props.clearErrors();
-    this.props.processForm(user);
+    this.props.processForm(user).then(() => window.location.reload());
   }
 
   errorMessages() {
@@ -44,7 +49,6 @@ class SessionForm extends React.Component {
 
   render() {
     const { formType } = this.props;
-
     return (
       <div className='section'>
         <div className='background-session'>
