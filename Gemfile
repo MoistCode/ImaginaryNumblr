@@ -22,19 +22,19 @@ end
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem 'rails', '~> 5.1.5'
+gem 'bcrypt'
+gem 'paperclip'
+gem 'puma', '~> 3.7'
+gem 'aws-sdk', '< 3.0'
+gem 'sass-rails', '~> 5.0'
+gem 'jquery-rails'
+gem 'uglifier', '>= 1.3.0'
+gem 'coffee-rails', '~> 4.2'
+gem 'jbuilder', '~> 2.5'
 group :production do
-  gem 'rails', '~> 5.1.5'
-  gem 'bcrypt'
   gem 'pg', '>= 0.18', '< 2.0'
-  gem 'paperclip'
-  gem 'puma', '~> 3.7'
-  gem 'aws-sdk', '< 3.0'
-  gem 'sass-rails', '~> 5.0'
-  gem 'jquery-rails'
-  gem 'uglifier', '>= 1.3.0'
   gem 'rails_12factor'
-  gem 'coffee-rails', '~> 4.2'
-  gem 'jbuilder', '~> 2.5'
 end
 
 

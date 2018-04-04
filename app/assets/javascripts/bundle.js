@@ -30508,7 +30508,7 @@ var NavigationBar = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (NavigationBar.__proto__ || Object.getPrototypeOf(NavigationBar)).call(this, props));
 
     _this.state = {
-      searchBar: 'Search ImaginaryNumblr'
+      searchBar: ''
     };
     return _this;
   }
@@ -30537,6 +30537,7 @@ var NavigationBar = function (_React$Component) {
             className: 'nav-search-bar',
             type: 'text',
             value: this.state.searchBar,
+            placeholder: 'Search ImaginaryNumblr',
             onChange: this.update('searchBar') })
         ),
         this._showCurrentUser(),
