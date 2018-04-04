@@ -4941,60 +4941,64 @@ var SessionForm = function (_React$Component) {
 
       return _react2.default.createElement(
         'div',
-        { className: 'background-session' },
+        { className: 'section' },
         _react2.default.createElement(
           'div',
-          { className: 'w3-container w3-center w3-animate-opacity' },
+          { className: 'background-session' },
           _react2.default.createElement(
             'div',
-            { className: 'main-session-form' },
+            { className: 'w3-container w3-center w3-animate-opacity' },
             _react2.default.createElement(
-              'h1',
-              { className: 'session-form-header' },
-              formType,
-              '!'
-            ),
-            _react2.default.createElement(
-              'form',
-              { onSubmit: function onSubmit(e) {
-                  return _this3.handleSubmit(e);
-                }, className: 'session-form' },
+              'div',
+              { className: 'main-session-form' },
               _react2.default.createElement(
-                'div',
-                { className: 'session-input-around-username' },
-                _react2.default.createElement(
-                  'i',
-                  { className: 'material-icons' },
-                  'person'
-                ),
-                _react2.default.createElement('input', {
-                  className: 'username-session-input',
-                  type: 'text',
-                  value: this.state.username,
-                  placeholder: 'Username',
-                  onChange: this.update('username') })
-              ),
-              _react2.default.createElement('br', null),
-              _react2.default.createElement(
-                'div',
-                { className: 'session-input-around' },
-                _react2.default.createElement('i', { className: 'fa fa-lock' }),
-                _react2.default.createElement('input', {
-                  type: 'password',
-                  placeholder: 'Password',
-                  value: this.state.password,
-                  onChange: this.update('password') })
-              ),
-              _react2.default.createElement('br', null),
-              this._additionalFields(formType),
-              _react2.default.createElement(
-                'button',
-                null,
-                this.props.formType,
+                'h1',
+                { className: 'session-form-header' },
+                formType,
                 '!'
-              )
-            ),
-            this.errorMessages()
+              ),
+              _react2.default.createElement(
+                'form',
+                { onSubmit: function onSubmit(e) {
+                    return _this3.handleSubmit(e);
+                  }, className: 'session-form' },
+                _react2.default.createElement(
+                  'div',
+                  { className: 'session-input-around-username' },
+                  _react2.default.createElement(
+                    'i',
+                    { className: 'material-icons' },
+                    'person'
+                  ),
+                  _react2.default.createElement('input', {
+                    className: 'username-session-input',
+                    type: 'text',
+                    value: this.state.username,
+                    placeholder: 'Username',
+                    onChange: this.update('username') })
+                ),
+                _react2.default.createElement('br', null),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'session-input-around' },
+                  _react2.default.createElement('i', { className: 'fa fa-lock' }),
+                  _react2.default.createElement('input', {
+                    type: 'password',
+                    placeholder: 'Password',
+                    value: this.state.password,
+                    onChange: this.update('password') })
+                ),
+                _react2.default.createElement('br', null),
+                this._additionalFields(formType),
+                _react2.default.createElement(
+                  'button',
+                  null,
+                  this.props.formType,
+                  '!'
+                )
+              ),
+              this.errorMessages()
+            )
           )
         )
       );
@@ -24384,7 +24388,6 @@ var sessionReducer = function sessionReducer() {
   Object.freeze(oldState);
   switch (action.type) {
     case _session_actions.RECEIVE_CURRENT_USER:
-      window.location.reload();
       return (0, _merge2.default)({}, { currentUser: action.currentUser });
     default:
       return oldState;
@@ -30180,14 +30183,6 @@ var _route_util = __webpack_require__(219);
 
 var _reactRouterDom = __webpack_require__(25);
 
-var _login_form_container = __webpack_require__(220);
-
-var _login_form_container2 = _interopRequireDefault(_login_form_container);
-
-var _signup_form_container = __webpack_require__(221);
-
-var _signup_form_container2 = _interopRequireDefault(_signup_form_container);
-
 var _front_page = __webpack_require__(222);
 
 var _front_page2 = _interopRequireDefault(_front_page);
@@ -30203,9 +30198,9 @@ var App = function App() {
     'div',
     null,
     _react2.default.createElement(_navigation_bar_container2.default, null),
-    _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _front_page2.default }),
-    _react2.default.createElement(_route_util.AuthRoute, { path: '/login', component: _login_form_container2.default }),
-    _react2.default.createElement(_route_util.AuthRoute, { path: '/signup', component: _signup_form_container2.default })
+    _react2.default.createElement(_reactRouterDom.Route, { path: '/', component: _front_page2.default }),
+    _react2.default.createElement(_route_util.AuthRoute, { path: '/login', component: _front_page2.default }),
+    _react2.default.createElement(_route_util.AuthRoute, { path: '/signup', component: _front_page2.default })
   );
 };
 
@@ -30352,6 +30347,14 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(25);
 
+var _login_form_container = __webpack_require__(220);
+
+var _login_form_container2 = _interopRequireDefault(_login_form_container);
+
+var _signup_form_container = __webpack_require__(221);
+
+var _signup_form_container2 = _interopRequireDefault(_signup_form_container);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -30372,19 +30375,21 @@ var FrontPage = function (_React$Component) {
   _createClass(FrontPage, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
+      console.log('1');
+      if ($('html').hasClass('fp-enabled')) {
+        $.fn.fullpage.destroy('all');
+      }
       $('#front_page').fullpage();
     }
   }, {
     key: 'render',
     value: function render() {
+      var curPath = this.props.history.location.pathname;
+      console.log(curPath);
       return _react2.default.createElement(
         'div',
         { id: 'front_page' },
-        _react2.default.createElement(
-          'div',
-          { className: 'section' },
-          _react2.default.createElement('img', { className: 'photo1' })
-        ),
+        this._firstSection(curPath),
         _react2.default.createElement(
           'div',
           { className: 'section' },
@@ -30411,6 +30416,22 @@ var FrontPage = function (_React$Component) {
           _react2.default.createElement('img', { className: 'photo6' })
         )
       );
+    }
+  }, {
+    key: '_firstSection',
+    value: function _firstSection(currentPath) {
+
+      if (currentPath == '/signup') {
+        return _react2.default.createElement(_signup_form_container2.default, null);
+      } else if (currentPath == '/login') {
+        return _react2.default.createElement(_login_form_container2.default, null);
+      } else {
+        return _react2.default.createElement(
+          'div',
+          { className: 'section' },
+          _react2.default.createElement('img', { className: 'photo1' })
+        );
+      }
     }
   }]);
 
