@@ -17,16 +17,18 @@ class SessionForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const user = Object.assign({}, this.state);
+    this.props.clearErrors();
     this.props.processForm(user);
   }
 
   errorMessages() {
   if (this.props.errors.length !== 0) {
     return (
-      <ul>
+      <ul className='session-errors'>
         {
-          this.props.errors.map((err) => <li>{err}</li>)
+          this.props.errors.map((err) => <li>{err}{'\u00A0'}</li>)
         }
+      <br />
       </ul>
     )
   }
@@ -37,30 +39,32 @@ class SessionForm extends React.Component {
 
     return (
       <div className='background-session'>
-        <div className='main-session-form'>
-          <h1 className='session-form-header'>{ formType }!</h1>
-          <form onSubmit={(e) => this.handleSubmit(e)} className='session-form'>
-            <div className='session-input-around-username'>
-              <i className="material-icons">person</i>
-              <input
-                className='username-session-input'
-                type='text'
-                value={this.state.username}
-                onChange={this.update('username')} />
-            </div>
-            <br />
-            <div className='session-input-around'>
-              <i className="fa fa-lock"></i>
-              <input
-                type='password'
-                value={this.state.password}
-                onChange={this.update('password')} />
-            </div>
-            <br />
-            {this._additionalFields(formType)}
-            <button>{this.props.formType}!</button>
-          </form>
-          {this.errorMessages()}
+        <div className='w3-container w3-center w3-animate-opacity'>
+          <div className='main-session-form'>
+            <h1 className='session-form-header'>{ formType }!</h1>
+            <form onSubmit={(e) => this.handleSubmit(e)} className='session-form'>
+              <div className='session-input-around-username'>
+                <i className="material-icons">person</i>
+                <input
+                  className='username-session-input'
+                  type='text'
+                  value={this.state.username}
+                  onChange={this.update('username')} />
+              </div>
+              <br />
+              <div className='session-input-around'>
+                <i className="fa fa-lock"></i>
+                <input
+                  type='password'
+                  value={this.state.password}
+                  onChange={this.update('password')} />
+              </div>
+              <br />
+              {this._additionalFields(formType)}
+              <button>{this.props.formType}!</button>
+            </form>
+            {this.errorMessages()}
+          </div>
         </div>
       </div>
     )

@@ -131,7 +131,20 @@
 }
 
 .username-session-input {
-  transform: translateY(-15%);
+  transform: translateY(-25%);
+}
+
+.session-errors {
+  transform: translateY(-145%);
+  padding-left: 0;
+}
+
+.session-errors li {
+  font-size: 20px;
+  list-style: none;
+  text-align: center;
+  color: red;
+  padding-left:0;
 }
 
 button:hover {

@@ -4901,6 +4901,7 @@ var SessionForm = function (_React$Component) {
     value: function handleSubmit(e) {
       e.preventDefault();
       var user = Object.assign({}, this.state);
+      this.props.clearErrors();
       this.props.processForm(user);
     }
   }, {
@@ -4909,14 +4910,16 @@ var SessionForm = function (_React$Component) {
       if (this.props.errors.length !== 0) {
         return _react2.default.createElement(
           'ul',
-          null,
+          { className: 'session-errors' },
           this.props.errors.map(function (err) {
             return _react2.default.createElement(
               'li',
               null,
-              err
+              err,
+              '\xA0'
             );
-          })
+          }),
+          _react2.default.createElement('br', null)
         );
       }
     }
@@ -4933,52 +4936,56 @@ var SessionForm = function (_React$Component) {
         { className: 'background-session' },
         _react2.default.createElement(
           'div',
-          { className: 'main-session-form' },
+          { className: 'w3-container w3-center w3-animate-opacity' },
           _react2.default.createElement(
-            'h1',
-            { className: 'session-form-header' },
-            formType,
-            '!'
-          ),
-          _react2.default.createElement(
-            'form',
-            { onSubmit: function onSubmit(e) {
-                return _this3.handleSubmit(e);
-              }, className: 'session-form' },
+            'div',
+            { className: 'main-session-form' },
             _react2.default.createElement(
-              'div',
-              { className: 'session-input-around-username' },
-              _react2.default.createElement(
-                'i',
-                { className: 'material-icons' },
-                'person'
-              ),
-              _react2.default.createElement('input', {
-                className: 'username-session-input',
-                type: 'text',
-                value: this.state.username,
-                onChange: this.update('username') })
-            ),
-            _react2.default.createElement('br', null),
-            _react2.default.createElement(
-              'div',
-              { className: 'session-input-around' },
-              _react2.default.createElement('i', { className: 'fa fa-lock' }),
-              _react2.default.createElement('input', {
-                type: 'password',
-                value: this.state.password,
-                onChange: this.update('password') })
-            ),
-            _react2.default.createElement('br', null),
-            this._additionalFields(formType),
-            _react2.default.createElement(
-              'button',
-              null,
-              this.props.formType,
+              'h1',
+              { className: 'session-form-header' },
+              formType,
               '!'
-            )
-          ),
-          this.errorMessages()
+            ),
+            _react2.default.createElement(
+              'form',
+              { onSubmit: function onSubmit(e) {
+                  return _this3.handleSubmit(e);
+                }, className: 'session-form' },
+              _react2.default.createElement(
+                'div',
+                { className: 'session-input-around-username' },
+                _react2.default.createElement(
+                  'i',
+                  { className: 'material-icons' },
+                  'person'
+                ),
+                _react2.default.createElement('input', {
+                  className: 'username-session-input',
+                  type: 'text',
+                  value: this.state.username,
+                  onChange: this.update('username') })
+              ),
+              _react2.default.createElement('br', null),
+              _react2.default.createElement(
+                'div',
+                { className: 'session-input-around' },
+                _react2.default.createElement('i', { className: 'fa fa-lock' }),
+                _react2.default.createElement('input', {
+                  type: 'password',
+                  value: this.state.password,
+                  onChange: this.update('password') })
+              ),
+              _react2.default.createElement('br', null),
+              this._additionalFields(formType),
+              _react2.default.createElement(
+                'button',
+                null,
+                this.props.formType,
+                '!'
+              )
+            ),
+            this.errorMessages()
+          )
         )
       );
     }
@@ -30259,6 +30266,9 @@ var mapStateToProps = function mapStateToProps(state) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
+    clearErrors: function clearErrors() {
+      return dispatch((0, _session_actions.clearErrors)());
+    },
     processForm: function processForm(user) {
       return dispatch((0, _session_actions.login)(user));
     }
@@ -30297,6 +30307,9 @@ var mapStateToProps = function mapStateToProps(state) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
+    clearErrors: function clearErrors() {
+      return dispatch((0, _session_actions.clearErrors)());
+    },
     processForm: function processForm(user) {
       return dispatch((0, _session_actions.signup)(user));
     }
