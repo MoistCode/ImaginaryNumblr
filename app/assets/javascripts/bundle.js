@@ -5011,7 +5011,8 @@ var SessionForm = function (_React$Component) {
                   'button',
                   null,
                   this.props.formType,
-                  '!'
+                  '!',
+                  _react2.default.createElement('i', { className: 'fa fa-superscript', style: { fontSize: '24px' } })
                 )
               ),
               this.errorMessages()
@@ -30617,7 +30618,10 @@ var NavigationBar = function (_React$Component) {
             _this3.props.clearErrors();
             _this3.props.history.push('/login');
           } },
-        'Log In'
+        'Log In',
+        _react2.default.createElement('i', {
+          className: 'fa fa-superscript',
+          style: { fontSize: '24px' } })
       );
 
       var logoutButton = _react2.default.createElement(
@@ -30627,7 +30631,10 @@ var NavigationBar = function (_React$Component) {
           onClick: function onClick() {
             return _this3.props.logout();
           } },
-        'Log Out'
+        'Log Out',
+        _react2.default.createElement('i', {
+          className: 'fa fa-superscript',
+          style: { fontSize: '24px' } })
       );
 
       var signupButton = _react2.default.createElement(
@@ -30638,7 +30645,10 @@ var NavigationBar = function (_React$Component) {
             _this3.props.clearErrors();
             _this3.props.history.push('/signup');
           } },
-        'Sign Up'
+        'Sign Up',
+        _react2.default.createElement('i', {
+          className: 'fa fa-superscript',
+          style: { fontSize: '24px' } })
       );
 
       var demoUser = {
@@ -30654,7 +30664,10 @@ var NavigationBar = function (_React$Component) {
             return _this3.props.demoLogin(demoUser);
           }
         },
-        'Demo'
+        'Demo',
+        _react2.default.createElement('i', {
+          className: 'fa fa-superscript',
+          style: { fontSize: '24px' } })
       );
 
       if (this.props.location.pathname == '/' && !currentUser) {

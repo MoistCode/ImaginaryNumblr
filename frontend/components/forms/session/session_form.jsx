@@ -76,7 +76,9 @@ class SessionForm extends React.Component {
                 </div>
                 <br />
                 {this._additionalFields(formType)}
-                <button>{this.props.formType}!</button>
+                <button>{this.props.formType}!
+                  <i className="fa fa-superscript" style={{fontSize:'24px'}} />
+                </button>
               </form>
               {this.errorMessages()}
             </div>

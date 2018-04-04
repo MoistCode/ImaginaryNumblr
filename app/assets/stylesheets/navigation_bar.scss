@@ -77,10 +77,13 @@
   border: 1px solid black;
   margin: 0px 6px;
   height: 32px;
-  width: 80px;
+  width: 100px;
   -webkit-box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
   -moz-box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
   box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
+  i {
+    margin-left: 4px;
+  }
 }
 
 .user-welcome {

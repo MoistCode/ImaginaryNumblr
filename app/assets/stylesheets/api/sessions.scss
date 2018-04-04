@@ -15,6 +15,7 @@
   width: 33%;
   left: 33.3%;
   position: absolute;
+
 }
 
 .session-form-header {
@@ -120,10 +121,13 @@
   background-color: gray;
   margin: 4px 6px;
   height: 32px;
-  width: 80px;
+  width: 110px;
   -webkit-box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
   -moz-box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
   box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
+  i {
+    margin-left: 4px;
+  }
 }
 
 .email-session-input {
@@ -153,7 +157,7 @@
 
 button:hover {
   height: 32px;
-  width: 100px;
+  width: 120px;
   background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
   -webkit-transition: width 1s; /* For Safari 3.1 to 6.0 */
   transition: width 1s;
@@ -161,6 +165,8 @@ button:hover {
   -z-animation: rainbow 18s ease infinite;
   -o-animation: rainbow 18s ease infinite;
   animation: rainbow 18s ease infinite;
+  font-weight: bold;
+  font: white;
 }
 
 @-webkit-keyframes rainbow {

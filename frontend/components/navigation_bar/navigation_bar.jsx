@@ -51,13 +51,19 @@ class NavigationBar extends React.Component {
         onClick={() => {
           this.props.clearErrors();
           this.props.history.push('/login')
-        }}>Log In</button>
+        }}>Log In<i
+                  className="fa fa-superscript"
+                  style={{fontSize:'24px'}} />
+      </button>
     );
 
     const logoutButton = (
       <button
         className='nav-button'
         onClick={() => this.props.logout()}>Log Out
+        <i
+          className="fa fa-superscript"
+          style={{fontSize:'24px'}} />
       </button>
     );
 
@@ -67,7 +73,11 @@ class NavigationBar extends React.Component {
         onClick={() => {
           this.props.clearErrors();
           this.props.history.push('/signup');
-        }}>Sign Up</button>
+        }}>Sign Up
+        <i
+          className="fa fa-superscript"
+          style={{fontSize:'24px'}} />
+      </button>
     )
 
     const demoUser = {
@@ -79,7 +89,11 @@ class NavigationBar extends React.Component {
       <button
         className='nav-button'
         onClick={() => this.props.demoLogin(demoUser)}
-        >Demo</button>
+        >Demo
+        <i
+          className="fa fa-superscript"
+          style={{fontSize:'24px'}} />
+      </button>
     )
 
     if (this.props.location.pathname == '/' && !currentUser) {
