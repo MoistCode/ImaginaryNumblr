@@ -2,8 +2,21 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.background-session {
+  background-image: url('../session.jpg');
+  height: 100vh;
+  width: 100%;
+  background-size:     cover;                      /* <------ */
+  background-repeat:   no-repeat;
+  background-position: center center;
+}
+
+.session-form-header {
+  color: white;
+}
+
 .main-session-form {
-  padding-top: 300px;
+  padding-top: 330px;
   text-align: center;
 }
 

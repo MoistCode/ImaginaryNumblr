@@ -18,4 +18,6 @@ li {
   list-style: none;
   display: inline;
   text-align: center;
+  color: white;
+  padding-left:0;
 }

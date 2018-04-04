@@ -4902,8 +4902,6 @@ var SessionForm = function (_React$Component) {
       e.preventDefault();
       var user = Object.assign({}, this.state);
       this.props.processForm(user);
-      window.location.reload();
-      this.props.history.push('/');
     }
   }, {
     key: 'errorMessages',
@@ -4932,45 +4930,49 @@ var SessionForm = function (_React$Component) {
 
       return _react2.default.createElement(
         'div',
-        { className: 'main-session-form' },
+        { className: 'background-session' },
         _react2.default.createElement(
-          'h1',
-          { className: 'session-form-header' },
-          formType,
-          '!'
-        ),
-        _react2.default.createElement(
-          'form',
-          { onSubmit: function onSubmit(e) {
-              return _this3.handleSubmit(e);
-            }, className: 'session-form' },
+          'div',
+          { className: 'main-session-form' },
           _react2.default.createElement(
-            'div',
-            { className: 'session-input-around' },
-            _react2.default.createElement('input', {
-              type: 'text',
-              value: this.state.username,
-              onChange: this.update('username') })
-          ),
-          _react2.default.createElement('br', null),
-          _react2.default.createElement(
-            'div',
-            { className: 'session-input-around' },
-            _react2.default.createElement('input', {
-              type: 'password',
-              value: this.state.password,
-              onChange: this.update('password') })
-          ),
-          _react2.default.createElement('br', null),
-          this._additionalFields(formType),
-          _react2.default.createElement(
-            'button',
-            null,
-            this.props.formType,
+            'h1',
+            { className: 'session-form-header' },
+            formType,
             '!'
-          )
-        ),
-        this.errorMessages()
+          ),
+          _react2.default.createElement(
+            'form',
+            { onSubmit: function onSubmit(e) {
+                return _this3.handleSubmit(e);
+              }, className: 'session-form' },
+            _react2.default.createElement(
+              'div',
+              { className: 'session-input-around' },
+              _react2.default.createElement('input', {
+                type: 'text',
+                value: this.state.username,
+                onChange: this.update('username') })
+            ),
+            _react2.default.createElement('br', null),
+            _react2.default.createElement(
+              'div',
+              { className: 'session-input-around' },
+              _react2.default.createElement('input', {
+                type: 'password',
+                value: this.state.password,
+                onChange: this.update('password') })
+            ),
+            _react2.default.createElement('br', null),
+            this._additionalFields(formType),
+            _react2.default.createElement(
+              'button',
+              null,
+              this.props.formType,
+              '!'
+            )
+          ),
+          this.errorMessages()
+        )
       );
     }
   }, {
@@ -24347,6 +24349,7 @@ var sessionReducer = function sessionReducer() {
   Object.freeze(oldState);
   switch (action.type) {
     case _session_actions.RECEIVE_CURRENT_USER:
+      window.location.reload();
       return (0, _merge2.default)({}, { currentUser: action.currentUser });
     default:
       return oldState;

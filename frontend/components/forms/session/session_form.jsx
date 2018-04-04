@@ -18,8 +18,6 @@ class SessionForm extends React.Component {
     e.preventDefault();
     const user = Object.assign({}, this.state);
     this.props.processForm(user);
-    window.location.reload();
-    this.props.history.push('/');
   }
 
   errorMessages() {
@@ -38,27 +36,29 @@ class SessionForm extends React.Component {
     const { formType } = this.props;
 
     return (
-      <div className='main-session-form'>
-        <h1 className='session-form-header'>{ formType }!</h1>
-        <form onSubmit={(e) => this.handleSubmit(e)} className='session-form'>
-          <div className='session-input-around'>
-            <input
-              type='text'
-              value={this.state.username}
-              onChange={this.update('username')} />
-          </div>
-          <br />
-          <div className='session-input-around'>
-            <input
-              type='password'
-              value={this.state.password}
-              onChange={this.update('password')} />
-          </div>
-          <br />
-          {this._additionalFields(formType)}
-          <button>{this.props.formType}!</button>
-        </form>
-        {this.errorMessages()}
+      <div className='background-session'>
+        <div className='main-session-form'>
+          <h1 className='session-form-header'>{ formType }!</h1>
+          <form onSubmit={(e) => this.handleSubmit(e)} className='session-form'>
+            <div className='session-input-around'>
+              <input
+                type='text'
+                value={this.state.username}
+                onChange={this.update('username')} />
+            </div>
+            <br />
+            <div className='session-input-around'>
+              <input
+                type='password'
+                value={this.state.password}
+                onChange={this.update('password')} />
+            </div>
+            <br />
+            {this._additionalFields(formType)}
+            <button>{this.props.formType}!</button>
+          </form>
+          {this.errorMessages()}
+        </div>
       </div>
     )
   }
