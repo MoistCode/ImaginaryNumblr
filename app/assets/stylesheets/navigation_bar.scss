@@ -62,12 +62,16 @@
   position: relative;
   vertical-align: top;
   outline: 0;
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: bold;
+
 }
 
 .session-form button {
   margin-top: 7px;
   margin-bottom: 5px;
   background-color: white;
+  font-family: 'Ubuntu', sans-serif;
 }
 
 .nav-button {
@@ -89,4 +93,8 @@
 .user-welcome {
   display: inline-block;
   transform: translate(400%, -75%);
+}
+
+.session-form-header {
+  font-family: 'Ubuntu', sans-serif;
 }

@@ -30201,7 +30201,7 @@ var _route_util = __webpack_require__(219);
 
 var _reactRouterDom = __webpack_require__(25);
 
-var _front_page = __webpack_require__(222);
+var _front_page = __webpack_require__(220);
 
 var _front_page2 = _interopRequireDefault(_front_page);
 
@@ -30275,88 +30275,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _session_form = __webpack_require__(86);
-
-var _session_form2 = _interopRequireDefault(_session_form);
-
-var _reactRedux = __webpack_require__(12);
-
-var _session_actions = __webpack_require__(10);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var mapStateToProps = function mapStateToProps(state) {
-  return {
-    errors: state.errors.session,
-    formType: 'Log In'
-  };
-};
-
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {
-    clearErrors: function clearErrors() {
-      return dispatch((0, _session_actions.clearErrors)());
-    },
-    processForm: function processForm(user) {
-      return dispatch((0, _session_actions.login)(user));
-    }
-  };
-};
-
-exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_session_form2.default);
-
-/***/ }),
-/* 221 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _session_form = __webpack_require__(86);
-
-var _session_form2 = _interopRequireDefault(_session_form);
-
-var _reactRedux = __webpack_require__(12);
-
-var _session_actions = __webpack_require__(10);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var mapStateToProps = function mapStateToProps(state) {
-  return {
-    errors: state.errors.session,
-    formType: 'Sign Up'
-  };
-};
-
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {
-    clearErrors: function clearErrors() {
-      return dispatch((0, _session_actions.clearErrors)());
-    },
-    processForm: function processForm(user) {
-      return dispatch((0, _session_actions.signup)(user));
-    }
-  };
-};
-
-exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_session_form2.default);
-
-/***/ }),
-/* 222 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = __webpack_require__(0);
@@ -30365,11 +30283,11 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRouterDom = __webpack_require__(25);
 
-var _login_form_container = __webpack_require__(220);
+var _login_form_container = __webpack_require__(221);
 
 var _login_form_container2 = _interopRequireDefault(_login_form_container);
 
-var _signup_form_container = __webpack_require__(221);
+var _signup_form_container = __webpack_require__(222);
 
 var _signup_form_container2 = _interopRequireDefault(_signup_form_container);
 
@@ -30465,6 +30383,88 @@ var FrontPage = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = FrontPage;
+
+/***/ }),
+/* 221 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _session_form = __webpack_require__(86);
+
+var _session_form2 = _interopRequireDefault(_session_form);
+
+var _reactRedux = __webpack_require__(12);
+
+var _session_actions = __webpack_require__(10);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    errors: state.errors.session,
+    formType: 'Log In'
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    clearErrors: function clearErrors() {
+      return dispatch((0, _session_actions.clearErrors)());
+    },
+    processForm: function processForm(user) {
+      return dispatch((0, _session_actions.login)(user));
+    }
+  };
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_session_form2.default);
+
+/***/ }),
+/* 222 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _session_form = __webpack_require__(86);
+
+var _session_form2 = _interopRequireDefault(_session_form);
+
+var _reactRedux = __webpack_require__(12);
+
+var _session_actions = __webpack_require__(10);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    errors: state.errors.session,
+    formType: 'Sign Up'
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    clearErrors: function clearErrors() {
+      return dispatch((0, _session_actions.clearErrors)());
+    },
+    processForm: function processForm(user) {
+      return dispatch((0, _session_actions.signup)(user));
+    }
+  };
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_session_form2.default);
 
 /***/ }),
 /* 223 */
