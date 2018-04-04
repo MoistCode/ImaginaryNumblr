@@ -1,5 +1,8 @@
 .main-nav-bar {
-  opacity: 1;
+  position: fixed;
+  z-index: 1;
+  margin: 5px 10px;
+  width: 95%;
 }
 
 .main-nav-bar input {
@@ -16,12 +19,16 @@
 
 .around-search-bar {
   transform: translateY(-50%);
-  margin-top: 5px;
+  margin-top: 20px;
+  background: #fff;
   border-radius: 5px;
   border: 1px solid black;
   display: inline-block;
   height: 32px;
   width: 450px;
+  -webkit-box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
 }
 
 .around-search-bar i {
@@ -35,7 +42,7 @@
   margin-right: 10px;
 }
 
-.session-form button {
+.session-form .nav-button {
   border-radius: 4px;
   background: #73AD21;
   cursor: pointer;
@@ -44,6 +51,7 @@
   margin: 0px 6px;
   height: 32px;
   width: 70px;
+  float: right;
 }
 
 .session-button {
@@ -60,8 +68,11 @@
   background: #73AD21;
   cursor: pointer;
   border: none;
-  background-color: rgba(0,0,0,.0941176);
+  background-color: white;
   margin: 0px 6px;
   height: 32px;
   width: 70px;
+  -webkit-box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
 }

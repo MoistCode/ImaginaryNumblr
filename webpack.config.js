@@ -16,10 +16,6 @@ module.exports = {
         query: {
           presets: ['env', 'react']
         }
-      },
-      {
-        test: /\.(png|jpg)$/,
-        loader: 'url-loader?limit=8192'
       }
     ]
   },

@@ -10,7 +10,22 @@ class SessionForm extends React.Component {
 
   update(field) {
     return (e) => {
-      this.setState({ [field]: e.target.value });
+      if (e.target.value == '') {
+        const defaultInput = () => {
+          if (field == 'username') {
+            return 'Username';
+          } else if (field == 'email') {
+            return 'Email';
+          } else if (field == 'profile_picture_url') {
+            return 'Profile Picture Url';
+          } else {
+            return field;
+          }
+        };
+        this.setState({ [field]: defaultInput() });
+      } else {
+        this.setState({ [field]: e.target.value });
+      }
     }
   }
 
@@ -37,24 +52,26 @@ class SessionForm extends React.Component {
 
     return (
       <div className='main-session-form'>
-        {this.errorMessages()}
         <h1 className='session-form-header'>{ formType }!</h1>
         <form onSubmit={(e) => this.handleSubmit(e)} className='session-form'>
-          <label>Username:
+          <div className='session-input-around'>
             <input
               type='text'
               value={this.state.username}
               onChange={this.update('username')} />
-          </label><br />
-          <label>Password:
+          </div>
+          <br />
+          <div className='session-input-around'>
             <input
               type='password'
               value={this.state.password}
               onChange={this.update('password')} />
-          </label><br />
+          </div>
+          <br />
           {this._additionalFields(formType)}
           <button>{this.props.formType}!</button>
         </form>
+        {this.errorMessages()}
       </div>
     )
   }
@@ -63,18 +80,20 @@ class SessionForm extends React.Component {
     if (formType === 'Sign Up') {
       return (
         <div className='session-form-add-input'>
-          <label>Email:
+          <div className='session-input-around'>
             <input
               type='text'
               value={this.state.email}
               onChange={this.update('email')} />
-          </label><br />
-          <label>Profile Picture Url:
+            <br />
+          </div>
+          <div className='session-input-around'>
             <input
               type='text'
               value={this.state.profile_picture_url}
               onChange={this.update('profile_picture_url')} />
-          </label><br />
+            <br />
+          </div>
         </div>
       )
     }
@@ -83,15 +102,15 @@ class SessionForm extends React.Component {
   _stateSetter(formType) {
     if (formType === 'Log In') {
       return {
-        username: '',
-        password: ''
+        username: 'Username',
+        password: 'Password'
       };
     } else {
       return {
-        username: '',
-        password: '',
-        email: '',
-        profile_picture_url: ''
+        username: 'Username',
+        password: 'Password',
+        email: 'Email',
+        profile_picture_url: 'Profile Picture Url'
       };
     }
   }

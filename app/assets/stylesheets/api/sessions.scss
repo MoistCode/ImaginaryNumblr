@@ -1,3 +1,54 @@
 // Place all the styles related to the Api::Sessions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.main-session-form {
+  padding-top: 300px;
+  text-align: center;
+}
+
+.session-form-add-input div input {
+  text-align: center;
+}
+
+.main-session-form * {
+  margin: 3px;
+}
+
+.session-input-around {
+  margin-top: 5px;
+  background: #fff;
+  border-radius: 5px;
+  border: 1px solid black;
+  display: inline-block;
+  height: 32px;
+  width: 200px;
+  -webkit-box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
+}
+
+.main-session-form input {
+  text-align: center;
+  border-radius: 5px;
+  border: 1px solid black;
+  background: #fff;
+  color: #444;
+  font-weight: 400;
+  border-style: none;
+  outline: none;
+}
+
+.main-session-form button {
+  border-radius: 4px;
+  background: #73AD21;
+  cursor: pointer;
+  border: none;
+  background-color: rgba(0,0,0,.0941176);
+  margin: 3px 6px;
+  height: 32px;
+  width: 70px;
+  -webkit-box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
+}

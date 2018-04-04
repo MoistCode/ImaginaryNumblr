@@ -4,10 +4,12 @@ import { Route } from 'react-router-dom';
 import LoginFormContainer from './forms/session/login_form_container';
 import SignupFormContainer from './forms/session/signup_form_container';
 import FrontPage from './front_page/front_page';
+import NavigationBarContainer from './navigation_bar/navigation_bar_container';
 
 const App = () => (
   <div>
-    <Route path='/' component={ FrontPage } />
+    <NavigationBarContainer />
+    <Route exact path='/' component={ FrontPage } />
     <AuthRoute path='/login' component={ LoginFormContainer } />
     <AuthRoute path='/signup' component={ SignupFormContainer } />
   </div>

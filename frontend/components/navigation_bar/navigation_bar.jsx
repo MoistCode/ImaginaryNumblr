@@ -6,6 +6,7 @@ class NavigationBar extends React.Component {
     this.state = {
       searchBar: 'Search ImaginaryNumblr'
     }
+
   }
 
   update(field) {
@@ -37,6 +38,7 @@ class NavigationBar extends React.Component {
       return (
         <span className='session-button'>
           <button
+            className='nav-button'
             onClick={() => this.props.logout()}>Log Out
           </button>
         </span>
@@ -45,6 +47,7 @@ class NavigationBar extends React.Component {
       return (
         <span className='session-button'>
           <button
+            className='nav-button'
             onClick={() => {
               this.props.clearErrors();
               this.props.history.push('/signup');
@@ -62,6 +65,11 @@ class NavigationBar extends React.Component {
   _mainIcon() {
     return (
         <img
+          onClick={() => {
+              window.location.reload();
+              this.props.history.push('/');
+            }
+          }
           className='main-nav-icon'
           src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAe
           P4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqG
