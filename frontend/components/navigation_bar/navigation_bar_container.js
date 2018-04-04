@@ -1,6 +1,10 @@
 import NavigationBar from './navigation_bar';
 import { connect } from 'react-redux';
-import { logout, clearErrors } from '../../actions/session_actions';
+import {
+  logout,
+  clearErrors,
+  login
+} from '../../actions/session_actions';
 import { withRouter } from 'react-router';
 
 const mapStateToProps = (state) => ({
@@ -9,7 +13,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   clearErrors: () => dispatch(clearErrors()),
-  logout: () => dispatch(logout())
+  logout: () => dispatch(logout()),
+  demoLogin: (user) => dispatch(login(user))
 });
 
 export default withRouter(

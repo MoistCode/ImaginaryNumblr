@@ -40,14 +40,17 @@ class SessionForm extends React.Component {
         <div className='main-session-form'>
           <h1 className='session-form-header'>{ formType }!</h1>
           <form onSubmit={(e) => this.handleSubmit(e)} className='session-form'>
-            <div className='session-input-around'>
+            <div className='session-input-around-username'>
+              <i className="material-icons">person</i>
               <input
+                className='username-session-input'
                 type='text'
                 value={this.state.username}
                 onChange={this.update('username')} />
             </div>
             <br />
             <div className='session-input-around'>
+              <i className="fa fa-lock"></i>
               <input
                 type='password'
                 value={this.state.password}
@@ -67,19 +70,21 @@ class SessionForm extends React.Component {
     if (formType === 'Sign Up') {
       return (
         <div className='session-form-add-input'>
-          <div className='session-input-around'>
+          <div className='session-input-around-email'>
+            <i className="material-icons">email</i>
             <input
+              className='email-session-input'
               type='text'
               value={this.state.email}
               onChange={this.update('email')} />
             <br />
           </div>
           <div className='session-input-around'>
+            <i className="fa fa-picture-o"></i>
             <input
               type='text'
               value={this.state.profile_picture_url}
               onChange={this.update('profile_picture_url')} />
-            <br />
           </div>
         </div>
       )

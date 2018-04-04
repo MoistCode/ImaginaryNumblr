@@ -35,6 +35,7 @@ class NavigationBar extends React.Component {
   _createSessionButtons(currentUser) {
     const loginButton = (
       <button
+        className='nav-button'
         onClick={() => {
           this.props.clearErrors();
           this.props.history.push('/login')
@@ -57,9 +58,22 @@ class NavigationBar extends React.Component {
         }}>Sign Up</button>
     )
 
+    const user = {
+      username: 'username',
+      password: 'password'
+    }
+
+    const demoButton = (
+      <button
+        className='nav-button'
+        onClick={() => this.props.demoLogin(user)}
+        >Demo</button>
+    )
+
     if (this.props.location.pathname == '/' && !currentUser) {
       return (
         <span className='session-button'>
+          { demoButton }
           { signupButton }
           { loginButton }
         </span>

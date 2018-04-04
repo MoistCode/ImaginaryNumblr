@@ -18,8 +18,8 @@
 }
 
 .around-search-bar {
-  transform: translateY(-50%);
-  margin-top: 20px;
+  transform: translateY(-45%);
+  margin-top: 25px;
   background: #fff;
   border-radius: 5px;
   border: 1px solid black;
@@ -32,17 +32,18 @@
 }
 
 .around-search-bar i {
-  transform: translateX(80%);
-  margin-top: 5px;
+  transform: translateX(70%);
+  margin-top: 4px;
   font-size: 20px;
 }
 
 .main-nav-icon {
   cursor: pointer;
   margin-right: 10px;
+  margin-bottom: 35px;
 }
 
-.session-form .nav-button {
+.nav-button {
   border-radius: 4px;
   background: #73AD21;
   cursor: pointer;
@@ -69,14 +70,14 @@
   background-color: white;
 }
 
-.session-button button {
+.nav-button {
   border-radius: 4px;
   background-color: white;
   cursor: pointer;
   border: 1px solid black;
   margin: 0px 6px;
   height: 32px;
-  width: 70px;
+  width: 80px;
   -webkit-box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
   -moz-box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
   box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);

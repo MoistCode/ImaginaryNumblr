@@ -4947,8 +4947,14 @@ var SessionForm = function (_React$Component) {
               }, className: 'session-form' },
             _react2.default.createElement(
               'div',
-              { className: 'session-input-around' },
+              { className: 'session-input-around-username' },
+              _react2.default.createElement(
+                'i',
+                { className: 'material-icons' },
+                'person'
+              ),
               _react2.default.createElement('input', {
+                className: 'username-session-input',
                 type: 'text',
                 value: this.state.username,
                 onChange: this.update('username') })
@@ -4957,6 +4963,7 @@ var SessionForm = function (_React$Component) {
             _react2.default.createElement(
               'div',
               { className: 'session-input-around' },
+              _react2.default.createElement('i', { className: 'fa fa-lock' }),
               _react2.default.createElement('input', {
                 type: 'password',
                 value: this.state.password,
@@ -4984,8 +4991,14 @@ var SessionForm = function (_React$Component) {
           { className: 'session-form-add-input' },
           _react2.default.createElement(
             'div',
-            { className: 'session-input-around' },
+            { className: 'session-input-around-email' },
+            _react2.default.createElement(
+              'i',
+              { className: 'material-icons' },
+              'email'
+            ),
             _react2.default.createElement('input', {
+              className: 'email-session-input',
               type: 'text',
               value: this.state.email,
               onChange: this.update('email') }),
@@ -4994,11 +5007,11 @@ var SessionForm = function (_React$Component) {
           _react2.default.createElement(
             'div',
             { className: 'session-input-around' },
+            _react2.default.createElement('i', { className: 'fa fa-picture-o' }),
             _react2.default.createElement('input', {
               type: 'text',
               value: this.state.profile_picture_url,
-              onChange: this.update('profile_picture_url') }),
-            _react2.default.createElement('br', null)
+              onChange: this.update('profile_picture_url') })
           )
         );
       }
@@ -30157,7 +30170,7 @@ var _front_page = __webpack_require__(222);
 
 var _front_page2 = _interopRequireDefault(_front_page);
 
-var _navigation_bar_container = __webpack_require__(224);
+var _navigation_bar_container = __webpack_require__(223);
 
 var _navigation_bar_container2 = _interopRequireDefault(_navigation_bar_container);
 
@@ -30379,8 +30392,7 @@ var FrontPage = function (_React$Component) {
 exports.default = FrontPage;
 
 /***/ }),
-/* 223 */,
-/* 224 */
+/* 223 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30390,7 +30402,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _navigation_bar = __webpack_require__(225);
+var _navigation_bar = __webpack_require__(224);
 
 var _navigation_bar2 = _interopRequireDefault(_navigation_bar);
 
@@ -30415,6 +30427,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     logout: function logout() {
       return dispatch((0, _session_actions.logout)());
+    },
+    demoLogin: function demoLogin(user) {
+      return dispatch((0, _session_actions.login)(user));
     }
   };
 };
@@ -30422,7 +30437,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 exports.default = (0, _reactRouter.withRouter)((0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_navigation_bar2.default));
 
 /***/ }),
-/* 225 */
+/* 224 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -30500,6 +30515,7 @@ var NavigationBar = function (_React$Component) {
       var loginButton = _react2.default.createElement(
         'button',
         {
+          className: 'nav-button',
           onClick: function onClick() {
             _this3.props.clearErrors();
             _this3.props.history.push('/login');
@@ -30528,10 +30544,27 @@ var NavigationBar = function (_React$Component) {
         'Sign Up'
       );
 
+      var user = {
+        username: 'username',
+        password: 'password'
+      };
+
+      var demoButton = _react2.default.createElement(
+        'button',
+        {
+          className: 'nav-button',
+          onClick: function onClick() {
+            return _this3.props.demoLogin(user);
+          }
+        },
+        'Demo'
+      );
+
       if (this.props.location.pathname == '/' && !currentUser) {
         return _react2.default.createElement(
           'span',
           { className: 'session-button' },
+          demoButton,
           signupButton,
           loginButton
         );
