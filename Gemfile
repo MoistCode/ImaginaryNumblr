@@ -29,6 +29,11 @@ gem 'jbuilder', '~> 2.5'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
+gem 'bcrypt'
+gem 'paperclip'
+gem 'aws-sdk', '< 3.0'
+gem 'jquery-rails'
+gem 'rails_12factor'
 
 
 group :development, :test do
@@ -39,10 +44,6 @@ group :development, :test do
   gem 'selenium-webdriver'
   gem 'annotate'
   gem 'faker'
-  gem 'bcrypt'
-  gem 'paperclip'
-  gem 'aws-sdk', '< 3.0'
-  gem 'jquery-rails'
   gem 'pry-rails'
   gem 'better_errors'
   gem 'binding_of_caller'
