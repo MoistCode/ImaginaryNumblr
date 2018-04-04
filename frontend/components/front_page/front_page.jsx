@@ -7,7 +7,6 @@ class FrontPage extends React.Component {
 
 
   componentDidMount() {
-    console.log('1')
     if($('html').hasClass('fp-enabled')){
       $.fn.fullpage.destroy('all');
     }

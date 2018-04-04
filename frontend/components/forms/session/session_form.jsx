@@ -7,6 +7,14 @@ class SessionForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidMount() {
+    console.log('1')
+    if($('html').hasClass('fp-enabled')){
+      $.fn.fullpage.destroy('all');
+    }
+    $('#front_page').fullpage();
+  }
+
 
   update(field) {
     return (e) => {

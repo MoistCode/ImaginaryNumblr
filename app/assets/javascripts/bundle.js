@@ -4896,6 +4896,15 @@ var SessionForm = function (_React$Component) {
   }
 
   _createClass(SessionForm, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      console.log('1');
+      if ($('html').hasClass('fp-enabled')) {
+        $.fn.fullpage.destroy('all');
+      }
+      $('#front_page').fullpage();
+    }
+  }, {
     key: 'update',
     value: function update(field) {
       var _this2 = this;
@@ -30375,7 +30384,6 @@ var FrontPage = function (_React$Component) {
   _createClass(FrontPage, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      console.log('1');
       if ($('html').hasClass('fp-enabled')) {
         $.fn.fullpage.destroy('all');
       }
