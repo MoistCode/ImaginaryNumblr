@@ -4,7 +4,7 @@ class NavigationBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchBar: 'Search ImaginaryNumblr'
+      searchBar: ''
     }
   }
 
@@ -24,6 +24,7 @@ class NavigationBar extends React.Component {
             className='nav-search-bar'
             type='text'
             value={this.state.searchBar}
+            placeholder='Search ImaginaryNumblr'
             onChange={this.update('searchBar')} />
         </div>
         {this._showCurrentUser()}
