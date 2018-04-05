@@ -31090,7 +31090,6 @@ var BlogPostCreationForm = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (BlogPostCreationForm.__proto__ || Object.getPrototypeOf(BlogPostCreationForm)).call(this, props));
 
     _this.state = _this._generateState(_this.props.contentType);
-    debugger;
     return _this;
   }
 
