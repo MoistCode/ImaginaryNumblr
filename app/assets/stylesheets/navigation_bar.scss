@@ -18,7 +18,7 @@
 }
 
 .around-search-bar {
-  transform: translateY(-45%);
+  transform: translateY(-25%);
   margin-top: 25px;
   background: #fff;
   border-radius: 5px;
@@ -33,7 +33,7 @@
 
 .around-search-bar i {
   transform: translateX(70%);
-  margin-top: 4px;
+  margin-top: 5px;
   font-size: 20px;
 }
 
@@ -74,12 +74,27 @@
   font-family: 'Ubuntu', sans-serif;
 }
 
+
+.user-welcome {
+  float: right;
+}
+
+.session-form-header {
+  font-family: 'Ubuntu', sans-serif;
+}
+
+.profile-picture {
+  display: inline;
+  width: 64px;
+  height: 64px;
+}
+
 .nav-button {
   border-radius: 4px;
   background-color: white;
   cursor: pointer;
   border: 1px solid black;
-  margin: 0px 6px;
+  margin: 5px 6px;
   height: 32px;
   width: 100px;
   -webkit-box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
@@ -90,11 +105,6 @@
   }
 }
 
-.user-welcome {
-  display: inline-block;
-  transform: translate(400%, -75%);
-}
-
-.session-form-header {
-  font-family: 'Ubuntu', sans-serif;
+.username {
+  margin-top: 10px;
 }

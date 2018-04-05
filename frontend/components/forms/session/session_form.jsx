@@ -30,9 +30,18 @@ class SessionForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const user = Object.assign({}, this.state);
+    const formData = new FormData();
+    formData.append('user[username]', this.state.username)
+    formData.append('user[password]', this.state.password)
+    if (this.props.formType === "Sign Up"){
+      formData.append('user[profile_picture_url]', this.state.profile_picture_file);
+      formData.append('user[email]', this.state.email);
+    }
+    for (var pair of formData.entries()) {
+      console.log(pair[0]+ ', ' + pair[1]);
+    }
     this.props.clearErrors();
-    this.props.processForm(user).then(() => window.location.reload());
+    this.props.processForm(formData).then(() => window.location.reload());
   }
 
   errorMessages() {
@@ -50,14 +59,19 @@ class SessionForm extends React.Component {
 
 _handleImageChange(e) {
   e.preventDefault();
-  let reader = new FileReader();
-  let file = e.target.files[0];
+  const reader = new FileReader();
+  const file = e.currentTarget.files[0];
 
-  reader.onloadend = function () {
+  reader.onloadend = () => {
     this.setState({ profile_picture_file: file, profile_picture_url: reader.result });
-  }.bind(this);
+  }
 
-  reader.readAsDataURL(file)
+  if (file) {
+    reader.readAsDataURL(file)
+  } else {
+    this.setState({ profile_picture_file: null, profile_picture_url: '' })
+  }
+
 }
 
   render() {
@@ -138,7 +152,7 @@ _handleImageChange(e) {
         username: '',
         password: '',
         email: '',
-        profile_picture_file: '',
+        profile_picture_file: null,
         profile_picture_url: ''
       };
     }

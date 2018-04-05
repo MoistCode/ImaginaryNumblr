@@ -22,6 +22,9 @@ class User < ApplicationRecord
 
   after_initialize :ensure_session_token, :ensure_profile_picture
 
+  has_attached_file :profile_picture_url, default_url: "default_user.png"
+  validates_attachment_content_type :profile_picture_url, content_type: /\Aimage\/.*\z/
+
   def self.find_by_credentials(username, password)
     user = User.find_by(username: username)
     return nil unless user && user.is_password?(password)

@@ -4925,9 +4925,40 @@ var SessionForm = function (_React$Component) {
     key: 'handleSubmit',
     value: function handleSubmit(e) {
       e.preventDefault();
-      var user = Object.assign({}, this.state);
+      var formData = new FormData();
+      formData.append('user[username]', this.state.username);
+      formData.append('user[password]', this.state.password);
+      if (this.props.formType === "Sign Up") {
+        formData.append('user[profile_picture_url]', this.state.profile_picture_file);
+        formData.append('user[email]', this.state.email);
+      }
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
+
+      try {
+        for (var _iterator = formData.entries()[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          var pair = _step.value;
+
+          console.log(pair[0] + ', ' + pair[1]);
+        }
+      } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion && _iterator.return) {
+            _iterator.return();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
+      }
+
       this.props.clearErrors();
-      this.props.processForm(user).then(function () {
+      this.props.processForm(formData).then(function () {
         return window.location.reload();
       });
     }
@@ -4953,20 +4984,26 @@ var SessionForm = function (_React$Component) {
   }, {
     key: '_handleImageChange',
     value: function _handleImageChange(e) {
+      var _this3 = this;
+
       e.preventDefault();
       var reader = new FileReader();
-      var file = e.target.files[0];
+      var file = e.currentTarget.files[0];
 
       reader.onloadend = function () {
-        this.setState({ profile_picture_file: file, profile_picture_url: reader.result });
-      }.bind(this);
+        _this3.setState({ profile_picture_file: file, profile_picture_url: reader.result });
+      };
 
-      reader.readAsDataURL(file);
+      if (file) {
+        reader.readAsDataURL(file);
+      } else {
+        this.setState({ profile_picture_file: null, profile_picture_url: '' });
+      }
     }
   }, {
     key: 'render',
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       var formType = this.props.formType;
 
@@ -4991,7 +5028,7 @@ var SessionForm = function (_React$Component) {
               _react2.default.createElement(
                 'form',
                 { onSubmit: function onSubmit(e) {
-                    return _this3.handleSubmit(e);
+                    return _this4.handleSubmit(e);
                   }, className: 'session-form' },
                 _react2.default.createElement(
                   'div',
@@ -5083,7 +5120,7 @@ var SessionForm = function (_React$Component) {
           username: '',
           password: '',
           email: '',
-          profile_picture_file: '',
+          profile_picture_file: null,
           profile_picture_url: ''
         };
       }
@@ -24373,7 +24410,10 @@ var signup = exports.signup = function signup(user) {
   return $.ajax({
     method: 'POST',
     url: '/api/user',
-    data: { user: user }
+    contentType: false,
+    processData: false,
+    dataType: 'json',
+    data: user
   });
 };
 
@@ -30610,12 +30650,16 @@ var NavigationBar = function (_React$Component) {
     value: function _showCurrentUser() {
       if (this.props.currentUser) {
         return _react2.default.createElement(
-          'div',
-          {
-            className: 'user-welcome' },
-          'Welcome ',
-          this.props.currentUser[0].username,
-          '!'
+          'span',
+          { className: 'user-welcome' },
+          _react2.default.createElement('img', {
+            className: 'profile-picture',
+            src: this.props.currentUser[0].profileImageUrl }),
+          _react2.default.createElement(
+            'span',
+            null,
+            this.props.currentUser[0].username
+          )
         );
       }
     }

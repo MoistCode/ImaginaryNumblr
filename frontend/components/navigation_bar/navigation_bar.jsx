@@ -36,10 +36,14 @@ class NavigationBar extends React.Component {
   _showCurrentUser() {
     if (this.props.currentUser) {
       return (
-        <div
-          className="user-welcome">
-          Welcome {this.props.currentUser[0].username}!
-        </div>
+        <span className="user-welcome">
+          <img
+            className='profile-picture'
+            src={this.props.currentUser[0].profileImageUrl} />
+          <span>
+            {this.props.currentUser[0].username}
+          </span>
+        </span>
       )
     }
   }

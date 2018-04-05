@@ -3,6 +3,7 @@ json.users do
     json.id user.id
     json.username user.username
     json.blogUrl "/users/#{user.id}"
-    json.profileImageUrl user.profile_picture_url
+    json.profileImageUrl asset_path(user.profile_picture_url.url(:original))
+
   end
 end
