@@ -707,7 +707,8 @@ var signup = exports.signup = function signup(user) {
       console.log(user);
       dispatch(receiveCurrentUser(user));
     }, function (errors) {
-      return dispatch(receiveSessionErrors(errors.responseJSON));
+      console.log(errors);
+      dispatch(receiveSessionErrors(errors.responseJSON));
     });
   };
 };

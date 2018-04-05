@@ -9,7 +9,10 @@ export const signup = (user) => (dispatch) => SessionApiUtil.signup(user)
     (user) => {
       console.log(user);
       dispatch(receiveCurrentUser(user))},
-    (errors) => dispatch(receiveSessionErrors(errors.responseJSON))
+    (errors) => {
+      console.log(errors);
+      dispatch(receiveSessionErrors(errors.responseJSON))
+    }
   );
 
 export const login = (user) => (dispatch) => SessionApiUtil.login(user)
