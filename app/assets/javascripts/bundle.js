@@ -24390,7 +24390,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var signup = exports.signup = function signup(user) {
-  console.log('signup ajax call');
   return $.ajax({
     method: 'POST',
     url: '/api/user',
@@ -30730,17 +30729,16 @@ var NavigationBar = function (_React$Component) {
           style: { fontSize: '24px' } })
       );
 
-      var demoUser = {
-        username: 'username',
-        password: 'password'
-      };
+      var formData = new FormData();
+      formData.append('user[username]', 'username');
+      formData.append('user[password]', 'password');
 
       var demoButton = _react2.default.createElement(
         'button',
         {
           className: 'nav-button',
           onClick: function onClick() {
-            return _this4.props.demoLogin(demoUser);
+            _this4.props.demoLogin(formData);
           }
         },
         'Demo',

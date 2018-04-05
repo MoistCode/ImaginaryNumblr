@@ -107,15 +107,16 @@ class NavigationBar extends React.Component {
       </button>
     )
 
-    const demoUser = {
-      username: 'username',
-      password: 'password'
-    }
+    const formData = new FormData();
+    formData.append('user[username]', 'username')
+    formData.append('user[password]', 'password')
 
     const demoButton = (
       <button
         className='nav-button'
-        onClick={() => this.props.demoLogin(demoUser)}
+        onClick={() => {
+          this.props.demoLogin(formData);
+          }}
         >Demo
         <i
           className="fa fa-superscript"
