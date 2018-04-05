@@ -8,8 +8,7 @@ export const signup = (user) => (dispatch) => SessionApiUtil.signup(user)
   .then(
     (user) => {
       console.log(user);
-      dispatch(receiveCurrentUser(user);
-    }),
+      dispatch(receiveCurrentUser(user))},
     (errors) => dispatch(receiveSessionErrors(errors.responseJSON))
   );
 
