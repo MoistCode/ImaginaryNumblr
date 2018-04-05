@@ -135,12 +135,12 @@ _handleImageChange(e) {
             <input
               type='file'
               onChange={this._handleImageChange} />
+            <img src={this.state.profile_picture_url} />
           </span>
         </div>
       )
     }
   }
-  // <img src={this.state.profile_picture_url} />
 
   _stateSetter(formType) {
     if (formType === 'Log In') {

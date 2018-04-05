@@ -30646,6 +30646,11 @@ var NavigationBar = function (_React$Component) {
         this._createSessionButtons(this.props.currentUser)
       );
     }
+
+    // <img
+    //   className='profile-picture'
+    //   src={this.props.currentUser[0].profileImageUrl} />
+
   }, {
     key: '_showCurrentUser',
     value: function _showCurrentUser() {
@@ -30653,9 +30658,6 @@ var NavigationBar = function (_React$Component) {
         return _react2.default.createElement(
           'span',
           { className: 'user-welcome' },
-          _react2.default.createElement('img', {
-            className: 'profile-picture',
-            src: this.props.currentUser[0].profileImageUrl }),
           _react2.default.createElement(
             'span',
             null,
