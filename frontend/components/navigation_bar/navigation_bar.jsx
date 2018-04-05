@@ -41,7 +41,15 @@ class NavigationBar extends React.Component {
       return (
         <span className="user-welcome">
           <img
-            onClick={() => this.props.history.push('/dashboard')}
+            onClick={() => {
+                if (
+                  !this.props.currentUser &&
+                  this.props.location.pathname != '/dashboard'
+                ) {
+                  window.location.reload();
+                  this.props.history.push('/');
+                }
+            }}
             className='profile-picture'
             src={this.props.currentUser[0].profileImageUrl} />
           <span>

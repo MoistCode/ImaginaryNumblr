@@ -27,6 +27,15 @@ class Dashboard extends React.Component {
         className='dash-background'>
         <div className='blog-creation'>
           <img
+            onClick={() => {
+                if (
+                  !this.props.currentUser &&
+                  this.props.location.pathname != '/dashboard'
+                ) {
+                  window.location.reload();
+                  this.props.history.push('/');
+                }
+            }}
             className='dash-current-user-image'
             src={this.props.currentUser[0].profileImageUrl} />
           <div className='create-blog-types'>

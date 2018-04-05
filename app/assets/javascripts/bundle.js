@@ -30661,7 +30661,10 @@ var NavigationBar = function (_React$Component) {
           { className: 'user-welcome' },
           _react2.default.createElement('img', {
             onClick: function onClick() {
-              return _this3.props.history.push('/dashboard');
+              if (!_this3.props.currentUser && _this3.props.location.pathname != '/dashboard') {
+                window.location.reload();
+                _this3.props.history.push('/');
+              }
             },
             className: 'profile-picture',
             src: this.props.currentUser[0].profileImageUrl }),
@@ -30903,6 +30906,12 @@ var Dashboard = function (_React$Component) {
           'div',
           { className: 'blog-creation' },
           _react2.default.createElement('img', {
+            onClick: function onClick() {
+              if (!_this2.props.currentUser && _this2.props.location.pathname != '/dashboard') {
+                window.location.reload();
+                _this2.props.history.push('/');
+              }
+            },
             className: 'dash-current-user-image',
             src: this.props.currentUser[0].profileImageUrl }),
           _react2.default.createElement(

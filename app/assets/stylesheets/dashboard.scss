@@ -17,9 +17,11 @@
 }
 
 .dash-current-user-image {
+  cursor: pointer;
   width: 64px;
   height: 64px;
   border-radius: 5px;
+  transform: translateX(5%);
 }
 
 .create-blog-types {
