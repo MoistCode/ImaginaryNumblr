@@ -65,6 +65,7 @@ class BlogPostCreationForm extends React.Component {
     }
   }
 
+  // https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_draggable
   dragElement(elmnt) {
     console.log(elmnt);
     var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;

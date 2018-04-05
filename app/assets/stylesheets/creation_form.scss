@@ -7,14 +7,17 @@
 }
 
 #creation-form {
-  // background-color: white;
-  background:rgba(0, 0, 255,1);
+  background-color: white;
   width: 500px;
   height: 500px;
   z-index: 10;
   transform: translate(92%, 45%);
-  border-radius: 5px;
+  border-radius: 8px;
   text-align: center;
+  border: 2px solid black;
+  -webkit-box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
 
   i {
     cursor: pointer;
@@ -24,11 +27,31 @@
   h2 {
     display: inline-block;
     width: 80%;
+    transform: translateX(3%);
   }
 
   textarea {
     width: 450px;
     height: 300px;
     resize: none;
+  }
+
+  form {
+
+    button {
+      border-radius: 4px;
+      cursor: pointer;
+      border: 1px solid black;
+      background-color: white;
+      margin: 4px 6px;
+      height: 32px;
+      width: 110px;
+      -webkit-box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
+      -moz-box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
+      box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
+      font-family: 'Ubuntu', sans-serif;
+      font-weight: bold;
+    }
+
   }
 }

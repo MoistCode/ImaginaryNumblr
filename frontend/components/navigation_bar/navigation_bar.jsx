@@ -155,8 +155,13 @@ class NavigationBar extends React.Component {
     return (
         <img
           onClick={() => {
-              window.location.reload();
-              this.props.history.push('/');
+              if (
+                !this.props.currentUser &&
+                this.props.location.pathname != '/dashboard'
+              ) {
+                window.location.reload();
+                this.props.history.push('/');
+              }
             }
           }
           className='main-nav-icon'

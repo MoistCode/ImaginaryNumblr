@@ -30785,8 +30785,10 @@ var NavigationBar = function (_React$Component) {
 
       return _react2.default.createElement('img', {
         onClick: function onClick() {
-          window.location.reload();
-          _this5.props.history.push('/');
+          if (!_this5.props.currentUser && _this5.props.location.pathname != '/dashboard') {
+            window.location.reload();
+            _this5.props.history.push('/');
+          }
         },
         className: 'main-nav-icon',
         src: 'data:image/png;base64,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' });
@@ -31167,6 +31169,9 @@ var BlogPostCreationForm = function (_React$Component) {
         };
       }
     }
+
+    // https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_draggable
+
   }, {
     key: 'dragElement',
     value: function dragElement(elmnt) {
