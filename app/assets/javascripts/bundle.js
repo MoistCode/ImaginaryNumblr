@@ -30263,8 +30263,8 @@ var App = function App() {
     _react2.default.createElement(_navigation_bar_container2.default, null),
     _react2.default.createElement(_route_util.AuthRoute, { path: '/login', component: _front_page2.default }),
     _react2.default.createElement(_route_util.AuthRoute, { path: '/signup', component: _front_page2.default }),
-    _react2.default.createElement(_route_util.AuthRoute, { exact: true, path: '/', component: _front_page2.default }),
-    _react2.default.createElement(_route_util.ProtectedRoute, { exact: true, path: '/dashboard', component: _dashboard_container2.default })
+    _react2.default.createElement(_route_util.AuthRoute, { path: '/', component: _front_page2.default }),
+    _react2.default.createElement(_route_util.ProtectedRoute, { path: '/dashboard', component: _dashboard_container2.default })
   );
 };
 
@@ -31127,6 +31127,9 @@ var BlogPostCreationForm = function (_React$Component) {
       );
     }
   }, {
+    key: '_generateForm',
+    value: function _generateForm() {}
+  }, {
     key: '_generateState',
     value: function _generateState(contentType) {
       if (contentType != 'text' && contentType != 'quote') {
@@ -31138,11 +31141,13 @@ var BlogPostCreationForm = function (_React$Component) {
       } else if (contentType == 'quote') {
         return {
           title: '',
+          contentType: contentType,
           quote: ''
         };
       } else {
         return {
           title: '',
+          contentType: contentType,
           description: ''
         };
       }

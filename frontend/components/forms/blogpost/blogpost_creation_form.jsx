@@ -30,6 +30,10 @@ class BlogPostCreationForm extends React.Component {
     )
   }
 
+  _generateForm() {
+
+  }
+
 _generateState(contentType) {
   if (contentType != 'text' && contentType != 'quote') {
     return {
@@ -40,12 +44,14 @@ _generateState(contentType) {
   } else if (contentType == 'quote') {
     return {
       title: '',
+      contentType,
       quote: ''
     }
   } else {
     return {
       title: '',
-      description: '',
+      contentType,
+      description: ''
     }
   }
 }

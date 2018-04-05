@@ -10,8 +10,8 @@ const App = () => (
     <NavigationBarContainer />
     <AuthRoute path='/login' component={ FrontPage } />
     <AuthRoute path='/signup' component={ FrontPage } />
-    <AuthRoute exact path='/' component={ FrontPage } />
-    <ProtectedRoute exact path='/dashboard' component={ DashboardContainer } />
+    <AuthRoute path='/' component={ FrontPage } />
+    <ProtectedRoute path='/dashboard' component={ DashboardContainer } />
   </div>
 );
 
