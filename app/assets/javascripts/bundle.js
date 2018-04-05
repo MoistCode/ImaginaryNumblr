@@ -4925,7 +4925,6 @@ var SessionForm = function (_React$Component) {
     key: 'handleSubmit',
     value: function handleSubmit(e) {
       e.preventDefault();
-      console.log('yee');
       var formData = new FormData();
       formData.append('user[username]', this.state.username);
       formData.append('user[password]', this.state.password);
@@ -4933,31 +4932,6 @@ var SessionForm = function (_React$Component) {
         formData.append('user[profile_picture_url]', this.state.profile_picture_file);
         formData.append('user[email]', this.state.email);
       }
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
-
-      try {
-        for (var _iterator = formData.entries()[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-          var pair = _step.value;
-
-          console.log(pair[0] + ', ' + pair[1]);
-        }
-      } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion && _iterator.return) {
-            _iterator.return();
-          }
-        } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
-          }
-        }
-      }
-
       this.props.clearErrors();
       this.props.processForm(formData).then(function () {
         return window.location.reload();
@@ -30366,7 +30340,6 @@ var FrontPage = function (_React$Component) {
   _createClass(FrontPage, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      console.log('didmount');
       if ($('html').hasClass('fp-enabled')) {
         $.fn.fullpage.destroy('all');
       }
@@ -30384,6 +30357,7 @@ var FrontPage = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+      console.log('front page');
       var curPath = this.props.history.location.pathname;
       return _react2.default.createElement(
         'div',
@@ -30627,6 +30601,7 @@ var NavigationBar = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+      console.log('nav bar');
       return _react2.default.createElement(
         'div',
         { className: 'main-nav-bar' },
@@ -30646,11 +30621,6 @@ var NavigationBar = function (_React$Component) {
         this._createSessionButtons(this.props.currentUser)
       );
     }
-
-    // <img
-    //   className='profile-picture'
-    //   src={this.props.currentUser[0].profileImageUrl} />
-
   }, {
     key: '_showCurrentUser',
     value: function _showCurrentUser() {
@@ -30658,6 +30628,9 @@ var NavigationBar = function (_React$Component) {
         return _react2.default.createElement(
           'span',
           { className: 'user-welcome' },
+          _react2.default.createElement('img', {
+            className: 'profile-picture',
+            src: this.props.currentUser[0].profileImageUrl }),
           _react2.default.createElement(
             'span',
             null,

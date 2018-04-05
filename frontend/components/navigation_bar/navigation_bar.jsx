@@ -15,6 +15,7 @@ class NavigationBar extends React.Component {
   }
 
   render() {
+    console.log('nav bar');
     return (
       <div className='main-nav-bar'>
         {this._mainIcon()}
@@ -33,13 +34,13 @@ class NavigationBar extends React.Component {
     )
   }
 
-  // <img
-  //   className='profile-picture'
-  //   src={this.props.currentUser[0].profileImageUrl} />
   _showCurrentUser() {
     if (this.props.currentUser) {
       return (
         <span className="user-welcome">
+          <img
+            className='profile-picture'
+            src={this.props.currentUser[0].profileImageUrl} />
           <span>
             {this.props.currentUser[0].username}
           </span>

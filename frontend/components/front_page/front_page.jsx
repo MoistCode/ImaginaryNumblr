@@ -9,7 +9,6 @@ class FrontPage extends React.Component {
   }
 
   componentDidMount() {
-    console.log('didmount')
     if($('html').hasClass('fp-enabled')){
       $.fn.fullpage.destroy('all');
     }
@@ -25,6 +24,7 @@ class FrontPage extends React.Component {
   }
 
   render() {
+    console.log('front page');
     const curPath = this.props.history.location.pathname;
     return (
       <div id="front_page">
