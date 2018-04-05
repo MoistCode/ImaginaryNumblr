@@ -40,6 +40,8 @@ class SessionForm extends React.Component {
     this.props.clearErrors();
 
     this.props.processForm(formData).then(() => window.location.reload());
+
+    console.log('end of handle submit');
   }
 
   errorMessages() {
@@ -61,6 +63,7 @@ _handleImageChange(e) {
   const file = e.currentTarget.files[0];
 
   reader.onloadend = () => {
+    console.log('reader running');
     this.setState({ profile_picture_file: file, profile_picture_url: reader.result });
   }
 
