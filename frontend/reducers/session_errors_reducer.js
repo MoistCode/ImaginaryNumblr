@@ -26,7 +26,12 @@ const sessionErrorsReducer = (oldState = [], action) => {
     case RECEIVE_CURRENT_USER:
       return [];
     case RECEIVE_SESSION_ERRORS:
-      const newState = oldState.concat(action.errors);
+      let newState;
+      if (typeof action.errors !== 'Array') {
+        newState = Object.values(action.errors);
+      } else {
+        newState = oldState.concat(action.errors);
+      }
       return _uniqueItUp(newState);
     case RECEIVE_CLEARED_ERRORS:
       return [];
