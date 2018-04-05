@@ -33,11 +33,12 @@ class SessionForm extends React.Component {
     const formData = new FormData();
     formData.append('user[username]', this.state.username)
     formData.append('user[password]', this.state.password)
-    if (this.props.formType === "Sign Up"){
+    if (this.props.formType == "Sign Up"){
       formData.append('user[profile_picture_url]', this.state.profile_picture_file);
       formData.append('user[email]', this.state.email);
     }
     this.props.clearErrors();
+
     this.props.processForm(formData).then(() => window.location.reload());
   }
 
@@ -149,7 +150,7 @@ _handleImageChange(e) {
         username: '',
         password: '',
         email: '',
-        profile_picture_file: null,
+        profile_picture_file: '',
         profile_picture_url: ''
       };
     }

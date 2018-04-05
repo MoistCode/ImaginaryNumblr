@@ -4928,11 +4928,12 @@ var SessionForm = function (_React$Component) {
       var formData = new FormData();
       formData.append('user[username]', this.state.username);
       formData.append('user[password]', this.state.password);
-      if (this.props.formType === "Sign Up") {
+      if (this.props.formType == "Sign Up") {
         formData.append('user[profile_picture_url]', this.state.profile_picture_file);
         formData.append('user[email]', this.state.email);
       }
       this.props.clearErrors();
+
       this.props.processForm(formData).then(function () {
         return window.location.reload();
       });
@@ -5095,7 +5096,7 @@ var SessionForm = function (_React$Component) {
           username: '',
           password: '',
           email: '',
-          profile_picture_file: null,
+          profile_picture_file: '',
           profile_picture_url: ''
         };
       }
@@ -5134,7 +5135,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 document.addEventListener('DOMContentLoaded', function () {
   var store = void 0;
-
   if (window.currentUser) {
     var preloadedState = {
       session: { currentUser: window.currentUser }
@@ -5144,7 +5144,7 @@ document.addEventListener('DOMContentLoaded', function () {
   } else {
     store = (0, _store2.default)();
   }
-
+  window.store = store;
   var root = document.getElementById('root');
   _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: store }), root);
 });
@@ -24393,10 +24393,14 @@ var signup = exports.signup = function signup(user) {
 };
 
 var login = exports.login = function login(user) {
+  debugger;
   return $.ajax({
     method: 'POST',
     url: '/api/session',
-    data: { user: user }
+    contentType: false,
+    processData: false,
+    dataType: 'json',
+    data: user
   });
 };
 

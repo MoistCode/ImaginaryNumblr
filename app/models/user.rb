@@ -20,7 +20,7 @@ class User < ApplicationRecord
   validates :username, presence: true, uniqueness: true
   validates :password, length: { minimum: 6 }, allow_nil: true
 
-  after_initialize :ensure_session_token, :ensure_profile_picture
+  after_initialize :ensure_session_token
 
   has_attached_file :profile_picture_url, default_url: "default_user.png"
   validates_attachment_content_type :profile_picture_url, content_type: /\Aimage\/.*\z/
@@ -50,12 +50,6 @@ class User < ApplicationRecord
 
   def ensure_session_token
     self.session_token ||= SecureRandom.urlsafe_base64
-  end
-
-  def ensure_profile_picture
-    if (self.profile_picture_url == '')
-      self.profile_picture_url = 'www.defaultimage.com'
-    end
   end
 
 end
