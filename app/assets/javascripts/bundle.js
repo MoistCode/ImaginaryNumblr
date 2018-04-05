@@ -31090,6 +31090,7 @@ var BlogPostCreationForm = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (BlogPostCreationForm.__proto__ || Object.getPrototypeOf(BlogPostCreationForm)).call(this, props));
 
     _this.state = _this._generateState(_this.props.contentType);
+    _this.dragElement = _this.dragElement.bind(_this);
     return _this;
   }
 
@@ -31097,14 +31098,26 @@ var BlogPostCreationForm = function (_React$Component) {
     key: 'closeModal',
     value: function closeModal() {}
   }, {
+    key: 'handleSubmit',
+    value: function handleSubmit(e) {
+      e.preventDefault();
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.dragElement(document.getElementById("creation-modal"));
+    }
+  }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       return _react2.default.createElement(
         'div',
-        { className: 'creation-modal' },
+        { id: 'creation-modal' },
         _react2.default.createElement(
           'div',
-          { className: 'creation-form' },
+          { id: 'creation-form' },
           _react2.default.createElement(
             'h2',
             null,
@@ -31115,7 +31128,9 @@ var BlogPostCreationForm = function (_React$Component) {
             className: 'fa fa-close' }),
           _react2.default.createElement(
             'form',
-            null,
+            { onSubmit: function onSubmit(e) {
+                return _this2.handleSubmit(e);
+              } },
             _react2.default.createElement('textarea', null),
             _react2.default.createElement(
               'button',
@@ -31150,6 +31165,50 @@ var BlogPostCreationForm = function (_React$Component) {
           contentType: contentType,
           description: ''
         };
+      }
+    }
+  }, {
+    key: 'dragElement',
+    value: function dragElement(elmnt) {
+      console.log(elmnt);
+      var pos1 = 0,
+          pos2 = 0,
+          pos3 = 0,
+          pos4 = 0;
+      if (document.getElementById(elmnt.id + "header")) {
+        /* if present, the header is where you move the DIV from:*/
+        document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+      } else {
+        /* otherwise, move the DIV from anywhere inside the DIV:*/
+        elmnt.onmousedown = dragMouseDown;
+      }
+
+      function dragMouseDown(e) {
+        e = e || window.event;
+        // get the mouse cursor position at startup:
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        document.onmouseup = closeDragElement;
+        // call a function whenever the cursor moves:
+        document.onmousemove = elementDrag;
+      }
+
+      function elementDrag(e) {
+        e = e || window.event;
+        // calculate the new cursor position:
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        // set the element's new position:
+        elmnt.style.top = elmnt.offsetTop - pos2 + "px";
+        elmnt.style.left = elmnt.offsetLeft - pos1 + "px";
+      }
+
+      function closeDragElement() {
+        /* stop moving when mouse button is released:*/
+        document.onmouseup = null;
+        document.onmousemove = null;
       }
     }
   }]);
