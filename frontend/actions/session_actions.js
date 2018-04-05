@@ -6,7 +6,10 @@ export const RECEIVE_CLEARED_ERRORS = 'RECEIVE_CLEARED_ERRORS';
 
 export const signup = (user) => (dispatch) => SessionApiUtil.signup(user)
   .then(
-    (user) => dispatch(receiveCurrentUser(user)),
+    (user) => {
+      console.log(user);
+      dispatch(receiveCurrentUser(user);
+    }),
     (errors) => dispatch(receiveSessionErrors(errors.responseJSON))
   );
 
