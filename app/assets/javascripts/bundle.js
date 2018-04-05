@@ -31149,13 +31149,7 @@ var BlogPostCreationForm = function (_React$Component) {
   }, {
     key: '_generateState',
     value: function _generateState(contentType) {
-      if (contentType != 'text' && contentType != 'quote') {
-        return {
-          title: '',
-          contentType: contentType,
-          description: ''
-        };
-      } else if (contentType == 'quote') {
+      if (contentType == 'quote') {
         return {
           title: '',
           contentType: contentType,

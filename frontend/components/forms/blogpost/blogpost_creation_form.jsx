@@ -44,13 +44,7 @@ class BlogPostCreationForm extends React.Component {
   }
 
   _generateState(contentType) {
-    if (contentType != 'text' && contentType != 'quote') {
-      return {
-        title: '',
-        contentType,
-        description: '',
-      }
-    } else if (contentType == 'quote') {
+    if (contentType == 'quote') {
       return {
         title: '',
         contentType,
