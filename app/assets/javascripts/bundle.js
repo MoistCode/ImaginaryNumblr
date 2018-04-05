@@ -30613,7 +30613,7 @@ var NavigationBar = function (_React$Component) {
     _this.state = {
       searchBar: ''
     };
-    _this._generateWhiteLine = _this._generateWhiteLine.bind(_this);
+    _this._generateStyle = _this._generateStyle.bind(_this);
     return _this;
   }
 
@@ -30633,7 +30633,7 @@ var NavigationBar = function (_React$Component) {
         'div',
         {
           className: 'main-nav-bar',
-          style: this._generateWhiteLine() },
+          style: this._generateStyle() },
         this._mainIcon(),
         _react2.default.createElement(
           'div',
@@ -30674,11 +30674,11 @@ var NavigationBar = function (_React$Component) {
       }
     }
   }, {
-    key: '_generateWhiteLine',
-    value: function _generateWhiteLine() {
+    key: '_generateStyle',
+    value: function _generateStyle() {
       var curPath = this.props.location.pathname;
-      if (curPath != '/signup', curPath != '/login', curPath != '/') {
-        return { borderBottom: '1px solid grey' };
+      if (curPath != '/signup' && curPath != '/login' && curPath != '/') {
+        return { borderBottom: '1px solid grey', backgroundColor: '#39485D' };
       }
     }
   }, {
@@ -30850,6 +30850,10 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _blogpost_creation_form_container = __webpack_require__(227);
+
+var _blogpost_creation_form_container2 = _interopRequireDefault(_blogpost_creation_form_container);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -30867,15 +30871,32 @@ var Dashboard = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (Dashboard.__proto__ || Object.getPrototypeOf(Dashboard)).call(this, props));
 
     _this._generateFeed = _this._generateFeed.bind(_this);
+    _this._generateForm = _this._generateForm.bind(_this);
+    _this.handleCreationModal = _this.handleCreationModal.bind(_this);
+    _this.state = {
+      creationFormModalIsOpen: false,
+      modalContentType: ''
+    };
     return _this;
   }
 
   _createClass(Dashboard, [{
+    key: 'handleCreationModal',
+    value: function handleCreationModal(field) {
+      this.setState({
+        creationFormModalIsOpen: !this.state.creationFormModalIsOpen,
+        modalContentType: field
+      });
+    }
+  }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       return _react2.default.createElement(
         'div',
-        { className: 'dash-background' },
+        {
+          className: 'dash-background' },
         _react2.default.createElement(
           'div',
           { className: 'blog-creation' },
@@ -30887,7 +30908,9 @@ var Dashboard = function (_React$Component) {
             { className: 'create-blog-types' },
             _react2.default.createElement(
               'div',
-              null,
+              { onClick: function onClick(e) {
+                  return _this2.handleCreationModal('quote');
+                } },
               _react2.default.createElement('i', {
                 className: 'fa fa-quote-left',
                 style: { fontSize: "48px", "color": "red" } }),
@@ -30899,7 +30922,9 @@ var Dashboard = function (_React$Component) {
             ),
             _react2.default.createElement(
               'div',
-              null,
+              { onClick: function onClick(e) {
+                  return _this2.handleCreationModal('text');
+                } },
               _react2.default.createElement('i', {
                 className: 'fa fa-font',
                 style: { fontSize: "48px", "color": "orange" } }),
@@ -30911,7 +30936,9 @@ var Dashboard = function (_React$Component) {
             ),
             _react2.default.createElement(
               'div',
-              null,
+              { onClick: function onClick(e) {
+                  return _this2.handleCreationModal('audio');
+                } },
               _react2.default.createElement(
                 'i',
                 {
@@ -30927,7 +30954,9 @@ var Dashboard = function (_React$Component) {
             ),
             _react2.default.createElement(
               'div',
-              null,
+              { onClick: function onClick(e) {
+                  return _this2.handleCreationModal('photo');
+                } },
               _react2.default.createElement(
                 'i',
                 {
@@ -30943,7 +30972,9 @@ var Dashboard = function (_React$Component) {
             ),
             _react2.default.createElement(
               'div',
-              null,
+              { onClick: function onClick(e) {
+                  return _this2.handleCreationModal('video');
+                } },
               _react2.default.createElement('i', {
                 className: 'fa fa-caret-square-o-right',
                 style: { fontSize: "48px", "color": "purple" } }),
@@ -30955,6 +30986,7 @@ var Dashboard = function (_React$Component) {
             )
           )
         ),
+        this._generateForm(),
         this._generateFeed()
       );
     }
@@ -30963,12 +30995,165 @@ var Dashboard = function (_React$Component) {
     value: function _generateFeed() {
       return _react2.default.createElement('div', { className: 'followed-users-content' });
     }
+  }, {
+    key: '_generateForm',
+    value: function _generateForm() {
+      var _this3 = this;
+
+      var contentType = this.state.modalContentType;
+      if (this.state.creationFormModalIsOpen == true) {
+        return _react2.default.createElement(_blogpost_creation_form_container2.default, {
+          contentType: contentType,
+          showDashboard: function showDashboard() {
+            return _this3.handleCreationModal('');
+          } });
+      }
+    }
   }]);
 
   return Dashboard;
 }(_react2.default.Component);
 
 exports.default = Dashboard;
+
+/***/ }),
+/* 227 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _blogpost_creation_form = __webpack_require__(229);
+
+var _blogpost_creation_form2 = _interopRequireDefault(_blogpost_creation_form);
+
+var _reactRedux = __webpack_require__(12);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _checkCurrentUser = function _checkCurrentUser(currentUser) {
+  if (currentUser != null) {
+    return Object.values(currentUser.users);
+  } else {
+    return null;
+  }
+};
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    currentUser: _checkCurrentUser(state.session.currentUser)
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {};
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_blogpost_creation_form2.default);
+
+/***/ }),
+/* 228 */,
+/* 229 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var BlogPostCreationForm = function (_React$Component) {
+  _inherits(BlogPostCreationForm, _React$Component);
+
+  function BlogPostCreationForm(props) {
+    _classCallCheck(this, BlogPostCreationForm);
+
+    var _this = _possibleConstructorReturn(this, (BlogPostCreationForm.__proto__ || Object.getPrototypeOf(BlogPostCreationForm)).call(this, props));
+
+    _this.state = _this._generateState(_this.props.contentType);
+    debugger;
+    return _this;
+  }
+
+  _createClass(BlogPostCreationForm, [{
+    key: 'closeModal',
+    value: function closeModal() {}
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'creation-modal' },
+        _react2.default.createElement(
+          'div',
+          { className: 'creation-form' },
+          _react2.default.createElement(
+            'h2',
+            null,
+            this.state.contentType
+          ),
+          _react2.default.createElement('i', {
+            onClick: this.props.showDashboard,
+            className: 'fa fa-close' }),
+          _react2.default.createElement(
+            'form',
+            null,
+            _react2.default.createElement('textarea', null),
+            _react2.default.createElement(
+              'button',
+              null,
+              'Submit'
+            )
+          )
+        )
+      );
+    }
+  }, {
+    key: '_generateState',
+    value: function _generateState(contentType) {
+      if (contentType != 'text' && contentType != 'quote') {
+        return {
+          title: '',
+          contentType: contentType,
+          description: ''
+        };
+      } else if (contentType == 'quote') {
+        return {
+          title: '',
+          quote: ''
+        };
+      } else {
+        return {
+          title: '',
+          description: ''
+        };
+      }
+    }
+  }]);
+
+  return BlogPostCreationForm;
+}(_react2.default.Component);
+
+exports.default = BlogPostCreationForm;
 
 /***/ })
 /******/ ]);

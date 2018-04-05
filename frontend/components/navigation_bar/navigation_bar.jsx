@@ -6,7 +6,7 @@ class NavigationBar extends React.Component {
     this.state = {
       searchBar: ''
     }
-    this._generateWhiteLine = this._generateWhiteLine.bind(this);
+    this._generateStyle = this._generateStyle.bind(this);
   }
 
   update(field) {
@@ -19,7 +19,7 @@ class NavigationBar extends React.Component {
     return (
       <div
         className='main-nav-bar'
-        style={this._generateWhiteLine()}>
+        style={this._generateStyle()}>
         {this._mainIcon()}
         <div className='around-search-bar'>
           <i className="fa fa-search"></i>
@@ -52,14 +52,14 @@ class NavigationBar extends React.Component {
     }
   }
 
-  _generateWhiteLine() {
+  _generateStyle() {
     const curPath = this.props.location.pathname;
     if (
-      curPath != '/signup',
-      curPath != '/login',
+      curPath != '/signup' &&
+      curPath != '/login' &&
       curPath != '/'
     ) {
-      return { borderBottom : '1px solid grey' };
+      return { borderBottom : '1px solid grey', backgroundColor: '#39485D' };
     }
   }
 

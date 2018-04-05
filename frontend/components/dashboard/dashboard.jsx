@@ -1,22 +1,37 @@
 import React from 'react';
+import BlogPostCreationFormContainer from '../forms/blogpost/blogpost_creation_form_container';
 
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
     this._generateFeed = this._generateFeed.bind(this);
+    this._generateForm = this._generateForm.bind(this);
+    this.handleCreationModal = this.handleCreationModal.bind(this);
+    this.state = {
+      creationFormModalIsOpen: false,
+      modalContentType: ''
+    }
+  }
+
+  handleCreationModal(field) {
+    this.setState({
+      creationFormModalIsOpen: !this.state.creationFormModalIsOpen,
+      modalContentType: field
+    });
+
   }
 
   render() {
     return (
-      <div className='dash-background'>
-
+      <div
+        className='dash-background'>
         <div className='blog-creation'>
           <img
             className='dash-current-user-image'
             src={this.props.currentUser[0].profileImageUrl} />
           <div className='create-blog-types'>
 
-            <div>
+            <div onClick={(e) => this.handleCreationModal('quote')}>
               <i
                 className="fa fa-quote-left"
                 style={
@@ -25,7 +40,7 @@ class Dashboard extends React.Component {
               <p>Quote</p>
             </div>
 
-            <div>
+            <div onClick={(e) => this.handleCreationModal('text')}>
               <i
                 className="fa fa-font"
                 style={
@@ -34,7 +49,7 @@ class Dashboard extends React.Component {
               <p>Text</p>
             </div>
 
-            <div>
+            <div onClick={(e) => this.handleCreationModal('audio')}>
               <i
                 className="material-icons"
                 style={
@@ -43,7 +58,7 @@ class Dashboard extends React.Component {
               <p>Audio</p>
             </div>
 
-            <div>
+            <div onClick={(e) => this.handleCreationModal('photo')}>
               <i
                 className="material-icons"
                 style={
@@ -53,7 +68,7 @@ class Dashboard extends React.Component {
               <p>Photo</p>
             </div>
 
-            <div>
+            <div onClick={(e) => this.handleCreationModal('video')}>
               <i
                 className="fa fa-caret-square-o-right"
                 style={
@@ -62,8 +77,10 @@ class Dashboard extends React.Component {
               <p>Video</p>
             </div>
 
+
           </div>
         </div>
+        {this._generateForm()}
 
         {this._generateFeed()}
 
@@ -79,6 +96,16 @@ class Dashboard extends React.Component {
     )
   }
 
+  _generateForm() {
+    const contentType = this.state.modalContentType;
+    if (this.state.creationFormModalIsOpen == true) {
+      return (
+        <BlogPostCreationFormContainer
+          contentType={contentType}
+          showDashboard={() => this.handleCreationModal('')}/>
+      )
+    }
+  }
 }
 
 export default Dashboard;

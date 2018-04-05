@@ -2,10 +2,12 @@
   background-color: #39485D;
   width: 100%;
   // height: 100%;
-  height: 100vh;
+  height: 150vh;
+  z-index: -1;
 }
 
 .blog-creation {
+  position: fixed;
   width: 600px;
   height: 110px;
   // border: 1px solid blue;
