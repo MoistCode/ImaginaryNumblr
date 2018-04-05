@@ -5,6 +5,7 @@ class SessionForm extends React.Component {
     super(props);
     this.state = this._stateSetter(this.props.formType);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this._handleImageChange = this._handleImageChange.bind(this);
   }
 
   componentWillMount() {
@@ -45,6 +46,18 @@ class SessionForm extends React.Component {
       </ul>
     )
   }
+}
+
+_handleImageChange(e) {
+  e.preventDefault();
+  let reader = new FileReader();
+  let file = e.target.files[0];
+
+  reader.onloadend = function () {
+    this.setState({ profile_picture_file: file, profile_picture_url: reader.result });
+  }.bind(this);
+
+  reader.readAsDataURL(file)
 }
 
   render() {
@@ -102,14 +115,13 @@ class SessionForm extends React.Component {
               onChange={this.update('email')} />
             <br />
           </div>
-          <div className='session-input-around'>
+          <span className='upload-profile-picture'>
             <i className="fa fa-picture-o"></i>
             <input
-              type='text'
-              value={this.state.profile_picture_url}
-              placeholder="Profile Picture"
-              onChange={this.update('profile_picture_url')} />
-          </div>
+              type='file'
+              onChange={this._handleImageChange} />
+            <img src={this.state.profile_picture_url} />
+          </span>
         </div>
       )
     }
@@ -126,6 +138,7 @@ class SessionForm extends React.Component {
         username: '',
         password: '',
         email: '',
+        profile_picture_file: '',
         profile_picture_url: ''
       };
     }

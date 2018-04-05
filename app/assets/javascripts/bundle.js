@@ -4892,6 +4892,7 @@ var SessionForm = function (_React$Component) {
 
     _this.state = _this._stateSetter(_this.props.formType);
     _this.handleSubmit = _this.handleSubmit.bind(_this);
+    _this._handleImageChange = _this._handleImageChange.bind(_this);
     return _this;
   }
 
@@ -4948,6 +4949,19 @@ var SessionForm = function (_React$Component) {
           _react2.default.createElement('br', null)
         );
       }
+    }
+  }, {
+    key: '_handleImageChange',
+    value: function _handleImageChange(e) {
+      e.preventDefault();
+      var reader = new FileReader();
+      var file = e.target.files[0];
+
+      reader.onloadend = function () {
+        this.setState({ profile_picture_file: file, profile_picture_url: reader.result });
+      }.bind(this);
+
+      reader.readAsDataURL(file);
     }
   }, {
     key: 'render',
@@ -5045,14 +5059,13 @@ var SessionForm = function (_React$Component) {
             _react2.default.createElement('br', null)
           ),
           _react2.default.createElement(
-            'div',
-            { className: 'session-input-around' },
+            'span',
+            { className: 'upload-profile-picture' },
             _react2.default.createElement('i', { className: 'fa fa-picture-o' }),
             _react2.default.createElement('input', {
-              type: 'text',
-              value: this.state.profile_picture_url,
-              placeholder: 'Profile Picture',
-              onChange: this.update('profile_picture_url') })
+              type: 'file',
+              onChange: this._handleImageChange }),
+            _react2.default.createElement('img', { src: this.state.profile_picture_url })
           )
         );
       }
@@ -5070,6 +5083,7 @@ var SessionForm = function (_React$Component) {
           username: '',
           password: '',
           email: '',
+          profile_picture_file: '',
           profile_picture_url: ''
         };
       }
