@@ -6,6 +6,7 @@ class NavigationBar extends React.Component {
     this.state = {
       searchBar: ''
     }
+    console.log('nav bar');
   }
 
   update(field) {
@@ -15,7 +16,6 @@ class NavigationBar extends React.Component {
   }
 
   render() {
-    console.log('nav bar');
     return (
       <div className='main-nav-bar'>
         {this._mainIcon()}

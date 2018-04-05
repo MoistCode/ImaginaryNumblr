@@ -30344,7 +30344,6 @@ var FrontPage = function (_React$Component) {
         $.fn.fullpage.destroy('all');
       }
       $('#front_page').fullpage();
-      console.log('didmount');
     }
   }, {
     key: 'componentWillReceiveProps',
@@ -30586,6 +30585,7 @@ var NavigationBar = function (_React$Component) {
     _this.state = {
       searchBar: ''
     };
+    console.log('nav bar');
     return _this;
   }
 
@@ -30601,7 +30601,6 @@ var NavigationBar = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      console.log('nav bar');
       return _react2.default.createElement(
         'div',
         { className: 'main-nav-bar' },

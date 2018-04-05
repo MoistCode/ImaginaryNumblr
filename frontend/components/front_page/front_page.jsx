@@ -13,7 +13,6 @@ class FrontPage extends React.Component {
       $.fn.fullpage.destroy('all');
     }
     $('#front_page').fullpage();
-    console.log('didmount')
   }
 
   componentWillReceiveProps(nextProps) {
