@@ -4970,14 +4970,13 @@ var SessionForm = function (_React$Component) {
       var file = e.currentTarget.files[0];
 
       reader.onloadend = function () {
-        console.log('reader running');
         _this4.setState({ profile_picture_file: file, profile_picture_url: reader.result });
       };
 
       if (file) {
         reader.readAsDataURL(file);
       } else {
-        this.setState({ profile_picture_file: null, profile_picture_url: '' });
+        this.setState({ profile_picture_file: '', profile_picture_url: '' });
       }
     }
   }, {
@@ -30251,18 +30250,21 @@ var _dashboard_container = __webpack_require__(225);
 
 var _dashboard_container2 = _interopRequireDefault(_dashboard_container);
 
+var _navigation_bar_container = __webpack_require__(223);
+
+var _navigation_bar_container2 = _interopRequireDefault(_navigation_bar_container);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var App = function App() {
   return _react2.default.createElement(
     'div',
     null,
-    _react2.default.createElement(NavigationBarContainer, null),
-    _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _front_page2.default }),
-    _react2.default.createElement(_route_util.AuthRoute, { exact: true, path: '/login', component: _front_page2.default }),
-    _react2.default.createElement(_route_util.AuthRoute, { exact: true, path: '/signup', component: _front_page2.default }),
-    _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/dashboard', component: _dashboard_container2.default }),
-    '// Route to users/:userId // Route to blogs/:blogId'
+    _react2.default.createElement(_navigation_bar_container2.default, null),
+    _react2.default.createElement(_route_util.AuthRoute, { path: '/login', component: _front_page2.default }),
+    _react2.default.createElement(_route_util.AuthRoute, { path: '/signup', component: _front_page2.default }),
+    _react2.default.createElement(_route_util.AuthRoute, { exact: true, path: '/', component: _front_page2.default }),
+    _react2.default.createElement(_route_util.ProtectedRoute, { exact: true, path: '/dashboard', component: _dashboard_container2.default })
   );
 };
 
@@ -30278,7 +30280,7 @@ exports.default = App;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.AuthRoute = undefined;
+exports.ProtectedRoute = exports.AuthRoute = undefined;
 
 var _react = __webpack_require__(0);
 
@@ -30302,11 +30304,22 @@ var Auth = function Auth(_ref) {
     } });
 };
 
+var Protected = function Protected(_ref2) {
+  var Component = _ref2.component,
+      path = _ref2.path,
+      loggedIn = _ref2.loggedIn,
+      exact = _ref2.exact;
+  return _react2.default.createElement(_reactRouter.Route, { path: path, exact: exact, render: function render(props) {
+      return loggedIn ? _react2.default.createElement(Component, props) : _react2.default.createElement(_reactRouter.Redirect, { to: '/' });
+    } });
+};
+
 var mapStateToProps = function mapStateToProps(state) {
   return { loggedIn: Boolean(state.session.currentUser) };
 };
 
 var AuthRoute = exports.AuthRoute = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps, null)(Auth));
+var ProtectedRoute = exports.ProtectedRoute = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps, null)(Protected));
 
 /***/ }),
 /* 220 */
@@ -30510,8 +30523,282 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_session_form2.default);
 
 /***/ }),
-/* 223 */,
-/* 224 */,
+/* 223 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _navigation_bar = __webpack_require__(224);
+
+var _navigation_bar2 = _interopRequireDefault(_navigation_bar);
+
+var _reactRedux = __webpack_require__(12);
+
+var _session_actions = __webpack_require__(10);
+
+var _reactRouter = __webpack_require__(85);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _checkCurrentUser = function _checkCurrentUser(currentUser) {
+  if (currentUser != null) {
+    return Object.values(currentUser.users);
+  } else {
+    return null;
+  }
+};
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    currentUser: _checkCurrentUser(state.session.currentUser)
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    clearErrors: function clearErrors() {
+      return dispatch((0, _session_actions.clearErrors)());
+    },
+    logout: function logout() {
+      return dispatch((0, _session_actions.logout)());
+    },
+    demoLogin: function demoLogin(user) {
+      return dispatch((0, _session_actions.login)(user));
+    }
+  };
+};
+
+exports.default = (0, _reactRouter.withRouter)((0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_navigation_bar2.default));
+
+/***/ }),
+/* 224 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var NavigationBar = function (_React$Component) {
+  _inherits(NavigationBar, _React$Component);
+
+  function NavigationBar(props) {
+    _classCallCheck(this, NavigationBar);
+
+    var _this = _possibleConstructorReturn(this, (NavigationBar.__proto__ || Object.getPrototypeOf(NavigationBar)).call(this, props));
+
+    _this.state = {
+      searchBar: ''
+    };
+    _this._generateWhiteLine = _this._generateWhiteLine.bind(_this);
+    return _this;
+  }
+
+  _createClass(NavigationBar, [{
+    key: 'update',
+    value: function update(field) {
+      var _this2 = this;
+
+      return function (e) {
+        _this2.setState(_defineProperty({}, field, e.target.value));
+      };
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        {
+          className: 'main-nav-bar',
+          style: this._generateWhiteLine() },
+        this._mainIcon(),
+        _react2.default.createElement(
+          'div',
+          { className: 'around-search-bar' },
+          _react2.default.createElement('i', { className: 'fa fa-search' }),
+          _react2.default.createElement('input', {
+            className: 'nav-search-bar',
+            type: 'text',
+            value: this.state.searchBar,
+            placeholder: 'Search ImaginaryNumblr',
+            onChange: this.update('searchBar') })
+        ),
+        this._showCurrentUser(),
+        this._createSessionButtons(this.props.currentUser)
+      );
+    }
+  }, {
+    key: '_showCurrentUser',
+    value: function _showCurrentUser() {
+      var _this3 = this;
+
+      if (this.props.currentUser) {
+        return _react2.default.createElement(
+          'span',
+          { className: 'user-welcome' },
+          _react2.default.createElement('img', {
+            onClick: function onClick() {
+              return _this3.props.history.push('/dashboard');
+            },
+            className: 'profile-picture',
+            src: this.props.currentUser[0].profileImageUrl }),
+          _react2.default.createElement(
+            'span',
+            null,
+            this.props.currentUser[0].username
+          )
+        );
+      }
+    }
+  }, {
+    key: '_generateWhiteLine',
+    value: function _generateWhiteLine() {
+      var curPath = this.props.location.pathname;
+      if (curPath != '/signup', curPath != '/login', curPath != '/') {
+        return { borderBottom: '1px solid grey' };
+      }
+    }
+  }, {
+    key: '_createSessionButtons',
+    value: function _createSessionButtons(currentUser) {
+      var _this4 = this;
+
+      var loginButton = _react2.default.createElement(
+        'button',
+        {
+          className: 'nav-button',
+          onClick: function onClick() {
+            _this4.props.clearErrors();
+            _this4.props.history.push('/login');
+          } },
+        'Log In',
+        _react2.default.createElement('i', {
+          className: 'fa fa-superscript',
+          style: { fontSize: '24px' } })
+      );
+
+      var logoutButton = _react2.default.createElement(
+        'button',
+        {
+          className: 'nav-button',
+          onClick: function onClick() {
+            return _this4.props.logout();
+          } },
+        'Log Out',
+        _react2.default.createElement('i', {
+          className: 'fa fa-superscript',
+          style: { fontSize: '24px' } })
+      );
+
+      var signupButton = _react2.default.createElement(
+        'button',
+        {
+          className: 'nav-button',
+          onClick: function onClick() {
+            _this4.props.clearErrors();
+            _this4.props.history.push('/signup');
+          } },
+        'Sign Up',
+        _react2.default.createElement('i', {
+          className: 'fa fa-superscript',
+          style: { fontSize: '24px' } })
+      );
+
+      var demoUser = {
+        username: 'Demo User',
+        password: 'Password'
+      };
+
+      var demoButton = _react2.default.createElement(
+        'button',
+        {
+          className: 'nav-button',
+          onClick: function onClick() {
+            return _this4.props.demoLogin(demoUser);
+          }
+        },
+        'Demo',
+        _react2.default.createElement('i', {
+          className: 'fa fa-superscript',
+          style: { fontSize: '24px' } })
+      );
+
+      if (this.props.location.pathname == '/' && !currentUser) {
+        return _react2.default.createElement(
+          'span',
+          { className: 'session-button' },
+          demoButton,
+          signupButton,
+          loginButton
+        );
+      }
+
+      var renderedButton = function renderedButton() {
+        if (_this4.props.location.pathname == '/signup') {
+          return loginButton;
+        } else if (_this4.props.location.pathname == '/login') {
+          return signupButton;
+        } else {}
+      };
+
+      if (currentUser) {
+        return _react2.default.createElement(
+          'span',
+          { className: 'session-button' },
+          logoutButton
+        );
+      } else {
+        return _react2.default.createElement(
+          'span',
+          { className: 'session-button' },
+          renderedButton()
+        );
+      }
+    }
+  }, {
+    key: '_mainIcon',
+    value: function _mainIcon() {
+      var _this5 = this;
+
+      return _react2.default.createElement('img', {
+        onClick: function onClick() {
+          window.location.reload();
+          _this5.props.history.push('/');
+        },
+        className: 'main-nav-icon',
+        src: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAe P4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqG QAAAVtSURBVGhD7VpbTBxlFF41Gm+JGi8xvpuY+GCiDyZGRVPYXXa3pRLRarxWolZfqqVa H3SDWnZndwGLraVokNQC0rTForFUqVRh5wLLfSnI/dZClRba2MJex3OGg+nOzBa2rswk8i XnYdnv/Jwzc85/vv8HwypWYTCk2OtvNuZx7/9bMzNsCi2pDUxOLtPi4kNvlfkvXqll5DeF TA7WQUtqg3SG/yansic0PBsVr9ReL+2c1zSRrP37r7G6uHMVTadVA1yuaZ5ImsP7uNnJRf 1TQdUAl2uaJ2Jysp43IAi14BIxzROxuvnRkl9PKgJrnZgXj/hnlm0vFbcHNUvEuN17H+xY ojByUZHIRwf7IvhdQqZZIk5u2/O7WufkSQzORMSMgqaAycG9QlR9w+oWWgqOjsYkgVbXew 6fcCTN7b2LqPoFBgmNHsWg5Yl4jgyLVg/fRFR9A+o5ez2Uz9BMbBJoz0G5GZ18DlH1DQvD /5hbPRCRJ8ENX5AaFzcCouoXT+ezN5gZLlDdPh2TBNqe4xOizS0ME1XfMDn4jHQXH+47E1 YkgsMRdjMXUfUNM8OXbqnoCcqT6JwMQFmxUZAsjxJVv7DbxatBss/s46ZikkDbx0+J+B1y iK5fGJ3eR/Cp49OXJ7K1sjeYznBlRNU3IAln9lcdCpGI/QJvI2xkvOuJmhxAnW5Y6xYa1u ULjUuZxc0fMIjiVeR6WVg9wtDu+omYJNAOd5wRcSdLc7ffRNTkAHXQMzt8YZQQlzNP7ajU oCaGf4xc4yKV4e7FGcHCrJAn8vF3AxGYLbVETR4wEdT48l+oZpvLu4MWhisn17gwOrgtG3 a2KNbE6f5UIYpENpuoyUMiiRxqm5bKIqWw/lZyV4XNxfNu0FFy/19+Py+9VYtLuJuoyUMi iQycjUhPFJ74JnJXwObx3YGK9qeeWYV/IZSozcO3ETW5SCQRtIKjIyKc9vzkrkCak315nU cI4llD7vvCF63z8EY+IGpygYlAPYeKYYeR2/cdZxXB4CkPDkKiiWEfpCViAJKkxn6oPyz3 axoDP+mEJ9xP1OQi3vZrcwndmZ81BwahnORBbfq6KwC9UkxL/IMUe/31kMjcwValSMTzOh ywxom6crA6Gm6Lp1y/bf5DhMl8wWb33Uh0CSASrekMH+79M6TwebO0E3qLzSfqyiLdxVXg lisPCqfzWugD7AeiSjAzbIka3386KOKdFpTkE0RdWaA6xe2yZWIuJjC0vJrBqNV1yTEVJj 58nt7LTiq4eLsIsuQ83jYSe+UBM2GwqG5cEVzj0F9S8y6e8NLyuIfxc9upeQX3vareEJTp koP0P4XRyW6O1/SvgSiEcpLqHqb1pxu/VIrEfihDm0cImR1slrSgVliTJ9wOjR1EsScPci 8rnStms+z+6+DY2rfrmPLN4RZudvIh/NsILakdQORVvlN+QtHEuDvh08ZZhGXlhXKTcz45 PBCFAVpHS2kLvEmHQKN4TysPNLe6PwLlF3i2yKcUiWCZS0ialYW0IwlDn6s0/bGF20LR8c NQVP7d8T4QiQ42mso03kMraQ8I9t2souZ5NQ31akm7WHtCKRJ3/DyGIrGLltAHUNVi09ao ND3OCVTG8p+/uLsNRCL3IS2hH4COqlK73lGz5vG5hTnj4B8gd/3AyPBPwmCLtJ1UNr3cSh tOiVaGnyRXnWFBhozsrBtTDf5Se7usKwBvpIg89QfYhbZmwVardru+aN0gEmGIRoCbSm76 g3n7b3dCeYXUDl2LVkUy/6E9vmvJTZ+ASX8gpzJ+02+r6g3jxkB0/cLMeNdg06v9iwWaxc 2H8ORJdB0Dmh4aORevReNZqtN3C7FX8T+CwfA3k4rvkXSPu0cAAAAASUVORK5CYII=' });
+    }
+  }]);
+
+  return NavigationBar;
+}(_react2.default.Component);
+
+exports.default = NavigationBar;
+
+/***/ }),
 /* 225 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -30530,11 +30817,21 @@ var _reactRedux = __webpack_require__(12);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var mapStateToProps = function mapStateToProps(state, ownProps) {};
+var _checkCurrentUser = function _checkCurrentUser(currentUser) {
+  if (currentUser != null) {
+    return Object.values(currentUser.users);
+  } else {
+    return null;
+  }
+};
 
-var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {};
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    currentUser: _checkCurrentUser(state.session.currentUser)
+  };
+};
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_dashboard2.default);
+exports.default = (0, _reactRedux.connect)(mapStateToProps)(_dashboard2.default);
 
 /***/ }),
 /* 226 */
@@ -30549,6 +30846,12 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -30558,25 +30861,112 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Dashboard = function (_React$Component) {
   _inherits(Dashboard, _React$Component);
 
-  function Dashboard() {
+  function Dashboard(props) {
     _classCallCheck(this, Dashboard);
 
-    return _possibleConstructorReturn(this, (Dashboard.__proto__ || Object.getPrototypeOf(Dashboard)).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, (Dashboard.__proto__ || Object.getPrototypeOf(Dashboard)).call(this, props));
+
+    _this._generateFeed = _this._generateFeed.bind(_this);
+    return _this;
   }
 
   _createClass(Dashboard, [{
-    key: "render",
+    key: 'render',
     value: function render() {
-      return React.createElement(
-        "h1",
-        null,
-        "Lonely Dashboard"
+      return _react2.default.createElement(
+        'div',
+        { className: 'dash-background' },
+        _react2.default.createElement(
+          'div',
+          { className: 'blog-creation' },
+          _react2.default.createElement('img', {
+            className: 'dash-current-user-image',
+            src: this.props.currentUser[0].profileImageUrl }),
+          _react2.default.createElement(
+            'div',
+            { className: 'create-blog-types' },
+            _react2.default.createElement(
+              'div',
+              null,
+              _react2.default.createElement('i', {
+                className: 'fa fa-quote-left',
+                style: { fontSize: "48px", "color": "red" } }),
+              _react2.default.createElement(
+                'p',
+                null,
+                'Quote'
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              null,
+              _react2.default.createElement('i', {
+                className: 'fa fa-font',
+                style: { fontSize: "48px", "color": "orange" } }),
+              _react2.default.createElement(
+                'p',
+                null,
+                'Text'
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              null,
+              _react2.default.createElement(
+                'i',
+                {
+                  className: 'material-icons',
+                  style: { fontSize: "48px", "color": "green" } },
+                'audiotrack'
+              ),
+              _react2.default.createElement(
+                'p',
+                null,
+                'Audio'
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              null,
+              _react2.default.createElement(
+                'i',
+                {
+                  className: 'material-icons',
+                  style: { fontSize: "48px", "color": "blue" } },
+                'add_a_photo'
+              ),
+              _react2.default.createElement(
+                'p',
+                null,
+                'Photo'
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              null,
+              _react2.default.createElement('i', {
+                className: 'fa fa-caret-square-o-right',
+                style: { fontSize: "48px", "color": "purple" } }),
+              _react2.default.createElement(
+                'p',
+                null,
+                'Video'
+              )
+            )
+          )
+        ),
+        this._generateFeed()
       );
+    }
+  }, {
+    key: '_generateFeed',
+    value: function _generateFeed() {
+      return _react2.default.createElement('div', { className: 'followed-users-content' });
     }
   }]);
 
   return Dashboard;
-}(React.Component);
+}(_react2.default.Component);
 
 exports.default = Dashboard;
 

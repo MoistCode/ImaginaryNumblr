@@ -1,0 +1,54 @@
+.dash-background {
+  background-color: #39485D;
+  width: 100%;
+  // height: 100%;
+  height: 100vh;
+}
+
+.blog-creation {
+  width: 600px;
+  height: 110px;
+  // border: 1px solid blue;
+  transform: translate(60%, 100%);
+  margin: 5px;
+
+}
+
+.dash-current-user-image {
+  border: 1px solid grey;
+  width: 64px;
+  height: 64px;
+  border-radius: 5px;
+}
+
+.create-blog-types {
+  float: right;
+  height: 100px;
+  width: 510px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+
+
+  div {
+    border: 1px solid grey;
+    height: 100%;
+    width: 20%;
+    padding: 4px;
+    margin: 0px;
+    text-align: center;
+    border-radius: 5px;
+    background-color: white;
+    p {
+      position: absolute;
+      bottom: 0;
+      margin-left: 26px;
+      font-family: 'Ubuntu', sans-serif;
+      font-weight: bold;
+    }
+  }
+}
+
+.followed-users-content {
+
+}

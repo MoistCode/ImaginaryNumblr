@@ -6,7 +6,7 @@ class NavigationBar extends React.Component {
     this.state = {
       searchBar: ''
     }
-    console.log('nav bar');
+    this._generateWhiteLine = this._generateWhiteLine.bind(this);
   }
 
   update(field) {
@@ -17,7 +17,9 @@ class NavigationBar extends React.Component {
 
   render() {
     return (
-      <div className='main-nav-bar'>
+      <div
+        className='main-nav-bar'
+        style={this._generateWhiteLine()}>
         {this._mainIcon()}
         <div className='around-search-bar'>
           <i className="fa fa-search"></i>
@@ -39,6 +41,7 @@ class NavigationBar extends React.Component {
       return (
         <span className="user-welcome">
           <img
+            onClick={() => this.props.history.push('/dashboard')}
             className='profile-picture'
             src={this.props.currentUser[0].profileImageUrl} />
           <span>
@@ -46,6 +49,17 @@ class NavigationBar extends React.Component {
           </span>
         </span>
       )
+    }
+  }
+
+  _generateWhiteLine() {
+    const curPath = this.props.location.pathname;
+    if (
+      curPath != '/signup',
+      curPath != '/login',
+      curPath != '/'
+    ) {
+      return { borderBottom : '1px solid grey' };
     }
   }
 

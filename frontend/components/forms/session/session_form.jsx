@@ -64,14 +64,13 @@ _handleImageChange(e) {
   const file = e.currentTarget.files[0];
 
   reader.onloadend = () => {
-    console.log('reader running');
     this.setState({ profile_picture_file: file, profile_picture_url: reader.result });
   }
 
   if (file) {
     reader.readAsDataURL(file)
   } else {
-    this.setState({ profile_picture_file: null, profile_picture_url: '' })
+    this.setState({ profile_picture_file: '', profile_picture_url: '' })
   }
 
 }

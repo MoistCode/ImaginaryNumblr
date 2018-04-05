@@ -76,7 +76,19 @@
 
 
 .user-welcome {
+  display: flex;
+  flex-direction: column;
   float: right;
+  margin-left: 5px;
+  justify-content: center;
+
+  span {
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    color: white;
+    font-size: 18px;
+  }
 }
 
 .session-form-header {
@@ -84,9 +96,10 @@
 }
 
 .profile-picture {
-  display: inline;
+  transform: translateX(10%);
   width: 64px;
   height: 64px;
+  cursor: pointer;
 }
 
 .nav-button {

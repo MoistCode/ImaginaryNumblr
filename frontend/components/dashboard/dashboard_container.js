@@ -1,12 +1,16 @@
 import Dashboard from './dashboard';
 import { connect } from 'react-redux';
 
-const mapStateToProps = (state, ownProps) => {
+const _checkCurrentUser = (currentUser) => {
+  if (currentUser != null) {
+    return Object.values(currentUser.users)
+  } else {
+    return null;
+  }
+}
 
-};
+const mapStateToProps = (state) => ({
+  currentUser: _checkCurrentUser(state.session.currentUser)
+});
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default connect(mapStateToProps)(Dashboard);

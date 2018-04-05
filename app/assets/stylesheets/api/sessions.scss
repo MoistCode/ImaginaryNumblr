@@ -177,10 +177,10 @@
 }
 
 .upload-profile-picture img {
-  transform: translateY(-550%);
-  background: #fff;
-  border-radius: 5px;
+  transform: translateY(-460%);
   display: inline-block;
+  width: 64px;
+  height: 64px;
   -webkit-box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
   -moz-box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
   box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
