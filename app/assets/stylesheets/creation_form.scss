@@ -11,14 +11,13 @@
   width: 500px;
   height: 500px;
   z-index: 10;
-  transform: translate(92%, 45%);
+  transform: translate(89%, 45%);
   border-radius: 8px;
   text-align: center;
   border: 2px solid black;
   -webkit-box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
   -moz-box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
   box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
-
   i {
     cursor: pointer;
     font-size: 35px;
@@ -55,4 +54,8 @@
     }
 
   }
+}
+
+.w3-container {
+  position: fixed;
 }

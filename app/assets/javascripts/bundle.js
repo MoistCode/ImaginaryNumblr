@@ -30731,8 +30731,8 @@ var NavigationBar = function (_React$Component) {
       );
 
       var demoUser = {
-        username: 'Demo User',
-        password: 'Password'
+        username: 'username',
+        password: 'password'
       };
 
       var demoButton = _react2.default.createElement(
@@ -31128,25 +31128,29 @@ var BlogPostCreationForm = function (_React$Component) {
         { id: 'creation-modal' },
         _react2.default.createElement(
           'div',
-          { id: 'creation-form' },
+          { className: 'w3-container w3-center w3-animate-opacity' },
           _react2.default.createElement(
-            'h2',
-            null,
-            this.state.contentType
-          ),
-          _react2.default.createElement('i', {
-            onClick: this.props.showDashboard,
-            className: 'fa fa-close' }),
-          _react2.default.createElement(
-            'form',
-            { onSubmit: function onSubmit(e) {
-                return _this2.handleSubmit(e);
-              } },
-            _react2.default.createElement('textarea', null),
+            'div',
+            { id: 'creation-form' },
             _react2.default.createElement(
-              'button',
+              'h2',
               null,
-              'Submit'
+              this.state.contentType
+            ),
+            _react2.default.createElement('i', {
+              onClick: this.props.showDashboard,
+              className: 'fa fa-close' }),
+            _react2.default.createElement(
+              'form',
+              { onSubmit: function onSubmit(e) {
+                  return _this2.handleSubmit(e);
+                } },
+              _react2.default.createElement('textarea', null),
+              _react2.default.createElement(
+                'button',
+                null,
+                'Submit'
+              )
             )
           )
         )

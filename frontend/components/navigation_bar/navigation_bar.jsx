@@ -108,8 +108,8 @@ class NavigationBar extends React.Component {
     )
 
     const demoUser = {
-      username: 'Demo User',
-      password: 'Password'
+      username: 'username',
+      password: 'password'
     }
 
     const demoButton = (

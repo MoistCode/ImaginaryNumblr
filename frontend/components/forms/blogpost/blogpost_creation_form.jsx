@@ -22,16 +22,19 @@ class BlogPostCreationForm extends React.Component {
 
   render() {
     return (
-      <div id='creation-modal'>
-        <div id='creation-form'>
-          <h2>{this.state.contentType}</h2>
-          <i
-            onClick={this.props.showDashboard}
-            className="fa fa-close"></i>
-          <form onSubmit={(e) => this.handleSubmit(e)}>
-              <textarea></textarea>
-              <button>Submit</button>
-          </form>
+        <div id='creation-modal'>
+          <div className='w3-container w3-center w3-animate-opacity'>
+          <div id='creation-form'>
+            <h2>{this.state.contentType}</h2>
+            <i
+              onClick={this.props.showDashboard}
+              className="fa fa-close"></i>
+            <form onSubmit={(e) => this.handleSubmit(e)}>
+                <textarea></textarea>
+                <button>Submit</button>
+            </form>
+
+          </div>
 
         </div>
 
