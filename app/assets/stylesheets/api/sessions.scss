@@ -12,9 +12,9 @@
 }
 
 .session-form {
-  width: 33%;
-  left: 33.3%;
-  position: absolute;
+  width: 100vw;
+  left: 100%;
+  // position: absolute;
 
 }
 
@@ -23,6 +23,7 @@
 }
 
 .main-session-form {
+
   padding-top: 290px;
   text-align: center;
 }
