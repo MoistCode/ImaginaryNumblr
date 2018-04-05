@@ -4925,6 +4925,7 @@ var SessionForm = function (_React$Component) {
     key: 'handleSubmit',
     value: function handleSubmit(e) {
       e.preventDefault();
+      console.log('yee');
       var formData = new FormData();
       formData.append('user[username]', this.state.username);
       formData.append('user[password]', this.state.password);

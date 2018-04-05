@@ -30,6 +30,7 @@ class SessionForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    console.log('yee');
     const formData = new FormData();
     formData.append('user[username]', this.state.username)
     formData.append('user[password]', this.state.password)
