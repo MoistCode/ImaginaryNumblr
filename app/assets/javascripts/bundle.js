@@ -24382,6 +24382,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 var signup = exports.signup = function signup(user) {
+  console.log('signup ajax call');
   return $.ajax({
     method: 'POST',
     url: '/api/user',
@@ -24393,7 +24394,6 @@ var signup = exports.signup = function signup(user) {
 };
 
 var login = exports.login = function login(user) {
-  debugger;
   return $.ajax({
     method: 'POST',
     url: '/api/session',
