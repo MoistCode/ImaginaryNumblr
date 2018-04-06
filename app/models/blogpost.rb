@@ -16,10 +16,10 @@
 #  attached_file_updated_at   :datetime
 #
 
-class BlogPost < ApplicationRecord
+class Blogpost < ApplicationRecord
   validates :content_type, presence: true
 
-  has_attached_file :attached_file, default_url: 'cow.com'
+  has_attached_file :attached_file, default_url: 'default_blogpost.jpg'
   validates_attachment_content_type :attached_file,
                                     content_type: /\Aimage\/.*\z/,
                                     message: 'only images'
@@ -27,6 +27,7 @@ class BlogPost < ApplicationRecord
   belongs_to :author,
     primary_key: :id,
     foreign_key: :author_id,
-    class_name: 'User'
+    class_name: 'User',
+    optional: true
 
 end

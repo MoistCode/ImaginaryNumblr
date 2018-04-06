@@ -32,7 +32,7 @@ class User < ApplicationRecord
   has_many :blogposts,
     primary_key: :id,
     foreign_key: :author_id,
-    class_name: 'BlogPost'
+    class_name: 'Blogpost'
 
   def self.find_by_credentials(username, password)
     user = User.find_by(username: username)

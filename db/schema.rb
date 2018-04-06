@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 20180406200637) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "blog_posts", force: :cascade do |t|
+  create_table "blogposts", force: :cascade do |t|
     t.integer "author_id", null: false
     t.string "content_type", null: false
     t.string "title"

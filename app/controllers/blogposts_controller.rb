@@ -1,11 +1,11 @@
-class BlogPostsController < ApplicationController
+class BlogpostsController < ApplicationController
 
   def index
 
   end
 
   def show
-    @blogpost = BlogPost.find(params[:id])
+    @blogpost = Blogpost.find(params[:id])
 
     if @blogpost
       render 'blogposts/show'
@@ -15,7 +15,8 @@ class BlogPostsController < ApplicationController
   end
 
   def create
-    @blogpost = BlogPost.new(blogpost_params)
+    @blogpost = Blogpost.new(blogpost_params)
+    debugger
     @blogpost.author_id = current_user.id
 
     if @blogpost.save
@@ -26,7 +27,7 @@ class BlogPostsController < ApplicationController
   end
 
   def edit
-    @blogpost = BlogPost.find(params[:id])
+    @blogpost = Blogpost.find(params[:id])
 
     if @blogpost.author_id == current_user.id
       render 'blogposts/show'
@@ -58,8 +59,7 @@ class BlogPostsController < ApplicationController
   private
 
   def blogpost_params
-    params.require(:blogposts).permit(
-      :author_id,
+    params.require(:blogpost).permit(
       :content_type,
       :title,
       :description,
