@@ -17,7 +17,12 @@
 #
 
 class BlogPost < ApplicationRecord
-  validates :content_type
+  validates :content_type, presence: true
+
+  has_attached_file :attached_file, default_url: 'cow.com'
+  validates_attachment_content_type :attached_file,
+                                    content_type: /\Aimage\/.*\z/,
+                                    message: 'only images'
 
   belongs_to :author,
     primary_key: :id,
