@@ -30953,7 +30953,10 @@ var BlogPostCreationForm = function (_React$Component) {
       var formData = new FormData();
       formData.append('blogpost[title]', this.state.title);
       formData.append('blogpost[content_type]', this.state.content_type);
-      switch (this.state.content_type) {}
+      switch (this.state.content_type) {
+        case ('photo', 'audio', 'video'):
+          formData.append('blogpost[attached_file]', this.state.attached_file);
+      }
       this.props.createBlogpost(formData).then(function () {
         window.location.reload();
         _this2.props.history.push('/dashboard');

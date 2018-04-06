@@ -16,7 +16,8 @@ class BlogPostCreationForm extends React.Component {
     formData.append('blogpost[title]', this.state.title);
     formData.append('blogpost[content_type]', this.state.content_type);
     switch(this.state.content_type) {
-
+      case 'photo', 'audio', 'video':
+        formData.append('blogpost[attached_file]', this.state.attached_file);
     }
     this.props.createBlogpost(formData).then(() => {
       window.location.reload();
