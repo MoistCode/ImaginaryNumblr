@@ -6,14 +6,22 @@ class BlogPostCreationForm extends React.Component {
     super(props);
     this.state = this._generateState(this.props.contentType);
     this.dragElement = this.dragElement.bind(this);
-  }
-
-  closeModal() {
-
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this._handleImageChange = this._handleImageChange.bind(this);
   }
 
   handleSubmit(e) {
     e.preventDefault();
+    const formData = new FormData();
+    formData.append('blogpost[title]', this.state.title);
+    formData.append('blogpost[content_type]', this.state.content_type);
+    switch(this.state.content_type) {
+
+    }
+    this.props.createBlogpost(formData).then(() => {
+      window.location.reload();
+      this.props.history.push('/dashboard');
+    });
   }
 
   componentDidMount() {
@@ -21,17 +29,21 @@ class BlogPostCreationForm extends React.Component {
   }
 
   render() {
+    console.log(this.state);
     return (
         <div id='creation-modal'>
           <div className='w3-container w3-center w3-animate-opacity'>
           <div id='creation-form'>
-            <h2>{this.state.contentType}</h2>
+            <h2>Create {this.state.content_type.charAt(0).toUpperCase() + this.state.content_type.slice(1)}</h2>
             <i
               onClick={this.props.showDashboard}
               className="fa fa-close"></i>
             <form onSubmit={(e) => this.handleSubmit(e)}>
-                <textarea></textarea>
-                <button>Submit</button>
+              <label>Title
+                <input type='text'></input>
+              </label>
+              {this._generateForm(this.props.contentType)}
+              <button>Submit</button>
             </form>
 
           </div>
@@ -42,7 +54,70 @@ class BlogPostCreationForm extends React.Component {
     )
   }
 
-  _generateForm() {
+  _generateForm(contentType) {
+    switch(contentType) {
+      case 'quote':
+        return (
+          <div>
+            <label>Quote
+              <input type='text'></input>
+            </label>
+          </div>
+        )
+      case 'text':
+        return (
+          <div>
+            <label>Description
+              <textarea></textarea>
+            </label>
+          </div>
+        )
+      case 'audio':
+        return (
+          <div>
+            <input type='file'></input>
+            <label>Description
+              <textarea></textarea>
+            </label>
+          </div>
+        )
+      case 'photo':
+        return (
+          <div>
+            <img src={this.state.photo} />
+            <input
+              type='file'
+              onChange={this._handleImageChange} />
+            <label>Description
+              <textarea></textarea>
+            </label>
+          </div>
+        )
+      case 'video':
+        return (
+          <div>
+            <label>Description
+              <textarea></textarea>
+            </label>
+          </div>
+        )
+    }
+  }
+
+  _handleImageChange(e) {
+    e.preventDefault();
+    const reader = new FileReader();
+    const file = e.currentTarget.files[0];
+
+    reader.onloadend = () => {
+      this.setState({ attached_file: file, photo: reader.result });
+    }
+
+    if (file) {
+      reader.readAsDataURL(file)
+    } else {
+      this.setState({ attached_file: '', photo: '' })
+    }
 
   }
 
@@ -50,15 +125,26 @@ class BlogPostCreationForm extends React.Component {
     if (contentType == 'quote') {
       return {
         title: '',
-        contentType,
-        quote: ''
+        quote: '',
+        content_type: contentType,
+        [contentType]: '',
+        attached_file: ''
       }
+    } else if (contentType != 'text') {
+        return {
+          title: '',
+          description: '',
+          content_type: contentType,
+          [contentType]: '',
+          attached_file: ''
+        }
     } else {
-      return {
-        title: '',
-        contentType,
-        description: ''
-      }
+        return {
+          title: '',
+          description: '',
+          content_type: contentType,
+          [contentType]: ''
+        }
     }
   }
 

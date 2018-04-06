@@ -24375,12 +24375,17 @@ var _users_reducer = __webpack_require__(188);
 
 var _users_reducer2 = _interopRequireDefault(_users_reducer);
 
+var _blogposts_reducer = __webpack_require__(234);
+
+var _blogposts_reducer2 = _interopRequireDefault(_blogposts_reducer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var rootReducer = (0, _redux.combineReducers)({
   session: _session_reducer2.default,
   errors: _errors_reducer2.default,
-  users: _users_reducer2.default
+  users: _users_reducer2.default,
+  blogposts: _blogposts_reducer2.default
 });
 
 exports.default = rootReducer;
@@ -24402,10 +24407,15 @@ var _session_errors_reducer = __webpack_require__(119);
 
 var _session_errors_reducer2 = _interopRequireDefault(_session_errors_reducer);
 
+var _blogpost_errors_reducer = __webpack_require__(237);
+
+var _blogpost_errors_reducer2 = _interopRequireDefault(_blogpost_errors_reducer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var errorsReducer = (0, _redux.combineReducers)({
-  session: _session_errors_reducer2.default
+  session: _session_errors_reducer2.default,
+  blogpost: _blogpost_errors_reducer2.default
 });
 
 exports.default = errorsReducer;
@@ -30864,6 +30874,8 @@ var _blogpost_creation_form2 = _interopRequireDefault(_blogpost_creation_form);
 
 var _reactRedux = __webpack_require__(5);
 
+var _blogpost_actions = __webpack_require__(235);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _checkCurrentUser = function _checkCurrentUser(currentUser) {
@@ -30881,7 +30893,11 @@ var mapStateToProps = function mapStateToProps(state) {
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  return {};
+  return {
+    createBlogpost: function createBlogpost(blogpost) {
+      return dispatch((0, _blogpost_actions.postBlogpost)(blogpost));
+    }
+  };
 };
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_blogpost_creation_form2.default);
@@ -30905,6 +30921,8 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -30921,16 +30939,25 @@ var BlogPostCreationForm = function (_React$Component) {
 
     _this.state = _this._generateState(_this.props.contentType);
     _this.dragElement = _this.dragElement.bind(_this);
+    _this.handleSubmit = _this.handleSubmit.bind(_this);
+    _this._handleImageChange = _this._handleImageChange.bind(_this);
     return _this;
   }
 
   _createClass(BlogPostCreationForm, [{
-    key: 'closeModal',
-    value: function closeModal() {}
-  }, {
     key: 'handleSubmit',
     value: function handleSubmit(e) {
+      var _this2 = this;
+
       e.preventDefault();
+      var formData = new FormData();
+      formData.append('blogpost[title]', this.state.title);
+      formData.append('blogpost[content_type]', this.state.content_type);
+      switch (this.state.content_type) {}
+      this.props.createBlogpost(formData).then(function () {
+        window.location.reload();
+        _this2.props.history.push('/dashboard');
+      });
     }
   }, {
     key: 'componentDidMount',
@@ -30940,8 +30967,9 @@ var BlogPostCreationForm = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
+      console.log(this.state);
       return _react2.default.createElement(
         'div',
         { id: 'creation-modal' },
@@ -30954,7 +30982,8 @@ var BlogPostCreationForm = function (_React$Component) {
             _react2.default.createElement(
               'h2',
               null,
-              this.state.contentType
+              'Create ',
+              this.state.content_type.charAt(0).toUpperCase() + this.state.content_type.slice(1)
             ),
             _react2.default.createElement('i', {
               onClick: this.props.showDashboard,
@@ -30962,9 +30991,15 @@ var BlogPostCreationForm = function (_React$Component) {
             _react2.default.createElement(
               'form',
               { onSubmit: function onSubmit(e) {
-                  return _this2.handleSubmit(e);
+                  return _this3.handleSubmit(e);
                 } },
-              _react2.default.createElement('textarea', null),
+              _react2.default.createElement(
+                'label',
+                null,
+                'Title',
+                _react2.default.createElement('input', { type: 'text' })
+              ),
+              this._generateForm(this.props.contentType),
               _react2.default.createElement(
                 'button',
                 null,
@@ -30977,22 +31012,114 @@ var BlogPostCreationForm = function (_React$Component) {
     }
   }, {
     key: '_generateForm',
-    value: function _generateForm() {}
+    value: function _generateForm(contentType) {
+      switch (contentType) {
+        case 'quote':
+          return _react2.default.createElement(
+            'div',
+            null,
+            _react2.default.createElement(
+              'label',
+              null,
+              'Quote',
+              _react2.default.createElement('input', { type: 'text' })
+            )
+          );
+        case 'text':
+          return _react2.default.createElement(
+            'div',
+            null,
+            _react2.default.createElement(
+              'label',
+              null,
+              'Description',
+              _react2.default.createElement('textarea', null)
+            )
+          );
+        case 'audio':
+          return _react2.default.createElement(
+            'div',
+            null,
+            _react2.default.createElement('input', { type: 'file' }),
+            _react2.default.createElement(
+              'label',
+              null,
+              'Description',
+              _react2.default.createElement('textarea', null)
+            )
+          );
+        case 'photo':
+          return _react2.default.createElement(
+            'div',
+            null,
+            _react2.default.createElement('img', { src: this.state.photo }),
+            _react2.default.createElement('input', {
+              type: 'file',
+              onChange: this._handleImageChange }),
+            _react2.default.createElement(
+              'label',
+              null,
+              'Description',
+              _react2.default.createElement('textarea', null)
+            )
+          );
+        case 'video':
+          return _react2.default.createElement(
+            'div',
+            null,
+            _react2.default.createElement(
+              'label',
+              null,
+              'Description',
+              _react2.default.createElement('textarea', null)
+            )
+          );
+      }
+    }
+  }, {
+    key: '_handleImageChange',
+    value: function _handleImageChange(e) {
+      var _this4 = this;
+
+      e.preventDefault();
+      var reader = new FileReader();
+      var file = e.currentTarget.files[0];
+
+      reader.onloadend = function () {
+        _this4.setState({ attached_file: file, photo: reader.result });
+      };
+
+      if (file) {
+        reader.readAsDataURL(file);
+      } else {
+        this.setState({ attached_file: '', photo: '' });
+      }
+    }
   }, {
     key: '_generateState',
     value: function _generateState(contentType) {
       if (contentType == 'quote') {
-        return {
+        var _ref;
+
+        return _ref = {
           title: '',
-          contentType: contentType,
-          quote: ''
-        };
+          quote: '',
+          content_type: contentType
+        }, _defineProperty(_ref, contentType, ''), _defineProperty(_ref, 'attached_file', ''), _ref;
+      } else if (contentType != 'text') {
+        var _ref2;
+
+        return _ref2 = {
+          title: '',
+          description: '',
+          content_type: contentType
+        }, _defineProperty(_ref2, contentType, ''), _defineProperty(_ref2, 'attached_file', ''), _ref2;
       } else {
-        return {
+        return _defineProperty({
           title: '',
-          contentType: contentType,
-          description: ''
-        };
+          description: '',
+          content_type: contentType
+        }, contentType, '');
       }
     }
 
@@ -31443,6 +31570,196 @@ var UserShowPage = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = UserShowPage;
+
+/***/ }),
+/* 234 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _blogpost_actions = __webpack_require__(235);
+
+var _merge2 = __webpack_require__(52);
+
+var _merge3 = _interopRequireDefault(_merge2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var blogpostsReducer = function blogpostsReducer() {
+  var oldState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments[1];
+
+  Object.freeze(oldState);
+  switch (action.type) {
+    case _blogpost_actions.RECEIVE_BLOGPOSTS:
+      return action.blogposts;
+    case _blogpost_actions.RECEIVE_BLOGPOST:
+      return (0, _merge3.default)({}, oldState, _defineProperty({}, action.blogpost.id, action.blogpost));
+    default:
+      return oldState;
+  }
+};
+
+exports.default = blogpostsReducer;
+
+/***/ }),
+/* 235 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.updateBlogpost = exports.postBlogpost = exports.fetchBlogpost = exports.RECEIVE_BLOGPOST_ERRORS = exports.REMOVE_BLOGPOST = exports.RECEIVE_BLOGPOST = exports.RECEIVE_BLOGPOSTS = undefined;
+
+var _blogpost_util = __webpack_require__(236);
+
+var BlogpostUtil = _interopRequireWildcard(_blogpost_util);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+var RECEIVE_BLOGPOSTS = exports.RECEIVE_BLOGPOSTS = 'RECEIVE_BLOGPOSTS';
+var RECEIVE_BLOGPOST = exports.RECEIVE_BLOGPOST = 'RECEIVE_BLOGPOST';
+var REMOVE_BLOGPOST = exports.REMOVE_BLOGPOST = 'REMOVE_BLOGPOST';
+var RECEIVE_BLOGPOST_ERRORS = exports.RECEIVE_BLOGPOST_ERRORS = 'RECEIVE_BLOGPOST_ERRORS';
+
+var fetchBlogpost = exports.fetchBlogpost = function fetchBlogpost(blogpostId) {
+  return function (dispatch) {
+    return BlogpostUtil.fetchBlogpost(blogpostId).then(function (blogpost) {
+      return dispatch(receiveBlogpost(blogpost));
+    }, function (errors) {
+      return dispatch(receiveBlogpostErrors(errors.responseJSON));
+    });
+  };
+};
+
+var postBlogpost = exports.postBlogpost = function postBlogpost(blogpost) {
+  return function (dispatch) {
+    return BlogpostUtil.postBlogpost(blogpost).then(function (blogpost) {
+      return dispatch(receiveBlogpost(blogpost));
+    }, function (errors) {
+      return dispatch(receiveBlogpostErrors(errors.responseJSON));
+    });
+  };
+};
+
+var updateBlogpost = exports.updateBlogpost = function updateBlogpost(blogpost) {
+  return function (dispatch) {
+    return BlogpostUtil.updateBlogpost(blogpost).then(function (blogpost) {
+      return dispatch(receiveBlogpost(blogpost));
+    }, function (errors) {
+      return dispatch(receiveBlogpostErrors(errors.responseJSON));
+    });
+  };
+};
+
+var receiveBlogpost = function receiveBlogpost(blogpost) {
+  return {
+    type: RECEIVE_BLOGPOST,
+    blogpost: blogpost
+  };
+};
+
+var receiveBlogpostErrors = function receiveBlogpostErrors(errors) {
+  return {
+    type: RECEIVE_BLOGPOST_ERRORS,
+    errors: errors
+  };
+};
+
+/***/ }),
+/* 236 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var fetchBlogpost = exports.fetchBlogpost = function fetchBlogpost(blogpostId) {
+  return $.ajax({
+    method: 'GET',
+    url: '/blogposts/' + blogpostId
+  });
+};
+
+var updateBlogpost = exports.updateBlogpost = function updateBlogpost(blogpost) {
+  return $.ajax({
+    method: 'PATCH',
+    url: '/blogposts/' + blogpost.id,
+    data: { blogpost: blogpost }
+  });
+};
+
+var postBlogpost = exports.postBlogpost = function postBlogpost(blogpost) {
+  return $.ajax({
+    method: 'POST',
+    url: '/blogposts',
+    data: { blogpost: blogpost }
+  });
+};
+
+/***/ }),
+/* 237 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _blogpost_actions = __webpack_require__(235);
+
+var _uniqueItUp = function _uniqueItUp(arr) {
+  var newArr = [];
+  for (var i = 0; i < arr.length; i++) {
+    var unique = true;
+    for (var j = i + 1; j < arr.length; j++) {
+      if (arr[i] === arr[j]) {
+        unique = false;
+      }
+    }
+    if (unique) {
+      newArr.push(arr[i]);
+    }
+  }
+  return newArr;
+};
+
+var blogpostErrorsReducer = function blogpostErrorsReducer() {
+  var oldState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments[1];
+
+  Object.freeze(oldState);
+  switch (action.type) {
+    case _blogpost_actions.RECEIVE_BLOGPOST:
+      return [];
+    case _blogpost_actions.RECEIVE_BLOGPOST:
+      var newState = void 0;
+      if (typeof action.errors !== 'Array') {
+        newState = Object.values(action.errors);
+      } else {
+        newState = oldState.concat(action.errors);
+      }
+      return _uniqueItUp(newState);
+    default:
+      return oldState;
+  }
+};
+
+exports.default = blogpostErrorsReducer;
 
 /***/ })
 /******/ ]);
