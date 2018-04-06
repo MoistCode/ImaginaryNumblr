@@ -30383,7 +30383,6 @@ var FrontPage = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      console.log('front page');
       var curPath = this.props.history.location.pathname;
       return _react2.default.createElement(
         'div',
@@ -30895,7 +30894,7 @@ var BlogPostCreationForm = function (_React$Component) {
     }
 
     // https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_draggable
-    // Messed around with it but credit goes to the site above
+    // Messed around with it but credit goes to the site below
 
   }, {
     key: 'dragElement',

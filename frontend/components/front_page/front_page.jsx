@@ -23,7 +23,6 @@ class FrontPage extends React.Component {
   }
 
   render() {
-    console.log('front page');
     const curPath = this.props.history.location.pathname;
     return (
       <div id="front_page">
