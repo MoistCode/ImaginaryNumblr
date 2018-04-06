@@ -1,12 +1,21 @@
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import UserShowPage from './user_showpage';
+import { fetchUser } from '../../actions/user_actions';
 
 
-const mapStateToProps = (state, ownProps) => ({
-  userId: ownProps.match.params.userId
-});
-
-const mapDispatchToProps = (dispatch) => {
-  // fetch blogposts here correlating to :userId
+const mapStateToProps = (state, ownProps) => {
+  if (state.users[ownProps.match.params.userId] != undefined) {
+    return { user: state.users[ownProps.match.params.userId] };
+  }
+  return { user: 'none' }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserShowPage)
+const mapDispatchToProps = (dispatch) => ({
+  // fetch blogposts here correlating to :userId
+  fetchUser: (userId) => dispatch(fetchUser(userId))
+});
+
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(UserShowPage)
+);

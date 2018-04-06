@@ -24291,11 +24291,16 @@ var _session_reducer = __webpack_require__(119);
 
 var _session_reducer2 = _interopRequireDefault(_session_reducer);
 
+var _users_reducer = __webpack_require__(232);
+
+var _users_reducer2 = _interopRequireDefault(_users_reducer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var rootReducer = (0, _redux.combineReducers)({
   session: _session_reducer2.default,
-  errors: _errors_reducer2.default
+  errors: _errors_reducer2.default,
+  users: _users_reducer2.default
 });
 
 exports.default = rootReducer;
@@ -24392,7 +24397,7 @@ Object.defineProperty(exports, "__esModule", {
 var signup = exports.signup = function signup(user) {
   return $.ajax({
     method: 'POST',
-    url: '/api/user',
+    url: '/api/users',
     contentType: false,
     processData: false,
     dataType: 'json',
@@ -30264,11 +30269,15 @@ var App = function App() {
     'div',
     null,
     _react2.default.createElement(_navigation_bar_container2.default, null),
-    _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/users/:userId', component: _user_showpage_container2.default }),
-    _react2.default.createElement(_route_util.AuthRoute, { path: '/login', component: _front_page2.default }),
-    _react2.default.createElement(_route_util.AuthRoute, { path: '/signup', component: _front_page2.default }),
-    _react2.default.createElement(_route_util.AuthRoute, { path: '/', component: _front_page2.default }),
-    _react2.default.createElement(_route_util.ProtectedRoute, { path: '/dashboard', component: _dashboard_container2.default })
+    _react2.default.createElement(
+      _reactRouterDom.Switch,
+      null,
+      _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/users/:userId', component: _user_showpage_container2.default }),
+      _react2.default.createElement(_route_util.AuthRoute, { path: '/login', component: _front_page2.default }),
+      _react2.default.createElement(_route_util.AuthRoute, { path: '/signup', component: _front_page2.default }),
+      _react2.default.createElement(_route_util.AuthRoute, { exact: true, path: '/', component: _front_page2.default }),
+      _react2.default.createElement(_route_util.ProtectedRoute, { path: '/dashboard', component: _dashboard_container2.default })
+    )
   );
 };
 
@@ -31235,17 +31244,205 @@ Object.defineProperty(exports, "__esModule", {
 
 var _reactRedux = __webpack_require__(7);
 
+var _reactRouterDom = __webpack_require__(25);
+
+var _user_showpage = __webpack_require__(230);
+
+var _user_showpage2 = _interopRequireDefault(_user_showpage);
+
+var _user_actions = __webpack_require__(233);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-  return {
-    userId: ownProps.match.params.userId
-  };
+  if (state.users[ownProps.match.params.userId] != undefined) {
+    return { user: state.users[ownProps.match.params.userId] };
+  }
+  return { user: 'none' };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  // fetch blogposts here correlating to :userId
+  return {
+    // fetch blogposts here correlating to :userId
+    fetchUser: function fetchUser(userId) {
+      return dispatch((0, _user_actions.fetchUser)(userId));
+    }
+  };
 };
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(UserShowPage);
+exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_user_showpage2.default));
+
+/***/ }),
+/* 230 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var UserShowPage = function (_React$Component) {
+  _inherits(UserShowPage, _React$Component);
+
+  function UserShowPage(props) {
+    _classCallCheck(this, UserShowPage);
+
+    return _possibleConstructorReturn(this, (UserShowPage.__proto__ || Object.getPrototypeOf(UserShowPage)).call(this, props));
+  }
+
+  _createClass(UserShowPage, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      // fetch username, blogposts, and profile picture here
+      this.props.fetchUser(this.props.match.params.userId);
+    }
+  }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      if (this.props.user.id != nextProps.match.params.userId) {
+        this.props.fetchUser(nextProps.match.params.userId);
+      }
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      if (this.props.user == 'none') {
+        return _react2.default.createElement(
+          'p',
+          null,
+          'Loading...'
+        );
+      }
+
+      var viewUser = this.props.user;
+      // Create an if statement that returns a loading screen if the fetching has
+      // not been done yet
+
+      // Also create a condition where if there is no user by that id
+      return _react2.default.createElement(
+        'div',
+        { className: 'user-showpage' },
+        _react2.default.createElement(
+          'div',
+          { className: 'user-info' },
+          _react2.default.createElement('img', {
+            src: viewUser.profileImageUrl,
+            style: { 'width': '100px', 'height': '100px' } })
+        ),
+        _react2.default.createElement('div', { className: 'user-blogs' })
+      );
+    }
+  }]);
+
+  return UserShowPage;
+}(_react2.default.Component);
+
+exports.default = UserShowPage;
+
+/***/ }),
+/* 231 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var fetchUser = exports.fetchUser = function fetchUser(userId) {
+  return $.ajax({
+    method: 'GET',
+    url: '/api/users/' + userId
+  });
+};
+
+/***/ }),
+/* 232 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _user_actions = __webpack_require__(233);
+
+var _merge2 = __webpack_require__(120);
+
+var _merge3 = _interopRequireDefault(_merge2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var usersReducer = function usersReducer() {
+  var oldState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var action = arguments[1];
+
+  Object.freeze(oldState);
+  switch (action.type) {
+    case _user_actions.RECEIVE_USER:
+      var receivedUser = Object.values(action.user.users)[0];
+      return (0, _merge3.default)({}, oldState, _defineProperty({}, receivedUser.id, receivedUser));
+    default:
+      return oldState;
+  }
+};
+
+exports.default = usersReducer;
+
+/***/ }),
+/* 233 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.fetchUser = exports.RECEIVE_USER = undefined;
+
+var _user_util = __webpack_require__(231);
+
+var UserUtil = _interopRequireWildcard(_user_util);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+var RECEIVE_USER = exports.RECEIVE_USER = 'RECEIVE_USER';
+
+var fetchUser = exports.fetchUser = function fetchUser(userId) {
+  return function (dispatch) {
+    return UserUtil.fetchUser(userId).then(function (user) {
+      return dispatch(receiveUser(user));
+    });
+  };
+};
+
+var receiveUser = function receiveUser(user) {
+  return {
+    type: RECEIVE_USER,
+    user: user
+  };
+};
 
 /***/ })
 /******/ ]);
