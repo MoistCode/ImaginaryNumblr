@@ -70,7 +70,7 @@
 .session-form button {
   margin-top: 7px;
   margin-bottom: 5px;
-  background-color: white;
+  background-color: transparent;
   font-family: 'Ubuntu', sans-serif;
 }
 
@@ -104,9 +104,10 @@
 
 .nav-button {
   border-radius: 4px;
-  background-color: white;
+  color: white;
+  background-color: transparent;
+  border: 1px solid white;
   cursor: pointer;
-  border: 1px solid black;
   margin: 5px 6px;
   height: 32px;
   width: 100px;
@@ -120,4 +121,10 @@
 
 .username {
   margin-top: 10px;
+}
+
+button:hover {
+  background-color: white;
+  border: 1px solid black;
+  color: black;
 }

@@ -12,10 +12,10 @@ const App = () => (
 
     <Switch>
       <Route exact path='/users/:userId' component={ UserShowPageContainer } />
+      <ProtectedRoute path='/dashboard' component={ DashboardContainer } />
       <AuthRoute path='/login' component={ FrontPage } />
       <AuthRoute path='/signup' component={ FrontPage } />
-      <AuthRoute exact path='/' component={ FrontPage } />
-      <ProtectedRoute path='/dashboard' component={ DashboardContainer } />
+      <AuthRoute path='/' component={ FrontPage } />
     </Switch>
 
   </div>
