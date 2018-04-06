@@ -142,11 +142,15 @@
 }
 
 .session-errors {
-  transform: translateY(-145%);
+  width: 33%;
   padding-left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  transform: translate(102%, 7%);
 }
 
 .session-errors li {
+  padding-top: 5px;
+  transform: translateY(23%);
   font-size: 20px;
   list-style: none;
   text-align: center;
