@@ -8,6 +8,8 @@ class BlogPostCreationForm extends React.Component {
     this.dragElement = this.dragElement.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this._handleImageChange = this._handleImageChange.bind(this);
+    this._handleVideoChange = this._handleVideoChange.bind(this);
+    this._handleAudioChange = this._handleAudioChange.bind(this);
   }
 
   handleSubmit(e) {
@@ -15,14 +17,24 @@ class BlogPostCreationForm extends React.Component {
     const formData = new FormData();
     formData.append('blogpost[title]', this.state.title);
     formData.append('blogpost[content_type]', this.state.content_type);
-    switch(this.state.content_type) {
-      case 'photo', 'audio', 'video':
-        formData.append('blogpost[attached_file]', this.state.attached_file);
+    if(this.state.content_type != 'quote' && this.state.content_type != 'text') {
+      formData.append('blogpost[description]]', this.state.description);
+      formData.append('blogpost[attached_file]', this.state.attached_file);
+    } else if (this.state.content_type == 'quote') {
+      formData.append('blogpost[quote]');
+    } else {
+      formData.append('blogpost[description]]', this.state.description);
     }
     this.props.createBlogpost(formData).then(() => {
       window.location.reload();
       this.props.history.push('/dashboard');
     });
+  }
+
+  update(field) {
+    return (e) => {
+      this.setState({ [field]: e.target.value });
+    }
   }
 
   componentDidMount() {
@@ -41,7 +53,10 @@ class BlogPostCreationForm extends React.Component {
               className="fa fa-close"></i>
             <form onSubmit={(e) => this.handleSubmit(e)}>
               <label>Title
-                <input type='text'></input>
+                <input
+                  type='text'
+                  value={this.state.title}
+                  onChange={this.update('title')} />
               </label>
               {this._generateForm(this.props.contentType)}
               <button>Submit</button>
@@ -61,7 +76,10 @@ class BlogPostCreationForm extends React.Component {
         return (
           <div>
             <label>Quote
-              <input type='text'></input>
+              <input
+                type='text'
+                value={this.state.quote}
+                onChange={this.update('quote')} />
             </label>
           </div>
         )
@@ -69,16 +87,22 @@ class BlogPostCreationForm extends React.Component {
         return (
           <div>
             <label>Description
-              <textarea></textarea>
+              <textarea
+                value={this.state.description}
+                onChange={this.update('description')} />
             </label>
           </div>
         )
       case 'audio':
         return (
           <div>
-            <input type='file'></input>
+            <input
+              type='file'
+              onChange={this._handleAudioChange} />
             <label>Description
-              <textarea></textarea>
+              <textarea
+                value={this.state.description}
+                onChange={this.update('description')} />
             </label>
           </div>
         )
@@ -90,7 +114,9 @@ class BlogPostCreationForm extends React.Component {
               type='file'
               onChange={this._handleImageChange} />
             <label>Description
-              <textarea></textarea>
+              <textarea
+                value={this.state.description}
+                onChange={this.update('description')} />
             </label>
           </div>
         )
@@ -98,11 +124,50 @@ class BlogPostCreationForm extends React.Component {
         return (
           <div>
             <label>Description
-              <textarea></textarea>
+              <input
+                type='file'
+                onChange={this._handleVideoChange} />
+              <textarea
+                value={this.state.description}
+                onChange={this.update('description')} />
             </label>
           </div>
         )
     }
+  }
+
+  _handleAudioChange(e) {
+    e.preventDefault();
+    const reader = new FileReader();
+    const file = e.currentTarget.files[0];
+
+    reader.onloadend = () => {
+      this.setState({ attached_file: file, audio: reader.result });
+    }
+
+    if (file) {
+      reader.readAsDataURL(file)
+    } else {
+      this.setState({ attached_file: '', audio: '' })
+    }
+
+  }
+
+  _handleVideoChange(e) {
+    e.preventDefault();
+    const reader = new FileReader();
+    const file = e.currentTarget.files[0];
+
+    reader.onloadend = () => {
+      this.setState({ attached_file: file, video: reader.result });
+    }
+
+    if (file) {
+      reader.readAsDataURL(file)
+    } else {
+      this.setState({ attached_file: '', video: '' })
+    }
+
   }
 
   _handleImageChange(e) {

@@ -17,6 +17,9 @@ export const postBlogpost = (blogpost) => (
   $.ajax({
     method: 'POST',
     url: '/blogposts',
-    data: { blogpost }
+    contentType: false,
+    processData: false,
+    dataType: 'json',
+    data: blogpost
   })
 );

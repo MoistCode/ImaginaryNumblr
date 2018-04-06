@@ -63,8 +63,8 @@ class BlogpostsController < ApplicationController
       :content_type,
       :title,
       :description,
-      :quote,
-      :attached_file
+      :attached_file,
+      :quote
     )
   end
 

@@ -30941,6 +30941,8 @@ var BlogPostCreationForm = function (_React$Component) {
     _this.dragElement = _this.dragElement.bind(_this);
     _this.handleSubmit = _this.handleSubmit.bind(_this);
     _this._handleImageChange = _this._handleImageChange.bind(_this);
+    _this._handleVideoChange = _this._handleVideoChange.bind(_this);
+    _this._handleAudioChange = _this._handleAudioChange.bind(_this);
     return _this;
   }
 
@@ -30953,14 +30955,27 @@ var BlogPostCreationForm = function (_React$Component) {
       var formData = new FormData();
       formData.append('blogpost[title]', this.state.title);
       formData.append('blogpost[content_type]', this.state.content_type);
-      switch (this.state.content_type) {
-        case ('photo', 'audio', 'video'):
-          formData.append('blogpost[attached_file]', this.state.attached_file);
+      if (this.state.content_type != 'quote' && this.state.content_type != 'text') {
+        formData.append('blogpost[description]]', this.state.description);
+        formData.append('blogpost[attached_file]', this.state.attached_file);
+      } else if (this.state.content_type == 'quote') {
+        formData.append('blogpost[quote]');
+      } else {
+        formData.append('blogpost[description]]', this.state.description);
       }
       this.props.createBlogpost(formData).then(function () {
         window.location.reload();
         _this2.props.history.push('/dashboard');
       });
+    }
+  }, {
+    key: 'update',
+    value: function update(field) {
+      var _this3 = this;
+
+      return function (e) {
+        _this3.setState(_defineProperty({}, field, e.target.value));
+      };
     }
   }, {
     key: 'componentDidMount',
@@ -30970,7 +30985,7 @@ var BlogPostCreationForm = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       console.log(this.state);
       return _react2.default.createElement(
@@ -30994,13 +31009,16 @@ var BlogPostCreationForm = function (_React$Component) {
             _react2.default.createElement(
               'form',
               { onSubmit: function onSubmit(e) {
-                  return _this3.handleSubmit(e);
+                  return _this4.handleSubmit(e);
                 } },
               _react2.default.createElement(
                 'label',
                 null,
                 'Title',
-                _react2.default.createElement('input', { type: 'text' })
+                _react2.default.createElement('input', {
+                  type: 'text',
+                  value: this.state.title,
+                  onChange: this.update('title') })
               ),
               this._generateForm(this.props.contentType),
               _react2.default.createElement(
@@ -31025,7 +31043,10 @@ var BlogPostCreationForm = function (_React$Component) {
               'label',
               null,
               'Quote',
-              _react2.default.createElement('input', { type: 'text' })
+              _react2.default.createElement('input', {
+                type: 'text',
+                value: this.state.quote,
+                onChange: this.update('quote') })
             )
           );
         case 'text':
@@ -31036,19 +31057,25 @@ var BlogPostCreationForm = function (_React$Component) {
               'label',
               null,
               'Description',
-              _react2.default.createElement('textarea', null)
+              _react2.default.createElement('textarea', {
+                value: this.state.description,
+                onChange: this.update('description') })
             )
           );
         case 'audio':
           return _react2.default.createElement(
             'div',
             null,
-            _react2.default.createElement('input', { type: 'file' }),
+            _react2.default.createElement('input', {
+              type: 'file',
+              onChange: this._handleAudioChange }),
             _react2.default.createElement(
               'label',
               null,
               'Description',
-              _react2.default.createElement('textarea', null)
+              _react2.default.createElement('textarea', {
+                value: this.state.description,
+                onChange: this.update('description') })
             )
           );
         case 'photo':
@@ -31063,7 +31090,9 @@ var BlogPostCreationForm = function (_React$Component) {
               'label',
               null,
               'Description',
-              _react2.default.createElement('textarea', null)
+              _react2.default.createElement('textarea', {
+                value: this.state.description,
+                onChange: this.update('description') })
             )
           );
         case 'video':
@@ -31074,22 +31103,65 @@ var BlogPostCreationForm = function (_React$Component) {
               'label',
               null,
               'Description',
-              _react2.default.createElement('textarea', null)
+              _react2.default.createElement('input', {
+                type: 'file',
+                onChange: this._handleVideoChange }),
+              _react2.default.createElement('textarea', {
+                value: this.state.description,
+                onChange: this.update('description') })
             )
           );
       }
     }
   }, {
-    key: '_handleImageChange',
-    value: function _handleImageChange(e) {
-      var _this4 = this;
+    key: '_handleAudioChange',
+    value: function _handleAudioChange(e) {
+      var _this5 = this;
 
       e.preventDefault();
       var reader = new FileReader();
       var file = e.currentTarget.files[0];
 
       reader.onloadend = function () {
-        _this4.setState({ attached_file: file, photo: reader.result });
+        _this5.setState({ attached_file: file, audio: reader.result });
+      };
+
+      if (file) {
+        reader.readAsDataURL(file);
+      } else {
+        this.setState({ attached_file: '', audio: '' });
+      }
+    }
+  }, {
+    key: '_handleVideoChange',
+    value: function _handleVideoChange(e) {
+      var _this6 = this;
+
+      e.preventDefault();
+      var reader = new FileReader();
+      var file = e.currentTarget.files[0];
+
+      reader.onloadend = function () {
+        _this6.setState({ attached_file: file, video: reader.result });
+      };
+
+      if (file) {
+        reader.readAsDataURL(file);
+      } else {
+        this.setState({ attached_file: '', video: '' });
+      }
+    }
+  }, {
+    key: '_handleImageChange',
+    value: function _handleImageChange(e) {
+      var _this7 = this;
+
+      e.preventDefault();
+      var reader = new FileReader();
+      var file = e.currentTarget.files[0];
+
+      reader.onloadend = function () {
+        _this7.setState({ attached_file: file, photo: reader.result });
       };
 
       if (file) {
@@ -31708,7 +31780,10 @@ var postBlogpost = exports.postBlogpost = function postBlogpost(blogpost) {
   return $.ajax({
     method: 'POST',
     url: '/blogposts',
-    data: { blogpost: blogpost }
+    contentType: false,
+    processData: false,
+    dataType: 'json',
+    data: blogpost
   });
 };
 

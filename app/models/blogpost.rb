@@ -21,8 +21,8 @@ class Blogpost < ApplicationRecord
 
   has_attached_file :attached_file, default_url: 'default_blogpost.jpg'
   validates_attachment_content_type :attached_file,
-                                    content_type: /\Aimage\/.*\z/,
-                                    message: 'only images'
+                                    content_type: [/\Aimage\/.*\Z/, /\Avideo\/.*\Z/, /\Aaudio\/.*\Z/]
+
 
   belongs_to :author,
     primary_key: :id,
