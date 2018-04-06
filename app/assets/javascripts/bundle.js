@@ -30253,6 +30253,10 @@ var _navigation_bar_container = __webpack_require__(227);
 
 var _navigation_bar_container2 = _interopRequireDefault(_navigation_bar_container);
 
+var _user_showpage_container = __webpack_require__(229);
+
+var _user_showpage_container2 = _interopRequireDefault(_user_showpage_container);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var App = function App() {
@@ -30260,6 +30264,7 @@ var App = function App() {
     'div',
     null,
     _react2.default.createElement(_navigation_bar_container2.default, null),
+    _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/users/:userId', component: _user_showpage_container2.default }),
     _react2.default.createElement(_route_util.AuthRoute, { path: '/login', component: _front_page2.default }),
     _react2.default.createElement(_route_util.AuthRoute, { path: '/signup', component: _front_page2.default }),
     _react2.default.createElement(_route_util.AuthRoute, { path: '/', component: _front_page2.default }),
@@ -31216,6 +31221,31 @@ var NavigationBar = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = NavigationBar;
+
+/***/ }),
+/* 229 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _reactRedux = __webpack_require__(7);
+
+var mapStateToProps = function mapStateToProps(state, ownProps) {
+  return {
+    userId: ownProps.match.params.userId
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  // fetch blogposts here correlating to :userId
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(UserShowPage);
 
 /***/ })
 /******/ ]);
