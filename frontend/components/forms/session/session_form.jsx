@@ -131,7 +131,7 @@ _handleImageChange(e) {
             <br />
           </div>
           <span className='upload-profile-picture'>
-            <i className="fa fa-picture-o"></i>
+            <i className="fa fa-picture-o" style={{fontSize: '23px'}}></i>
             <input
               type='file'
               onChange={this._handleImageChange} />

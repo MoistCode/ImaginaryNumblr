@@ -5077,7 +5077,7 @@ var SessionForm = function (_React$Component) {
           _react2.default.createElement(
             'span',
             { className: 'upload-profile-picture' },
-            _react2.default.createElement('i', { className: 'fa fa-picture-o' }),
+            _react2.default.createElement('i', { className: 'fa fa-picture-o', style: { fontSize: '23px' } }),
             _react2.default.createElement('input', {
               type: 'file',
               onChange: this._handleImageChange }),

@@ -177,8 +177,12 @@
   padding-top: 0px;
 }
 
+.upload-profile-picture i {
+  transform: translateY(15%);
+}
+
 .upload-profile-picture * {
-  transform: translateX(5%);
+  transform: translateX(12%);
 }
 
 .upload-profile-picture img {
