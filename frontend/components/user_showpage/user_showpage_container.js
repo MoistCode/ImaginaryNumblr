@@ -6,7 +6,9 @@ import { fetchUser } from '../../actions/user_actions';
 
 const mapStateToProps = (state, ownProps) => {
   if (state.users[ownProps.match.params.userId] != undefined) {
-    return { user: state.users[ownProps.match.params.userId] };
+    return {
+      user: state.users[ownProps.match.params.userId]
+    };
   }
   return { user: 'none' }
 };

@@ -1,7 +1,13 @@
 class BlogpostsController < ApplicationController
 
   def index
+    debugger
+    @user_blogposts = []
+    params[:blogpostIds].each do |blogpostId|
+      @user_blogposts << Blogpost.find(blogpostId)
+    end
 
+    render json: @user_blogposts
   end
 
   def show
@@ -64,7 +70,8 @@ class BlogpostsController < ApplicationController
       :title,
       :description,
       :attached_file,
-      :quote
+      :quote,
+      :blogpostIds
     )
   end
 

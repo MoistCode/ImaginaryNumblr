@@ -19,16 +19,19 @@ class UserShowPage extends React.Component {
 
 
   render() {
+
     if (this.props.user == 'none') {
       return (
-        <p>Loading...</p>
+        <div className='user-showpage'>
+          <p>Loading...</p>
+        </div>
       )
     }
 
     const viewUser = this.props.user
     // Create an if statement that returns a loading screen if the fetching has
     // not been done yet
-
+    console.log(viewUser.blogposts);
     // Also create a condition where if there is no user by that id
     return (
       <div className='user-showpage'>
@@ -43,6 +46,10 @@ class UserShowPage extends React.Component {
         </div>
       </div>
     )
+  }
+
+  _generateUserBlogs() {
+
   }
 
 }

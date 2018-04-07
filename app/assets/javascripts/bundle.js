@@ -31547,7 +31547,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   if (state.users[ownProps.match.params.userId] != undefined) {
-    return { user: state.users[ownProps.match.params.userId] };
+    return {
+      user: state.users[ownProps.match.params.userId]
+    };
   }
   return { user: 'none' };
 };
@@ -31613,18 +31615,23 @@ var UserShowPage = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+
       if (this.props.user == 'none') {
         return _react2.default.createElement(
-          'p',
-          null,
-          'Loading...'
+          'div',
+          { className: 'user-showpage' },
+          _react2.default.createElement(
+            'p',
+            null,
+            'Loading...'
+          )
         );
       }
 
       var viewUser = this.props.user;
       // Create an if statement that returns a loading screen if the fetching has
       // not been done yet
-
+      console.log(viewUser.blogposts);
       // Also create a condition where if there is no user by that id
       return _react2.default.createElement(
         'div',
@@ -31639,6 +31646,9 @@ var UserShowPage = function (_React$Component) {
         _react2.default.createElement('div', { className: 'user-blogs' })
       );
     }
+  }, {
+    key: '_generateUserBlogs',
+    value: function _generateUserBlogs() {}
   }]);
 
   return UserShowPage;
@@ -31761,6 +31771,14 @@ var receiveBlogpostErrors = function receiveBlogpostErrors(errors) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+var fetchBlogposts = exports.fetchBlogposts = function fetchBlogposts(blogpostIds) {
+  return $.ajax({
+    method: 'GET',
+    url: '/blogposts',
+    data: { blogpost: blogpostIds }
+  });
+};
+
 var fetchBlogpost = exports.fetchBlogpost = function fetchBlogpost(blogpostId) {
   return $.ajax({
     method: 'GET',
