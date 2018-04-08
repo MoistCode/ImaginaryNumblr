@@ -31962,13 +31962,15 @@ var BlogpostItem = function (_React$Component) {
           { className: 'blogpost-item' },
           _react2.default.createElement(
             'h1',
-            null,
+            { className: 'title' },
             title
           ),
           _react2.default.createElement(
-            'h2',
-            null,
-            quote
+            'h1',
+            { className: 'quote' },
+            '"',
+            quote,
+            '"'
           )
         );
       } else if (contentType == 'text') {
@@ -31977,7 +31979,7 @@ var BlogpostItem = function (_React$Component) {
           { className: 'blogpost-item' },
           _react2.default.createElement(
             'h1',
-            null,
+            { className: 'title' },
             title
           ),
           _react2.default.createElement(
@@ -31992,7 +31994,7 @@ var BlogpostItem = function (_React$Component) {
           { className: 'blogpost-item' },
           _react2.default.createElement(
             'h1',
-            null,
+            { className: 'title' },
             title
           ),
           _react2.default.createElement(
@@ -32012,7 +32014,7 @@ var BlogpostItem = function (_React$Component) {
           { className: 'blogpost-item' },
           _react2.default.createElement(
             'h1',
-            null,
+            { className: 'title' },
             title
           ),
           _react2.default.createElement('img', { src: attachedFile }),
@@ -32028,7 +32030,7 @@ var BlogpostItem = function (_React$Component) {
           { className: 'blogpost-item' },
           _react2.default.createElement(
             'h1',
-            null,
+            { className: 'title' },
             title
           ),
           _react2.default.createElement('video', { src: attachedFile }),
