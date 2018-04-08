@@ -33,7 +33,7 @@ class BlogpostItem extends React.Component {
       return (
         <div className='blogpost-item'>
           <h1>{title}</h1>
-          <audio controlers>
+          <audio controls>
             <source src={attachedFile}></source>
           </audio>
           <p>{description}</p>

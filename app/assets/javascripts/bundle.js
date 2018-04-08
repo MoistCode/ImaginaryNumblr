@@ -31997,7 +31997,7 @@ var BlogpostItem = function (_React$Component) {
           ),
           _react2.default.createElement(
             'audio',
-            { controlers: true },
+            { controls: true },
             _react2.default.createElement('source', { src: attachedFile })
           ),
           _react2.default.createElement(
