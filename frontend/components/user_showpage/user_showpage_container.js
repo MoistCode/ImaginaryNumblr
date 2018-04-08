@@ -11,7 +11,6 @@ const _generateUserBlogposts = (blogposts, usersBlogpostIds) => {
 };
 
 const mapStateToProps = (state, ownProps) => {
-  debugger;
   if (
     state.users[ownProps.match.params.userId] != undefined &&
     state.users[ownProps.match.params.userId].blogpostIds != undefined

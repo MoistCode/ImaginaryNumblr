@@ -31849,7 +31849,6 @@ var _generateUserBlogposts = function _generateUserBlogposts(blogposts, usersBlo
 };
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-  debugger;
   if (state.users[ownProps.match.params.userId] != undefined && state.users[ownProps.match.params.userId].blogpostIds != undefined) {
     return {
       user: state.users[ownProps.match.params.userId],
@@ -32019,7 +32018,21 @@ var BlogpostItem = function (_React$Component) {
   _createClass(BlogpostItem, [{
     key: 'render',
     value: function render() {
-      return this._renderContentType();
+      return _react2.default.createElement(
+        'div',
+        { className: 'blogpost' },
+        _react2.default.createElement('div', { className: 'blogpost-header' }),
+        this._renderContentType(),
+        _react2.default.createElement(
+          'div',
+          { className: 'blogpost-footer' },
+          _react2.default.createElement('i', {
+            className: 'fa fa-heart-o',
+            style: {
+              fontSize: "24px"
+            } })
+        )
+      );
     }
   }, {
     key: '_renderContentType',
@@ -32109,7 +32122,7 @@ var BlogpostItem = function (_React$Component) {
             { className: 'title' },
             title
           ),
-          _react2.default.createElement('video', { src: attachedFile }),
+          _react2.default.createElement('video', { controls: true, src: attachedFile }),
           _react2.default.createElement(
             'p',
             null,

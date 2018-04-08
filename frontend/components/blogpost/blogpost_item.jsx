@@ -3,7 +3,19 @@ import React from 'react';
 class BlogpostItem extends React.Component {
 
   render() {
-    return this._renderContentType();
+    return (
+      <div className='blogpost'>
+        <div className='blogpost-header'></div>
+        {this._renderContentType()}
+        <div className='blogpost-footer'>
+          <i
+            className="fa fa-heart-o"
+            style={{
+              fontSize:"24px",
+            }}></i>
+        </div>
+      </div>
+    )
   }
 
   _renderContentType() {
@@ -51,7 +63,7 @@ class BlogpostItem extends React.Component {
       return (
         <div className='blogpost-item'>
           <h1 className='title'>{title}</h1>
-          <video src={attachedFile} />
+          <video controls src={attachedFile} />
           <p>{description}</p>
         </div>
       )
