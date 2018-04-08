@@ -31776,6 +31776,7 @@ var _generateUserBlogposts = function _generateUserBlogposts(blogposts, usersBlo
 };
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
+  debugger;
   if (state.users[ownProps.match.params.userId] != undefined && state.users[ownProps.match.params.userId].blogpostIds != undefined) {
     return {
       user: state.users[ownProps.match.params.userId],
