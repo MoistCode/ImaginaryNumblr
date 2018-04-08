@@ -1,15 +1,14 @@
 class BlogpostsController < ApplicationController
 
   def index
-    debugger
-    if !params[:blogpostIds]
+    if !params[:blogpost][:blogpostIds]
       render json: ['Nothing to see here']
     else
       @user_blogposts = []
-      params[:blogpostIds].each do |blogpostId|
-        @user_blogposts << Blogpost.find(blogpostId)
+      params[:blogpost][:blogpostIds].each do |blogpostId|
+        @user_blogposts << Blogpost.find(blogpostId.to_i)
       end
-      render json: @user_blogposts
+      render 'blogposts/index'
     end
   end
 

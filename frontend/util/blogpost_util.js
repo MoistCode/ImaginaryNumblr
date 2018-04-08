@@ -1,10 +1,12 @@
-export const fetchBlogposts = (blogpostIds) => (
-  $.ajax({
-    method: 'GET',
-    url: '/blogposts',
-    data: { blogpost: blogpostIds }
-  })
-);
+export const fetchBlogposts = (blogpostIds) => {
+  return (
+    $.ajax({
+      method: 'GET',
+      url: '/blogposts',
+      data: { blogpost: { blogpostIds } }
+    })
+  )
+};
 
 export const fetchBlogpost = (blogpostId) => (
   $.ajax({

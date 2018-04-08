@@ -9,12 +9,15 @@ class UserShowPage extends React.Component {
   componentDidMount() {
     // fetch username, blogposts, and profile picture here
     this.props.fetchUser(this.props.match.params.userId);
-    this.props.fetchUserBlogposts(this.props.user.blogpostsIds);
+    if (this.props.user.blogpostIds != undefined) {
+      this.props.fetchUserBlogposts(this.props.user.blogpostIds);
+    }
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.user.id != nextProps.match.params.userId) {
       this.props.fetchUser(nextProps.match.params.userId);
+      this.props.fetchUserBlogposts(nextProps.user.blogpostIds);
     }
   }
 
@@ -28,7 +31,6 @@ class UserShowPage extends React.Component {
         </div>
       )
     }
-
     const viewUser = this.props.user
     // Create an if statement that returns a loading screen if the fetching has
     // not been done yet
@@ -44,18 +46,16 @@ class UserShowPage extends React.Component {
         </div>
         <div className='user-blogs'>
         </div>
-        {_this.generateUserBlogs()}
+        {this._generateUserBlogs()}
       </div>
     )
   }
 
   _generateUserBlogs() {
     if (this.props.blogposts) {
-      this.props.blogposts.map((blogpost) => {
-        return (
-          <li>blogpost.title</li>
-        )
-      });
+      return (
+        this.props.blogposts.map((blogpost) => <li>{blogpost.title}</li>)
+      )
     }
   }
 

@@ -5,14 +5,19 @@ import { fetchUser } from '../../actions/user_actions';
 import { fetchBlogposts } from '../../actions/blogpost_actions';
 
 const _generateUserBlogposts = (blogposts, usersBlogpostIds) => {
-  return usersBlogpostIds.map((id) => blogposts[id])
+  if (blogposts.blogposts != undefined) {
+    return usersBlogpostIds.map((id) => blogposts.blogposts[id])
+  }
 };
 
 const mapStateToProps = (state, ownProps) => {
-  if (state.users[ownProps.match.params.userId] != undefined) {
+  if (
+    state.users[ownProps.match.params.userId] != undefined &&
+    state.users[ownProps.match.params.userId].blogpostIds != undefined
+  ) {
     return {
       user: state.users[ownProps.match.params.userId],
-      blogposts: _generateUserBlogposts(state.blogposts, state.users[ownProps.match.params.userId].blogposts)
+      blogposts: _generateUserBlogposts(state.blogposts, state.users[ownProps.match.params.userId].blogpostIds)
     };
   }
   return { user: 'none' }

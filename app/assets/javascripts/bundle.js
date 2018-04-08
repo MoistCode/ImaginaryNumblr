@@ -24663,7 +24663,7 @@ var fetchBlogposts = exports.fetchBlogposts = function fetchBlogposts(blogpostId
   return $.ajax({
     method: 'GET',
     url: '/blogposts',
-    data: { blogpost: blogpostIds }
+    data: { blogpost: { blogpostIds: blogpostIds } }
   });
 };
 
@@ -30590,7 +30590,7 @@ var App = function App() {
       _reactRouterDom.Switch,
       null,
       _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/users/:userId', component: _user_showpage_container2.default }),
-      _react2.default.createElement(_route_util.ProtectedRoute, { path: '/dashboard', component: _dashboard_container2.default }),
+      _react2.default.createElement(_route_util.ProtectedRoute, { exact: true, path: '/dashboard', component: _dashboard_container2.default }),
       _react2.default.createElement(_route_util.AuthRoute, { path: '/login', component: _front_page2.default }),
       _react2.default.createElement(_route_util.AuthRoute, { path: '/signup', component: _front_page2.default }),
       _react2.default.createElement(_route_util.AuthRoute, { path: '/', component: _front_page2.default })
@@ -31765,16 +31765,18 @@ var _blogpost_actions = __webpack_require__(32);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _generateUserBlogposts = function _generateUserBlogposts(blogposts, usersBlogpostIds) {
-  return usersBlogpostIds.map(function (id) {
-    return blogposts[id];
-  });
+  if (blogposts.blogposts != undefined) {
+    return usersBlogpostIds.map(function (id) {
+      return blogposts.blogposts[id];
+    });
+  }
 };
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-  if (state.users[ownProps.match.params.userId] != undefined) {
+  if (state.users[ownProps.match.params.userId] != undefined && state.users[ownProps.match.params.userId].blogpostIds != undefined) {
     return {
       user: state.users[ownProps.match.params.userId],
-      blogposts: _generateUserBlogposts(state.blogposts, state.users[ownProps.match.params.userId].blogposts)
+      blogposts: _generateUserBlogposts(state.blogposts, state.users[ownProps.match.params.userId].blogpostIds)
     };
   }
   return { user: 'none' };
@@ -31833,13 +31835,16 @@ var UserShowPage = function (_React$Component) {
     value: function componentDidMount() {
       // fetch username, blogposts, and profile picture here
       this.props.fetchUser(this.props.match.params.userId);
-      this.props.fetchUserBlogposts(this.props.user.blogpostsIds);
+      if (this.props.user.blogpostIds != undefined) {
+        this.props.fetchUserBlogposts(this.props.user.blogpostIds);
+      }
     }
   }, {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
       if (this.props.user.id != nextProps.match.params.userId) {
         this.props.fetchUser(nextProps.match.params.userId);
+        this.props.fetchUserBlogposts(nextProps.user.blogpostIds);
       }
     }
   }, {
@@ -31857,7 +31862,6 @@ var UserShowPage = function (_React$Component) {
           )
         );
       }
-
       var viewUser = this.props.user;
       // Create an if statement that returns a loading screen if the fetching has
       // not been done yet
@@ -31873,18 +31877,18 @@ var UserShowPage = function (_React$Component) {
             style: { 'width': '100px', 'height': '100px' } })
         ),
         _react2.default.createElement('div', { className: 'user-blogs' }),
-        _this.generateUserBlogs()
+        this._generateUserBlogs()
       );
     }
   }, {
     key: '_generateUserBlogs',
     value: function _generateUserBlogs() {
       if (this.props.blogposts) {
-        this.props.blogposts.map(function (blogpost) {
+        return this.props.blogposts.map(function (blogpost) {
           return _react2.default.createElement(
             'li',
             null,
-            'blogpost.title'
+            blogpost.title
           );
         });
       }
