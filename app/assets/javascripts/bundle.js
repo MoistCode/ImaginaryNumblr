@@ -1783,7 +1783,7 @@ function isPlainObject(value) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.updateBlogpost = exports.postBlogpost = exports.fetchBlogpost = exports.RECEIVE_BLOGPOST_ERRORS = exports.REMOVE_BLOGPOST = exports.RECEIVE_BLOGPOST = exports.RECEIVE_BLOGPOSTS = undefined;
+exports.updateBlogpost = exports.postBlogpost = exports.fetchBlogpost = exports.fetchBlogposts = exports.RECEIVE_BLOGPOST_ERRORS = exports.REMOVE_BLOGPOST = exports.RECEIVE_BLOGPOST = exports.RECEIVE_BLOGPOSTS = undefined;
 
 var _blogpost_util = __webpack_require__(123);
 
@@ -1795,6 +1795,16 @@ var RECEIVE_BLOGPOSTS = exports.RECEIVE_BLOGPOSTS = 'RECEIVE_BLOGPOSTS';
 var RECEIVE_BLOGPOST = exports.RECEIVE_BLOGPOST = 'RECEIVE_BLOGPOST';
 var REMOVE_BLOGPOST = exports.REMOVE_BLOGPOST = 'REMOVE_BLOGPOST';
 var RECEIVE_BLOGPOST_ERRORS = exports.RECEIVE_BLOGPOST_ERRORS = 'RECEIVE_BLOGPOST_ERRORS';
+
+var fetchBlogposts = exports.fetchBlogposts = function fetchBlogposts(blogpostIds) {
+  return function (dispatch) {
+    return BlogpostUtil.fetchBlogposts(blogpostIds).then(function (blogposts) {
+      return dispatch(receiveBlogposts(blogposts));
+    }, function (errors) {
+      return dispatch(receiveBlogpostErrors(errors.responseJSON));
+    });
+  };
+};
 
 var fetchBlogpost = exports.fetchBlogpost = function fetchBlogpost(blogpostId) {
   return function (dispatch) {
@@ -1823,6 +1833,13 @@ var updateBlogpost = exports.updateBlogpost = function updateBlogpost(blogpost) 
     }, function (errors) {
       return dispatch(receiveBlogpostErrors(errors.responseJSON));
     });
+  };
+};
+
+var receiveBlogposts = function receiveBlogposts(blogpost) {
+  return {
+    type: RECEIVE_BLOGPOSTS,
+    blogposts: blogposts
   };
 };
 
@@ -26905,7 +26922,7 @@ var blogpostsReducer = function blogpostsReducer() {
   Object.freeze(oldState);
   switch (action.type) {
     case _blogpost_actions.RECEIVE_BLOGPOSTS:
-      return action.blogposts;
+      return (0, _merge3.default)({}, oldState, action.blogposts);
     case _blogpost_actions.RECEIVE_BLOGPOST:
       return (0, _merge3.default)({}, oldState, _defineProperty({}, action.blogpost.id, action.blogpost));
     default:
@@ -31745,10 +31762,17 @@ var _user_actions = __webpack_require__(70);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var _generateUserBlogposts = function _generateUserBlogposts(blogposts, usersBlogpostIds) {
+  return usersBlogpostIds.map(function (id) {
+    return blogposts[id];
+  });
+};
+
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   if (state.users[ownProps.match.params.userId] != undefined) {
     return {
-      user: state.users[ownProps.match.params.userId]
+      user: state.users[ownProps.match.params.userId],
+      blogposts: _generateUserBlogposts(state.blogposts, state.users[ownProps.match.params.userId].blogposts)
     };
   }
   return { user: 'none' };
@@ -31759,6 +31783,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     // fetch blogposts here correlating to :userId
     fetchUser: function fetchUser(userId) {
       return dispatch((0, _user_actions.fetchUser)(userId));
+    },
+    fetchUserBlogposts: function fetchUserBlogposts(blogpostIds) {
+      return dispatch(fetchBlogposts(blogpostIds));
     }
   };
 };
@@ -31804,6 +31831,7 @@ var UserShowPage = function (_React$Component) {
     value: function componentDidMount() {
       // fetch username, blogposts, and profile picture here
       this.props.fetchUser(this.props.match.params.userId);
+      this.props.fetchUserBlogposts(this.props.user.blogpostsIds);
     }
   }, {
     key: 'componentWillReceiveProps',
@@ -31842,12 +31870,15 @@ var UserShowPage = function (_React$Component) {
             src: viewUser.profileImageUrl,
             style: { 'width': '100px', 'height': '100px' } })
         ),
-        _react2.default.createElement('div', { className: 'user-blogs' })
+        _react2.default.createElement('div', { className: 'user-blogs' }),
+        _this.generateUserBlogs()
       );
     }
   }, {
     key: '_generateUserBlogs',
-    value: function _generateUserBlogs() {}
+    value: function _generateUserBlogs() {
+      this.props.user.blogpostIds;
+    }
   }]);
 
   return UserShowPage;

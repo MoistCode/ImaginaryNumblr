@@ -3,11 +3,15 @@ import { withRouter } from 'react-router-dom';
 import UserShowPage from './user_showpage';
 import { fetchUser } from '../../actions/user_actions';
 
+const _generateUserBlogposts = (blogposts, usersBlogpostIds) => {
+  return usersBlogpostIds.map((id) => blogposts[id])
+};
 
 const mapStateToProps = (state, ownProps) => {
   if (state.users[ownProps.match.params.userId] != undefined) {
     return {
-      user: state.users[ownProps.match.params.userId]
+      user: state.users[ownProps.match.params.userId],
+      blogposts: _generateUserBlogposts(state.blogposts, state.users[ownProps.match.params.userId].blogposts)
     };
   }
   return { user: 'none' }
@@ -15,7 +19,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => ({
   // fetch blogposts here correlating to :userId
-  fetchUser: (userId) => dispatch(fetchUser(userId))
+  fetchUser: (userId) => dispatch(fetchUser(userId)),
+  fetchUserBlogposts: (blogpostIds) => dispatch(fetchBlogposts(blogpostIds))
 });
 
 export default withRouter(

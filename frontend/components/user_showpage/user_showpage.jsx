@@ -9,6 +9,7 @@ class UserShowPage extends React.Component {
   componentDidMount() {
     // fetch username, blogposts, and profile picture here
     this.props.fetchUser(this.props.match.params.userId);
+    this.props.fetchUserBlogposts(this.props.user.blogpostsIds);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -43,12 +44,13 @@ class UserShowPage extends React.Component {
         </div>
         <div className='user-blogs'>
         </div>
+        {_this.generateUserBlogs()}
       </div>
     )
   }
 
   _generateUserBlogs() {
-
+    this.props.user.blogpostIds
   }
 
 }
