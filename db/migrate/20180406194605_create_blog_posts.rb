@@ -1,6 +1,6 @@
 class CreateBlogPosts < ActiveRecord::Migration[5.1]
   def change
-    create_table :blog_posts do |t|
+    create_table :blogposts do |t|
       t.integer :author_id, null: false
       t.string :content_type, null: false
       t.string :title
@@ -9,6 +9,6 @@ class CreateBlogPosts < ActiveRecord::Migration[5.1]
       t.timestamps
     end
   end
-  add_index :blog_posts, :author_id
-  add_index :blog_posts, :id
+  add_index :blogposts, :author_id
+  add_index :blogposts, :id
 end
