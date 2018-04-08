@@ -1,7 +1,6 @@
 class BlogpostsController < ApplicationController
 
   def index
-    debugger
     @user_blogposts = []
     params[:blogpostIds].each do |blogpostId|
       @user_blogposts << Blogpost.find(blogpostId)
@@ -22,7 +21,7 @@ class BlogpostsController < ApplicationController
 
   def create
     @blogpost = Blogpost.new(blogpost_params)
-    debugger
+
     @blogpost.author_id = current_user.id
 
     if @blogpost.save

@@ -31,7 +31,6 @@ class UserShowPage extends React.Component {
     const viewUser = this.props.user
     // Create an if statement that returns a loading screen if the fetching has
     // not been done yet
-    console.log(viewUser.blogposts);
     // Also create a condition where if there is no user by that id
     return (
       <div className='user-showpage'>
