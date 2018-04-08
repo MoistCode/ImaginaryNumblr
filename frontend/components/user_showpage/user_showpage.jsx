@@ -8,20 +8,23 @@ class UserShowPage extends React.Component {
   }
 
   componentDidMount() {
+    if($('html').hasClass('fp-enabled')){
+      $.fn.fullpage.destroy('all');
+    }
     // fetch username, blogposts, and profile picture here
     this.props.fetchUser(this.props.match.params.userId);
-    if (this.props.user.blogpostIds != undefined) {
-      this.props.fetchUserBlogposts(this.props.user.blogpostIds);
-    }
+    this.props.fetchUserBlogposts(this.props.user.blogpostIds);
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.user.id != nextProps.match.params.userId) {
       this.props.fetchUser(nextProps.match.params.userId)
-        .then(() => this.props.fetchUserBlogposts(nextProps.user.blogpostIds));
+        .then(() => {
+          this.props.fetchUserBlogposts(nextProps.user.blogpostIds)
+        });
+    } else if (this.props.user.id == nextProps.match.params.userId) {
     }
   }
-
 
   render() {
 

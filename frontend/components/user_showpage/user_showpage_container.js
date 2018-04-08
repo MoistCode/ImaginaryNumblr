@@ -4,6 +4,8 @@ import UserShowPage from './user_showpage';
 import { fetchUser } from '../../actions/user_actions';
 import { fetchBlogposts } from '../../actions/blogpost_actions';
 
+
+
 const _generateUserBlogposts = (blogposts, usersBlogpostIds) => {
   if (blogposts.blogposts != undefined) {
     return usersBlogpostIds.map((id) => blogposts.blogposts[id])

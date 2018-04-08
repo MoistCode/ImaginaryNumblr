@@ -45,7 +45,6 @@ class BlogpostItem extends React.Component {
       quote,
       attachedFile
     } = this.props.blogpost;
-    console.log(contentType);
     if (contentType == 'quote') {
       return (
         <div className='blogpost-item'>

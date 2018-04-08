@@ -31913,11 +31913,12 @@ var UserShowPage = function (_React$Component) {
   _createClass(UserShowPage, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
+      if ($('html').hasClass('fp-enabled')) {
+        $.fn.fullpage.destroy('all');
+      }
       // fetch username, blogposts, and profile picture here
       this.props.fetchUser(this.props.match.params.userId);
-      if (this.props.user.blogpostIds != undefined) {
-        this.props.fetchUserBlogposts(this.props.user.blogpostIds);
-      }
+      this.props.fetchUserBlogposts(this.props.user.blogpostIds);
     }
   }, {
     key: 'componentWillReceiveProps',
@@ -31926,9 +31927,9 @@ var UserShowPage = function (_React$Component) {
 
       if (this.props.user.id != nextProps.match.params.userId) {
         this.props.fetchUser(nextProps.match.params.userId).then(function () {
-          return _this2.props.fetchUserBlogposts(nextProps.user.blogpostIds);
+          _this2.props.fetchUserBlogposts(nextProps.user.blogpostIds);
         });
-      }
+      } else if (this.props.user.id == nextProps.match.params.userId) {}
     }
   }, {
     key: 'render',
@@ -32076,7 +32077,6 @@ var BlogpostItem = function (_React$Component) {
           quote = _props$blogpost.quote,
           attachedFile = _props$blogpost.attachedFile;
 
-      console.log(contentType);
       if (contentType == 'quote') {
         return _react2.default.createElement(
           'div',
