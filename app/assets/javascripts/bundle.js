@@ -32038,6 +32038,8 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -32061,6 +32063,20 @@ var BlogpostItem = function (_React$Component) {
     key: 'closeEditForm',
     value: function closeEditForm() {
       this.setState({ showEditForm: false });
+    }
+  }, {
+    key: 'showEditForm',
+    value: function showEditForm() {
+      this.setState({ showEditForm: true });
+    }
+  }, {
+    key: 'update',
+    value: function update(field) {
+      var _this2 = this;
+
+      return function (e) {
+        _this2.setState(_defineProperty({}, field, e.target.value));
+      };
     }
 
     //handle sumission here
@@ -32098,7 +32114,7 @@ var BlogpostItem = function (_React$Component) {
   }, {
     key: '_generateEditForm',
     value: function _generateEditForm() {
-      var _this2 = this;
+      var _this3 = this;
 
       if (this.state.showEditForm == true) {
         return _react2.default.createElement(
@@ -32122,7 +32138,7 @@ var BlogpostItem = function (_React$Component) {
               _react2.default.createElement(
                 'form',
                 { onSubmit: function onSubmit(e) {
-                    return _this2.handleSubmit(e);
+                    return _this3.handleSubmit(e);
                   } },
                 _react2.default.createElement(
                   'label',
@@ -32133,7 +32149,7 @@ var BlogpostItem = function (_React$Component) {
                     value: this.state.title,
                     onChange: this.update('title') })
                 ),
-                this._generateForm(this.props.contentType),
+                this._generateForm(this.props.blogpost.contentType),
                 _react2.default.createElement(
                   'button',
                   null,
@@ -32156,7 +32172,7 @@ var BlogpostItem = function (_React$Component) {
             'div',
             { className: 'header-edit' },
             _react2.default.createElement('i', {
-              onClick: this._generateEditForm,
+              onClick: this.showEditForm,
               className: 'fa fa-edit' })
           ),
           _react2.default.createElement(
@@ -32288,6 +32304,85 @@ var BlogpostItem = function (_React$Component) {
             description
           )
         );
+      }
+    }
+  }, {
+    key: '_generateForm',
+    value: function _generateForm(contentType) {
+      switch (contentType) {
+        case 'quote':
+          return _react2.default.createElement(
+            'div',
+            null,
+            _react2.default.createElement(
+              'label',
+              null,
+              'Quote',
+              _react2.default.createElement('input', {
+                type: 'text',
+                value: this.state.quote,
+                onChange: this.update('quote') })
+            )
+          );
+        case 'text':
+          return _react2.default.createElement(
+            'div',
+            null,
+            _react2.default.createElement(
+              'label',
+              null,
+              'Description',
+              _react2.default.createElement('textarea', {
+                value: this.state.description,
+                onChange: this.update('description') })
+            )
+          );
+        case 'audio':
+          return _react2.default.createElement(
+            'div',
+            null,
+            _react2.default.createElement(
+              'audio',
+              { controls: true },
+              _react2.default.createElement('source', { src: this.props.blogpost.attachedFile })
+            ),
+            _react2.default.createElement(
+              'label',
+              null,
+              'Description',
+              _react2.default.createElement('textarea', {
+                value: this.state.description,
+                onChange: this.update('description') })
+            )
+          );
+        case 'photo':
+          return _react2.default.createElement(
+            'div',
+            null,
+            _react2.default.createElement('img', { src: this.props.blogpost.attachedFile }),
+            _react2.default.createElement(
+              'label',
+              null,
+              'Description',
+              _react2.default.createElement('textarea', {
+                value: this.state.description,
+                onChange: this.update('description') })
+            )
+          );
+        case 'video':
+          return _react2.default.createElement(
+            'div',
+            null,
+            _react2.default.createElement(
+              'label',
+              null,
+              'Description',
+              _react2.default.createElement('video', { controls: true, src: attachedFile }),
+              _react2.default.createElement('textarea', {
+                value: this.state.description,
+                onChange: this.update('description') })
+            )
+          );
       }
     }
   }]);

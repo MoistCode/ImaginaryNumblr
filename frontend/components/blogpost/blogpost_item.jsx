@@ -12,6 +12,16 @@ class BlogpostItem extends React.Component {
     this.setState({ showEditForm: false })
   }
 
+  showEditForm() {
+    this.setState({ showEditForm: true })
+  }
+
+  update(field) {
+    return (e) => {
+      this.setState({ [field]: e.target.value });
+    }
+  }
+
   //handle sumission here
 
   render() {
@@ -56,7 +66,7 @@ class BlogpostItem extends React.Component {
                     value={this.state.title}
                     onChange={this.update('title')} />
                 </label>
-                {this._generateForm(this.props.contentType)}
+                {this._generateForm(this.props.blogpost.contentType)}
                 <button>Submit</button>
               </form>
 
@@ -75,7 +85,7 @@ class BlogpostItem extends React.Component {
         <div className='blogpost-header'>
           <div className='header-edit'>
             <i
-              onClick={this._generateEditForm}
+              onClick={this.showEditForm}
               className="fa fa-edit"></i>
           </div>
           <div className='header-remove'>
@@ -161,6 +171,67 @@ class BlogpostItem extends React.Component {
           <p>{description}</p>
         </div>
       )
+    }
+  }
+
+  _generateForm(contentType) {
+    switch(contentType) {
+      case 'quote':
+        return (
+          <div>
+            <label>Quote
+              <input
+                type='text'
+                value={this.state.quote}
+                onChange={this.update('quote')} />
+            </label>
+          </div>
+        )
+      case 'text':
+        return (
+          <div>
+            <label>Description
+              <textarea
+                value={this.state.description}
+                onChange={this.update('description')} />
+            </label>
+          </div>
+        )
+      case 'audio':
+        return (
+          <div>
+            <audio controls>
+              <source src={this.props.blogpost.attachedFile}></source>
+            </audio>
+            <label>Description
+              <textarea
+                value={this.state.description}
+                onChange={this.update('description')} />
+            </label>
+          </div>
+        )
+      case 'photo':
+        return (
+          <div>
+            <img src={this.props.blogpost.attachedFile} />
+            <label>Description
+              <textarea
+                value={this.state.description}
+                onChange={this.update('description')} />
+            </label>
+          </div>
+        )
+      case 'video':
+        return (
+          <div>
+            <label>Description
+              <video controls src={attachedFile} />
+              <textarea
+                value={this.state.description}
+                onChange={this.update('description')} />
+            </label>
+          </div>
+        )
     }
   }
 }
