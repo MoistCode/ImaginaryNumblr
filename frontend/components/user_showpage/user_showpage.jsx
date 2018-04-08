@@ -1,5 +1,5 @@
 import React from 'react';
-import BlogPostItem from '../blogpost/blogpost_item';
+import BlogpostItemContainer from '../blogpost/blogpost_item_container';
 
 
 class UserShowPage extends React.Component {
@@ -17,8 +17,8 @@ class UserShowPage extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.props.user.id != nextProps.match.params.userId) {
-      this.props.fetchUser(nextProps.match.params.userId);
-      this.props.fetchUserBlogposts(nextProps.user.blogpostIds);
+      this.props.fetchUser(nextProps.match.params.userId)
+        .then(() => this.props.fetchUserBlogposts(nextProps.user.blogpostIds));
     }
   }
 
@@ -54,9 +54,9 @@ class UserShowPage extends React.Component {
   }
 
   _generateUserBlogs() {
-    if (this.props.blogposts) {
+    if (this.props.blogposts && this.props.blogposts[0]) {
       return (
-        this.props.blogposts.map((blogpost) => <BlogPostItem key={blogpost.id} blogpost={blogpost}/>)
+        this.props.blogposts.map((blogpost) => <BlogpostItemContainer key={blogpost.id} blogpost={blogpost}/>)
       )
     }
   }

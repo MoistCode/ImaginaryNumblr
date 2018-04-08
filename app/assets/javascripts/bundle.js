@@ -31889,9 +31889,9 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _blogpost_item = __webpack_require__(238);
+var _blogpost_item_container = __webpack_require__(239);
 
-var _blogpost_item2 = _interopRequireDefault(_blogpost_item);
+var _blogpost_item_container2 = _interopRequireDefault(_blogpost_item_container);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -31922,9 +31922,12 @@ var UserShowPage = function (_React$Component) {
   }, {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
+      var _this2 = this;
+
       if (this.props.user.id != nextProps.match.params.userId) {
-        this.props.fetchUser(nextProps.match.params.userId);
-        this.props.fetchUserBlogposts(nextProps.user.blogpostIds);
+        this.props.fetchUser(nextProps.match.params.userId).then(function () {
+          return _this2.props.fetchUserBlogposts(nextProps.user.blogpostIds);
+        });
       }
     }
   }, {
@@ -31968,9 +31971,9 @@ var UserShowPage = function (_React$Component) {
   }, {
     key: '_generateUserBlogs',
     value: function _generateUserBlogs() {
-      if (this.props.blogposts) {
+      if (this.props.blogposts && this.props.blogposts[0]) {
         return this.props.blogposts.map(function (blogpost) {
-          return _react2.default.createElement(_blogpost_item2.default, { key: blogpost.id, blogpost: blogpost });
+          return _react2.default.createElement(_blogpost_item_container2.default, { key: blogpost.id, blogpost: blogpost });
         });
       }
     }
@@ -32021,16 +32024,7 @@ var BlogpostItem = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         { className: 'blogpost' },
-        _react2.default.createElement(
-          'div',
-          { className: 'blogpost-header' },
-          _react2.default.createElement(
-            'div',
-            { className: 'header-remove' },
-            _react2.default.createElement('i', {
-              className: 'fa fa-close' })
-          )
-        ),
+        this._generateAuthorOptions(),
         this._renderContentType(),
         _react2.default.createElement(
           'div',
@@ -32044,13 +32038,33 @@ var BlogpostItem = function (_React$Component) {
                 fontSize: "24px"
               } }),
             _react2.default.createElement(
-              'p',
-              null,
-              Math.floor(Math.random() * 100 + 1)
+              'div',
+              { className: 'like-count' },
+              Math.floor(Math.random() * 500 + 100)
             )
           )
         )
       );
+    }
+  }, {
+    key: '_generateAuthorOptions',
+    value: function _generateAuthorOptions() {
+      if (this.props.blogpost.authorId == this.props.currentUser) {
+        return _react2.default.createElement(
+          'div',
+          { className: 'blogpost-header' },
+          _react2.default.createElement(
+            'div',
+            { className: 'header-edit' },
+            _react2.default.createElement('i', { className: 'fa fa-edit' })
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'header-remove' },
+            _react2.default.createElement('i', { className: 'fa fa-close' })
+          )
+        );
+      }
     }
   }, {
     key: '_renderContentType',
@@ -32062,7 +32076,7 @@ var BlogpostItem = function (_React$Component) {
           quote = _props$blogpost.quote,
           attachedFile = _props$blogpost.attachedFile;
 
-
+      console.log(contentType);
       if (contentType == 'quote') {
         return _react2.default.createElement(
           'div',
@@ -32155,6 +32169,39 @@ var BlogpostItem = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = BlogpostItem;
+
+/***/ }),
+/* 239 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _blogpost_item = __webpack_require__(238);
+
+var _blogpost_item2 = _interopRequireDefault(_blogpost_item);
+
+var _reactRedux = __webpack_require__(5);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mapStateToProps = function mapStateToProps(state) {
+  var currentUser = void 0;
+  if (state.session.currentUser != undefined) {
+    currentUser = Object.keys(state.session.currentUser.users)[0];
+    return { currentUser: currentUser };
+  } else {
+    return { currentUser: 'none' };
+  }
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_blogpost_item2.default);
 
 /***/ })
 /******/ ]);

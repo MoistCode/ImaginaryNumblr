@@ -17,6 +17,7 @@
 
     .title {
       height: 30px;
+      margin-top: 20px;
       margin-bottom: 50px;
       font-family: 'Ubuntu', sans-serif;
       font-weight: bold;
@@ -40,7 +41,6 @@
     p {
       word-wrap: break-word;
       font-family: 'Ubuntu', sans-serif;
-      font-weight: bold;
     }
 }
 
@@ -49,19 +49,18 @@
     position: absolute;
     display: flex;
     flex-direction: row;
+    z-index: 9;
 
-    left: 51%;
-    transform: translateY(-60%);
-
-    p {
-      transform: translateY(-30%);
+    .like-count {
       font-family: 'Ubuntu', sans-serif;
-      font-weight: bold;
       color: grey;
+      transform: translate(1700%, -100%);
+      z-index: 15;
 
     }
 
     i {
+      transform: translate(1800%, -130%);
       color: grey;
     }
 
@@ -78,7 +77,34 @@
     display: flex;
     flex-direction: row;
     font-size: 24px;
-    left: 52%;
-    z-index: 16;
+    z-index: 9;
+    i {
+      transform: translate(5250%, 10%);
+      position: absolute;
+      color: grey;
+    }
+
+    i:hover {
+      color: red;
+      cursor: pointer;
+    }
+
+  }
+  .header-edit {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    font-size: 24px;
+    z-index: 9;
+    i {
+      transform: translate(3980%, 16%);
+      color: grey;
+    }
+
+    i:hover {
+      color: red;
+      cursor: pointer;
+    }
+
   }
 }

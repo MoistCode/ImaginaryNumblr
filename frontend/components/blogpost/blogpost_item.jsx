@@ -5,12 +5,7 @@ class BlogpostItem extends React.Component {
   render() {
     return (
       <div className='blogpost'>
-        <div className='blogpost-header'>
-          <div className='header-remove'>
-            <i
-              className="fa fa-close"></i>
-          </div>
-        </div>
+        {this._generateAuthorOptions()}
         {this._renderContentType()}
         <div className='blogpost-footer'>
           <div className='footer-likes'>
@@ -19,14 +14,30 @@ class BlogpostItem extends React.Component {
               style={{
                 fontSize:"24px",
               }}></i>
-              <p>{Math.floor((Math.random() * 100) + 1)}</p>
+            <div className='like-count'>{Math.floor((Math.random() * 500) + 100)}</div>
           </div>
         </div>
       </div>
     )
   }
 
+  _generateAuthorOptions() {
+    if (this.props.blogpost.authorId == this.props.currentUser) {
+      return (
+        <div className='blogpost-header'>
+          <div className='header-edit'>
+            <i className="fa fa-edit"></i>
+          </div>
+          <div className='header-remove'>
+            <i className="fa fa-close"></i>
+          </div>
+        </div>
+      )
+    }
+  }
+
   _renderContentType() {
+
     const {
       title,
       contentType,
@@ -34,7 +45,7 @@ class BlogpostItem extends React.Component {
       quote,
       attachedFile
     } = this.props.blogpost;
-
+    console.log(contentType);
     if (contentType == 'quote') {
       return (
         <div className='blogpost-item'>
