@@ -31464,21 +31464,19 @@ var BlogPostCreationForm = function (_React$Component) {
     key: '_generateState',
     value: function _generateState(contentType) {
       if (contentType == 'quote') {
-        var _ref;
-
-        return _ref = {
+        return {
           title: '',
           quote: '',
-          content_type: contentType
-        }, _defineProperty(_ref, contentType, ''), _defineProperty(_ref, 'attached_file', ''), _ref;
+          content_type: contentType,
+          attached_file: ''
+        };
       } else if (contentType != 'text') {
-        var _ref2;
-
-        return _ref2 = {
+        return {
           title: '',
           description: '',
-          content_type: contentType
-        }, _defineProperty(_ref2, contentType, ''), _defineProperty(_ref2, 'attached_file', ''), _ref2;
+          content_type: contentType,
+          attached_file: ''
+        };
       } else {
         return _defineProperty({
           title: '',
@@ -32023,10 +32021,281 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(
 
 /***/ }),
 /* 239 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-throw new Error("Module build failed: SyntaxError: Unexpected token, expected , (9:25)\n\n\u001b[0m \u001b[90m  7 | \u001b[39m    \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39m_generateEditForm \u001b[33m=\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39m_generateEditForm\u001b[33m.\u001b[39mbind(\u001b[36mthis\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m  8 | \u001b[39m    \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mstate \u001b[33m=\u001b[39m {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m  9 | \u001b[39m      showEditForm\u001b[33m:\u001b[39m \u001b[36mfalse\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m    | \u001b[39m                         \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 10 | \u001b[39m    }\n \u001b[90m 11 | \u001b[39m  }\n \u001b[90m 12 | \u001b[39m\u001b[0m\n");
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var BlogpostItem = function (_React$Component) {
+  _inherits(BlogpostItem, _React$Component);
+
+  function BlogpostItem(props) {
+    _classCallCheck(this, BlogpostItem);
+
+    var _this = _possibleConstructorReturn(this, (BlogpostItem.__proto__ || Object.getPrototypeOf(BlogpostItem)).call(this, props));
+
+    _this._generateEditForm = _this._generateEditForm.bind(_this);
+    return _this;
+  }
+
+  _createClass(BlogpostItem, [{
+    key: 'closeEditForm',
+    value: function closeEditForm() {
+      this.setState({ showEditForm: false });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'blogpost' },
+        this._generateEditForm(),
+        this._generateAuthorOptions(),
+        this._renderContentType(),
+        _react2.default.createElement(
+          'div',
+          { className: 'blogpost-footer' },
+          _react2.default.createElement(
+            'div',
+            { className: 'footer-likes' },
+            _react2.default.createElement('i', {
+              className: 'fa fa-heart',
+              style: {
+                fontSize: "24px"
+              } }),
+            _react2.default.createElement(
+              'div',
+              {
+                className: 'like-count' },
+              Math.floor(Math.random() * 500 + 100)
+            )
+          )
+        )
+      );
+    }
+  }, {
+    key: '_generateEditForm',
+    value: function _generateEditForm() {
+      var _this2 = this;
+
+      if (this.state.showEditForm == true) {
+        return _react2.default.createElement(
+          'div',
+          { id: 'creation-modal' },
+          _react2.default.createElement(
+            'div',
+            { className: 'w3-container w3-center w3-animate-opacity' },
+            _react2.default.createElement(
+              'div',
+              { id: 'creation-form' },
+              _react2.default.createElement(
+                'h2',
+                null,
+                'Edit ',
+                this.props.blogpost.contentType.charAt(0).toUpperCase() + this.props.blogpost.contentType.slice(1)
+              ),
+              _react2.default.createElement('i', {
+                onClick: this.closeEditForm,
+                className: 'fa fa-close' }),
+              _react2.default.createElement(
+                'form',
+                { onSubmit: function onSubmit(e) {
+                    return _this2.handleSubmit(e);
+                  } },
+                _react2.default.createElement(
+                  'label',
+                  null,
+                  'Title',
+                  _react2.default.createElement('input', {
+                    type: 'text',
+                    value: this.state.title,
+                    onChange: this.update('title') })
+                ),
+                this._generateForm(this.props.contentType),
+                _react2.default.createElement(
+                  'button',
+                  null,
+                  'Submit'
+                )
+              )
+            )
+          )
+        );
+      }
+    }
+  }, {
+    key: '_generateAuthorOptions',
+    value: function _generateAuthorOptions() {
+      if (this.props.blogpost.authorId == this.props.currentUser) {
+        return _react2.default.createElement(
+          'div',
+          { className: 'blogpost-header' },
+          _react2.default.createElement(
+            'div',
+            { className: 'header-edit' },
+            _react2.default.createElement('i', {
+              onClick: this._generateEditForm,
+              className: 'fa fa-edit' })
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'header-remove' },
+            _react2.default.createElement('i', { className: 'fa fa-close' })
+          )
+        );
+      }
+    }
+  }, {
+    key: '_generateState',
+    value: function _generateState(contentType) {
+      if (contentType == 'quote') {
+        var _ref;
+
+        return _ref = {
+          title: '',
+          quote: '',
+          content_type: contentType
+        }, _defineProperty(_ref, contentType, ''), _defineProperty(_ref, 'attached_file', ''), _defineProperty(_ref, 'showEditForm', false), _ref;
+      } else if (contentType != 'text') {
+        var _ref2;
+
+        return _ref2 = {
+          title: '',
+          description: '',
+          content_type: contentType
+        }, _defineProperty(_ref2, contentType, ''), _defineProperty(_ref2, 'attached_file', ''), _defineProperty(_ref2, 'showEditForm', false), _ref2;
+      } else {
+        var _ref3;
+
+        return _ref3 = {
+          title: '',
+          description: '',
+          content_type: contentType
+        }, _defineProperty(_ref3, contentType, ''), _defineProperty(_ref3, 'showEditForm', false), _ref3;
+      }
+    }
+  }, {
+    key: '_renderContentType',
+    value: function _renderContentType() {
+      var _props$blogpost = this.props.blogpost,
+          title = _props$blogpost.title,
+          contentType = _props$blogpost.contentType,
+          description = _props$blogpost.description,
+          quote = _props$blogpost.quote,
+          attachedFile = _props$blogpost.attachedFile;
+
+      if (contentType == 'quote') {
+        return _react2.default.createElement(
+          'div',
+          { className: 'blogpost-item' },
+          _react2.default.createElement(
+            'h1',
+            { className: 'title' },
+            title
+          ),
+          _react2.default.createElement(
+            'h1',
+            { className: 'quote' },
+            '"',
+            quote,
+            '"'
+          )
+        );
+      } else if (contentType == 'text') {
+        return _react2.default.createElement(
+          'div',
+          { className: 'blogpost-item' },
+          _react2.default.createElement(
+            'h1',
+            { className: 'title' },
+            title
+          ),
+          _react2.default.createElement(
+            'p',
+            null,
+            description
+          )
+        );
+      } else if (contentType == 'audio') {
+        return _react2.default.createElement(
+          'div',
+          { className: 'blogpost-item' },
+          _react2.default.createElement(
+            'h1',
+            { className: 'title' },
+            title
+          ),
+          _react2.default.createElement(
+            'audio',
+            { controls: true },
+            _react2.default.createElement('source', { src: attachedFile })
+          ),
+          _react2.default.createElement(
+            'p',
+            null,
+            description
+          )
+        );
+      } else if (contentType == 'photo') {
+        return _react2.default.createElement(
+          'div',
+          { className: 'blogpost-item' },
+          _react2.default.createElement(
+            'h1',
+            { className: 'title' },
+            title
+          ),
+          _react2.default.createElement('img', { src: attachedFile }),
+          _react2.default.createElement(
+            'p',
+            null,
+            description
+          )
+        );
+      } else if (contentType == 'video') {
+        return _react2.default.createElement(
+          'div',
+          { className: 'blogpost-item' },
+          _react2.default.createElement(
+            'h1',
+            { className: 'title' },
+            title
+          ),
+          _react2.default.createElement('video', { controls: true, src: attachedFile }),
+          _react2.default.createElement(
+            'p',
+            null,
+            description
+          )
+        );
+      }
+    }
+  }]);
+
+  return BlogpostItem;
+}(_react2.default.Component);
+
+exports.default = BlogpostItem;
 
 /***/ })
 /******/ ]);

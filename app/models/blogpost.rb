@@ -19,7 +19,7 @@
 class Blogpost < ApplicationRecord
   validates :content_type, presence: true
 
-  has_attached_file :attached_file, default_url: 'default_blogpost.jpg'
+  has_attached_file :attached_file
   validates_attachment_content_type :attached_file,
                                     content_type: [/\Aimage\/.*\Z/, /\Avideo\/.*\Z/, /\Aaudio\/.*\Z/]
 

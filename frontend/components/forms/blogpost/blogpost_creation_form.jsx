@@ -191,7 +191,6 @@ class BlogPostCreationForm extends React.Component {
         title: '',
         quote: '',
         content_type: contentType,
-        [contentType]: '',
         attached_file: ''
       }
     } else if (contentType != 'text') {
@@ -199,7 +198,6 @@ class BlogPostCreationForm extends React.Component {
           title: '',
           description: '',
           content_type: contentType,
-          [contentType]: '',
           attached_file: ''
         }
     } else {

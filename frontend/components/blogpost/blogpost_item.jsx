@@ -5,14 +5,16 @@ class BlogpostItem extends React.Component {
   constructor(props) {
     super(props);
     this._generateEditForm = this._generateEditForm.bind(this);
-    this.state = {
-      showEditForm: false;
-    }
+  }
+
+  closeEditForm() {
+    this.setState({ showEditForm: false })
   }
 
   render() {
     return (
       <div className='blogpost'>
+        {this._generateEditForm()}
         {this._generateAuthorOptions()}
         {this._renderContentType()}
         <div className='blogpost-footer'>
@@ -42,7 +44,7 @@ class BlogpostItem extends React.Component {
                   this.props.blogpost.contentType.slice(1)}
               </h2>
               <i
-                onClick={this.props.showDashboard}
+                onClick={this.closeEditForm}
                 className="fa fa-close"></i>
               <form onSubmit={(e) => this.handleSubmit(e)}>
                 <label>Title
@@ -78,6 +80,36 @@ class BlogpostItem extends React.Component {
           </div>
         </div>
       )
+    }
+  }
+
+  _generateState(contentType) {
+    if (contentType == 'quote') {
+      return {
+        title: '',
+        quote: '',
+        content_type: contentType,
+        [contentType]: '',
+        attached_file: '',
+        showEditForm: false
+      }
+    } else if (contentType != 'text') {
+        return {
+          title: '',
+          description: '',
+          content_type: contentType,
+          [contentType]: '',
+          attached_file: '',
+          showEditForm: false
+        }
+    } else {
+        return {
+          title: '',
+          description: '',
+          content_type: contentType,
+          [contentType]: '',
+          showEditForm: false
+        }
     }
   }
 
