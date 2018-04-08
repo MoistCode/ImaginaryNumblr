@@ -30758,6 +30758,79 @@ var FrontPage = function (_React$Component) {
         return _react2.default.createElement(
           'div',
           { className: 'section' },
+          _react2.default.createElement(
+            'div',
+            { className: 'front-page-title' },
+            _react2.default.createElement(
+              'h1',
+              null,
+              'Imaginary Numblr'
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'math-icons' },
+              _react2.default.createElement(
+                'div',
+                { className: 'exist1' },
+                '\u2203'
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'forall' },
+                '\u2200'
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'isin' },
+                '\u2208'
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'sum' },
+                '\u2211'
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'math1' },
+                '\u22D9'
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'infin' },
+                '\u221E'
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'math2' },
+                '\u2230'
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'math3' },
+                '\u22B1'
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'part' },
+                '\u2202'
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'empty' },
+                '\u2205'
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'math4' },
+                '\u2222'
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'math5' },
+                '\u22C8'
+              )
+            )
+          ),
           _react2.default.createElement('img', { className: 'photo1' })
         );
       }

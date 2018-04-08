@@ -27,7 +27,9 @@ class FrontPage extends React.Component {
     return (
       <div id="front_page">
         {this._firstSection(curPath)}
-        <div className='section'><img className='photo2'></img></div>
+        <div className='section'>
+          <img className='photo2'></img>
+        </div>
         <div className='section'><img className='photo3'></img></div>
         <div className='section'><img className='photo4'></img></div>
         <div className='section'><img className='photo5'></img></div>
@@ -49,6 +51,23 @@ class FrontPage extends React.Component {
     } else {
       return (
         <div className='section'>
+          <div className='front-page-title'>
+            <h1>Imaginary Numblr</h1>
+            <div className='math-icons'>
+              <div className='exist1'>&exist;</div>
+              <div className='forall'>&forall;</div>
+              <div className='isin'>&isin;</div>
+              <div className='sum'>&sum;</div>
+              <div className='math1'>&#x22D9;</div>
+              <div className='infin'>&infin;</div>
+              <div className='math2'>&#x2230;</div>
+              <div className='math3'>&#x22B1;</div>
+              <div className='part'>&part;</div>
+              <div className='empty'>&empty;</div>
+              <div className='math4'>&#x2222;</div>
+              <div className='math5'>&#x22C8;</div>
+            </div>
+          </div>
           <img className='photo1' />
         </div>
       )
