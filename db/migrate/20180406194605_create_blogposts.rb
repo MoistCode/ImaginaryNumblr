@@ -1,4 +1,4 @@
-class CreateBlogPosts < ActiveRecord::Migration[5.1]
+class CreateBlogposts < ActiveRecord::Migration[5.1]
   def change
     create_table :blogposts do |t|
       t.integer :author_id, null: false
@@ -8,7 +8,7 @@ class CreateBlogPosts < ActiveRecord::Migration[5.1]
       t.string :quote
       t.timestamps
     end
+    add_index :blogposts, :author_id
+    add_index :blogposts, :id
   end
-  add_index :blogposts, :author_id
-  add_index :blogposts, :id
 end

@@ -27,8 +27,8 @@ ActiveRecord::Schema.define(version: 20180406200637) do
     t.string "attached_file_content_type"
     t.integer "attached_file_file_size"
     t.datetime "attached_file_updated_at"
-    t.index ["author_id"], name: "index_blog_posts_on_author_id"
-    t.index ["id"], name: "index_blog_posts_on_id"
+    t.index ["author_id"], name: "index_blogposts_on_author_id"
+    t.index ["id"], name: "index_blogposts_on_id"
   end
 
   create_table "users", force: :cascade do |t|

@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: blog_posts
+# Table name: blogposts
 #
 #  id                         :integer          not null, primary key
 #  author_id                  :integer          not null
