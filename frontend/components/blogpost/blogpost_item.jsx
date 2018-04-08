@@ -5,14 +5,22 @@ class BlogpostItem extends React.Component {
   render() {
     return (
       <div className='blogpost'>
-        <div className='blogpost-header'></div>
+        <div className='blogpost-header'>
+          <div className='header-remove'>
+            <i
+              className="fa fa-close"></i>
+          </div>
+        </div>
         {this._renderContentType()}
         <div className='blogpost-footer'>
-          <i
-            className="fa fa-heart-o"
-            style={{
-              fontSize:"24px",
-            }}></i>
+          <div className='footer-likes'>
+            <i
+              className="fa fa-heart"
+              style={{
+                fontSize:"24px",
+              }}></i>
+              <p>{Math.floor((Math.random() * 100) + 1)}</p>
+          </div>
         </div>
       </div>
     )

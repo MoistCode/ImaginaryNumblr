@@ -32021,16 +32021,34 @@ var BlogpostItem = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         { className: 'blogpost' },
-        _react2.default.createElement('div', { className: 'blogpost-header' }),
+        _react2.default.createElement(
+          'div',
+          { className: 'blogpost-header' },
+          _react2.default.createElement(
+            'div',
+            { className: 'header-remove' },
+            _react2.default.createElement('i', {
+              className: 'fa fa-close' })
+          )
+        ),
         this._renderContentType(),
         _react2.default.createElement(
           'div',
           { className: 'blogpost-footer' },
-          _react2.default.createElement('i', {
-            className: 'fa fa-heart-o',
-            style: {
-              fontSize: "24px"
-            } })
+          _react2.default.createElement(
+            'div',
+            { className: 'footer-likes' },
+            _react2.default.createElement('i', {
+              className: 'fa fa-heart',
+              style: {
+                fontSize: "24px"
+              } }),
+            _react2.default.createElement(
+              'p',
+              null,
+              Math.floor(Math.random() * 100 + 1)
+            )
+          )
         )
       );
     }
