@@ -48,6 +48,7 @@ class UserShowPage extends React.Component {
         <div className='user-blogs'>
         </div>
         {this._generateUserBlogs()}
+        <footer>Nothing to see here</footer>
       </div>
     )
   }
@@ -55,7 +56,7 @@ class UserShowPage extends React.Component {
   _generateUserBlogs() {
     if (this.props.blogposts) {
       return (
-        this.props.blogposts.map((blogpost) => <li>{blogpost.title}</li>)
+        this.props.blogposts.map((blogpost) => <BlogPostItem key={blogpost.id} blogpost={blogpost}/>)
       )
     }
   }

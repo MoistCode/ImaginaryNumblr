@@ -1,3 +1,29 @@
 // Place all the styles related to the BlogPosts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.blogpost-item {
+    transform: translateX(70%);
+    margin-top: 25px;
+    background-color: white;
+    width: 600px;
+    border-radius: 8px;
+    text-align: center;
+    border: 2px solid black;
+    -webkit-box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
+    height: 100%;
+
+    h1 {
+      height: 30px;
+    }
+
+    img {
+      width: 100%;
+    }
+
+    video {
+      width: 100%;
+    }
+}
