@@ -29,7 +29,7 @@ export const updateBlogpost = (blogpost) => (dispatch) => BlogpostUtil.updateBlo
     (errors) => dispatch(receiveBlogpostErrors(errors.responseJSON))
   )
 
-const receiveBlogposts = (blogpost) => ({
+const receiveBlogposts = (blogposts) => ({
   type: RECEIVE_BLOGPOSTS,
   blogposts
 });

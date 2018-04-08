@@ -20,7 +20,7 @@ class BlogPostCreationForm extends React.Component {
       formData.append('blogpost[description]]', this.state.description);
       formData.append('blogpost[attached_file]', this.state.attached_file);
     } else if (this.state.content_type == 'quote') {
-      formData.append('blogpost[quote]');
+      formData.append('blogpost[quote]', this.state.quote);
     } else {
       formData.append('blogpost[description]]', this.state.description);
     }

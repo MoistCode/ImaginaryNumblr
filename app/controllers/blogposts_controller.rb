@@ -1,12 +1,16 @@
 class BlogpostsController < ApplicationController
 
   def index
-    @user_blogposts = []
-    params[:blogpostIds].each do |blogpostId|
-      @user_blogposts << Blogpost.find(blogpostId)
+    debugger
+    if !params[:blogpostIds]
+      render json: ['Nothing to see here']
+    else
+      @user_blogposts = []
+      params[:blogpostIds].each do |blogpostId|
+        @user_blogposts << Blogpost.find(blogpostId)
+      end
+      render json: @user_blogposts
     end
-
-    render json: @user_blogposts
   end
 
   def show

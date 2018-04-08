@@ -1836,7 +1836,7 @@ var updateBlogpost = exports.updateBlogpost = function updateBlogpost(blogpost) 
   };
 };
 
-var receiveBlogposts = function receiveBlogposts(blogpost) {
+var receiveBlogposts = function receiveBlogposts(blogposts) {
   return {
     type: RECEIVE_BLOGPOSTS,
     blogposts: blogposts
@@ -31177,7 +31177,7 @@ var BlogPostCreationForm = function (_React$Component) {
         formData.append('blogpost[description]]', this.state.description);
         formData.append('blogpost[attached_file]', this.state.attached_file);
       } else if (this.state.content_type == 'quote') {
-        formData.append('blogpost[quote]');
+        formData.append('blogpost[quote]', this.state.quote);
       } else {
         formData.append('blogpost[description]]', this.state.description);
       }
@@ -31760,6 +31760,8 @@ var _user_showpage2 = _interopRequireDefault(_user_showpage);
 
 var _user_actions = __webpack_require__(70);
 
+var _blogpost_actions = __webpack_require__(32);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _generateUserBlogposts = function _generateUserBlogposts(blogposts, usersBlogpostIds) {
@@ -31785,7 +31787,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
       return dispatch((0, _user_actions.fetchUser)(userId));
     },
     fetchUserBlogposts: function fetchUserBlogposts(blogpostIds) {
-      return dispatch(fetchBlogposts(blogpostIds));
+      return dispatch((0, _blogpost_actions.fetchBlogposts)(blogpostIds));
     }
   };
 };
@@ -31877,7 +31879,15 @@ var UserShowPage = function (_React$Component) {
   }, {
     key: '_generateUserBlogs',
     value: function _generateUserBlogs() {
-      this.props.user.blogpostIds;
+      if (this.props.blogposts) {
+        this.props.blogposts.map(function (blogpost) {
+          return _react2.default.createElement(
+            'li',
+            null,
+            'blogpost.title'
+          );
+        });
+      }
     }
   }]);
 

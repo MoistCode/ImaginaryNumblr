@@ -50,7 +50,13 @@ class UserShowPage extends React.Component {
   }
 
   _generateUserBlogs() {
-    this.props.user.blogpostIds
+    if (this.props.blogposts) {
+      this.props.blogposts.map((blogpost) => {
+        return (
+          <li>blogpost.title</li>
+        )
+      });
+    }
   }
 
 }
