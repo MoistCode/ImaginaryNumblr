@@ -2,6 +2,14 @@ import React from 'react';
 
 class BlogpostItem extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this._generateEditForm = this._generateEditForm.bind(this);
+    this.state = {
+      showEditForm: false;
+    }
+  }
+
   render() {
     return (
       <div className='blogpost'>
@@ -14,11 +22,46 @@ class BlogpostItem extends React.Component {
               style={{
                 fontSize:"24px",
               }}></i>
-            <div className='like-count'>{Math.floor((Math.random() * 500) + 100)}</div>
+            <div
+              className='like-count'>{Math.floor((Math.random() * 500) + 100)}
+            </div>
           </div>
         </div>
       </div>
     )
+  }
+
+  _generateEditForm() {
+    if (this.state.showEditForm == true) {
+      return (
+        <div id='creation-modal'>
+          <div className='w3-container w3-center w3-animate-opacity'>
+            <div id='creation-form'>
+              <h2>
+                Edit {this.props.blogpost.contentType.charAt(0).toUpperCase() +
+                  this.props.blogpost.contentType.slice(1)}
+              </h2>
+              <i
+                onClick={this.props.showDashboard}
+                className="fa fa-close"></i>
+              <form onSubmit={(e) => this.handleSubmit(e)}>
+                <label>Title
+                  <input
+                    type='text'
+                    value={this.state.title}
+                    onChange={this.update('title')} />
+                </label>
+                {this._generateForm(this.props.contentType)}
+                <button>Submit</button>
+              </form>
+
+            </div>
+
+          </div>
+
+        </div>
+      )
+    }
   }
 
   _generateAuthorOptions() {
@@ -26,7 +69,9 @@ class BlogpostItem extends React.Component {
       return (
         <div className='blogpost-header'>
           <div className='header-edit'>
-            <i className="fa fa-edit"></i>
+            <i
+              onClick={this._generateEditForm}
+              className="fa fa-edit"></i>
           </div>
           <div className='header-remove'>
             <i className="fa fa-close"></i>

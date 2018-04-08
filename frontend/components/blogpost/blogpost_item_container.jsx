@@ -13,7 +13,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-
+  updateBlogpost: (blogpostId)
+  deleteBlogpost: (blogpostId)
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(BlogpostItem);

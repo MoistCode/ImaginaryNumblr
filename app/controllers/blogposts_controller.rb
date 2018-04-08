@@ -35,12 +35,12 @@ class BlogpostsController < ApplicationController
   end
 
   def edit
-    @blogpost = Blogpost.find(params[:id])
+    @blogpost = current_user.blogposts.find(params[:id])
 
     if @blogpost.author_id == current_user.id
       render 'blogposts/show'
     else
-      render json: ['Cannot edit blog.'], status: 404
+      render json: ['Blog does not exist.'], status: 404
     end
   end
 
@@ -58,7 +58,7 @@ class BlogpostsController < ApplicationController
     blogpost = current_user.blogposts.find(params[:id])
 
     if blogpost.destroy
-      # Send the user back to their dashboard
+      render json: ['Deletion completed']
     else
       render json: blogpost.errors.full_messages, status: 404
     end
