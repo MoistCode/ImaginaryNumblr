@@ -1,4 +1,5 @@
 import React from 'react';
+import BlogPostItem from '../blogpost/blogpost_item';
 
 
 class UserShowPage extends React.Component {

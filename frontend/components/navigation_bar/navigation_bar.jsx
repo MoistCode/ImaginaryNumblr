@@ -87,7 +87,10 @@ class NavigationBar extends React.Component {
     const logoutButton = (
       <button
         className='nav-button'
-        onClick={() => this.props.logout()}>Log Out
+        onClick={() => {
+          this.props.logout();
+          this.props.history.push('/');
+        }}>Log Out
         <i
           className="fa fa-superscript"
           style={{fontSize:'24px'}} />

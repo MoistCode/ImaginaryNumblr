@@ -31645,7 +31645,8 @@ var NavigationBar = function (_React$Component) {
         {
           className: 'nav-button',
           onClick: function onClick() {
-            return _this4.props.logout();
+            _this4.props.logout();
+            _this4.props.history.push('/');
           } },
         'Log Out',
         _react2.default.createElement('i', {
@@ -31813,6 +31814,10 @@ var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
+var _blogpost_item = __webpack_require__(238);
+
+var _blogpost_item2 = _interopRequireDefault(_blogpost_item);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -31899,6 +31904,12 @@ var UserShowPage = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = UserShowPage;
+
+/***/ }),
+/* 238 */
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed: SyntaxError: Unexpected token (13:4)\n\n\u001b[0m \u001b[90m 11 | \u001b[39m    \u001b[36mreturn\u001b[39m (\n \u001b[90m 12 | \u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 13 | \u001b[39m    )\n \u001b[90m    | \u001b[39m    \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 14 | \u001b[39m  }\n \u001b[90m 15 | \u001b[39m\n \u001b[90m 16 | \u001b[39m  _renderContentType() {\u001b[0m\n");
 
 /***/ })
 /******/ ]);
