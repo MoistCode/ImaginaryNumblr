@@ -31728,6 +31728,8 @@ var NavigationBar = function (_React$Component) {
           if (!_this5.props.currentUser && _this5.props.location.pathname != '/dashboard') {
             window.location.reload();
             _this5.props.history.push('/');
+          } else {
+            _this5.props.history.push('/dashboard');
           }
         },
         className: 'main-nav-icon',

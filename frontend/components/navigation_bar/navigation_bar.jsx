@@ -173,6 +173,8 @@ class NavigationBar extends React.Component {
               ) {
                 window.location.reload();
                 this.props.history.push('/');
+              } else {
+                this.props.history.push('/dashboard');
               }
             }
           }
