@@ -5,11 +5,14 @@ class BlogpostItem extends React.Component {
   constructor(props) {
     super(props);
     this._generateEditForm = this._generateEditForm.bind(this);
+    this.state = this._generateState(this.props.blogpost.contentType);
   }
 
   closeEditForm() {
     this.setState({ showEditForm: false })
   }
+
+  //handle sumission here
 
   render() {
     return (
@@ -86,28 +89,24 @@ class BlogpostItem extends React.Component {
   _generateState(contentType) {
     if (contentType == 'quote') {
       return {
-        title: '',
-        quote: '',
-        content_type: contentType,
-        [contentType]: '',
-        attached_file: '',
+        title: this.props.blogpost.title,
+        quote: this.props.blogpost.quote,
+        content_type: this.props.blogpost.contentType,
         showEditForm: false
       }
     } else if (contentType != 'text') {
         return {
-          title: '',
-          description: '',
-          content_type: contentType,
-          [contentType]: '',
-          attached_file: '',
+          title: this.props.blogpost.title,
+          description: this.props.blogpost.description,
+          content_type: this.props.blogpost.contentType,
+          attached_file: this.props.blogpost.attachedFile,
           showEditForm: false
         }
     } else {
         return {
-          title: '',
-          description: '',
-          content_type: contentType,
-          [contentType]: '',
+          title: this.props.blogpost.title,
+          description: this.props.blogpost.description,
+          content_type: this.props.blogpost.contentType,
           showEditForm: false
         }
     }

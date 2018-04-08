@@ -32038,8 +32038,6 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -32055,6 +32053,7 @@ var BlogpostItem = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (BlogpostItem.__proto__ || Object.getPrototypeOf(BlogpostItem)).call(this, props));
 
     _this._generateEditForm = _this._generateEditForm.bind(_this);
+    _this.state = _this._generateState(_this.props.blogpost.contentType);
     return _this;
   }
 
@@ -32063,6 +32062,9 @@ var BlogpostItem = function (_React$Component) {
     value: function closeEditForm() {
       this.setState({ showEditForm: false });
     }
+
+    //handle sumission here
+
   }, {
     key: 'render',
     value: function render() {
@@ -32169,29 +32171,27 @@ var BlogpostItem = function (_React$Component) {
     key: '_generateState',
     value: function _generateState(contentType) {
       if (contentType == 'quote') {
-        var _ref;
-
-        return _ref = {
-          title: '',
-          quote: '',
-          content_type: contentType
-        }, _defineProperty(_ref, contentType, ''), _defineProperty(_ref, 'attached_file', ''), _defineProperty(_ref, 'showEditForm', false), _ref;
+        return {
+          title: this.props.blogpost.title,
+          quote: this.props.blogpost.quote,
+          content_type: this.props.blogpost.contentType,
+          showEditForm: false
+        };
       } else if (contentType != 'text') {
-        var _ref2;
-
-        return _ref2 = {
-          title: '',
-          description: '',
-          content_type: contentType
-        }, _defineProperty(_ref2, contentType, ''), _defineProperty(_ref2, 'attached_file', ''), _defineProperty(_ref2, 'showEditForm', false), _ref2;
+        return {
+          title: this.props.blogpost.title,
+          description: this.props.blogpost.description,
+          content_type: this.props.blogpost.contentType,
+          attached_file: this.props.blogpost.attachedFile,
+          showEditForm: false
+        };
       } else {
-        var _ref3;
-
-        return _ref3 = {
-          title: '',
-          description: '',
-          content_type: contentType
-        }, _defineProperty(_ref3, contentType, ''), _defineProperty(_ref3, 'showEditForm', false), _ref3;
+        return {
+          title: this.props.blogpost.title,
+          description: this.props.blogpost.description,
+          content_type: this.props.blogpost.contentType,
+          showEditForm: false
+        };
       }
     }
   }, {
