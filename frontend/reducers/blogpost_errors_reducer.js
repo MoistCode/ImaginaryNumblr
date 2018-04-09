@@ -24,7 +24,7 @@ const blogpostErrorsReducer = (oldState = [], action) => {
   Object.freeze(oldState);
   switch(action.type) {
     case RECEIVE_BLOGPOST_ERRORS:
-      return action.errors
+      return action.errors || oldState;
     case RECEIVE_BLOGPOST:
       return [];
     case RECEIVE_CLEARED_ERRORS:

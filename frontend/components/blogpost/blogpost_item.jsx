@@ -169,7 +169,7 @@ class BlogpostItem extends React.Component {
             className='quote'
             style={{
               fontStyle: 'italic',
-              'margin-bottom': '10px'
+              marginBottom: '10px'
             }}>"{quote}"</h1>
           <p>- {this.props.blogpost.quoteSource}</p>
         </div>

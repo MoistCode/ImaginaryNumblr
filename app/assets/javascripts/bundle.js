@@ -24663,7 +24663,7 @@ var blogpostErrorsReducer = function blogpostErrorsReducer() {
   Object.freeze(oldState);
   switch (action.type) {
     case _blogpost_actions.RECEIVE_BLOGPOST_ERRORS:
-      return action.errors;
+      return action.errors || oldState;
     case _blogpost_actions.RECEIVE_BLOGPOST:
       return [];
     case _blogpost_actions.RECEIVE_CLEARED_ERRORS:
@@ -32324,7 +32324,7 @@ var BlogpostItem = function (_React$Component) {
               className: 'quote',
               style: {
                 fontStyle: 'italic',
-                'margin-bottom': '10px'
+                marginBottom: '10px'
               } },
             '"',
             quote,

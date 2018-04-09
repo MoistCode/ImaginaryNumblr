@@ -1,14 +1,14 @@
 class BlogpostsController < ApplicationController
 
   def index
-    if !params[:blogpost][:blogpostIds]
-      render json: ['Nothing to see here'], status: 404
-    else
+    if params[:blogpost]
       @user_blogposts = []
       params[:blogpost][:blogpostIds].each do |blogpostId|
         @user_blogposts << Blogpost.find(blogpostId.to_i)
       end
       render 'blogposts/index'
+    else
+      render json: ['Nothing to see here'], status: 404
     end
   end
 
