@@ -85,12 +85,10 @@ class BlogpostItem extends React.Component {
                 onClick={this.closeEditForm}
                 className="fa fa-close"></i>
               <form onSubmit={(e) => this.handleSubmit(e)}>
-                <label>Title
-                  <input
-                    type='text'
-                    value={this.state.title}
-                    onChange={this.update('title')} />
-                </label>
+                <input
+                  type='text'
+                  value={this.state.title}
+                  onChange={this.update('title')} />
                 {this._generateForm(this.props.blogpost.contentType)}
                 <button>Submit</button>
               </form>
@@ -215,26 +213,22 @@ class BlogpostItem extends React.Component {
       case 'quote':
         return (
           <div>
-            <label>Quote
+            <input
+              type='text'
+              value={this.state.quote}
+              onChange={this.update('quote')} />
               <input
                 type='text'
-                value={this.state.quote}
-                onChange={this.update('quote')} />
-                <input
-                  type='text'
-                  value={`- ${this.state.quoteSource}`}
-                  onChange={this.update('quoteSource')} />
-            </label>
+                value={`- ${this.state.quoteSource}`}
+              onChange={this.update('quoteSource')} />
           </div>
         )
       case 'text':
         return (
           <div>
-            <label>Description
-              <textarea
-                value={this.state.description}
-                onChange={this.update('description')} />
-            </label>
+            <textarea
+              value={this.state.description}
+              onChange={this.update('description')} />
           </div>
         )
       case 'audio':

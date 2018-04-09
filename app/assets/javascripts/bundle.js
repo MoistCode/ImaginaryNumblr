@@ -32224,15 +32224,10 @@ var BlogpostItem = function (_React$Component) {
                 { onSubmit: function onSubmit(e) {
                     return _this3.handleSubmit(e);
                   } },
-                _react2.default.createElement(
-                  'label',
-                  null,
-                  'Title',
-                  _react2.default.createElement('input', {
-                    type: 'text',
-                    value: this.state.title,
-                    onChange: this.update('title') })
-                ),
+                _react2.default.createElement('input', {
+                  type: 'text',
+                  value: this.state.title,
+                  onChange: this.update('title') }),
                 this._generateForm(this.props.blogpost.contentType),
                 _react2.default.createElement(
                   'button',
@@ -32414,32 +32409,22 @@ var BlogpostItem = function (_React$Component) {
           return _react2.default.createElement(
             'div',
             null,
-            _react2.default.createElement(
-              'label',
-              null,
-              'Quote',
-              _react2.default.createElement('input', {
-                type: 'text',
-                value: this.state.quote,
-                onChange: this.update('quote') }),
-              _react2.default.createElement('input', {
-                type: 'text',
-                value: '- ' + this.state.quoteSource,
-                onChange: this.update('quoteSource') })
-            )
+            _react2.default.createElement('input', {
+              type: 'text',
+              value: this.state.quote,
+              onChange: this.update('quote') }),
+            _react2.default.createElement('input', {
+              type: 'text',
+              value: '- ' + this.state.quoteSource,
+              onChange: this.update('quoteSource') })
           );
         case 'text':
           return _react2.default.createElement(
             'div',
             null,
-            _react2.default.createElement(
-              'label',
-              null,
-              'Description',
-              _react2.default.createElement('textarea', {
-                value: this.state.description,
-                onChange: this.update('description') })
-            )
+            _react2.default.createElement('textarea', {
+              value: this.state.description,
+              onChange: this.update('description') })
           );
         case 'audio':
           return _react2.default.createElement(
