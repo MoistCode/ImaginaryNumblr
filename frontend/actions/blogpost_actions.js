@@ -23,11 +23,12 @@ export const postBlogpost = (blogpost) => (dispatch) => BlogpostUtil.postBlogpos
     (errors) => dispatch(receiveBlogpostErrors(errors.responseJSON))
   );
 
-export const updateBlogpost = (blogpost) => (dispatch) => BlogpostUtil.updateBlogpost(blogpost)
+export const updateBlogpost = (blogpost, blogpostId) => (dispatch) => BlogpostUtil.updateBlogpost(blogpost, blogpostId)
   .then(
     (blogpost) => dispatch(receiveBlogpost(blogpost)),
     (errors) => dispatch(receiveBlogpostErrors(errors.responseJSON))
-  )
+  );
+
 
 const receiveBlogposts = (blogposts) => ({
   type: RECEIVE_BLOGPOSTS,

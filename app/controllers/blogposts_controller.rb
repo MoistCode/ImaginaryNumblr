@@ -45,9 +45,10 @@ class BlogpostsController < ApplicationController
   end
 
   def update
-    @blogpost = current_user.blogposts.find(params[:id])
+    @blogpost = current_user.blogposts.find(params[:blogpost][:id])
 
-    if @blogpost.update_attributes(blogpost_params)
+    if @blogpost.update(blogpost_params)
+      debugger;
       render 'blogposts/show'
     else
       render json: @blogpost.errors.full_messages, status: 422

@@ -15,11 +15,14 @@ export const fetchBlogpost = (blogpostId) => (
   })
 );
 
-export const updateBlogpost = (blogpost) => (
+export const updateBlogpost = (blogpost, blogpostId) => (
   $.ajax({
     method: 'PATCH',
-    url: `/blogposts/${blogpost.id}`,
-    data: { blogpost }
+    url: `/blogposts/${blogpostId}`,
+    contentType: false,
+    processData: false,
+    dataType: 'json',
+    data: blogpost
   })
 );
 

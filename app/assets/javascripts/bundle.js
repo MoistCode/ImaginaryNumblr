@@ -1218,9 +1218,9 @@ var postBlogpost = exports.postBlogpost = function postBlogpost(blogpost) {
   };
 };
 
-var updateBlogpost = exports.updateBlogpost = function updateBlogpost(blogpost) {
+var updateBlogpost = exports.updateBlogpost = function updateBlogpost(blogpost, blogpostId) {
   return function (dispatch) {
-    return BlogpostUtil.updateBlogpost(blogpost).then(function (blogpost) {
+    return BlogpostUtil.updateBlogpost(blogpost, blogpostId).then(function (blogpost) {
       return dispatch(receiveBlogpost(blogpost));
     }, function (errors) {
       return dispatch(receiveBlogpostErrors(errors.responseJSON));
@@ -24674,11 +24674,14 @@ var fetchBlogpost = exports.fetchBlogpost = function fetchBlogpost(blogpostId) {
   });
 };
 
-var updateBlogpost = exports.updateBlogpost = function updateBlogpost(blogpost) {
+var updateBlogpost = exports.updateBlogpost = function updateBlogpost(blogpost, blogpostId) {
   return $.ajax({
     method: 'PATCH',
-    url: '/blogposts/' + blogpost.id,
-    data: { blogpost: blogpost }
+    url: '/blogposts/' + blogpostId,
+    contentType: false,
+    processData: false,
+    dataType: 'json',
+    data: blogpost
   });
 };
 
@@ -26924,6 +26927,7 @@ var blogpostsReducer = function blogpostsReducer() {
     case _blogpost_actions.RECEIVE_BLOGPOSTS:
       return (0, _merge3.default)({}, oldState, action.blogposts);
     case _blogpost_actions.RECEIVE_BLOGPOST:
+      debugger;
       return (0, _merge3.default)({}, oldState, _defineProperty({}, action.blogpost.id, action.blogpost));
     default:
       return oldState;
@@ -32000,6 +32004,8 @@ var _blogpost_item2 = _interopRequireDefault(_blogpost_item);
 
 var _reactRedux = __webpack_require__(5);
 
+var _blogpost_util = __webpack_require__(123);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -32012,7 +32018,13 @@ var mapStateToProps = function mapStateToProps(state) {
   }
 };
 
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {};
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    updateBlogpost: function updateBlogpost(blogpost, blogpostId) {
+      return dispatch((0, _blogpost_util.updateBlogpost)(blogpost, blogpostId));
+    }
+  };
+};
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_blogpost_item2.default);
 
@@ -32077,9 +32089,24 @@ var BlogpostItem = function (_React$Component) {
         _this2.setState(_defineProperty({}, field, e.target.value));
       };
     }
-
-    //handle sumission here
-
+  }, {
+    key: 'handleSubmit',
+    value: function handleSubmit(e) {
+      e.preventDefault();
+      var formData = new FormData();
+      formData.append('blogpost[title]', this.state.title);
+      formData.append('blogpost[content_type]', this.state.content_type);
+      formData.append('blogpost[id]', this.props.blogpost.id);
+      if (this.state.content_type != 'quote' && this.state.content_type != 'text') {
+        formData.append('blogpost[description]]', this.state.description);
+        formData.append('blogpost[attached_file]', this.state.attached_file);
+      } else if (this.state.content_type == 'quote') {
+        formData.append('blogpost[quote]', this.state.quote);
+      } else {
+        formData.append('blogpost[description]]', this.state.description);
+      }
+      this.props.updateBlogpost(formData, this.props.blogpost.id);
+    }
   }, {
     key: 'render',
     value: function render() {

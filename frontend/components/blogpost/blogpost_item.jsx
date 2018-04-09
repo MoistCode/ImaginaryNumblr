@@ -10,6 +10,7 @@ class BlogpostItem extends React.Component {
     this.toggleEditForm = this.toggleEditForm.bind(this);
   }
 
+
   closeEditForm() {
     this.setState({ showEditForm: false })
   }
@@ -24,7 +25,22 @@ class BlogpostItem extends React.Component {
     }
   }
 
-  //handle sumission here
+  handleSubmit(e) {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append('blogpost[title]', this.state.title);
+    formData.append('blogpost[content_type]', this.state.content_type);
+    formData.append('blogpost[id]', this.props.blogpost.id);
+    if(this.state.content_type != 'quote' && this.state.content_type != 'text') {
+      formData.append('blogpost[description]]', this.state.description);
+      formData.append('blogpost[attached_file]', this.state.attached_file);
+    } else if (this.state.content_type == 'quote') {
+      formData.append('blogpost[quote]', this.state.quote);
+    } else {
+      formData.append('blogpost[description]]', this.state.description);
+    }
+    this.props.updateBlogpost(formData, this.props.blogpost.id);
+  }
 
   render() {
     return (

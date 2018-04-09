@@ -1,5 +1,6 @@
 import BlogpostItem from './blogpost_item';
 import { connect } from 'react-redux';
+import { updateBlogpost } from '../../util/blogpost_util';
 
 const mapStateToProps = (state) => {
   let currentUser;
@@ -12,8 +13,8 @@ const mapStateToProps = (state) => {
 
 };
 
-const mapDispatchToProps = (dispatch) => {
-
-};
+const mapDispatchToProps = (dispatch) => ({
+  updateBlogpost: (blogpost, blogpostId) => dispatch(updateBlogpost(blogpost, blogpostId))
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(BlogpostItem);
