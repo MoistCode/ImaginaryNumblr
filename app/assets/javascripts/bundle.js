@@ -32012,10 +32012,7 @@ var mapStateToProps = function mapStateToProps(state) {
   }
 };
 
-var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-  updateBlogpost: blogpostId;
-  deleteBlogpost: blogpostId;
-};
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {};
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_blogpost_item2.default);
 
@@ -32056,6 +32053,8 @@ var BlogpostItem = function (_React$Component) {
 
     _this._generateEditForm = _this._generateEditForm.bind(_this);
     _this.state = _this._generateState(_this.props.blogpost.contentType);
+    _this.closeEditForm = _this.closeEditForm.bind(_this);
+    _this.toggleEditForm = _this.toggleEditForm.bind(_this);
     return _this;
   }
 
@@ -32065,9 +32064,9 @@ var BlogpostItem = function (_React$Component) {
       this.setState({ showEditForm: false });
     }
   }, {
-    key: 'showEditForm',
-    value: function showEditForm() {
-      this.setState({ showEditForm: true });
+    key: 'toggleEditForm',
+    value: function toggleEditForm() {
+      this.setState({ showEditForm: !this.state.showEditForm });
     }
   }, {
     key: 'update',
@@ -32119,13 +32118,13 @@ var BlogpostItem = function (_React$Component) {
       if (this.state.showEditForm == true) {
         return _react2.default.createElement(
           'div',
-          { id: 'creation-modal' },
+          { id: 'edit-modal' },
           _react2.default.createElement(
             'div',
             { className: 'w3-container w3-center w3-animate-opacity' },
             _react2.default.createElement(
               'div',
-              { id: 'creation-form' },
+              { id: 'edit-form' },
               _react2.default.createElement(
                 'h2',
                 null,
@@ -32172,7 +32171,7 @@ var BlogpostItem = function (_React$Component) {
             'div',
             { className: 'header-edit' },
             _react2.default.createElement('i', {
-              onClick: this.showEditForm,
+              onClick: this.toggleEditForm,
               className: 'fa fa-edit' })
           ),
           _react2.default.createElement(
@@ -32377,7 +32376,7 @@ var BlogpostItem = function (_React$Component) {
               'label',
               null,
               'Description',
-              _react2.default.createElement('video', { controls: true, src: attachedFile }),
+              _react2.default.createElement('video', { controls: true, src: this.props.blogpost.attachedFile }),
               _react2.default.createElement('textarea', {
                 value: this.state.description,
                 onChange: this.update('description') })

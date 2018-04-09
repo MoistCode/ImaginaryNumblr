@@ -6,14 +6,16 @@ class BlogpostItem extends React.Component {
     super(props);
     this._generateEditForm = this._generateEditForm.bind(this);
     this.state = this._generateState(this.props.blogpost.contentType);
+    this.closeEditForm = this.closeEditForm.bind(this);
+    this.toggleEditForm = this.toggleEditForm.bind(this);
   }
 
   closeEditForm() {
     this.setState({ showEditForm: false })
   }
 
-  showEditForm() {
-    this.setState({ showEditForm: true })
+  toggleEditForm() {
+    this.setState({ showEditForm: !this.state.showEditForm })
   }
 
   update(field) {
@@ -49,9 +51,9 @@ class BlogpostItem extends React.Component {
   _generateEditForm() {
     if (this.state.showEditForm == true) {
       return (
-        <div id='creation-modal'>
+        <div id='edit-modal'>
           <div className='w3-container w3-center w3-animate-opacity'>
-            <div id='creation-form'>
+            <div id='edit-form'>
               <h2>
                 Edit {this.props.blogpost.contentType.charAt(0).toUpperCase() +
                   this.props.blogpost.contentType.slice(1)}
@@ -85,7 +87,7 @@ class BlogpostItem extends React.Component {
         <div className='blogpost-header'>
           <div className='header-edit'>
             <i
-              onClick={this.showEditForm}
+              onClick={this.toggleEditForm}
               className="fa fa-edit"></i>
           </div>
           <div className='header-remove'>
@@ -225,7 +227,7 @@ class BlogpostItem extends React.Component {
         return (
           <div>
             <label>Description
-              <video controls src={attachedFile} />
+              <video controls src={this.props.blogpost.attachedFile} />
               <textarea
                 value={this.state.description}
                 onChange={this.update('description')} />
