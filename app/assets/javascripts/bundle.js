@@ -31393,7 +31393,7 @@ var BlogPostCreationForm = function (_React$Component) {
       return errArr.map(function (err) {
         return _react2.default.createElement(
           "li",
-          { style: { color: 'red' } },
+          { style: { color: 'red', listStyle: 'none' } },
           err
         );
       });
