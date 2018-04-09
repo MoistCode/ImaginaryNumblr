@@ -31282,11 +31282,13 @@ var BlogPostCreationForm = function (_React$Component) {
   }
 
   _createClass(BlogPostCreationForm, [{
-    key: 'handleSubmit',
+    key: "handleSubmit",
     value: function handleSubmit(e) {
       var _this2 = this;
 
       e.preventDefault();
+      var submitButton = $(".create-submit-button");
+      submitButton.prop("disabled", true);
       var formData = new FormData();
       formData.append('blogpost[title]', this.state.title);
       formData.append('blogpost[content_type]', this.state.content_type);
@@ -31300,12 +31302,13 @@ var BlogPostCreationForm = function (_React$Component) {
         formData.append('blogpost[description]]', this.state.description);
       }
       this.props.createBlogpost(formData).then(function () {
+        submitButton.prop("disabled", false);
         window.location.reload();
         _this2.props.history.push('/dashboard');
       });
     }
   }, {
-    key: 'update',
+    key: "update",
     value: function update(field) {
       var _this3 = this;
 
@@ -31314,51 +31317,52 @@ var BlogPostCreationForm = function (_React$Component) {
       };
     }
   }, {
-    key: 'componentDidMount',
+    key: "componentDidMount",
     value: function componentDidMount() {
       this.dragElement(document.getElementById("creation-modal"));
     }
   }, {
-    key: 'render',
+    key: "render",
     value: function render() {
       var _this4 = this;
 
       return _react2.default.createElement(
-        'div',
-        { id: 'creation-modal' },
+        "div",
+        { id: "creation-modal" },
         _react2.default.createElement(
-          'div',
-          { className: 'w3-container w3-center w3-animate-opacity' },
+          "div",
+          { className: "w3-container w3-center w3-animate-opacity" },
           _react2.default.createElement(
-            'div',
-            { id: 'creation-form' },
+            "div",
+            { id: "creation-form" },
             _react2.default.createElement(
-              'p',
+              "p",
               null,
-              'Drag Me :)'
+              "Drag Me :)"
             ),
-            _react2.default.createElement('i', {
+            _react2.default.createElement("i", {
               onClick: function onClick() {
                 _this4.props.showDashboard();
                 _this4.props.clearErrors();
               },
-              className: 'fa fa-close' }),
+              className: "fa fa-close" }),
             _react2.default.createElement(
-              'form',
+              "form",
               { onSubmit: function onSubmit(e) {
                   return _this4.handleSubmit(e);
                 } },
-              _react2.default.createElement('input', {
-                type: 'text',
-                placeholder: 'Title',
+              _react2.default.createElement("input", {
+                type: "text",
+                placeholder: "Title",
                 value: this.state.title,
                 onChange: this.update('title'),
                 style: { fontSize: '28px' } }),
               this._generateForm(this.props.contentType),
               _react2.default.createElement(
-                'button',
-                null,
-                'Submit'
+                "button",
+                {
+                  className: "create-submit-button" },
+                "Submit"
               ),
               this._generateErrors(this.props.errors)
             )
@@ -31367,25 +31371,25 @@ var BlogPostCreationForm = function (_React$Component) {
       );
     }
   }, {
-    key: '_generateErrors',
+    key: "_generateErrors",
     value: function _generateErrors(errArr) {
       return errArr.map(function (err) {
         return _react2.default.createElement(
-          'li',
+          "li",
           null,
           err
         );
       });
     }
   }, {
-    key: '_generateForm',
+    key: "_generateForm",
     value: function _generateForm(contentType) {
       switch (contentType) {
         case 'quote':
           return _react2.default.createElement(
-            'div',
+            "div",
             null,
-            _react2.default.createElement('textarea', {
+            _react2.default.createElement("textarea", {
               placeholder: "“All mathematicians live in two different worlds." + "They live in a crystalline world of perfect platonic forms." + "An ice palace. But they also live in the common world where" + "things are transient, ambiguous, subject to vicissitudes." + "Mathematicians go backward and forward from one world to another." + "They’re adults in the crystalline world, infants in the real one.”",
               value: this.state.quote,
               style: {
@@ -31395,56 +31399,56 @@ var BlogPostCreationForm = function (_React$Component) {
                 fontStyle: 'italic'
               },
               onChange: this.update('quote') }),
-            _react2.default.createElement('input', {
-              type: 'text',
+            _react2.default.createElement("input", {
+              type: "text",
               value: this.state.quoteSource,
               onChange: this.update('quoteSource'),
               placeholder: "- Sylvain Cappell" })
           );
         case 'text':
           return _react2.default.createElement(
-            'div',
+            "div",
             null,
-            _react2.default.createElement('textarea', {
+            _react2.default.createElement("textarea", {
               placeholder: "Tell me how your day was.\n" + "What did you do?\n" + "Anything you want to say about climate change?",
               value: this.state.description,
               onChange: this.update('description') })
           );
         case 'audio':
           return _react2.default.createElement(
-            'div',
+            "div",
             null,
-            _react2.default.createElement('audio', { controls: true, src: this.state.audio }),
-            _react2.default.createElement('input', {
-              type: 'file',
+            _react2.default.createElement("audio", { controls: true, src: this.state.audio }),
+            _react2.default.createElement("input", {
+              type: "file",
               onChange: this._handleAudioChange }),
-            _react2.default.createElement('textarea', {
+            _react2.default.createElement("textarea", {
               placeholder: "This song is the morning bird songs to my day...",
               value: this.state.description,
               onChange: this.update('description') })
           );
         case 'photo':
           return _react2.default.createElement(
-            'div',
+            "div",
             null,
-            _react2.default.createElement('img', { src: this.state.photo }),
-            _react2.default.createElement('input', {
-              type: 'file',
+            _react2.default.createElement("img", { src: this.state.photo }),
+            _react2.default.createElement("input", {
+              type: "file",
               onChange: this._handleImageChange }),
-            _react2.default.createElement('textarea', {
+            _react2.default.createElement("textarea", {
               placeholder: "Not another photo of someone contemplating...",
               value: this.state.description,
               onChange: this.update('description') })
           );
         case 'video':
           return _react2.default.createElement(
-            'div',
+            "div",
             null,
-            _react2.default.createElement('video', { controls: true, src: this.state.video }),
-            _react2.default.createElement('input', {
-              type: 'file',
+            _react2.default.createElement("video", { controls: true, src: this.state.video }),
+            _react2.default.createElement("input", {
+              type: "file",
               onChange: this._handleVideoChange }),
-            _react2.default.createElement('textarea', {
+            _react2.default.createElement("textarea", {
               placeholder: "Today marks the day I started loving math!",
               value: this.state.description,
               onChange: this.update('description') })
@@ -31452,7 +31456,7 @@ var BlogPostCreationForm = function (_React$Component) {
       }
     }
   }, {
-    key: '_handleAudioChange',
+    key: "_handleAudioChange",
     value: function _handleAudioChange(e) {
       var _this5 = this;
 
@@ -31471,7 +31475,7 @@ var BlogPostCreationForm = function (_React$Component) {
       }
     }
   }, {
-    key: '_handleVideoChange',
+    key: "_handleVideoChange",
     value: function _handleVideoChange(e) {
       var _this6 = this;
 
@@ -31490,7 +31494,7 @@ var BlogPostCreationForm = function (_React$Component) {
       }
     }
   }, {
-    key: '_handleImageChange',
+    key: "_handleImageChange",
     value: function _handleImageChange(e) {
       var _this7 = this;
 
@@ -31509,7 +31513,7 @@ var BlogPostCreationForm = function (_React$Component) {
       }
     }
   }, {
-    key: '_generateState',
+    key: "_generateState",
     value: function _generateState(contentType) {
       if (contentType == 'quote') {
         var _ref;
@@ -31518,7 +31522,7 @@ var BlogPostCreationForm = function (_React$Component) {
           title: '',
           content_type: contentType,
           attached_file: ''
-        }, _defineProperty(_ref, contentType, ''), _defineProperty(_ref, 'quoteSource', ''), _ref;
+        }, _defineProperty(_ref, contentType, ''), _defineProperty(_ref, "quoteSource", ''), _ref;
       } else if (contentType != 'text') {
         return _defineProperty({
           title: '',
@@ -31539,7 +31543,7 @@ var BlogPostCreationForm = function (_React$Component) {
     // Messed around with it but credit goes to the site below
 
   }, {
-    key: 'dragElement',
+    key: "dragElement",
     value: function dragElement(elmnt) {
       var pos1 = 0,
           pos2 = 0,
@@ -32144,6 +32148,8 @@ var BlogpostItem = function (_React$Component) {
     key: 'handleSubmit',
     value: function handleSubmit(e) {
       e.preventDefault();
+      var submitButton = $('.edit-submit-button');
+      submitButton.prop("disabled", true);
       var formData = new FormData();
       formData.append('blogpost[title]', this.state.title);
       formData.append('blogpost[content_type]', this.state.content_type);
@@ -32157,7 +32163,8 @@ var BlogpostItem = function (_React$Component) {
         formData.append('blogpost[description]]', this.state.description);
       }
       this.props.updateBlogpost(formData, this.props.blogpost.id).then(function () {
-        return window.location.reload();
+        submitButton.prop('disabled', false);
+        window.location.reload();
       });
     }
   }, {
@@ -32274,7 +32281,8 @@ var BlogpostItem = function (_React$Component) {
                 this._generateForm(this.props.blogpost.contentType),
                 _react2.default.createElement(
                   'button',
-                  null,
+                  {
+                    className: 'edit-submit-button' },
                   'Submit'
                 )
               )

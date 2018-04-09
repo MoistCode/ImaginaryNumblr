@@ -13,6 +13,8 @@ class BlogPostCreationForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    const submitButton = $(".create-submit-button");
+    submitButton.prop("disabled", true);
     const formData = new FormData();
     formData.append('blogpost[title]', this.state.title);
     formData.append('blogpost[content_type]', this.state.content_type);
@@ -26,6 +28,7 @@ class BlogPostCreationForm extends React.Component {
       formData.append('blogpost[description]]', this.state.description);
     }
     this.props.createBlogpost(formData).then(() => {
+      submitButton.prop("disabled", false);
       window.location.reload();
       this.props.history.push('/dashboard');
     });
@@ -61,7 +64,8 @@ class BlogPostCreationForm extends React.Component {
                 onChange={this.update('title')}
                 style={{ fontSize: '28px' }} />
               {this._generateForm(this.props.contentType)}
-              <button>Submit</button>
+              <button
+                className='create-submit-button'>Submit</button>
               {this._generateErrors(this.props.errors)}
             </form>
           </div>

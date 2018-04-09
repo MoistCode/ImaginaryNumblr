@@ -30,6 +30,8 @@ class BlogpostItem extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    const submitButton = $('.edit-submit-button')
+    submitButton.prop("disabled", true);
     const formData = new FormData();
     formData.append('blogpost[title]', this.state.title);
     formData.append('blogpost[content_type]', this.state.content_type);
@@ -43,7 +45,11 @@ class BlogpostItem extends React.Component {
       formData.append('blogpost[description]]', this.state.description);
     }
     this.props.updateBlogpost(formData, this.props.blogpost.id)
-      .then(() => window.location.reload())
+      .then(() => {
+          submitButton.prop('disabled', false);
+          window.location.reload();
+        }
+      )
   }
 
   handleDeletion() {
@@ -118,7 +124,8 @@ class BlogpostItem extends React.Component {
                   value={this.state.title}
                   onChange={this.update('title')} />
                 {this._generateForm(this.props.blogpost.contentType)}
-                <button>Submit</button>
+                <button
+                  className='edit-submit-button'>Submit</button>
               </form>
             </div>
 
