@@ -60,7 +60,6 @@ class BlogpostItem extends React.Component {
     return (
       <div className='blogpost'>
         {this._generateEditForm()}
-        {this._generateDeletionConfirmation()}
         {this._generateAuthorOptions()}
         {this._renderContentType()}
         <div className='blogpost-footer'>
@@ -75,6 +74,7 @@ class BlogpostItem extends React.Component {
             </div>
           </div>
         </div>
+        {this._generateDeletionConfirmation()}
       </div>
     )
   }
@@ -84,8 +84,13 @@ class BlogpostItem extends React.Component {
       return (
         <div className='confirm-delete-modal'>
           <div className='inner-modal'>
-            <button className='delete-yes'>Yes</button>
-            <button className='delete-no'>No</button>
+            <h2>Confirm Deletion</h2>
+            <button
+              className='delete-no'
+              onClick={this.toggleDeletion}>Cancel</button>
+            <button
+              className='delete-yes'
+              onClick={this.handleDeletion}>DELETE</button>
           </div>
         </div>
       )

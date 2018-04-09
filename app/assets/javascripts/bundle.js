@@ -32179,7 +32179,6 @@ var BlogpostItem = function (_React$Component) {
         'div',
         { className: 'blogpost' },
         this._generateEditForm(),
-        this._generateDeletionConfirmation(),
         this._generateAuthorOptions(),
         this._renderContentType(),
         _react2.default.createElement(
@@ -32200,7 +32199,8 @@ var BlogpostItem = function (_React$Component) {
               Math.floor(Math.random() * 500 + 100)
             )
           )
-        )
+        ),
+        this._generateDeletionConfirmation()
       );
     }
   }, {
@@ -32214,14 +32214,23 @@ var BlogpostItem = function (_React$Component) {
             'div',
             { className: 'inner-modal' },
             _react2.default.createElement(
-              'button',
-              { className: 'delete-yes' },
-              'Yes'
+              'h2',
+              null,
+              'Confirm Deletion'
             ),
             _react2.default.createElement(
               'button',
-              { className: 'delete-no' },
-              'No'
+              {
+                className: 'delete-no',
+                onClick: this.toggleDeletion },
+              'Cancel'
+            ),
+            _react2.default.createElement(
+              'button',
+              {
+                className: 'delete-yes',
+                onClick: this.handleDeletion },
+              'DELETE'
             )
           )
         );

@@ -211,11 +211,55 @@
 }
 
 .confirm-delete-modal {
-  display: inline;
-  width: 500px;
-  height: 500px;
+  position: fixed;
+  top: 125px;
+  transform: translate(340%, 0%);
+  background-color: white;
+  width: 300px;
+  height: auto;
+  z-index: 17;
+  border-radius: 8px;
+  text-align: center;
+  border: 2px solid black;
+  -webkit-box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
+
 
   .inner-modal {
+    h2 {
+      margin-bottom: 0px;
+      font-family: 'Ubuntu', sans-serif;
+      font-weight: bold;
+      color: red;
+    }
+    button {
+      border-radius: 4px;
+      cursor: pointer;
+      border: 1px solid black;
+      background-color: white;
+      margin: 4px 6px;
+      height: 32px;
+      width: 70px;
+      -webkit-box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
+      -moz-box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
+      box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
+      font-family: 'Ubuntu', sans-serif;
+      font-weight: bold;
+    }
 
+    .delete-yes {
+      color: red;
+    }
+
+    .delete-yes:hover {
+      background-color: red;
+      color: white;
+    }
+
+    .delete-no:hover {
+      background-color: black;
+      color: white;
+    }
   }
 }
