@@ -161,8 +161,16 @@ class BlogpostItem extends React.Component {
     if (contentType == 'quote') {
       return (
         <div className='blogpost-item'>
-          <h1 className='title'>{title}</h1>
-          <h1 className='quote'>"{quote}"</h1>
+          <h1
+            className='title'
+            style={{fontSize: '22px'}}>{title}
+          </h1>
+          <h1
+            className='quote'
+            style={{
+              fontStyle: 'italic',
+              'margin-bottom': '10px'
+            }}>"{quote}"</h1>
           <p>- {this.props.blogpost.quoteSource}</p>
         </div>
       )

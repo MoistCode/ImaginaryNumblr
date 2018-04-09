@@ -32313,12 +32313,19 @@ var BlogpostItem = function (_React$Component) {
           { className: 'blogpost-item' },
           _react2.default.createElement(
             'h1',
-            { className: 'title' },
+            {
+              className: 'title',
+              style: { fontSize: '22px' } },
             title
           ),
           _react2.default.createElement(
             'h1',
-            { className: 'quote' },
+            {
+              className: 'quote',
+              style: {
+                fontStyle: 'italic',
+                'margin-bottom': '10px'
+              } },
             '"',
             quote,
             '"'
