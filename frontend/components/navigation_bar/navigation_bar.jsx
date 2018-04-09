@@ -75,17 +75,25 @@ class NavigationBar extends React.Component {
   }
 
   _createSessionButtons(currentUser) {
+    const buttonColor = () => {
+      debugger;
+      if (this.props.location.pathname == '/404meansthispagedoesnotexist') {
+        return {color: 'grey', border: '1px solid grey'};
+      }
+    }
     const loginButton = (
       <button
         className='nav-button'
         onClick={() => {
           this.props.clearErrors();
           this.props.history.push('/login')
-        }}>Log In<i
+        }}
+        style={buttonColor()} >Log In<i
                   className="fa fa-superscript"
                   style={{fontSize:'24px'}} />
       </button>
     );
+
 
     const logoutButton = (
       <button
@@ -93,7 +101,8 @@ class NavigationBar extends React.Component {
         onClick={() => {
           this.props.logout();
           this.props.history.push('/');
-        }}>Log Out
+        }}
+        style={buttonColor()} >Log Out
         <i
           className="fa fa-superscript"
           style={{fontSize:'24px'}} />
@@ -106,7 +115,8 @@ class NavigationBar extends React.Component {
         onClick={() => {
           this.props.clearErrors();
           this.props.history.push('/signup');
-        }}>Sign Up
+        }}
+        style={buttonColor()} >Sign Up
         <i
           className="fa fa-superscript"
           style={{fontSize:'24px'}} />
@@ -126,7 +136,7 @@ class NavigationBar extends React.Component {
         >Demo
         <i
           className="fa fa-superscript"
-          style={{fontSize:'24px'}} />
+          style={buttonColor()} />
       </button>
     )
 

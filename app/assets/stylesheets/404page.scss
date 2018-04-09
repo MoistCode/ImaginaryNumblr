@@ -1,8 +1,10 @@
+
 .four-o-four-background {
+  background-color: #FAFAFA;
   background-image: url('/assets/404page.png');
   height: 100vh;
-  width: 100%;
-  background-size: cover;                      /* <------ */
+  width: 100vw;
+  background-size: contain;                      /* <------ */
   background-repeat: no-repeat;
   background-position: center center;
 }

@@ -31774,6 +31774,12 @@ var NavigationBar = function (_React$Component) {
     value: function _createSessionButtons(currentUser) {
       var _this4 = this;
 
+      var buttonColor = function buttonColor() {
+        debugger;
+        if (_this4.props.location.pathname == '/404meansthispagedoesnotexist') {
+          return { color: 'grey', border: '1px solid grey' };
+        }
+      };
       var loginButton = _react2.default.createElement(
         'button',
         {
@@ -31781,7 +31787,8 @@ var NavigationBar = function (_React$Component) {
           onClick: function onClick() {
             _this4.props.clearErrors();
             _this4.props.history.push('/login');
-          } },
+          },
+          style: buttonColor() },
         'Log In',
         _react2.default.createElement('i', {
           className: 'fa fa-superscript',
@@ -31795,7 +31802,8 @@ var NavigationBar = function (_React$Component) {
           onClick: function onClick() {
             _this4.props.logout();
             _this4.props.history.push('/');
-          } },
+          },
+          style: buttonColor() },
         'Log Out',
         _react2.default.createElement('i', {
           className: 'fa fa-superscript',
@@ -31809,7 +31817,8 @@ var NavigationBar = function (_React$Component) {
           onClick: function onClick() {
             _this4.props.clearErrors();
             _this4.props.history.push('/signup');
-          } },
+          },
+          style: buttonColor() },
         'Sign Up',
         _react2.default.createElement('i', {
           className: 'fa fa-superscript',
@@ -31831,7 +31840,7 @@ var NavigationBar = function (_React$Component) {
         'Demo',
         _react2.default.createElement('i', {
           className: 'fa fa-superscript',
-          style: { fontSize: '24px' } })
+          style: buttonColor() })
       );
 
       if (this.props.location.pathname == '/' && !currentUser) {
