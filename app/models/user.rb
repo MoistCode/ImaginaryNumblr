@@ -34,6 +34,17 @@ class User < ApplicationRecord
     foreign_key: :author_id,
     class_name: 'Blogpost'
 
+  has_many :follows,
+    primary_key: :id,
+    foreign_key: :follower_id,
+    class_name: 'Follow'
+
+  has_many :followers,
+    primary_key: :id,
+    foreign_key: :followee_id,
+    class_name: 'Follow'
+
+
   def self.find_by_credentials(username, password)
     user = User.find_by(username: username)
     return nil unless user && user.is_password?(password)

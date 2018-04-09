@@ -9,5 +9,9 @@ Rails.application.routes.draw do
             defaults: { format: :json },
             only: [:index, :show, :create, :update, :destroy]
 
+  resources :follows,
+             defaults: { format: :json },
+             only: [:create, :destroy]
+
   root 'static_pages#root'
 end
