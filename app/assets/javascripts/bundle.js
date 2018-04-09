@@ -31964,21 +31964,24 @@ var UserShowPage = function (_React$Component) {
   _createClass(UserShowPage, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
+      var _this2 = this;
+
       if ($('html').hasClass('fp-enabled')) {
         $.fn.fullpage.destroy('all');
       }
       // fetch username, blogposts, and profile picture here
-      this.props.fetchUser(this.props.match.params.userId);
-      this.props.fetchUserBlogposts(this.props.user.blogpostIds);
+      this.props.fetchUser(this.props.match.params.userId).then(function () {
+        return _this2.props.fetchUserBlogposts(_this2.props.user.blogpostIds);
+      });
     }
   }, {
     key: 'componentWillReceiveProps',
     value: function componentWillReceiveProps(nextProps) {
-      var _this2 = this;
+      var _this3 = this;
 
       if (this.props.user.id != nextProps.match.params.userId) {
         this.props.fetchUser(nextProps.match.params.userId).then(function () {
-          _this2.props.fetchUserBlogposts(nextProps.user.blogpostIds);
+          _this3.props.fetchUserBlogposts(nextProps.user.blogpostIds);
         });
       } else if (this.props.user.id == nextProps.match.params.userId) {}
     }

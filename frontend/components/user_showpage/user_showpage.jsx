@@ -12,8 +12,9 @@ class UserShowPage extends React.Component {
       $.fn.fullpage.destroy('all');
     }
     // fetch username, blogposts, and profile picture here
-    this.props.fetchUser(this.props.match.params.userId);
-    this.props.fetchUserBlogposts(this.props.user.blogpostIds);
+    this.props.fetchUser(this.props.match.params.userId)
+      .then(() => this.props.fetchUserBlogposts(this.props.user.blogpostIds))
+
   }
 
   componentWillReceiveProps(nextProps) {
