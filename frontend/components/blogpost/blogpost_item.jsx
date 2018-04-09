@@ -33,13 +33,18 @@ class BlogpostItem extends React.Component {
     formData.append('blogpost[id]', this.props.blogpost.id);
     if(this.state.content_type != 'quote' && this.state.content_type != 'text') {
       formData.append('blogpost[description]]', this.state.description);
-      formData.append('blogpost[attached_file]', this.state.attached_file);
     } else if (this.state.content_type == 'quote') {
       formData.append('blogpost[quote]', this.state.quote);
     } else {
       formData.append('blogpost[description]]', this.state.description);
     }
-    this.props.updateBlogpost(formData, this.props.blogpost.id);
+    this.props.updateBlogpost(formData, this.props.blogpost.id)
+      .then(() => window.location.reload())
+  }
+
+  handleDeletion() {
+    this.props.deleteBlogpost(this.props.blogpost.id)
+      .then(() => window.location.reload())
   }
 
   render() {
@@ -107,7 +112,9 @@ class BlogpostItem extends React.Component {
               className="fa fa-edit"></i>
           </div>
           <div className='header-remove'>
-            <i className="fa fa-close"></i>
+            <i
+              onClick={this.handleDeletion}
+              className="fa fa-close"></i>
           </div>
         </div>
       )

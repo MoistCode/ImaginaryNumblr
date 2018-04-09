@@ -24651,50 +24651,9 @@ exports.default = blogpostErrorsReducer;
 
 /***/ }),
 /* 123 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-var fetchBlogposts = exports.fetchBlogposts = function fetchBlogposts(blogpostIds) {
-  return $.ajax({
-    method: 'GET',
-    url: '/blogposts',
-    data: { blogpost: { blogpostIds: blogpostIds } }
-  });
-};
-
-var fetchBlogpost = exports.fetchBlogpost = function fetchBlogpost(blogpostId) {
-  return $.ajax({
-    method: 'GET',
-    url: '/blogposts/' + blogpostId
-  });
-};
-
-var updateBlogpost = exports.updateBlogpost = function updateBlogpost(blogpost, blogpostId) {
-  return $.ajax({
-    method: 'PATCH',
-    url: '/blogposts/' + blogpostId,
-    contentType: false,
-    processData: false,
-    dataType: 'json',
-    data: blogpost
-  });
-};
-
-var postBlogpost = exports.postBlogpost = function postBlogpost(blogpost) {
-  return $.ajax({
-    method: 'POST',
-    url: '/blogposts',
-    contentType: false,
-    processData: false,
-    dataType: 'json',
-    data: blogpost
-  });
-};
+throw new Error("Module build failed: SyntaxError: Unexpected token (42:0)\n\n\u001b[0m \u001b[90m 40 | \u001b[39m\u001b[36mexport\u001b[39m \u001b[36mconst\u001b[39m deleteBlogpost \u001b[33m=\u001b[39m (blogpostId) \u001b[33m=>\u001b[39m (\n \u001b[90m 41 | \u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 42 | \u001b[39m)\n \u001b[90m    | \u001b[39m\u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 43 | \u001b[39m\u001b[0m\n");
 
 /***/ }),
 /* 124 */
@@ -26927,7 +26886,6 @@ var blogpostsReducer = function blogpostsReducer() {
     case _blogpost_actions.RECEIVE_BLOGPOSTS:
       return (0, _merge3.default)({}, oldState, action.blogposts);
     case _blogpost_actions.RECEIVE_BLOGPOST:
-      debugger;
       return (0, _merge3.default)({}, oldState, _defineProperty({}, action.blogpost.id, action.blogpost));
     default:
       return oldState;
@@ -32004,7 +31962,7 @@ var _blogpost_item2 = _interopRequireDefault(_blogpost_item);
 
 var _reactRedux = __webpack_require__(5);
 
-var _blogpost_util = __webpack_require__(123);
+var _blogpost_actions = __webpack_require__(20);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -32021,8 +31979,9 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     updateBlogpost: function updateBlogpost(blogpost, blogpostId) {
-      return dispatch((0, _blogpost_util.updateBlogpost)(blogpost, blogpostId));
-    }
+      return dispatch((0, _blogpost_actions.updateBlogpost)(blogpost, blogpostId));
+    },
+    deleteBlogpost: blogpostId
   };
 };
 
@@ -32099,13 +32058,21 @@ var BlogpostItem = function (_React$Component) {
       formData.append('blogpost[id]', this.props.blogpost.id);
       if (this.state.content_type != 'quote' && this.state.content_type != 'text') {
         formData.append('blogpost[description]]', this.state.description);
-        formData.append('blogpost[attached_file]', this.state.attached_file);
       } else if (this.state.content_type == 'quote') {
         formData.append('blogpost[quote]', this.state.quote);
       } else {
         formData.append('blogpost[description]]', this.state.description);
       }
-      this.props.updateBlogpost(formData, this.props.blogpost.id);
+      this.props.updateBlogpost(formData, this.props.blogpost.id).then(function () {
+        return window.location.reload();
+      });
+    }
+  }, {
+    key: 'handleDeletion',
+    value: function handleDeletion() {
+      this.props.deleteBlogpost(this.props.blogpost.id).then(function () {
+        return window.location.reload();
+      });
     }
   }, {
     key: 'render',
@@ -32204,7 +32171,9 @@ var BlogpostItem = function (_React$Component) {
           _react2.default.createElement(
             'div',
             { className: 'header-remove' },
-            _react2.default.createElement('i', { className: 'fa fa-close' })
+            _react2.default.createElement('i', {
+              onClick: this.handleDeletion,
+              className: 'fa fa-close' })
           )
         );
       }

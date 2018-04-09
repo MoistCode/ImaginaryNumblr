@@ -10,7 +10,6 @@ const blogpostsReducer = (oldState = {}, action) => {
     case RECEIVE_BLOGPOSTS:
       return merge({}, oldState, action.blogposts);
     case RECEIVE_BLOGPOST:
-    debugger;
       return merge({}, oldState, { [action.blogpost.id]: action.blogpost })
     default:
       return oldState;
