@@ -1,5 +1,6 @@
 import Dashboard from './dashboard';
 import { connect } from 'react-redux';
+import { clearErrors } from '../../actions/blogpost_actions';
 
 const _checkCurrentUser = (currentUser) => {
   if (currentUser != null) {
@@ -13,4 +14,8 @@ const mapStateToProps = (state) => ({
   currentUser: _checkCurrentUser(state.session.currentUser)
 });
 
-export default connect(mapStateToProps)(Dashboard);
+const mapDispatchToProps = (dispatch) => ({
+  clearErrors: () => dispatch(clearErrors())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

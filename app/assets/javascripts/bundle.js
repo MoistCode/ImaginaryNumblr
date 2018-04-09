@@ -30981,6 +30981,8 @@ var _dashboard2 = _interopRequireDefault(_dashboard);
 
 var _reactRedux = __webpack_require__(5);
 
+var _blogpost_actions = __webpack_require__(12);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _checkCurrentUser = function _checkCurrentUser(currentUser) {
@@ -30997,7 +30999,15 @@ var mapStateToProps = function mapStateToProps(state) {
   };
 };
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps)(_dashboard2.default);
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    clearErrors: function clearErrors() {
+      return dispatch((0, _blogpost_actions.clearErrors)());
+    }
+  };
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_dashboard2.default);
 
 /***/ }),
 /* 231 */
@@ -31049,6 +31059,7 @@ var Dashboard = function (_React$Component) {
   _createClass(Dashboard, [{
     key: 'handleCreationModal',
     value: function handleCreationModal(field) {
+      this.props.clearErrors();
       this.setState({
         creationFormModalIsOpen: !this.state.creationFormModalIsOpen,
         modalContentType: field
@@ -31177,7 +31188,7 @@ var Dashboard = function (_React$Component) {
         return _react2.default.createElement(_blogpost_creation_form_container2.default, {
           contentType: contentType,
           showDashboard: function showDashboard() {
-            return _this3.handleCreationModal('');
+            _this3.handleCreationModal('');
           } });
       }
     }
@@ -31380,7 +31391,7 @@ var BlogPostCreationForm = function (_React$Component) {
       return errArr.map(function (err) {
         return _react2.default.createElement(
           "li",
-          null,
+          { style: { color: 'red' } },
           err
         );
       });

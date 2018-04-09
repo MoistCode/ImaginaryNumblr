@@ -14,6 +14,7 @@ class Dashboard extends React.Component {
   }
 
   handleCreationModal(field) {
+    this.props.clearErrors();
     this.setState({
       creationFormModalIsOpen: !this.state.creationFormModalIsOpen,
       modalContentType: field
@@ -111,7 +112,7 @@ class Dashboard extends React.Component {
       return (
         <BlogPostCreationFormContainer
           contentType={contentType}
-          showDashboard={() => this.handleCreationModal('')}/>
+          showDashboard={() => {this.handleCreationModal('')}}/>
       )
     }
   }
