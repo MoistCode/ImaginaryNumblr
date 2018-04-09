@@ -40,7 +40,7 @@ class Blogpost < ApplicationRecord
 
   def conditional_attached_file_validation
     if (( content_type != 'text' && content_type != 'quote') && attached_file.url == "/attached_files/original/missing.png")
-      errors.add(:attached_file, "Must be present for type audio, photo, and video")
+      errors.add(:attached_file, "must be present for type audio, photo, and video")
     end
   end
 
