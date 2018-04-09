@@ -31740,6 +31740,8 @@ var NavigationBar = function (_React$Component) {
               if (!_this3.props.currentUser && _this3.props.location.pathname != '/dashboard') {
                 window.location.reload();
                 _this3.props.history.push('/');
+              } else {
+                _this3.props.history.push('/users/' + _this3.props.currentUser[0].id);
               }
             },
             className: 'profile-picture',
