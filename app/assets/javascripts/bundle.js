@@ -30619,6 +30619,10 @@ var _user_showpage_container = __webpack_require__(236);
 
 var _user_showpage_container2 = _interopRequireDefault(_user_showpage_container);
 
+var _page_does_not_exist = __webpack_require__(240);
+
+var _page_does_not_exist2 = _interopRequireDefault(_page_does_not_exist);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var App = function App() {
@@ -30629,6 +30633,7 @@ var App = function App() {
     _react2.default.createElement(
       _reactRouterDom.Switch,
       null,
+      _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/404meansthispagedoesnotexist', component: _page_does_not_exist2.default }),
       _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/users/:userId', component: _user_showpage_container2.default }),
       _react2.default.createElement(_route_util.ProtectedRoute, { exact: true, path: '/dashboard', component: _dashboard_container2.default }),
       _react2.default.createElement(_route_util.AuthRoute, { path: '/login', component: _front_page2.default }),
@@ -31760,7 +31765,7 @@ var NavigationBar = function (_React$Component) {
     key: '_generateStyle',
     value: function _generateStyle() {
       var curPath = this.props.location.pathname;
-      if (curPath != '/signup' && curPath != '/login' && curPath != '/') {
+      if (curPath != '/signup' && curPath != '/login' && curPath != '/' && curPath != '/404meansthispagedoesnotexist') {
         return { borderBottom: '1px solid grey', backgroundColor: '#39485D' };
       }
     }
@@ -31989,10 +31994,10 @@ var UserShowPage = function (_React$Component) {
       if ($('html').hasClass('fp-enabled')) {
         $.fn.fullpage.destroy('all');
       }
-      debugger;
-
       this.props.fetchUser(this.props.match.params.userId).then(function () {
         return _this2.props.fetchUserBlogposts(_this2.props.user.blogpostIds);
+      }, function () {
+        return _this2.props.history.push('/404meansthispagedoesnotexist');
       });
     }
   }, {
@@ -32548,6 +32553,60 @@ var BlogpostItem = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = BlogpostItem;
+
+/***/ }),
+/* 240 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var PageDoesNotExist = function (_React$Component) {
+  _inherits(PageDoesNotExist, _React$Component);
+
+  function PageDoesNotExist() {
+    _classCallCheck(this, PageDoesNotExist);
+
+    return _possibleConstructorReturn(this, (PageDoesNotExist.__proto__ || Object.getPrototypeOf(PageDoesNotExist)).apply(this, arguments));
+  }
+
+  _createClass(PageDoesNotExist, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'four-o-four-page' },
+        _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement('img', { className: 'four-o-four-background' })
+        )
+      );
+    }
+  }]);
+
+  return PageDoesNotExist;
+}(_react2.default.Component);
+
+exports.default = PageDoesNotExist;
 
 /***/ })
 /******/ ]);

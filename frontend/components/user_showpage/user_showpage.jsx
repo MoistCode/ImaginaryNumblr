@@ -11,10 +11,11 @@ class UserShowPage extends React.Component {
     if($('html').hasClass('fp-enabled')){
       $.fn.fullpage.destroy('all');
     }
-    debugger;
-
     this.props.fetchUser(this.props.match.params.userId)
-      .then(() => this.props.fetchUserBlogposts(this.props.user.blogpostIds))
+      .then(
+        () => this.props.fetchUserBlogposts(this.props.user.blogpostIds),
+        () => this.props.history.push('/404meansthispagedoesnotexist')
+      )
 
   }
 

@@ -67,7 +67,8 @@ class NavigationBar extends React.Component {
     if (
       curPath != '/signup' &&
       curPath != '/login' &&
-      curPath != '/'
+      curPath != '/' &&
+      curPath != '/404meansthispagedoesnotexist'
     ) {
       return { borderBottom : '1px solid grey', backgroundColor: '#39485D' };
     }

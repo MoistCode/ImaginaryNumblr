@@ -32,4 +32,10 @@ class Api::UsersController < ApplicationController
     )
   end
 
+  private
+
+  def not_found
+    raise ActionController::RoutingError.new('Not Found')
+  end
+
 end
