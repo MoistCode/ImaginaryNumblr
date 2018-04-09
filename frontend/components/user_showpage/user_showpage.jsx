@@ -11,7 +11,8 @@ class UserShowPage extends React.Component {
     if($('html').hasClass('fp-enabled')){
       $.fn.fullpage.destroy('all');
     }
-    // fetch username, blogposts, and profile picture here
+    debugger;
+
     this.props.fetchUser(this.props.match.params.userId)
       .then(() => this.props.fetchUserBlogposts(this.props.user.blogpostIds))
 
@@ -52,7 +53,7 @@ class UserShowPage extends React.Component {
         <div className='user-blogs'>
         </div>
         {this._generateUserBlogs()}
-        <footer>Nothing to see here</footer>
+        <footer></footer>
       </div>
     )
   }

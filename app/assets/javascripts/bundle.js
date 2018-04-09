@@ -31989,7 +31989,8 @@ var UserShowPage = function (_React$Component) {
       if ($('html').hasClass('fp-enabled')) {
         $.fn.fullpage.destroy('all');
       }
-      // fetch username, blogposts, and profile picture here
+      debugger;
+
       this.props.fetchUser(this.props.match.params.userId).then(function () {
         return _this2.props.fetchUserBlogposts(_this2.props.user.blogpostIds);
       });
@@ -32036,11 +32037,7 @@ var UserShowPage = function (_React$Component) {
         ),
         _react2.default.createElement('div', { className: 'user-blogs' }),
         this._generateUserBlogs(),
-        _react2.default.createElement(
-          'footer',
-          null,
-          'Nothing to see here'
-        )
+        _react2.default.createElement('footer', null)
       );
     }
   }, {
