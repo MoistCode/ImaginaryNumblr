@@ -31372,7 +31372,9 @@ var BlogPostCreationForm = function (_React$Component) {
     }
   }, {
     key: "_generateErrors",
-    value: function _generateErrors(errArr) {
+    value: function _generateErrors() {
+      var errArr = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+
       return errArr.map(function (err) {
         return _react2.default.createElement(
           "li",

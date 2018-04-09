@@ -74,7 +74,7 @@ class BlogPostCreationForm extends React.Component {
     )
   }
 
-  _generateErrors(errArr) {
+  _generateErrors(errArr = []) {
     return errArr.map((err) => <li>{err}</li>)
   }
 
