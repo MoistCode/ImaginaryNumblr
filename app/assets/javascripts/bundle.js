@@ -31305,6 +31305,8 @@ var BlogPostCreationForm = function (_React$Component) {
         submitButton.prop("disabled", false);
         window.location.reload();
         _this2.props.history.push('/dashboard');
+      }, function () {
+        return submitButton.prop("disabled", false);
       });
     }
   }, {
@@ -32171,6 +32173,8 @@ var BlogpostItem = function (_React$Component) {
       this.props.updateBlogpost(formData, this.props.blogpost.id).then(function () {
         submitButton.prop('disabled', false);
         window.location.reload();
+      }, function () {
+        return submitButton.prop("disabled", false);
       });
     }
   }, {

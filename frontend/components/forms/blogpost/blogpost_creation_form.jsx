@@ -31,7 +31,7 @@ class BlogPostCreationForm extends React.Component {
       submitButton.prop("disabled", false);
       window.location.reload();
       this.props.history.push('/dashboard');
-    });
+    }, () => submitButton.prop("disabled", false));
   }
 
   update(field) {

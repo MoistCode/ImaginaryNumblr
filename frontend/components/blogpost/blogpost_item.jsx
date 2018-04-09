@@ -48,7 +48,7 @@ class BlogpostItem extends React.Component {
       .then(() => {
           submitButton.prop('disabled', false);
           window.location.reload();
-        }
+        }, () => submitButton.prop("disabled", false)
       )
   }
 
