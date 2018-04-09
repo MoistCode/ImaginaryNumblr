@@ -45,25 +45,22 @@ class BlogPostCreationForm extends React.Component {
         <div id='creation-modal'>
           <div className='w3-container w3-center w3-animate-opacity'>
           <div id='creation-form'>
-            <h2>Create {this.state.content_type.charAt(0).toUpperCase() + this.state.content_type.slice(1)}</h2>
+            <p>Drag Me :)</p>
             <i
               onClick={this.props.showDashboard}
               className="fa fa-close"></i>
             <form onSubmit={(e) => this.handleSubmit(e)}>
-              <label>Title
-                <input
-                  type='text'
-                  value={this.state.title}
-                  onChange={this.update('title')} />
-              </label>
+              <input
+                type='text'
+                placeholder='Title'
+                value={this.state.title}
+                onChange={this.update('title')}
+                style={{ fontSize: '28px' }} />
               {this._generateForm(this.props.contentType)}
               <button>Submit</button>
             </form>
-
           </div>
-
         </div>
-
       </div>
     )
   }
@@ -73,35 +70,53 @@ class BlogPostCreationForm extends React.Component {
       case 'quote':
         return (
           <div>
-            <label>Quote
-              <input
-                type='text'
+              <textarea
+                placeholder={"“All mathematicians live in two different worlds."+
+                "They live in a crystalline world of perfect platonic forms."+
+                "An ice palace. But they also live in the common world where"+
+                "things are transient, ambiguous, subject to vicissitudes."+
+                "Mathematicians go backward and forward from one world to another."+
+                "They’re adults in the crystalline world, infants in the real one.”"}
                 value={this.state.quote}
+                style={
+                  {
+                    width: '85%',
+                    maxHeight: '450px',
+                    fontSize: '34px',
+                    fontStyle: 'italic'
+                  }
+                }
                 onChange={this.update('quote')} />
-            </label>
+              <input
+                placeholder={"- Sylvain Cappell"} />
           </div>
         )
       case 'text':
         return (
           <div>
-            <label>Description
               <textarea
+                placeholder={
+                  "Tell me how your day was.\n" +
+                  "What did you do?\n" +
+                  "Anything you want to say about climate change?"
+                }
                 value={this.state.description}
                 onChange={this.update('description')} />
-            </label>
           </div>
         )
       case 'audio':
         return (
           <div>
+            <audio controls src={this.state.audio} />
             <input
               type='file'
               onChange={this._handleAudioChange} />
-            <label>Description
               <textarea
+                placeholder={
+                  "This song is the morning bird songs to my day..."
+                }
                 value={this.state.description}
                 onChange={this.update('description')} />
-            </label>
           </div>
         )
       case 'photo':
@@ -111,24 +126,27 @@ class BlogPostCreationForm extends React.Component {
             <input
               type='file'
               onChange={this._handleImageChange} />
-            <label>Description
               <textarea
+                placeholder={
+                  "Not another photo of someone contemplating..."
+                }
                 value={this.state.description}
                 onChange={this.update('description')} />
-            </label>
           </div>
         )
       case 'video':
         return (
           <div>
-            <label>Description
-              <input
-                type='file'
-                onChange={this._handleVideoChange} />
-              <textarea
-                value={this.state.description}
-                onChange={this.update('description')} />
-            </label>
+            <video controls src={this.state.video} />
+            <input
+              type='file'
+              onChange={this._handleVideoChange} />
+            <textarea
+              placeholder={
+                "Today marks the day I started loving math!"
+              }
+              value={this.state.description}
+              onChange={this.update('description')} />
           </div>
         )
     }
@@ -148,7 +166,6 @@ class BlogPostCreationForm extends React.Component {
     } else {
       this.setState({ attached_file: '', audio: '' })
     }
-
   }
 
   _handleVideoChange(e) {
@@ -189,23 +206,23 @@ class BlogPostCreationForm extends React.Component {
     if (contentType == 'quote') {
       return {
         title: '',
-        quote: '',
         content_type: contentType,
-        attached_file: ''
+        attached_file: '',
+        [contentType]: ''
       }
     } else if (contentType != 'text') {
         return {
           title: '',
           description: '',
           content_type: contentType,
-          attached_file: ''
+          attached_file: '',
+          [contentType]: ''
         }
     } else {
         return {
           title: '',
           description: '',
           content_type: contentType,
-          [contentType]: ''
         }
     }
   }
