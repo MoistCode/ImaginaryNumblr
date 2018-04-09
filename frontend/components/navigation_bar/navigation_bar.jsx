@@ -76,7 +76,6 @@ class NavigationBar extends React.Component {
 
   _createSessionButtons(currentUser) {
     const buttonColor = () => {
-      debugger;
       if (this.props.location.pathname == '/404meansthispagedoesnotexist') {
         return {color: 'grey', border: '1px solid grey'};
       }

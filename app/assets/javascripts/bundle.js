@@ -3521,11 +3521,15 @@ module.exports = identity;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.fetchUser = exports.RECEIVE_USER = undefined;
+exports.postFollow = exports.fetchUser = exports.RECEIVE_USER = undefined;
 
 var _user_util = __webpack_require__(192);
 
 var UserUtil = _interopRequireWildcard(_user_util);
+
+var _follow_util = __webpack_require__(241);
+
+var FollowUtil = _interopRequireWildcard(_follow_util);
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -3534,6 +3538,14 @@ var RECEIVE_USER = exports.RECEIVE_USER = 'RECEIVE_USER';
 var fetchUser = exports.fetchUser = function fetchUser(userId) {
   return function (dispatch) {
     return UserUtil.fetchUser(userId).then(function (user) {
+      return dispatch(receiveUser(user));
+    });
+  };
+};
+
+var postFollow = exports.postFollow = function postFollow(followeeId) {
+  return function (dispatch) {
+    return FollowUtil.postFollow(followeeId).then(function (user) {
       return dispatch(receiveUser(user));
     });
   };
@@ -31775,7 +31787,6 @@ var NavigationBar = function (_React$Component) {
       var _this4 = this;
 
       var buttonColor = function buttonColor() {
-        debugger;
         if (_this4.props.location.pathname == '/404meansthispagedoesnotexist') {
           return { color: 'grey', border: '1px solid grey' };
         }
@@ -32618,6 +32629,24 @@ var PageDoesNotExist = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = PageDoesNotExist;
+
+/***/ }),
+/* 241 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var postFollow = exports.postFollow = function postFollow(followeeId) {
+  return $.ajax({
+    method: 'POST',
+    url: '/follows',
+    data: { follow: { followee_id: followeeId } }
+  });
+};
 
 /***/ })
 /******/ ]);
