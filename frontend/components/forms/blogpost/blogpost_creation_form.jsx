@@ -48,7 +48,10 @@ class BlogPostCreationForm extends React.Component {
           <div id='creation-form'>
             <p>Drag Me :)</p>
             <i
-              onClick={this.props.showDashboard}
+              onClick={() => {
+                this.props.showDashboard();
+                this.props.clearErrors();
+              }}
               className="fa fa-close"></i>
             <form onSubmit={(e) => this.handleSubmit(e)}>
               <input
@@ -59,11 +62,16 @@ class BlogPostCreationForm extends React.Component {
                 style={{ fontSize: '28px' }} />
               {this._generateForm(this.props.contentType)}
               <button>Submit</button>
+              {this._generateErrors(this.props.errors)}
             </form>
           </div>
         </div>
       </div>
     )
+  }
+
+  _generateErrors(errArr) {
+    return errArr.map((err) => <li>{err}</li>)
   }
 
   _generateForm(contentType) {

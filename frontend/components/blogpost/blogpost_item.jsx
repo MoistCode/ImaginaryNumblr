@@ -94,7 +94,6 @@ class BlogpostItem extends React.Component {
                 {this._generateForm(this.props.blogpost.contentType)}
                 <button>Submit</button>
               </form>
-
             </div>
 
           </div>

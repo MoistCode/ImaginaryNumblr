@@ -1,6 +1,6 @@
 import BlogPostCreationForm from './blogpost_creation_form';
 import { connect } from 'react-redux';
-import { postBlogpost } from '../../../actions/blogpost_actions';
+import { postBlogpost, clearErrors } from '../../../actions/blogpost_actions';
 
 const _checkCurrentUser = (currentUser) => {
   if (currentUser != null) {
@@ -11,11 +11,13 @@ const _checkCurrentUser = (currentUser) => {
 }
 
 const mapStateToProps = (state) => ({
-  currentUser: _checkCurrentUser(state.session.currentUser)
+  currentUser: _checkCurrentUser(state.session.currentUser),
+  errors: state.errors.blogpost
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  createBlogpost: (blogpost) => dispatch(postBlogpost(blogpost))
+  createBlogpost: (blogpost) => dispatch(postBlogpost(blogpost)),
+  clearErrors: () => dispatch(clearErrors())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(BlogPostCreationForm);

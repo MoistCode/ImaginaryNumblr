@@ -786,7 +786,7 @@ var receiveClearedErrors = function receiveClearedErrors() {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.deleteBlogpost = exports.updateBlogpost = exports.postBlogpost = exports.fetchBlogpost = exports.fetchBlogposts = exports.RECEIVE_BLOGPOST_ERRORS = exports.REMOVE_BLOGPOST = exports.RECEIVE_BLOGPOST = exports.RECEIVE_BLOGPOSTS = undefined;
+exports.clearErrors = exports.deleteBlogpost = exports.updateBlogpost = exports.postBlogpost = exports.fetchBlogpost = exports.fetchBlogposts = exports.RECEIVE_CLEARED_ERRORS = exports.RECEIVE_BLOGPOST_ERRORS = exports.REMOVE_BLOGPOST = exports.RECEIVE_BLOGPOST = exports.RECEIVE_BLOGPOSTS = undefined;
 
 var _blogpost_util = __webpack_require__(123);
 
@@ -798,6 +798,7 @@ var RECEIVE_BLOGPOSTS = exports.RECEIVE_BLOGPOSTS = 'RECEIVE_BLOGPOSTS';
 var RECEIVE_BLOGPOST = exports.RECEIVE_BLOGPOST = 'RECEIVE_BLOGPOST';
 var REMOVE_BLOGPOST = exports.REMOVE_BLOGPOST = 'REMOVE_BLOGPOST';
 var RECEIVE_BLOGPOST_ERRORS = exports.RECEIVE_BLOGPOST_ERRORS = 'RECEIVE_BLOGPOST_ERRORS';
+var RECEIVE_CLEARED_ERRORS = exports.RECEIVE_CLEARED_ERRORS = 'RECEIVE_CLEARED_ERRORS';
 
 var fetchBlogposts = exports.fetchBlogposts = function fetchBlogposts(blogpostIds) {
   return function (dispatch) {
@@ -849,6 +850,12 @@ var deleteBlogpost = exports.deleteBlogpost = function deleteBlogpost(blogpostId
   };
 };
 
+var clearErrors = exports.clearErrors = function clearErrors() {
+  return function (dispatch) {
+    return dispatch(receiveClearedErrors());
+  };
+};
+
 var receiveBlogposts = function receiveBlogposts(blogposts) {
   return {
     type: RECEIVE_BLOGPOSTS,
@@ -874,6 +881,12 @@ var receiveBlogpostErrors = function receiveBlogpostErrors(errors) {
   return {
     type: RECEIVE_BLOGPOST_ERRORS,
     errors: errors
+  };
+};
+
+var receiveClearedErrors = function receiveClearedErrors() {
+  return {
+    type: RECEIVE_CLEARED_ERRORS
   };
 };
 
@@ -24649,16 +24662,12 @@ var blogpostErrorsReducer = function blogpostErrorsReducer() {
 
   Object.freeze(oldState);
   switch (action.type) {
+    case _blogpost_actions.RECEIVE_BLOGPOST_ERRORS:
+      return action.errors;
     case _blogpost_actions.RECEIVE_BLOGPOST:
       return [];
-    case _blogpost_actions.RECEIVE_BLOGPOST:
-      var newState = void 0;
-      if (typeof action.errors !== 'Array') {
-        newState = Object.values(action.errors);
-      } else {
-        newState = oldState.concat(action.errors);
-      }
-      return _uniqueItUp(newState);
+    case _blogpost_actions.RECEIVE_CLEARED_ERRORS:
+      return [];
     default:
       return oldState;
   }
@@ -31210,7 +31219,8 @@ var _checkCurrentUser = function _checkCurrentUser(currentUser) {
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    currentUser: _checkCurrentUser(state.session.currentUser)
+    currentUser: _checkCurrentUser(state.session.currentUser),
+    errors: state.errors.blogpost
   };
 };
 
@@ -31218,6 +31228,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     createBlogpost: function createBlogpost(blogpost) {
       return dispatch((0, _blogpost_actions.postBlogpost)(blogpost));
+    },
+    clearErrors: function clearErrors() {
+      return dispatch((0, _blogpost_actions.clearErrors)());
     }
   };
 };
@@ -31325,7 +31338,10 @@ var BlogPostCreationForm = function (_React$Component) {
               'Drag Me :)'
             ),
             _react2.default.createElement('i', {
-              onClick: this.props.showDashboard,
+              onClick: function onClick() {
+                _this4.props.showDashboard();
+                _this4.props.clearErrors();
+              },
               className: 'fa fa-close' }),
             _react2.default.createElement(
               'form',
@@ -31343,11 +31359,23 @@ var BlogPostCreationForm = function (_React$Component) {
                 'button',
                 null,
                 'Submit'
-              )
+              ),
+              this._generateErrors(this.props.errors)
             )
           )
         )
       );
+    }
+  }, {
+    key: '_generateErrors',
+    value: function _generateErrors(errArr) {
+      return errArr.map(function (err) {
+        return _react2.default.createElement(
+          'li',
+          null,
+          err
+        );
+      });
     }
   }, {
     key: '_generateForm',

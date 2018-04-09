@@ -4,6 +4,7 @@ export const RECEIVE_BLOGPOSTS = 'RECEIVE_BLOGPOSTS';
 export const RECEIVE_BLOGPOST = 'RECEIVE_BLOGPOST';
 export const REMOVE_BLOGPOST = 'REMOVE_BLOGPOST';
 export const RECEIVE_BLOGPOST_ERRORS = 'RECEIVE_BLOGPOST_ERRORS';
+export const RECEIVE_CLEARED_ERRORS = 'RECEIVE_CLEARED_ERRORS';
 
 export const fetchBlogposts = (blogpostIds) => (dispatch) => BlogpostUtil.fetchBlogposts(blogpostIds)
   .then(
@@ -35,6 +36,8 @@ export const deleteBlogpost = (blogpostId) => (dispatch) => BlogpostUtil.deleteB
     (errors) => dispatch(receiveBlogpostErrors(errors.responseJSON))
   );
 
+export const clearErrors = () => (dispatch) => dispatch(receiveClearedErrors());
+
 const receiveBlogposts = (blogposts) => ({
   type: RECEIVE_BLOGPOSTS,
   blogposts
@@ -53,4 +56,8 @@ const removeBlogpost = (blogpostId) => ({
 const receiveBlogpostErrors = (errors) => ({
   type: RECEIVE_BLOGPOST_ERRORS,
   errors
-})
+});
+
+const receiveClearedErrors = () => ({
+  type: RECEIVE_CLEARED_ERRORS
+});
