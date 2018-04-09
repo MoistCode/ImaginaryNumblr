@@ -18,13 +18,16 @@
 #
 
 class Blogpost < ApplicationRecord
+  validate :conditional_attached_file_validation
+
   validates :content_type, presence: true
 
   validates :title, length: { maximum: 36 }
 
   has_attached_file :attached_file
   validates_attachment_content_type :attached_file,
-                                    content_type: [/\Aimage\/.*\Z/, /\Avideo\/.*\Z/, /\Aaudio\/.*\Z/]
+                                    content_type: [/\Aimage\/.*\Z/, /\Avideo\/.*\Z/, /\Aaudio\/.*\Z/],
+                                    message: ['Format not supported']
 
 
   belongs_to :author,
@@ -32,5 +35,14 @@ class Blogpost < ApplicationRecord
     foreign_key: :author_id,
     class_name: 'User',
     optional: true
+
+  private
+
+  def conditional_attached_file_validation
+    debugger;
+    if (( content_type != 'text' && content_type != 'quote') && attached_file.url == "/attached_files/original/missing.png")
+      errors.add(:attached_file, "Must be present for type audio, photo, and video")
+    end
+  end
 
 end
