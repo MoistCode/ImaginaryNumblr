@@ -32007,7 +32007,9 @@ var UserShowPage = function (_React$Component) {
 
       if (this.props.user.id != nextProps.match.params.userId) {
         this.props.fetchUser(nextProps.match.params.userId).then(function () {
-          _this3.props.fetchUserBlogposts(nextProps.user.blogpostIds);
+          return _this3.props.fetchUserBlogposts(nextProps.user.blogpostIds);
+        }, function () {
+          return _this3.props.history.push('/404meansthispagedoesnotexist');
         });
       } else if (this.props.user.id == nextProps.match.params.userId) {}
     }

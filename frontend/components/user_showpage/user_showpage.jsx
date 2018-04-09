@@ -22,9 +22,10 @@ class UserShowPage extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (this.props.user.id != nextProps.match.params.userId) {
       this.props.fetchUser(nextProps.match.params.userId)
-        .then(() => {
-          this.props.fetchUserBlogposts(nextProps.user.blogpostIds)
-        });
+        .then(
+          () => this.props.fetchUserBlogposts(nextProps.user.blogpostIds),
+          () => this.props.history.push('/404meansthispagedoesnotexist')
+        );
     } else if (this.props.user.id == nextProps.match.params.userId) {
     }
   }
