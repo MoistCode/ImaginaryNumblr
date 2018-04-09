@@ -31855,6 +31855,7 @@ var NavigationBar = function (_React$Component) {
             window.location.reload();
             _this5.props.history.push('/');
           } else {
+            window.location.reload();
             _this5.props.history.push('/dashboard');
           }
         },
