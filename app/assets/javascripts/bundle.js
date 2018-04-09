@@ -31082,6 +31082,8 @@ var Dashboard = function (_React$Component) {
               if (!_this2.props.currentUser && _this2.props.location.pathname != '/dashboard') {
                 window.location.reload();
                 _this2.props.history.push('/');
+              } else {
+                _this2.props.history.push('/users/' + _this2.props.currentUser[0].id);
               }
             },
             className: 'dash-current-user-image',

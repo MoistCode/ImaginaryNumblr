@@ -35,6 +35,8 @@ class Dashboard extends React.Component {
                 ) {
                   window.location.reload();
                   this.props.history.push('/');
+                } else {
+                  this.props.history.push(`/users/${this.props.currentUser[0].id}`)
                 }
             }}
             className='dash-current-user-image'
