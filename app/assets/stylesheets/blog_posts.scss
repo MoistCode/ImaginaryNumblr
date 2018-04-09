@@ -137,7 +137,21 @@
     font-family: 'Ubuntu', sans-serif;
     font-weight: bold;
     font-size: 22px;
-    border: 1px solid grey;
+    border: 1px solid #D3D3D3;
+    border-radius: 10px;
+  }
+
+  .edit-quote {
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    font-size: 36px;
+    font-style: italic;
+    border: 1px solid #D3D3D3;
+    border-radius: 10px;
+    width: 85%;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 15px;
   }
 
   img {
@@ -155,12 +169,16 @@
     display: inline-block;
     width: 80%;
     transform: translateX(3%);
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
   }
 
   textarea {
     width: 450px;
     height: 200px;
     resize: none;
+    border: 1px solid #D3D3D3;
+    border-radius: 10px;
   }
 
   form {

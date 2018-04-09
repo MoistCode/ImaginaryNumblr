@@ -32412,13 +32412,14 @@ var BlogpostItem = function (_React$Component) {
             'div',
             null,
             _react2.default.createElement('input', {
+              className: 'edit-quote',
               type: 'text',
               placeholder: "“All mathematicians live in two different worlds." + "They live in a crystalline world of perfect platonic forms." + "An ice palace. But they also live in the common world where" + "things are transient, ambiguous, subject to vicissitudes." + "Mathematicians go backward and forward from one world to another." + "They’re adults in the crystalline world, infants in the real one.”",
               value: this.state.quote,
               onChange: this.update('quote') }),
             _react2.default.createElement('input', {
               type: 'text',
-              value: '- ' + this.state.quoteSource,
+              value: '' + this.state.quoteSource,
               placeholder: "- Sylvain Cappell",
               onChange: this.update('quoteSource') })
           );

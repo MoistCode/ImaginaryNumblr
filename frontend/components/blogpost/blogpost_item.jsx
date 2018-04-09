@@ -216,6 +216,7 @@ class BlogpostItem extends React.Component {
         return (
           <div>
             <input
+              className='edit-quote'
               type='text'
               placeholder={"“All mathematicians live in two different worlds."+
               "They live in a crystalline world of perfect platonic forms."+
@@ -227,7 +228,7 @@ class BlogpostItem extends React.Component {
               onChange={this.update('quote')} />
               <input
                 type='text'
-                value={`- ${this.state.quoteSource}`}
+                value={`${this.state.quoteSource}`}
                 placeholder={"- Sylvain Cappell"}
                 onChange={this.update('quoteSource')} />
           </div>
