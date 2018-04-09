@@ -131,6 +131,15 @@
   -moz-box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
   box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
 
+  .edit-title {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    font-size: 22px;
+    border: 1px solid grey;
+  }
+
   img {
     width: 100%;
   }
@@ -168,6 +177,11 @@
       box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
       font-family: 'Ubuntu', sans-serif;
       font-weight: bold;
+    }
+
+    button:hover {
+      background-color: black;
+      color: white;
     }
 
   }

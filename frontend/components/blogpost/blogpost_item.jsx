@@ -86,7 +86,9 @@ class BlogpostItem extends React.Component {
                 className="fa fa-close"></i>
               <form onSubmit={(e) => this.handleSubmit(e)}>
                 <input
+                  className='edit-title'
                   type='text'
+                  placeholder='Title'
                   value={this.state.title}
                   onChange={this.update('title')} />
                 {this._generateForm(this.props.blogpost.contentType)}
@@ -215,18 +217,30 @@ class BlogpostItem extends React.Component {
           <div>
             <input
               type='text'
+              placeholder={"“All mathematicians live in two different worlds."+
+              "They live in a crystalline world of perfect platonic forms."+
+              "An ice palace. But they also live in the common world where"+
+              "things are transient, ambiguous, subject to vicissitudes."+
+              "Mathematicians go backward and forward from one world to another."+
+              "They’re adults in the crystalline world, infants in the real one.”"}
               value={this.state.quote}
               onChange={this.update('quote')} />
               <input
                 type='text'
                 value={`- ${this.state.quoteSource}`}
-              onChange={this.update('quoteSource')} />
+                placeholder={"- Sylvain Cappell"}
+                onChange={this.update('quoteSource')} />
           </div>
         )
       case 'text':
         return (
           <div>
             <textarea
+              placeholder={
+                "Tell me how your day was.\n" +
+                "What did you do?\n" +
+                "Anything you want to say about climate change?"
+              }
               value={this.state.description}
               onChange={this.update('description')} />
           </div>
@@ -237,33 +251,36 @@ class BlogpostItem extends React.Component {
             <audio controls>
               <source src={this.props.blogpost.attachedFile}></source>
             </audio>
-            <label>Description
-              <textarea
-                value={this.state.description}
-                onChange={this.update('description')} />
-            </label>
+            <textarea
+              placeholder={
+                "This song is the morning bird songs to my day..."
+              }
+              value={this.state.description}
+              onChange={this.update('description')} />
           </div>
         )
       case 'photo':
         return (
           <div>
             <img src={this.props.blogpost.attachedFile} />
-            <label>Description
-              <textarea
-                value={this.state.description}
-                onChange={this.update('description')} />
-            </label>
+            <textarea
+              placeholder={
+                "Not another photo of someone contemplating..."
+              }
+              value={this.state.description}
+              onChange={this.update('description')} />
           </div>
         )
       case 'video':
         return (
           <div>
-            <label>Description
-              <video controls src={this.props.blogpost.attachedFile} />
-              <textarea
-                value={this.state.description}
-                onChange={this.update('description')} />
-            </label>
+            <video controls src={this.props.blogpost.attachedFile} />
+            <textarea
+              placeholder={
+                "Today marks the day I started loving math!"
+              }
+              value={this.state.description}
+              onChange={this.update('description')} />
           </div>
         )
     }

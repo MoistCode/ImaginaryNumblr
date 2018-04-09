@@ -32225,7 +32225,9 @@ var BlogpostItem = function (_React$Component) {
                     return _this3.handleSubmit(e);
                   } },
                 _react2.default.createElement('input', {
+                  className: 'edit-title',
                   type: 'text',
+                  placeholder: 'Title',
                   value: this.state.title,
                   onChange: this.update('title') }),
                 this._generateForm(this.props.blogpost.contentType),
@@ -32411,11 +32413,13 @@ var BlogpostItem = function (_React$Component) {
             null,
             _react2.default.createElement('input', {
               type: 'text',
+              placeholder: "“All mathematicians live in two different worlds." + "They live in a crystalline world of perfect platonic forms." + "An ice palace. But they also live in the common world where" + "things are transient, ambiguous, subject to vicissitudes." + "Mathematicians go backward and forward from one world to another." + "They’re adults in the crystalline world, infants in the real one.”",
               value: this.state.quote,
               onChange: this.update('quote') }),
             _react2.default.createElement('input', {
               type: 'text',
               value: '- ' + this.state.quoteSource,
+              placeholder: "- Sylvain Cappell",
               onChange: this.update('quoteSource') })
           );
         case 'text':
@@ -32423,6 +32427,7 @@ var BlogpostItem = function (_React$Component) {
             'div',
             null,
             _react2.default.createElement('textarea', {
+              placeholder: "Tell me how your day was.\n" + "What did you do?\n" + "Anything you want to say about climate change?",
               value: this.state.description,
               onChange: this.update('description') })
           );
@@ -32435,42 +32440,30 @@ var BlogpostItem = function (_React$Component) {
               { controls: true },
               _react2.default.createElement('source', { src: this.props.blogpost.attachedFile })
             ),
-            _react2.default.createElement(
-              'label',
-              null,
-              'Description',
-              _react2.default.createElement('textarea', {
-                value: this.state.description,
-                onChange: this.update('description') })
-            )
+            _react2.default.createElement('textarea', {
+              placeholder: "This song is the morning bird songs to my day...",
+              value: this.state.description,
+              onChange: this.update('description') })
           );
         case 'photo':
           return _react2.default.createElement(
             'div',
             null,
             _react2.default.createElement('img', { src: this.props.blogpost.attachedFile }),
-            _react2.default.createElement(
-              'label',
-              null,
-              'Description',
-              _react2.default.createElement('textarea', {
-                value: this.state.description,
-                onChange: this.update('description') })
-            )
+            _react2.default.createElement('textarea', {
+              placeholder: "Not another photo of someone contemplating...",
+              value: this.state.description,
+              onChange: this.update('description') })
           );
         case 'video':
           return _react2.default.createElement(
             'div',
             null,
-            _react2.default.createElement(
-              'label',
-              null,
-              'Description',
-              _react2.default.createElement('video', { controls: true, src: this.props.blogpost.attachedFile }),
-              _react2.default.createElement('textarea', {
-                value: this.state.description,
-                onChange: this.update('description') })
-            )
+            _react2.default.createElement('video', { controls: true, src: this.props.blogpost.attachedFile }),
+            _react2.default.createElement('textarea', {
+              placeholder: "Today marks the day I started loving math!",
+              value: this.state.description,
+              onChange: this.update('description') })
           );
       }
     }
