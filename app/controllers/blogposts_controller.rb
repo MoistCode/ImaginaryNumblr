@@ -8,7 +8,7 @@ class BlogpostsController < ApplicationController
       end
       render 'blogposts/index'
     else
-      render json: ['Nothing to see here'], status: 404
+      render status: 422
     end
   end
 

@@ -209,3 +209,13 @@
 .w3-container {
   position: fixed;
 }
+
+.confirm-delete-modal {
+  display: inline;
+  width: 500px;
+  height: 500px;
+
+  .inner-modal {
+
+  }
+}

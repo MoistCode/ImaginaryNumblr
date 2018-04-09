@@ -32116,6 +32116,8 @@ var BlogpostItem = function (_React$Component) {
     _this.closeEditForm = _this.closeEditForm.bind(_this);
     _this.toggleEditForm = _this.toggleEditForm.bind(_this);
     _this.handleDeletion = _this.handleDeletion.bind(_this);
+    _this.toggleDeletion = _this.toggleDeletion.bind(_this);
+
     return _this;
   }
 
@@ -32166,12 +32168,18 @@ var BlogpostItem = function (_React$Component) {
       });
     }
   }, {
+    key: 'toggleDeletion',
+    value: function toggleDeletion() {
+      this.setState({ showDeleteConfirmation: !this.state.showDeleteConfirmation });
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
         'div',
         { className: 'blogpost' },
         this._generateEditForm(),
+        this._generateDeletionConfirmation(),
         this._generateAuthorOptions(),
         this._renderContentType(),
         _react2.default.createElement(
@@ -32194,6 +32202,30 @@ var BlogpostItem = function (_React$Component) {
           )
         )
       );
+    }
+  }, {
+    key: '_generateDeletionConfirmation',
+    value: function _generateDeletionConfirmation() {
+      if (this.state.showDeleteConfirmation == true) {
+        return _react2.default.createElement(
+          'div',
+          { className: 'confirm-delete-modal' },
+          _react2.default.createElement(
+            'div',
+            { className: 'inner-modal' },
+            _react2.default.createElement(
+              'button',
+              { className: 'delete-yes' },
+              'Yes'
+            ),
+            _react2.default.createElement(
+              'button',
+              { className: 'delete-no' },
+              'No'
+            )
+          )
+        );
+      }
     }
   }, {
     key: '_generateEditForm',
@@ -32260,7 +32292,7 @@ var BlogpostItem = function (_React$Component) {
             'div',
             { className: 'header-remove' },
             _react2.default.createElement('i', {
-              onClick: this.handleDeletion,
+              onClick: this.toggleDeletion,
               className: 'fa fa-close' })
           )
         );
@@ -32275,7 +32307,8 @@ var BlogpostItem = function (_React$Component) {
           quote: this.props.blogpost.quote,
           quoteSource: this.props.blogpost.quoteSource,
           content_type: this.props.blogpost.contentType,
-          showEditForm: false
+          showEditForm: false,
+          showDeleteConfirmation: false
         };
       } else if (contentType != 'text') {
         return {
@@ -32283,14 +32316,16 @@ var BlogpostItem = function (_React$Component) {
           description: this.props.blogpost.description,
           content_type: this.props.blogpost.contentType,
           attached_file: this.props.blogpost.attachedFile,
-          showEditForm: false
+          showEditForm: false,
+          showDeleteConfirmation: false
         };
       } else {
         return {
           title: this.props.blogpost.title,
           description: this.props.blogpost.description,
           content_type: this.props.blogpost.contentType,
-          showEditForm: false
+          showEditForm: false,
+          showDeleteConfirmation: false
         };
       }
     }

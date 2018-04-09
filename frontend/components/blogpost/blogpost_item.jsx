@@ -9,6 +9,8 @@ class BlogpostItem extends React.Component {
     this.closeEditForm = this.closeEditForm.bind(this);
     this.toggleEditForm = this.toggleEditForm.bind(this);
     this.handleDeletion = this.handleDeletion.bind(this);
+    this.toggleDeletion = this.toggleDeletion.bind(this);
+
   }
 
 
@@ -49,10 +51,16 @@ class BlogpostItem extends React.Component {
       .then(() => window.location.reload())
   }
 
+  toggleDeletion() {
+    this.setState({ showDeleteConfirmation: !this.state.showDeleteConfirmation})
+  }
+
+
   render() {
     return (
       <div className='blogpost'>
         {this._generateEditForm()}
+        {this._generateDeletionConfirmation()}
         {this._generateAuthorOptions()}
         {this._renderContentType()}
         <div className='blogpost-footer'>
@@ -69,6 +77,19 @@ class BlogpostItem extends React.Component {
         </div>
       </div>
     )
+  }
+
+  _generateDeletionConfirmation() {
+    if (this.state.showDeleteConfirmation == true) {
+      return (
+        <div className='confirm-delete-modal'>
+          <div className='inner-modal'>
+            <button className='delete-yes'>Yes</button>
+            <button className='delete-no'>No</button>
+          </div>
+        </div>
+      )
+    }
   }
 
   _generateEditForm() {
@@ -114,7 +135,7 @@ class BlogpostItem extends React.Component {
           </div>
           <div className='header-remove'>
             <i
-              onClick={this.handleDeletion}
+              onClick={this.toggleDeletion}
               className="fa fa-close"></i>
           </div>
         </div>
@@ -129,7 +150,8 @@ class BlogpostItem extends React.Component {
         quote: this.props.blogpost.quote,
         quoteSource: this.props.blogpost.quoteSource,
         content_type: this.props.blogpost.contentType,
-        showEditForm: false
+        showEditForm: false,
+        showDeleteConfirmation: false
       }
     } else if (contentType != 'text') {
         return {
@@ -137,14 +159,16 @@ class BlogpostItem extends React.Component {
           description: this.props.blogpost.description,
           content_type: this.props.blogpost.contentType,
           attached_file: this.props.blogpost.attachedFile,
-          showEditForm: false
+          showEditForm: false,
+          showDeleteConfirmation: false
         }
     } else {
         return {
           title: this.props.blogpost.title,
           description: this.props.blogpost.description,
           content_type: this.props.blogpost.contentType,
-          showEditForm: false
+          showEditForm: false,
+          showDeleteConfirmation: false
         }
     }
   }
