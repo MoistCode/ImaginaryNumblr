@@ -4,6 +4,7 @@ json.blogposts do
       json.id blogpost.id
       json.title blogpost.title
       json.quote blogpost.quote
+      json.quoteSource blogpost.quote_source
       json.description blogpost.description
       json.authorId blogpost.author_id
       json.contentType blogpost.content_type

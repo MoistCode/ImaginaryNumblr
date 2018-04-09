@@ -31282,6 +31282,7 @@ var BlogPostCreationForm = function (_React$Component) {
         formData.append('blogpost[attached_file]', this.state.attached_file);
       } else if (this.state.content_type == 'quote') {
         formData.append('blogpost[quote]', this.state.quote);
+        formData.append('blogpost[quote_source]', this.state.quoteSource);
       } else {
         formData.append('blogpost[description]]', this.state.description);
       }
@@ -31367,6 +31368,9 @@ var BlogPostCreationForm = function (_React$Component) {
               },
               onChange: this.update('quote') }),
             _react2.default.createElement('input', {
+              type: 'text',
+              value: this.state.quoteSource,
+              onChange: this.update('quoteSource'),
               placeholder: "- Sylvain Cappell" })
           );
         case 'text':
@@ -31480,11 +31484,13 @@ var BlogPostCreationForm = function (_React$Component) {
     key: '_generateState',
     value: function _generateState(contentType) {
       if (contentType == 'quote') {
-        return _defineProperty({
+        var _ref;
+
+        return _ref = {
           title: '',
           content_type: contentType,
           attached_file: ''
-        }, contentType, '');
+        }, _defineProperty(_ref, contentType, ''), _defineProperty(_ref, 'quoteSource', ''), _ref;
       } else if (contentType != 'text') {
         return _defineProperty({
           title: '',
@@ -32116,6 +32122,7 @@ var BlogpostItem = function (_React$Component) {
         formData.append('blogpost[description]]', this.state.description);
       } else if (this.state.content_type == 'quote') {
         formData.append('blogpost[quote]', this.state.quote);
+        formData.append('blogpost[quote_source]', this.state.quoteSource);
       } else {
         formData.append('blogpost[description]]', this.state.description);
       }
@@ -32241,6 +32248,7 @@ var BlogpostItem = function (_React$Component) {
         return {
           title: this.props.blogpost.title,
           quote: this.props.blogpost.quote,
+          quoteSource: this.props.blogpost.quoteSource,
           content_type: this.props.blogpost.contentType,
           showEditForm: false
         };
@@ -32286,6 +32294,12 @@ var BlogpostItem = function (_React$Component) {
             '"',
             quote,
             '"'
+          ),
+          _react2.default.createElement(
+            'p',
+            null,
+            '- ',
+            this.props.blogpost.quoteSource
           )
         );
       } else if (contentType == 'text') {
@@ -32372,7 +32386,11 @@ var BlogpostItem = function (_React$Component) {
               _react2.default.createElement('input', {
                 type: 'text',
                 value: this.state.quote,
-                onChange: this.update('quote') })
+                onChange: this.update('quote') }),
+              _react2.default.createElement('input', {
+                type: 'text',
+                value: '- ' + this.state.quoteSource,
+                onChange: this.update('quoteSource') })
             )
           );
         case 'text':

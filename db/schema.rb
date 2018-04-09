@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180406200637) do
+ActiveRecord::Schema.define(version: 20180409160246) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20180406200637) do
     t.string "attached_file_content_type"
     t.integer "attached_file_file_size"
     t.datetime "attached_file_updated_at"
+    t.string "quote_source"
     t.index ["author_id"], name: "index_blogposts_on_author_id"
     t.index ["id"], name: "index_blogposts_on_id"
   end

@@ -36,6 +36,7 @@ class BlogpostItem extends React.Component {
       formData.append('blogpost[description]]', this.state.description);
     } else if (this.state.content_type == 'quote') {
       formData.append('blogpost[quote]', this.state.quote);
+      formData.append('blogpost[quote_source]', this.state.quoteSource);
     } else {
       formData.append('blogpost[description]]', this.state.description);
     }
@@ -127,6 +128,7 @@ class BlogpostItem extends React.Component {
       return {
         title: this.props.blogpost.title,
         quote: this.props.blogpost.quote,
+        quoteSource: this.props.blogpost.quoteSource,
         content_type: this.props.blogpost.contentType,
         showEditForm: false
       }
@@ -162,6 +164,7 @@ class BlogpostItem extends React.Component {
         <div className='blogpost-item'>
           <h1 className='title'>{title}</h1>
           <h1 className='quote'>"{quote}"</h1>
+          <p>- {this.props.blogpost.quoteSource}</p>
         </div>
       )
     } else if (contentType == 'text') {
@@ -210,6 +213,10 @@ class BlogpostItem extends React.Component {
                 type='text'
                 value={this.state.quote}
                 onChange={this.update('quote')} />
+                <input
+                  type='text'
+                  value={`- ${this.state.quoteSource}`}
+                  onChange={this.update('quoteSource')} />
             </label>
           </div>
         )

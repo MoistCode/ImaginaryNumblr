@@ -63,7 +63,8 @@ class BlogpostsController < ApplicationController
       :description,
       :attached_file,
       :quote,
-      :blogpostIds
+      :blogpostIds,
+      :quote_source
     )
   end
 

@@ -21,6 +21,7 @@ class BlogPostCreationForm extends React.Component {
       formData.append('blogpost[attached_file]', this.state.attached_file);
     } else if (this.state.content_type == 'quote') {
       formData.append('blogpost[quote]', this.state.quote);
+      formData.append('blogpost[quote_source]', this.state.quoteSource)
     } else {
       formData.append('blogpost[description]]', this.state.description);
     }
@@ -88,6 +89,9 @@ class BlogPostCreationForm extends React.Component {
                 }
                 onChange={this.update('quote')} />
               <input
+                type='text'
+                value={this.state.quoteSource}
+                onChange={this.update('quoteSource')}
                 placeholder={"- Sylvain Cappell"} />
           </div>
         )
@@ -208,7 +212,8 @@ class BlogPostCreationForm extends React.Component {
         title: '',
         content_type: contentType,
         attached_file: '',
-        [contentType]: ''
+        [contentType]: '',
+        quoteSource: ''
       }
     } else if (contentType != 'text') {
         return {

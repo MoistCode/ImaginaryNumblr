@@ -14,10 +14,13 @@
 #  attached_file_content_type :string
 #  attached_file_file_size    :integer
 #  attached_file_updated_at   :datetime
+#  quote_source               :string
 #
 
 class Blogpost < ApplicationRecord
   validates :content_type, presence: true
+
+  validates :title, length: { maximum: 36 }
 
   has_attached_file :attached_file
   validates_attachment_content_type :attached_file,
