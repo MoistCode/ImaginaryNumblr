@@ -1,6 +1,7 @@
 import {
   RECEIVE_BLOGPOSTS,
-  RECEIVE_BLOGPOST
+  RECEIVE_BLOGPOST,
+  REMOVE_BLOGPOST
 } from '../actions/blogpost_actions';
 import merge from 'lodash/merge';
 
@@ -10,7 +11,11 @@ const blogpostsReducer = (oldState = {}, action) => {
     case RECEIVE_BLOGPOSTS:
       return merge({}, oldState, action.blogposts);
     case RECEIVE_BLOGPOST:
-      return merge({}, oldState, { [action.blogpost.id]: action.blogpost })
+      return merge({}, oldState, { [action.blogpost.id]: action.blogpost });
+    case REMOVE_BLOGPOST:
+      let newState = merge({}, oldState);
+      delete newState[action.blogpostId];
+      return newState;
     default:
       return oldState;
   }

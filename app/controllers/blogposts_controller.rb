@@ -45,11 +45,10 @@ class BlogpostsController < ApplicationController
   end
 
   def destroy
-    debugger;
-    blogpost = current_user.blogposts.find(params[:id])
+    @blogpost = current_user.blogposts.find(params[:id])
 
-    if blogpost.destroy
-      render json: ['Deletion completed']
+    if @blogpost.destroy
+      render 'blogposts/show'
     else
       render json: ['Cannot do such thing!'], status: 404
     end

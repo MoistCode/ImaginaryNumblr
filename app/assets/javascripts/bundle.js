@@ -1175,7 +1175,7 @@ module.exports = g;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.updateBlogpost = exports.postBlogpost = exports.fetchBlogpost = exports.fetchBlogposts = exports.RECEIVE_BLOGPOST_ERRORS = exports.REMOVE_BLOGPOST = exports.RECEIVE_BLOGPOST = exports.RECEIVE_BLOGPOSTS = undefined;
+exports.deleteBlogpost = exports.updateBlogpost = exports.postBlogpost = exports.fetchBlogpost = exports.fetchBlogposts = exports.RECEIVE_BLOGPOST_ERRORS = exports.REMOVE_BLOGPOST = exports.RECEIVE_BLOGPOST = exports.RECEIVE_BLOGPOSTS = undefined;
 
 var _blogpost_util = __webpack_require__(123);
 
@@ -1228,6 +1228,16 @@ var updateBlogpost = exports.updateBlogpost = function updateBlogpost(blogpost, 
   };
 };
 
+var deleteBlogpost = exports.deleteBlogpost = function deleteBlogpost(blogpostId) {
+  return function (dispatch) {
+    return BlogpostUtil.deleteBlogpost(blogpostId).then(function (blogpost) {
+      return dispatch(removeBlogpost(blogpostId));
+    }, function (errors) {
+      return dispatch(receiveBlogpostErrors(errors.responseJSON));
+    });
+  };
+};
+
 var receiveBlogposts = function receiveBlogposts(blogposts) {
   return {
     type: RECEIVE_BLOGPOSTS,
@@ -1239,6 +1249,13 @@ var receiveBlogpost = function receiveBlogpost(blogpost) {
   return {
     type: RECEIVE_BLOGPOST,
     blogpost: blogpost
+  };
+};
+
+var removeBlogpost = function removeBlogpost(blogpostId) {
+  return {
+    type: REMOVE_BLOGPOST,
+    blogpostId: blogpostId
   };
 };
 
@@ -24651,9 +24668,57 @@ exports.default = blogpostErrorsReducer;
 
 /***/ }),
 /* 123 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-throw new Error("Module build failed: SyntaxError: Unexpected token (42:0)\n\n\u001b[0m \u001b[90m 40 | \u001b[39m\u001b[36mexport\u001b[39m \u001b[36mconst\u001b[39m deleteBlogpost \u001b[33m=\u001b[39m (blogpostId) \u001b[33m=>\u001b[39m (\n \u001b[90m 41 | \u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 42 | \u001b[39m)\n \u001b[90m    | \u001b[39m\u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 43 | \u001b[39m\u001b[0m\n");
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var fetchBlogposts = exports.fetchBlogposts = function fetchBlogposts(blogpostIds) {
+  return $.ajax({
+    method: 'GET',
+    url: '/blogposts',
+    data: { blogpost: { blogpostIds: blogpostIds } }
+  });
+};
+
+var fetchBlogpost = exports.fetchBlogpost = function fetchBlogpost(blogpostId) {
+  return $.ajax({
+    method: 'GET',
+    url: '/blogposts/' + blogpostId
+  });
+};
+
+var updateBlogpost = exports.updateBlogpost = function updateBlogpost(blogpost, blogpostId) {
+  return $.ajax({
+    method: 'PATCH',
+    url: '/blogposts/' + blogpostId,
+    contentType: false,
+    processData: false,
+    dataType: 'json',
+    data: blogpost
+  });
+};
+
+var postBlogpost = exports.postBlogpost = function postBlogpost(blogpost) {
+  return $.ajax({
+    method: 'POST',
+    url: '/blogposts',
+    contentType: false,
+    processData: false,
+    dataType: 'json',
+    data: blogpost
+  });
+};
+
+var deleteBlogpost = exports.deleteBlogpost = function deleteBlogpost(blogpostId) {
+  return $.ajax({
+    method: 'DELETE',
+    url: '/blogposts/' + blogpostId
+  });
+};
 
 /***/ }),
 /* 124 */
@@ -26887,6 +26952,10 @@ var blogpostsReducer = function blogpostsReducer() {
       return (0, _merge3.default)({}, oldState, action.blogposts);
     case _blogpost_actions.RECEIVE_BLOGPOST:
       return (0, _merge3.default)({}, oldState, _defineProperty({}, action.blogpost.id, action.blogpost));
+    case _blogpost_actions.REMOVE_BLOGPOST:
+      var newState = (0, _merge3.default)({}, oldState);
+      delete newState[action.blogpostId];
+      return newState;
     default:
       return oldState;
   }
@@ -31981,7 +32050,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     updateBlogpost: function updateBlogpost(blogpost, blogpostId) {
       return dispatch((0, _blogpost_actions.updateBlogpost)(blogpost, blogpostId));
     },
-    deleteBlogpost: blogpostId
+    deleteBlogpost: function deleteBlogpost(blogpostId) {
+      return dispatch((0, _blogpost_actions.deleteBlogpost)(blogpostId));
+    }
   };
 };
 
@@ -32026,6 +32097,7 @@ var BlogpostItem = function (_React$Component) {
     _this.state = _this._generateState(_this.props.blogpost.contentType);
     _this.closeEditForm = _this.closeEditForm.bind(_this);
     _this.toggleEditForm = _this.toggleEditForm.bind(_this);
+    _this.handleDeletion = _this.handleDeletion.bind(_this);
     return _this;
   }
 

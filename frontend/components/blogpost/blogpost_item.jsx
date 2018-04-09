@@ -8,6 +8,7 @@ class BlogpostItem extends React.Component {
     this.state = this._generateState(this.props.blogpost.contentType);
     this.closeEditForm = this.closeEditForm.bind(this);
     this.toggleEditForm = this.toggleEditForm.bind(this);
+    this.handleDeletion = this.handleDeletion.bind(this);
   }
 
 

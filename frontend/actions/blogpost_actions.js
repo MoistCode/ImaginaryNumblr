@@ -29,6 +29,11 @@ export const updateBlogpost = (blogpost, blogpostId) => (dispatch) => BlogpostUt
     (errors) => dispatch(receiveBlogpostErrors(errors.responseJSON))
   );
 
+export const deleteBlogpost = (blogpostId) => (dispatch) => BlogpostUtil.deleteBlogpost(blogpostId)
+  .then(
+    (blogpost) => dispatch(removeBlogpost(blogpostId)),
+    (errors) => dispatch(receiveBlogpostErrors(errors.responseJSON))
+  );
 
 const receiveBlogposts = (blogposts) => ({
   type: RECEIVE_BLOGPOSTS,
@@ -38,6 +43,11 @@ const receiveBlogposts = (blogposts) => ({
 const receiveBlogpost = (blogpost) => ({
   type: RECEIVE_BLOGPOST,
   blogpost
+});
+
+const removeBlogpost = (blogpostId) => ({
+  type: REMOVE_BLOGPOST,
+  blogpostId
 });
 
 const receiveBlogpostErrors = (errors) => ({

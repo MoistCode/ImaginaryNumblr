@@ -40,6 +40,6 @@ export const postBlogpost = (blogpost) => (
 export const deleteBlogpost = (blogpostId) => (
   $.ajax({
     method: 'DELETE',
-    url: `/blogpost`
+    url: `/blogposts/${blogpostId}`
   })
-)
+);
