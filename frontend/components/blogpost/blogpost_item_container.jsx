@@ -1,6 +1,6 @@
 import BlogpostItem from './blogpost_item';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
+import { withRouter } from 'react-router-dom';
 import { updateBlogpost, deleteBlogpost } from '../../actions/blogpost_actions';
 
 const mapStateToProps = (state) => {

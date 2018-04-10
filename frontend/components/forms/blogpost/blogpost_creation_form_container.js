@@ -1,6 +1,7 @@
 import BlogPostCreationForm from './blogpost_creation_form';
 import { connect } from 'react-redux';
 import { postBlogpost, clearErrors } from '../../../actions/blogpost_actions';
+import { withRouter } from 'react-router-dom';
 
 const _checkCurrentUser = (currentUser) => {
   if (currentUser != null) {
@@ -20,4 +21,4 @@ const mapDispatchToProps = (dispatch) => ({
   clearErrors: () => dispatch(clearErrors())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(BlogPostCreationForm);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(BlogPostCreationForm));

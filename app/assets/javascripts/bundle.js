@@ -614,10 +614,8 @@ var receiveBlogposts = function receiveBlogposts(blogposts) {
 };
 
 var receiveBlogpost = function receiveBlogpost(blogpost) {
-  return {
-    type: RECEIVE_BLOGPOST,
-    blogpost: blogpost
-  };
+  debugger;
+  return { type: RECEIVE_BLOGPOST, blogpost: blogpost };
 };
 
 var removeBlogpost = function removeBlogpost(blogpostId) {
@@ -5167,8 +5165,8 @@ var SessionForm = function (_React$Component) {
       this.props.clearErrors();
 
       this.props.processForm(formData).then(function () {
-        window.location.reload();
         _this3.props.history.push('/dashboard');
+        window.location.reload();
       });
     }
   }, {
@@ -5358,7 +5356,7 @@ var _blogpost_item2 = _interopRequireDefault(_blogpost_item);
 
 var _reactRedux = __webpack_require__(5);
 
-var _reactRouter = __webpack_require__(88);
+var _reactRouterDom = __webpack_require__(14);
 
 var _blogpost_actions = __webpack_require__(8);
 
@@ -5385,7 +5383,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   };
 };
 
-exports.default = (0, _reactRouter.withRouter)((0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_blogpost_item2.default));
+exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_blogpost_item2.default));
 
 /***/ }),
 /* 91 */
@@ -31429,6 +31427,8 @@ var _reactRedux = __webpack_require__(5);
 
 var _blogpost_actions = __webpack_require__(8);
 
+var _reactRouterDom = __webpack_require__(14);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _checkCurrentUser = function _checkCurrentUser(currentUser) {
@@ -31457,7 +31457,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   };
 };
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_blogpost_creation_form2.default);
+exports.default = (0, _reactRouterDom.withRouter)((0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_blogpost_creation_form2.default));
 
 /***/ }),
 /* 235 */
@@ -31525,8 +31525,8 @@ var BlogPostCreationForm = function (_React$Component) {
       }
       this.props.createBlogpost(formData).then(function () {
         submitButton.prop("disabled", false);
-        window.location.reload();
         _this2.props.history.push('/dashboard');
+        window.location.reload();
       }, function () {
         return submitButton.prop("disabled", false);
       });
@@ -32439,20 +32439,28 @@ var NavigationBar = function (_React$Component) {
         {
           className: 'main-nav-bar',
           style: this._generateStyle() },
-        this._mainIcon(),
         _react2.default.createElement(
           'div',
-          { className: 'around-search-bar' },
-          _react2.default.createElement('i', { className: 'fa fa-search' }),
-          _react2.default.createElement('input', {
-            className: 'nav-search-bar',
-            type: 'text',
-            value: this.state.searchBar,
-            placeholder: 'Search ImaginaryNumblr',
-            onChange: this.update('searchBar') })
+          { className: 'nav-header-left' },
+          this._mainIcon(),
+          _react2.default.createElement(
+            'div',
+            { className: 'around-search-bar' },
+            _react2.default.createElement('i', { className: 'fa fa-search' }),
+            _react2.default.createElement('input', {
+              className: 'nav-search-bar',
+              type: 'text',
+              value: this.state.searchBar,
+              placeholder: 'Search ImaginaryNumblr',
+              onChange: this.update('searchBar') })
+          )
         ),
-        this._showCurrentUser(),
-        this._createSessionButtons(this.props.currentUser)
+        _react2.default.createElement(
+          'div',
+          { className: 'nav-header-right' },
+          this._createSessionButtons(this.props.currentUser),
+          this._showCurrentUser()
+        )
       );
     }
   }, {

@@ -3,9 +3,20 @@
   z-index: 99;
   // margin: 0;
   width: 100%;
-  transform: translateY(-25px);
-  padding-left: 100px;
-  padding-right: 100px;
+  padding: 15px 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .nav-header-left, .nav-header-right{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    &:last-child {
+      margin-left: 100px;
+    }
+  }
+
 }
 
 .main-nav-bar input {
@@ -22,12 +33,11 @@
 
 .around-search-bar {
   // transform: translateY(-15%);
-  margin-top: 25px;
   background: #fff;
   border-radius: 5px;
   border: 1px solid black;
   display: inline-block;
-  height: 32px;
+  height: 41px;
   width: 450px;
   -webkit-box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
   -moz-box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
@@ -36,15 +46,13 @@
 
 .around-search-bar i {
   transform: translateX(70%);
-  margin-top: 5px;
+  margin-top: 8px;
   font-size: 20px;
 }
 
 .main-nav-icon {
   cursor: pointer;
   margin-right: 10px;
-  margin-bottom: 35px;
-  transform: translateY(40%);
 }
 
 .nav-button {
@@ -57,12 +65,10 @@
   height: 32px;
   width: 70px;
   float: right;
-  transform: translateY(70%);
 }
 
 .session-button {
   float: right;
-  margin-top: 10px;
   margin-right: 0;
   position: relative;
   vertical-align: top;
@@ -102,7 +108,6 @@
 }
 
 .profile-picture {
-  transform: translateY(37%);
   width: 64px;
   height: 64px;
   cursor: pointer;

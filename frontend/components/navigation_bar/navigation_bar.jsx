@@ -20,18 +20,22 @@ class NavigationBar extends React.Component {
       <div
         className='main-nav-bar'
         style={this._generateStyle()}>
-        {this._mainIcon()}
-        <div className='around-search-bar'>
-          <i className="fa fa-search"></i>
-          <input
-            className='nav-search-bar'
-            type='text'
-            value={this.state.searchBar}
-            placeholder='Search ImaginaryNumblr'
-            onChange={this.update('searchBar')} />
+        <div className='nav-header-left'>
+          {this._mainIcon()}
+          <div className='around-search-bar'>
+            <i className="fa fa-search"></i>
+            <input
+              className='nav-search-bar'
+              type='text'
+              value={this.state.searchBar}
+              placeholder='Search ImaginaryNumblr'
+              onChange={this.update('searchBar')} />
+          </div>
         </div>
-        {this._showCurrentUser()}
-        {this._createSessionButtons(this.props.currentUser)}
+        <div className='nav-header-right'>
+          {this._createSessionButtons(this.props.currentUser)}
+          {this._showCurrentUser()}
+        </div>
       </div>
     )
   }

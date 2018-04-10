@@ -29,8 +29,8 @@ class BlogPostCreationForm extends React.Component {
     }
     this.props.createBlogpost(formData).then(() => {
       submitButton.prop("disabled", false);
-      window.location.reload();
       this.props.history.push('/dashboard');
+      window.location.reload();
     }, () => submitButton.prop("disabled", false));
   }
 

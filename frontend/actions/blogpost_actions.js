@@ -43,10 +43,10 @@ const receiveBlogposts = (blogposts) => ({
   blogposts
 });
 
-const receiveBlogpost = (blogpost) => ({
-  type: RECEIVE_BLOGPOST,
-  blogpost
-});
+const receiveBlogpost = (blogpost) => {
+  debugger;
+  return { type: RECEIVE_BLOGPOST, blogpost }
+};
 
 const removeBlogpost = (blogpostId) => ({
   type: REMOVE_BLOGPOST,
