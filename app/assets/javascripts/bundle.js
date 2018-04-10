@@ -32077,7 +32077,8 @@ var UserShowPage = function (_React$Component) {
       var _this4 = this;
 
       this.props.postFollow(this.props.user.id).then(function () {
-        return _this4.props.fetchUser(_this4.props.user.id);
+        _this4.props.fetchUser(_this4.props.user.id);
+        window.location.reload();
       });
     }
   }, {

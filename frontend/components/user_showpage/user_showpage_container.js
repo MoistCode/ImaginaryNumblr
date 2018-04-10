@@ -31,7 +31,7 @@ const mapStateToProps = (state, ownProps) => {
       user: state.users[ownProps.match.params.userId],
       blogposts: _generateUserBlogposts(state.blogposts, state.users[ownProps.match.params.userId].blogpostIds),
       currentUser: _checkCurrentUser(state.session.currentUser) || 'none',
-      currentUserFollows: _checkCurrentUserFollows(state.session.currentUser) || 'none'
+      currentUserFollows: _checkCurrentUserFollows(state.session.currentUser) || 'none',
     };
   }
   return { user: 'none' }

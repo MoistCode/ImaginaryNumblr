@@ -33,7 +33,12 @@ class UserShowPage extends React.Component {
 
   handleFollow() {
     this.props.postFollow(this.props.user.id)
-      .then(() => this.props.fetchUser(this.props.user.id))
+      .then(() => {
+          this.props.fetchUser(this.props.user.id);
+          window.location.reload();
+        }
+      )
+
   }
 
   render() {
