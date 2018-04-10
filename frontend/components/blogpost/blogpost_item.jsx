@@ -140,6 +140,7 @@ class BlogpostItem extends React.Component {
                 {this._generateForm(this.props.blogpost.contentType)}
                 <button
                   className='edit-submit-button'>Submit</button>
+                {this._generateErrors(this.props.errors)}
               </form>
             </div>
 
@@ -148,6 +149,10 @@ class BlogpostItem extends React.Component {
         </div>
       )
     }
+  }
+
+  _generateErrors(errArr = []) {
+    return errArr.map((err) => <li style={{color: 'red', listStyle: 'none'}}>{err}</li>)
   }
 
   _generateAuthorOptions() {

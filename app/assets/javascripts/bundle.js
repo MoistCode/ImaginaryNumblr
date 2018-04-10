@@ -5368,9 +5368,9 @@ var mapStateToProps = function mapStateToProps(state) {
   var currentUser = void 0;
   if (state.session.currentUser != undefined) {
     currentUser = Object.keys(state.session.currentUser.users)[0];
-    return { currentUser: currentUser };
+    return { currentUser: currentUser, errors: state.errors.blogpost };
   } else {
-    return { currentUser: 'none' };
+    return { currentUser: 'none', errors: state.errors.blogpost };
   }
 };
 
@@ -31556,8 +31556,7 @@ var BlogPostCreationForm = function (_React$Component) {
         _react2.default.createElement(
           "div",
           {
-            className: "w3-container w3-center w3-animate-opacity",
-            style: { position: 'absolute' } },
+            className: "w3-container w3-center w3-animate-opacity" },
           _react2.default.createElement(
             "div",
             { id: "creation-form" },
@@ -32029,12 +32028,26 @@ var BlogpostItem = function (_React$Component) {
                   {
                     className: 'edit-submit-button' },
                   'Submit'
-                )
+                ),
+                this._generateErrors(this.props.errors)
               )
             )
           )
         );
       }
+    }
+  }, {
+    key: '_generateErrors',
+    value: function _generateErrors() {
+      var errArr = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+
+      return errArr.map(function (err) {
+        return _react2.default.createElement(
+          'li',
+          { style: { color: 'red', listStyle: 'none' } },
+          err
+        );
+      });
     }
   }, {
     key: '_generateAuthorOptions',

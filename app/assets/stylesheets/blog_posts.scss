@@ -3,8 +3,9 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .blogpost {
-  transform: translateY(100px);
+  transform: translateY(83px);
   z-index: -5;
+  width: 100%;
   .blog-profile-pic {
     width: 64px;
     length: 64px;
@@ -15,6 +16,7 @@
 }
 
 .blogpost-item {
+    z-index: -5;
     transform: translateX(70%);
     margin-top: 25px;
     background-color: white;
