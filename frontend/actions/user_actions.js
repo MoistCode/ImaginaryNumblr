@@ -13,6 +13,12 @@ export const postFollow = (followeeId) => (dispatch) => FollowUtil.postFollow(fo
     (user) => dispatch(receiveUser(user))
   )
 
+export const destroyFollow = (followeeId) => (dispatch) => FollowUtil.destroyFollow(followeeId)
+  .then(
+    (user) => dispatch(receiveUser(user))
+  )
+
+
 const receiveUser = (user) => ({
   type: RECEIVE_USER,
   user

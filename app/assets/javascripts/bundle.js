@@ -3521,7 +3521,7 @@ module.exports = identity;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.postFollow = exports.fetchUser = exports.RECEIVE_USER = undefined;
+exports.destroyFollow = exports.postFollow = exports.fetchUser = exports.RECEIVE_USER = undefined;
 
 var _user_util = __webpack_require__(192);
 
@@ -3546,6 +3546,14 @@ var fetchUser = exports.fetchUser = function fetchUser(userId) {
 var postFollow = exports.postFollow = function postFollow(followeeId) {
   return function (dispatch) {
     return FollowUtil.postFollow(followeeId).then(function (user) {
+      return dispatch(receiveUser(user));
+    });
+  };
+};
+
+var destroyFollow = exports.destroyFollow = function destroyFollow(followeeId) {
+  return function (dispatch) {
+    return FollowUtil.destroyFollow(followeeId).then(function (user) {
       return dispatch(receiveUser(user));
     });
   };
@@ -31995,7 +32003,6 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    // fetch blogposts here correlating to :userId
     fetchUser: function fetchUser(userId) {
       return dispatch((0, _user_actions.fetchUser)(userId));
     },
@@ -32004,6 +32011,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     postFollow: function postFollow(followeeId) {
       return dispatch((0, _user_actions.postFollow)(followeeId));
+    },
+    destroyFollow: function destroyFollow(followeeId) {
+      return dispatch((0, _user_actions.destroyFollow)(followeeId));
     }
   };
 };
@@ -32048,6 +32058,7 @@ var UserShowPage = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, (UserShowPage.__proto__ || Object.getPrototypeOf(UserShowPage)).call(this, props));
 
     _this.handleFollow = _this.handleFollow.bind(_this);
+    _this.handleUnfollow = _this.handleUnfollow.bind(_this);
     return _this;
   }
 
@@ -32085,6 +32096,16 @@ var UserShowPage = function (_React$Component) {
 
       this.props.postFollow(this.props.user.id).then(function () {
         _this4.props.fetchUser(_this4.props.user.id);
+        window.location.reload();
+      });
+    }
+  }, {
+    key: 'handleUnfollow',
+    value: function handleUnfollow() {
+      var _this5 = this;
+
+      this.props.destroyFollow(this.props.user.id).then(function () {
+        _this5.props.fetchUser(_this5.props.user.id);
         window.location.reload();
       });
     }
@@ -32133,7 +32154,7 @@ var UserShowPage = function (_React$Component) {
       } else if (this.props.currentUserFollows.indexOf(this.props.user.id) > -1) {
         return _react2.default.createElement(
           'button',
-          { className: 'follow-button' },
+          { className: 'follow-button', onClick: this.handleUnfollow },
           'Unfollow'
         );
       } else if (this.props.user.id != this.props.currentUser.id) {

@@ -6,6 +6,7 @@ class UserShowPage extends React.Component {
   constructor(props) {
     super(props);
     this.handleFollow = this.handleFollow.bind(this);
+    this.handleUnfollow = this.handleUnfollow.bind(this);
   }
 
   componentDidMount() {
@@ -33,6 +34,16 @@ class UserShowPage extends React.Component {
 
   handleFollow() {
     this.props.postFollow(this.props.user.id)
+      .then(() => {
+          this.props.fetchUser(this.props.user.id);
+          window.location.reload();
+        }
+      )
+
+  }
+
+  handleUnfollow() {
+    this.props.destroyFollow(this.props.user.id)
       .then(() => {
           this.props.fetchUser(this.props.user.id);
           window.location.reload();
@@ -74,7 +85,7 @@ class UserShowPage extends React.Component {
     if (this.props.currentUser == 'none') {
       // Do something here later
     } else if (this.props.currentUserFollows.indexOf(this.props.user.id) > -1) {
-      return <button className='follow-button'>Unfollow</button>
+      return <button className='follow-button' onClick={this.handleUnfollow}>Unfollow</button>
     } else if (this.props.user.id != this.props.currentUser.id) {
       return <button className='follow-button' onClick={this.handleFollow}>Follow</button>
     }

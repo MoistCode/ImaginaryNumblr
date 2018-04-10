@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import UserShowPage from './user_showpage';
-import { fetchUser, postFollow } from '../../actions/user_actions';
+import { fetchUser, postFollow, destroyFollow } from '../../actions/user_actions';
 import { fetchBlogposts } from '../../actions/blogpost_actions';
 
 const _checkCurrentUser = (currentUser) => {
@@ -38,10 +38,10 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  // fetch blogposts here correlating to :userId
   fetchUser: (userId) => dispatch(fetchUser(userId)),
   fetchUserBlogposts: (blogpostIds) => dispatch(fetchBlogposts(blogpostIds)),
-  postFollow: (followeeId) => dispatch(postFollow(followeeId))
+  postFollow: (followeeId) => dispatch(postFollow(followeeId)),
+  destroyFollow: (followeeId) => dispatch(destroyFollow(followeeId))
 });
 
 export default withRouter(
