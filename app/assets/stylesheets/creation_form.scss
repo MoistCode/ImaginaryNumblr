@@ -1,9 +1,13 @@
 #creation-modal {
-  position: fixed;
+  position: relative;
   // width: 100%;
   // height: 100%;
   // background-color: black;
   z-index: 3;
+}
+
+.create-blog-types {
+  z-index: 10;
 }
 
 #creation-form {

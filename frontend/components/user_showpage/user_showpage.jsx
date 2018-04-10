@@ -94,7 +94,7 @@ class UserShowPage extends React.Component {
   _generateUserBlogs() {
     if (this.props.blogposts && this.props.blogposts[0]) {
       return (
-        this.props.blogposts.map((blogpost) => <BlogpostItemContainer key={blogpost.id} blogpost={blogpost}/>)
+        this.props.blogposts.map((blogpost) => <BlogpostItemContainer key={blogpost.id} blogpost={blogpost} dash={true}/>)
       )
     }
   }

@@ -1,9 +1,9 @@
 .main-nav-bar {
   position: fixed;
   z-index: 99;
-  padding-top: 5px;
-  margin: 0px 10px;
-  width: 98%;
+  margin: 0;
+  width: 100%;
+  transform: translateY(-6%);
 }
 
 .main-nav-bar input {
@@ -89,6 +89,7 @@
     font-weight: bold;
     color: white;
     font-size: 18px;
+    margin-right: 20px;
   }
 }
 

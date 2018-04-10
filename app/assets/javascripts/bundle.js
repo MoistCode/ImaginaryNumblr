@@ -31095,7 +31095,6 @@ var _getBlogposts = function _getBlogposts(blogposts, currentUser) {
 
   if (userIds != null) {
     var arrOfBlogposts = [];
-    debugger;
     Object.values(blogposts.blogposts).forEach(function (blogpost) {
       if (userIdsIncluded(blogpost.authorId, userIds)) {
         arrOfBlogposts.push(blogpost);
@@ -31207,7 +31206,6 @@ var Dashboard = function (_React$Component) {
     value: function render() {
       var _this3 = this;
 
-      debugger;
       return _react2.default.createElement(
         'div',
         {
@@ -31215,17 +31213,6 @@ var Dashboard = function (_React$Component) {
         _react2.default.createElement(
           'div',
           { className: 'blog-creation' },
-          _react2.default.createElement('img', {
-            onClick: function onClick() {
-              if (!_this3.props.currentUser && _this3.props.location.pathname != '/dashboard') {
-                window.location.reload();
-                _this3.props.history.push('/');
-              } else {
-                _this3.props.history.push('/users/' + _this3.props.currentUser[0].id);
-              }
-            },
-            className: 'dash-current-user-image',
-            src: this.props.currentUser[0].profileImageUrl }),
           _react2.default.createElement(
             'div',
             { className: 'create-blog-types' },
@@ -32265,7 +32252,7 @@ var UserShowPage = function (_React$Component) {
     value: function _generateUserBlogs() {
       if (this.props.blogposts && this.props.blogposts[0]) {
         return this.props.blogposts.map(function (blogpost) {
-          return _react2.default.createElement(_blogpost_item_container2.default, { key: blogpost.id, blogpost: blogpost });
+          return _react2.default.createElement(_blogpost_item_container2.default, { key: blogpost.id, blogpost: blogpost, dash: true });
         });
       }
     }

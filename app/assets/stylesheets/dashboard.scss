@@ -1,17 +1,21 @@
 .dash-background {
   background-color: #39485D;
   width: 100%;
-  // height: 100%;
-  height: 150vh;
+  min-height: 100vh;
   z-index: -1;
+  margin-bottom: 0;
+
+  .blogpost {
+    transform: translateY(100px);
+  }
 }
 
 .blog-creation {
-  position: fixed;
+  position: relative;
   width: 600px;
   height: 110px;
   // border: 1px solid blue;
-  transform: translate(60%, 100%);
+  transform: translate(62%, 100%);
   margin: 5px;
   z-index: 4;
 }
