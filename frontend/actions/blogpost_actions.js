@@ -44,7 +44,6 @@ const receiveBlogposts = (blogposts) => ({
 });
 
 const receiveBlogpost = (blogpost) => {
-  debugger;
   return { type: RECEIVE_BLOGPOST, blogpost }
 };
 

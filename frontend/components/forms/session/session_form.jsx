@@ -40,7 +40,6 @@ class SessionForm extends React.Component {
     this.props.clearErrors();
 
     this.props.processForm(formData).then(() => {
-      this.props.history.push('/dashboard');
       window.location.reload();
     });
   }

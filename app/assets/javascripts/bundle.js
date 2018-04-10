@@ -614,7 +614,6 @@ var receiveBlogposts = function receiveBlogposts(blogposts) {
 };
 
 var receiveBlogpost = function receiveBlogpost(blogpost) {
-  debugger;
   return { type: RECEIVE_BLOGPOST, blogpost: blogpost };
 };
 
@@ -5152,8 +5151,6 @@ var SessionForm = function (_React$Component) {
   }, {
     key: 'handleSubmit',
     value: function handleSubmit(e) {
-      var _this3 = this;
-
       e.preventDefault();
       var formData = new FormData();
       formData.append('user[username]', this.state.username);
@@ -5165,7 +5162,6 @@ var SessionForm = function (_React$Component) {
       this.props.clearErrors();
 
       this.props.processForm(formData).then(function () {
-        _this3.props.history.push('/dashboard');
         window.location.reload();
       });
     }
@@ -5191,14 +5187,14 @@ var SessionForm = function (_React$Component) {
   }, {
     key: '_handleImageChange',
     value: function _handleImageChange(e) {
-      var _this4 = this;
+      var _this3 = this;
 
       e.preventDefault();
       var reader = new FileReader();
       var file = e.currentTarget.files[0];
 
       reader.onloadend = function () {
-        _this4.setState({ profile_picture_file: file, profile_picture_url: reader.result });
+        _this3.setState({ profile_picture_file: file, profile_picture_url: reader.result });
       };
 
       if (file) {
@@ -5210,7 +5206,7 @@ var SessionForm = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this5 = this;
+      var _this4 = this;
 
       var formType = this.props.formType;
 
@@ -5235,7 +5231,7 @@ var SessionForm = function (_React$Component) {
               _react2.default.createElement(
                 'form',
                 { onSubmit: function onSubmit(e) {
-                    return _this5.handleSubmit(e);
+                    return _this4.handleSubmit(e);
                   }, className: 'session-form' },
                 _react2.default.createElement(
                   'div',
@@ -27075,6 +27071,10 @@ var blogpostsReducer = function blogpostsReducer() {
     case _blogpost_actions.RECEIVE_BLOGPOSTS:
       return (0, _merge3.default)({}, oldState, action.blogposts);
     case _blogpost_actions.RECEIVE_BLOGPOST:
+      debugger;
+      if (action.blogpost.blogposts != undefined) {
+        return (0, _merge3.default)({}, oldState, { blogposts: action.blogpost.blogposts });
+      }
       return (0, _merge3.default)({}, oldState, _defineProperty({}, action.blogpost.id, action.blogpost));
     case _blogpost_actions.REMOVE_BLOGPOST:
       var newState = (0, _merge3.default)({}, oldState);
