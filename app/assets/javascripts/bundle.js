@@ -31543,7 +31543,7 @@ var BlogPostCreationForm = function (_React$Component) {
   }, {
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.dragElement(document.getElementById("creation-modal"));
+      // this.dragElement(document.getElementById(("creation-modal")));
     }
   }, {
     key: "render",
@@ -31918,6 +31918,7 @@ var BlogpostItem = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         { className: 'blogpost' },
+        this._generateDeletionConfirmation(),
         this._generateEditForm(),
         this._generateProfileImageUrl(),
         this._generateAuthorOptions(),
@@ -31940,8 +31941,7 @@ var BlogpostItem = function (_React$Component) {
               Math.floor(Math.random() * 500 + 100)
             )
           )
-        ),
-        this._generateDeletionConfirmation()
+        )
       );
     }
   }, {

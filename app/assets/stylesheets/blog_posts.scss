@@ -9,6 +9,8 @@
     width: 64px;
     length: 64px;
     cursor: pointer;
+    position: absolute;
+    transform: translateX(530%);
   }
 }
 
@@ -222,10 +224,9 @@
 }
 
 .confirm-delete-modal {
-  position: fixed;
-  top: 125px;
-  transform: translate(360%, 15%);
+  position: absolute;
   background-color: white;
+  transform: translateX(350%);
   width: 300px;
   height: auto;
   border-radius: 8px;

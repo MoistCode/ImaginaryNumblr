@@ -41,7 +41,7 @@ class BlogPostCreationForm extends React.Component {
   }
 
   componentDidMount() {
-    this.dragElement(document.getElementById(("creation-modal")));
+    // this.dragElement(document.getElementById(("creation-modal")));
   }
 
   render() {

@@ -65,6 +65,7 @@ class BlogpostItem extends React.Component {
   render() {
     return (
       <div className='blogpost'>
+        {this._generateDeletionConfirmation()}
         {this._generateEditForm()}
         {this._generateProfileImageUrl()}
         {this._generateAuthorOptions()}
@@ -81,7 +82,6 @@ class BlogpostItem extends React.Component {
             </div>
           </div>
         </div>
-        {this._generateDeletionConfirmation()}
       </div>
     )
   }
