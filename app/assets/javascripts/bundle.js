@@ -31139,7 +31139,7 @@ var _getBlogposts = function _getBlogposts(blogposts, currentUser) {
 
   if (userIds != null) {
     var arrOfBlogposts = [];
-    Object.values(blogposts.blogposts).forEach(function (blogpost) {
+    Object.values(blogposts.blogposts).reverse().forEach(function (blogpost) {
       if (userIdsIncluded(blogpost.authorId, userIds)) {
         arrOfBlogposts.push(blogpost);
       }
@@ -31252,8 +31252,7 @@ var Dashboard = function (_React$Component) {
 
       return _react2.default.createElement(
         'div',
-        {
-          className: 'dash-background' },
+        { className: 'dash-background' },
         _react2.default.createElement(
           'div',
           { className: 'blog-creation' },
@@ -31522,7 +31521,9 @@ var BlogPostCreationForm = function (_React$Component) {
         { id: "creation-modal" },
         _react2.default.createElement(
           "div",
-          { className: "w3-container w3-center w3-animate-opacity" },
+          {
+            className: "w3-container w3-center w3-animate-opacity",
+            style: { position: 'absolute' } },
           _react2.default.createElement(
             "div",
             { id: "creation-form" },

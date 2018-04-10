@@ -39,8 +39,7 @@ class Dashboard extends React.Component {
 
   render() {
     return (
-      <div
-        className='dash-background'>
+      <div className='dash-background'>
         <div className='blog-creation'>
           <div className='create-blog-types'>
 

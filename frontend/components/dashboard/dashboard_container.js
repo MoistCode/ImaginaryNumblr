@@ -37,7 +37,7 @@ const _getBlogposts = (blogposts, currentUser) => {
 
   if (userIds != null) {
     let arrOfBlogposts = [];
-    Object.values(blogposts.blogposts).forEach((blogpost) => {
+    Object.values(blogposts.blogposts).reverse().forEach((blogpost) => {
       if (userIdsIncluded(blogpost.authorId, userIds)) {
         arrOfBlogposts.push(blogpost);
       }

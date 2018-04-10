@@ -47,7 +47,9 @@ class BlogPostCreationForm extends React.Component {
   render() {
     return (
         <div id='creation-modal'>
-          <div className='w3-container w3-center w3-animate-opacity'>
+          <div
+            className='w3-container w3-center w3-animate-opacity'
+            style={{position: 'absolute'}}>
           <div id='creation-form'>
             <p>Drag Me :)</p>
             <i

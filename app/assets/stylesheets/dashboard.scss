@@ -8,6 +8,7 @@
 
   .blogpost {
     transform: translateY(100px);
+    z-index: -5;
   }
 }
 
@@ -18,7 +19,7 @@
   // border: 1px solid blue;
   transform: translate(62%, 100%);
   margin: 5px;
-  z-index: 4;
+  // z-index: 4;
 }
 
 .dash-current-user-image {
