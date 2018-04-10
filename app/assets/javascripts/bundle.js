@@ -32419,12 +32419,7 @@ var NavigationBar = function (_React$Component) {
               }
             },
             className: 'profile-picture',
-            src: this.props.currentUser[0].profileImageUrl }),
-          _react2.default.createElement(
-            'span',
-            null,
-            this.props.currentUser[0].username
-          )
+            src: this.props.currentUser[0].profileImageUrl })
         );
       }
     }

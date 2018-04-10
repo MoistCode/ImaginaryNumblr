@@ -1,16 +1,15 @@
 .main-nav-bar {
   position: fixed;
   z-index: 99;
-  margin: 0;
+  // margin: 0;
   width: 100%;
   transform: translateY(-25px);
-
-  * {
-  }
+  padding-left: 100px;
+  padding-right: 100px;
 }
 
 .main-nav-bar input {
-  transform: translateY(-10%);
+  // transform: translateY(-5%);
   margin-left: 30px;
   background: #fff;
   color: #444;
@@ -22,7 +21,7 @@
 }
 
 .around-search-bar {
-  transform: translateY(-25%);
+  // transform: translateY(-15%);
   margin-top: 25px;
   background: #fff;
   border-radius: 5px;
@@ -45,6 +44,7 @@
   cursor: pointer;
   margin-right: 10px;
   margin-bottom: 35px;
+  transform: translateY(40%);
 }
 
 .nav-button {
@@ -57,6 +57,7 @@
   height: 32px;
   width: 70px;
   float: right;
+  transform: translateY(70%);
 }
 
 .session-button {
@@ -101,7 +102,7 @@
 }
 
 .profile-picture {
-  transform: translateX(10%);
+  transform: translateY(37%);
   width: 64px;
   height: 64px;
   cursor: pointer;
