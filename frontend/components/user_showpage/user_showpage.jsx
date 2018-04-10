@@ -30,8 +30,11 @@ class UserShowPage extends React.Component {
     }
   }
 
-  render() {
+  handleFollow() {
 
+  }
+
+  render() {
     if (this.props.user == 'none') {
       return (
         <div className='user-showpage'>
@@ -49,15 +52,26 @@ class UserShowPage extends React.Component {
           <img
             src={viewUser.profileImageUrl}
             style={{ 'width': '100px', 'height': '100px' }}>
-
           </img>
         </div>
         <div className='user-blogs'>
+          {this._generateUserBlogs()}
         </div>
-        {this._generateUserBlogs()}
+        {this._generateFollowButton()}
         <footer></footer>
       </div>
     )
+  }
+
+  _generateFollowButton() {
+    debugger;
+    if (this.props.currentUser == 'none') {
+      // Do something here later
+    } else if (this.props.currentUserFollows.indexOf(this.props.user.id) > -1) {
+      return <button>Unfollow</button>
+    } else if (this.props.user.id != this.props.currentUser.id) {
+      return <button onClick={this.handleFollow}>Follow</button>
+    }
   }
 
   _generateUserBlogs() {

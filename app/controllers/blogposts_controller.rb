@@ -1,8 +1,8 @@
 class BlogpostsController < ApplicationController
 
   def index
+    @user_blogposts = []
     if params[:blogpost]
-      @user_blogposts = []
       params[:blogpost][:blogpostIds].each do |blogpostId|
         @user_blogposts << Blogpost.find(blogpostId.to_i)
       end
