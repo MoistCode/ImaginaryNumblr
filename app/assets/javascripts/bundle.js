@@ -31561,11 +31561,6 @@ var BlogPostCreationForm = function (_React$Component) {
           _react2.default.createElement(
             "div",
             { id: "creation-form" },
-            _react2.default.createElement(
-              "p",
-              null,
-              "Drag Me :)"
-            ),
             _react2.default.createElement("i", {
               onClick: function onClick() {
                 _this4.props.showDashboard();

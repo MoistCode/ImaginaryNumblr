@@ -51,7 +51,6 @@ class BlogPostCreationForm extends React.Component {
             className='w3-container w3-center w3-animate-opacity'
             style={{position: 'absolute'}}>
           <div id='creation-form'>
-            <p>Drag Me :)</p>
             <i
               onClick={() => {
                 this.props.showDashboard();
