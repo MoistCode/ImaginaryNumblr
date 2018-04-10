@@ -17,7 +17,8 @@ class FollowsController < ApplicationController
   end
 
   def destroy
-
+    @follow = Follow.find_by(follower_id: current_user.id, followee_id: params[:id])
+    @follow.destroy
   end
 
   private

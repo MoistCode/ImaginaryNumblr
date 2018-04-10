@@ -5,3 +5,10 @@ export const postFollow = (followeeId) => (
     data: { follow: { followee_id: followeeId } }
   })
 );
+
+export const destroyFollow = (followeeId) => (
+  $.ajax({
+    method: 'DELETE',
+    url: `/follows/${followeeId}`
+  })
+)

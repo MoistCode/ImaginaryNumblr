@@ -26960,6 +26960,13 @@ var postFollow = exports.postFollow = function postFollow(followeeId) {
   });
 };
 
+var destroyFollow = exports.destroyFollow = function destroyFollow(followeeId) {
+  return $.ajax({
+    method: 'DELETE',
+    url: '/follows/' + followeeId
+  });
+};
+
 /***/ }),
 /* 194 */
 /***/ (function(module, exports, __webpack_require__) {
