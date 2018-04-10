@@ -77,6 +77,11 @@ class UserShowPage extends React.Component {
             <button>About Me</button>
             {this._generateFollowButton()}
           </div>
+          <div className='user-info-show'>
+            <p>{`Welcome to ${this.props.user.username}'s Blogpage!`}</p>
+            <p>Followers: </p>
+            <p>Followees:</p>
+          </div>
         </div>
         <div className='user-blogs'>
           {this._generateUserBlogs()}

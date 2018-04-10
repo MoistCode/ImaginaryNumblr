@@ -4,6 +4,15 @@
   flex-direction: row;
   // position: fixed;
 
+  .user-info-show {
+    width: 300px;
+    transform: translate(-885px, 110px);
+    text-align: -webkit-center;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    color: white;
+  }
+
   img {
     transform: translate(-15px, 13px);
   }

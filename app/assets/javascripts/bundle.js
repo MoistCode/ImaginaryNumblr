@@ -32792,6 +32792,25 @@ var UserShowPage = function (_React$Component) {
               'About Me'
             ),
             this._generateFollowButton()
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'user-info-show' },
+            _react2.default.createElement(
+              'p',
+              null,
+              'Welcome to ' + this.props.user.username + '\'s Blogpage!'
+            ),
+            _react2.default.createElement(
+              'p',
+              null,
+              'Followers: '
+            ),
+            _react2.default.createElement(
+              'p',
+              null,
+              'Followees:'
+            )
           )
         ),
         _react2.default.createElement(
