@@ -130,7 +130,11 @@ class NavigationBar extends React.Component {
       <button
         className='nav-button'
         onClick={() => {
-          this.props.demoLogin(formData);
+          this.props.demoLogin(formData)
+            .then(() => {
+              window.location.reload();
+              this.props.history.push('/dashboard');
+            })
           }}
         >Demo
         <i
