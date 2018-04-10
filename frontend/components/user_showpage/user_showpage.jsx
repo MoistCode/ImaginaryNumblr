@@ -80,7 +80,7 @@ class UserShowPage extends React.Component {
           <div className='user-info-show'>
             <p>{`Welcome to ${this.props.user.username}'s Blogpage!`}</p>
             <p>Followers: </p>
-            <p>Followees:</p>
+            <p>Following:</p>
           </div>
         </div>
         <div className='user-blogs'>

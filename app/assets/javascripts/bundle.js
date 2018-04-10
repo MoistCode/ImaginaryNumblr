@@ -32851,7 +32851,7 @@ var UserShowPage = function (_React$Component) {
             _react2.default.createElement(
               'p',
               null,
-              'Followees:'
+              'Following:'
             )
           )
         ),
