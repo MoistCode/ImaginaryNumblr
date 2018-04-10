@@ -89,10 +89,10 @@
 .blogpost-header {
   position: absolute;
   display: flex;
+  transform: translate(437px, 0px);
 
   .header-follow {
-    padding-left: 436px;
-    transform: translateY(-11px);
+    transform: translate(-2px,-11px);
     color: grey;
     cursor: pointer;
     margin-bottom: 15px;
@@ -105,8 +105,7 @@
   }
 
   .header-username {
-    padding-left: 15px;
-    padding-top: 4px;
+    transform: translate(5px, 4px);
     color: grey;
     cursor: pointer;
     margin-bottom: 15px;
