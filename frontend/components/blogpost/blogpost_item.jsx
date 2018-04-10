@@ -10,7 +10,7 @@ class BlogpostItem extends React.Component {
     this.toggleEditForm = this.toggleEditForm.bind(this);
     this.handleDeletion = this.handleDeletion.bind(this);
     this.toggleDeletion = this.toggleDeletion.bind(this);
-
+    this._generateProfileImageUrl = this._generateProfileImageUrl.bind(this);
   }
 
 
@@ -66,6 +66,7 @@ class BlogpostItem extends React.Component {
     return (
       <div className='blogpost'>
         {this._generateEditForm()}
+        {this._generateProfileImageUrl()}
         {this._generateAuthorOptions()}
         {this._renderContentType()}
         <div className='blogpost-footer'>
@@ -83,6 +84,19 @@ class BlogpostItem extends React.Component {
         {this._generateDeletionConfirmation()}
       </div>
     )
+  }
+
+  _generateProfileImageUrl() {
+    if (this.props.author != undefined) {
+      return (
+        <img
+          className='blog-profile-pic'
+          src={this.props.author.profileImageUrl}
+          onClick={() => this.props.history.push(`/${this.props.author.blogUrl}`)}/>
+      )
+    } else {
+      return ''
+    }
   }
 
   _generateDeletionConfirmation() {

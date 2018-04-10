@@ -5358,6 +5358,8 @@ var _blogpost_item2 = _interopRequireDefault(_blogpost_item);
 
 var _reactRedux = __webpack_require__(5);
 
+var _reactRouter = __webpack_require__(88);
+
 var _blogpost_actions = __webpack_require__(8);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -5383,7 +5385,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   };
 };
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_blogpost_item2.default);
+exports.default = (0, _reactRouter.withRouter)((0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_blogpost_item2.default));
 
 /***/ }),
 /* 91 */
@@ -5421,6 +5423,7 @@ document.addEventListener('DOMContentLoaded', function () {
   } else {
     store = (0, _store2.default)();
   }
+  window.store = store;
   var root = document.getElementById('root');
   _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: store }), root);
 });
@@ -31098,6 +31101,8 @@ var _dashboard = __webpack_require__(233);
 
 var _dashboard2 = _interopRequireDefault(_dashboard);
 
+var _reactRouter = __webpack_require__(88);
+
 var _reactRedux = __webpack_require__(5);
 
 var _blogpost_actions = __webpack_require__(8);
@@ -31115,7 +31120,7 @@ var _checkCurrentUser = function _checkCurrentUser(currentUser) {
 };
 
 var _getUserIds = function _getUserIds(currentUser) {
-  if (currentUser != null) {
+  if (currentUser != null && Object.values(currentUser.users)[0].followeeIds != undefined) {
     return Object.values(currentUser.users)[0].followeeIds.concat(Object.values(currentUser.users)[0].id);
   } else {
     return null;
@@ -31148,10 +31153,23 @@ var _getBlogposts = function _getBlogposts(blogposts, currentUser) {
   }
 };
 
+var _getUsers = function _getUsers(users, currentUser) {
+  if (Object.values(users).length == 0) {
+    return [];
+  };
+  var userIds = _getUserIds(currentUser);
+  if (userIds != undefined && userIds != null) {
+    return userIds.map(function (id) {
+      return users.users[id];
+    });
+  }
+};
+
 var mapStateToProps = function mapStateToProps(state) {
   return {
     currentUser: _checkCurrentUser(state.session.currentUser),
-    listOfBlogposts: _getBlogposts(state.blogposts, state.session.currentUser)
+    listOfBlogposts: _getBlogposts(state.blogposts, state.session.currentUser),
+    listOfUsers: _getUsers(state.users, state.session.currentUser) || []
   };
 };
 
@@ -31169,7 +31187,7 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   };
 };
 
-exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_dashboard2.default);
+exports.default = (0, _reactRouter.withRouter)((0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_dashboard2.default));
 
 /***/ }),
 /* 233 */
@@ -31214,6 +31232,7 @@ var Dashboard = function (_React$Component) {
 
     _this._generateFeed = _this._generateFeed.bind(_this);
     _this._generateForm = _this._generateForm.bind(_this);
+    _this._generateFeed = _this._generateFeed.bind(_this);
     _this.handleCreationModal = _this.handleCreationModal.bind(_this);
     _this.state = {
       creationFormModalIsOpen: false,
@@ -31346,23 +31365,38 @@ var Dashboard = function (_React$Component) {
   }, {
     key: '_generateFeed',
     value: function _generateFeed() {
+      var _this4 = this;
+
       if (this.props.listOfBlogposts.length > 0) {
         return this.props.listOfBlogposts.map(function (blogpost) {
-          return _react2.default.createElement(_blogpost_item_container2.default, { key: blogpost.id, blogpost: blogpost });
+          return _react2.default.createElement(_blogpost_item_container2.default, {
+            key: blogpost.id,
+            blogpost: blogpost,
+            author: _this4._getAuthorFromBlogpost(blogpost.authorId) });
         });
+      }
+    }
+  }, {
+    key: '_getAuthorFromBlogpost',
+    value: function _getAuthorFromBlogpost(blogpostAuthorId) {
+      for (var i = 0; i < this.props.listOfUsers.length; i++) {
+
+        if (this.props.listOfUsers[i].id == blogpostAuthorId) {
+          return this.props.listOfUsers[i];
+        }
       }
     }
   }, {
     key: '_generateForm',
     value: function _generateForm() {
-      var _this4 = this;
+      var _this5 = this;
 
       var contentType = this.state.modalContentType;
       if (this.state.creationFormModalIsOpen == true) {
         return _react2.default.createElement(_blogpost_creation_form_container2.default, {
           contentType: contentType,
           showDashboard: function showDashboard() {
-            _this4.handleCreationModal('');
+            _this5.handleCreationModal('');
           } });
       }
     }
@@ -31818,7 +31852,7 @@ var BlogpostItem = function (_React$Component) {
     _this.toggleEditForm = _this.toggleEditForm.bind(_this);
     _this.handleDeletion = _this.handleDeletion.bind(_this);
     _this.toggleDeletion = _this.toggleDeletion.bind(_this);
-
+    _this._generateProfileImageUrl = _this._generateProfileImageUrl.bind(_this);
     return _this;
   }
 
@@ -31885,6 +31919,7 @@ var BlogpostItem = function (_React$Component) {
         'div',
         { className: 'blogpost' },
         this._generateEditForm(),
+        this._generateProfileImageUrl(),
         this._generateAuthorOptions(),
         this._renderContentType(),
         _react2.default.createElement(
@@ -31908,6 +31943,22 @@ var BlogpostItem = function (_React$Component) {
         ),
         this._generateDeletionConfirmation()
       );
+    }
+  }, {
+    key: '_generateProfileImageUrl',
+    value: function _generateProfileImageUrl() {
+      var _this3 = this;
+
+      if (this.props.author != undefined) {
+        return _react2.default.createElement('img', {
+          className: 'blog-profile-pic',
+          src: this.props.author.profileImageUrl,
+          onClick: function onClick() {
+            return _this3.props.history.push('/' + _this3.props.author.blogUrl);
+          } });
+      } else {
+        return '';
+      }
     }
   }, {
     key: '_generateDeletionConfirmation',
@@ -31945,7 +31996,7 @@ var BlogpostItem = function (_React$Component) {
   }, {
     key: '_generateEditForm',
     value: function _generateEditForm() {
-      var _this3 = this;
+      var _this4 = this;
 
       if (this.state.showEditForm == true) {
         return _react2.default.createElement(
@@ -31969,7 +32020,7 @@ var BlogpostItem = function (_React$Component) {
               _react2.default.createElement(
                 'form',
                 { onSubmit: function onSubmit(e) {
-                    return _this3.handleSubmit(e);
+                    return _this4.handleSubmit(e);
                   } },
                 _react2.default.createElement('input', {
                   className: 'edit-title',
@@ -32747,9 +32798,11 @@ var UserShowPage = function (_React$Component) {
   }, {
     key: '_generateUserBlogs',
     value: function _generateUserBlogs() {
+      var _this6 = this;
+
       if (this.props.blogposts && this.props.blogposts[0]) {
         return this.props.blogposts.map(function (blogpost) {
-          return _react2.default.createElement(_blogpost_item_container2.default, { key: blogpost.id, blogpost: blogpost, dash: true });
+          return _react2.default.createElement(_blogpost_item_container2.default, { key: blogpost.id, blogpost: blogpost, listOfUsers: _this6.props.currentUser });
         });
       }
     }

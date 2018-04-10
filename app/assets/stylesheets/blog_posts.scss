@@ -2,6 +2,16 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.blogpost {
+  transform: translateY(100px);
+  z-index: -5;
+  .blog-profile-pic {
+    width: 64px;
+    length: 64px;
+    cursor: pointer;
+  }
+}
+
 .blogpost-item {
     transform: translateX(70%);
     margin-top: 25px;

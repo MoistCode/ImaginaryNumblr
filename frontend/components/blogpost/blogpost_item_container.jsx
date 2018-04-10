@@ -1,5 +1,6 @@
 import BlogpostItem from './blogpost_item';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import { updateBlogpost, deleteBlogpost } from '../../actions/blogpost_actions';
 
 const mapStateToProps = (state) => {
@@ -18,4 +19,4 @@ const mapDispatchToProps = (dispatch) => ({
   deleteBlogpost: (blogpostId) => dispatch(deleteBlogpost(blogpostId))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(BlogpostItem);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(BlogpostItem));

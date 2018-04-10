@@ -7,6 +7,7 @@ class Dashboard extends React.Component {
     super(props);
     this._generateFeed = this._generateFeed.bind(this);
     this._generateForm = this._generateForm.bind(this);
+    this._generateFeed = this._generateFeed.bind(this);
     this.handleCreationModal = this.handleCreationModal.bind(this);
     this.state = {
       creationFormModalIsOpen: false,
@@ -102,8 +103,21 @@ class Dashboard extends React.Component {
   _generateFeed() {
     if (this.props.listOfBlogposts.length > 0) {
       return (
-        this.props.listOfBlogposts.map((blogpost) => <BlogpostItemContainer key={blogpost.id} blogpost={blogpost}/>)
+        this.props.listOfBlogposts.map((blogpost) => <BlogpostItemContainer
+                                                        key={blogpost.id}
+                                                        blogpost={blogpost}
+                                                        author={this._getAuthorFromBlogpost(blogpost.authorId)}/>
+                                      )
       )
+    }
+  }
+
+  _getAuthorFromBlogpost(blogpostAuthorId) {
+    for(let i = 0; i < this.props.listOfUsers.length; i++) {
+
+      if (this.props.listOfUsers[i].id == blogpostAuthorId) {
+        return this.props.listOfUsers[i];
+      }
     }
   }
 
