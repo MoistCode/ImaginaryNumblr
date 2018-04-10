@@ -32769,7 +32769,26 @@ var UserShowPage = function (_React$Component) {
           _react2.default.createElement('img', {
             src: viewUser.profileImageUrl,
             style: { 'width': '100px', 'height': '100px', marginBottom: '7px' } }),
-          this._generateFollowButton()
+          _react2.default.createElement(
+            'div',
+            { className: 'user-info-buttons' },
+            _react2.default.createElement(
+              'button',
+              null,
+              'Home'
+            ),
+            _react2.default.createElement(
+              'button',
+              null,
+              'Archive'
+            ),
+            _react2.default.createElement(
+              'button',
+              null,
+              'About Me'
+            ),
+            this._generateFollowButton()
+          )
         ),
         _react2.default.createElement(
           'div',

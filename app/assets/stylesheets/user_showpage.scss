@@ -1,28 +1,33 @@
 .user-info {
-  transform: translate(16%, 62%);
+  transform: translate(17%, 84%);
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   // position: fixed;
 
   img {
     transform: translateY(16px);
   }
-  button {
-    z-index: 5;
-    margin-top: 7px;
-    width: 100px;
-    border-radius: 4px;
-    color: white;
-    background-color: transparent;
-    border: 1px solid black;
-    cursor: pointer;
-    font-family: 'Ubuntu', sans-serif;
-    font-weight: bold;
-  }
+  .user-info-buttons {
+    width: 596px;
+    display: flex;
+    justify-content: space-between;
+    button {
+      z-index: 5;
+      margin-top: 15px;
+      width: 100px;
+      border-radius: 4px;
+      color: white;
+      background-color: transparent;
+      border: 0;
+      cursor: pointer;
+      font-family: 'Ubuntu', sans-serif;
+      font-weight: bold;
+    }
 
-  button:hover {
-    background-color: white;
-    color: black;
+    button:hover {
+      background-color: white;
+      color: black;
+    }
   }
 }
 
