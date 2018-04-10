@@ -3,6 +3,10 @@
   display: flex;
   flex-direction: column;
   position: fixed;
+
+  img {
+    transform: translateY(16px);
+  }
   button {
     z-index: 5;
     margin-top: 7px;
@@ -27,6 +31,7 @@
   width: 100%;
   min-height: 100vh;
   height: 100%;
+  transform: translateY(-22px);
 
   footer {
     transform: translateX(41%);

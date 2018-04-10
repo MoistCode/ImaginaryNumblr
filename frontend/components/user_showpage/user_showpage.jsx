@@ -69,7 +69,7 @@ class UserShowPage extends React.Component {
         <div className='user-info'>
           <img
             src={viewUser.profileImageUrl}
-            style={{ 'width': '100px', 'height': '100px' }}>
+            style={{ 'width': '100px', 'height': '100px', marginBottom: '7px' }}>
           </img>
           {this._generateFollowButton()}
         </div>

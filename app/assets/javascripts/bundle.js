@@ -31158,7 +31158,7 @@ var _getUsers = function _getUsers(users, currentUser) {
     return [];
   };
   var userIds = _getUserIds(currentUser);
-  if (userIds != undefined && userIds != null) {
+  if (userIds != undefined && userIds != null && userIds.length != 0) {
     return userIds.map(function (id) {
       return users.users[id];
     });
@@ -32755,7 +32755,7 @@ var UserShowPage = function (_React$Component) {
           { className: 'user-info' },
           _react2.default.createElement('img', {
             src: viewUser.profileImageUrl,
-            style: { 'width': '100px', 'height': '100px' } }),
+            style: { 'width': '100px', 'height': '100px', marginBottom: '7px' } }),
           this._generateFollowButton()
         ),
         _react2.default.createElement(
