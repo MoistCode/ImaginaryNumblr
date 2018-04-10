@@ -31994,6 +31994,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     fetchUserBlogposts: function fetchUserBlogposts(blogpostIds) {
       return dispatch((0, _blogpost_actions.fetchBlogposts)(blogpostIds));
+    },
+    postFollow: function postFollow(followeeId) {
+      return dispatch((0, _user_actions.postFollow)(followeeId));
     }
   };
 };
@@ -32035,7 +32038,10 @@ var UserShowPage = function (_React$Component) {
   function UserShowPage(props) {
     _classCallCheck(this, UserShowPage);
 
-    return _possibleConstructorReturn(this, (UserShowPage.__proto__ || Object.getPrototypeOf(UserShowPage)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (UserShowPage.__proto__ || Object.getPrototypeOf(UserShowPage)).call(this, props));
+
+    _this.handleFollow = _this.handleFollow.bind(_this);
+    return _this;
   }
 
   _createClass(UserShowPage, [{
@@ -32067,7 +32073,13 @@ var UserShowPage = function (_React$Component) {
     }
   }, {
     key: 'handleFollow',
-    value: function handleFollow() {}
+    value: function handleFollow() {
+      var _this4 = this;
+
+      this.props.postFollow(this.props.user.id).then(function () {
+        return _this4.props.fetchUser(_this4.props.user.id);
+      });
+    }
   }, {
     key: 'render',
     value: function render() {
@@ -32108,19 +32120,18 @@ var UserShowPage = function (_React$Component) {
   }, {
     key: '_generateFollowButton',
     value: function _generateFollowButton() {
-      debugger;
       if (this.props.currentUser == 'none') {
         // Do something here later
       } else if (this.props.currentUserFollows.indexOf(this.props.user.id) > -1) {
         return _react2.default.createElement(
           'button',
-          null,
+          { className: 'follow-button' },
           'Unfollow'
         );
       } else if (this.props.user.id != this.props.currentUser.id) {
         return _react2.default.createElement(
           'button',
-          { onClick: this.handleFollow },
+          { className: 'follow-button', onClick: this.handleFollow },
           'Follow'
         );
       }

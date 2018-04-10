@@ -5,6 +5,7 @@ import BlogpostItemContainer from '../blogpost/blogpost_item_container';
 class UserShowPage extends React.Component {
   constructor(props) {
     super(props);
+    this.handleFollow = this.handleFollow.bind(this);
   }
 
   componentDidMount() {
@@ -31,7 +32,8 @@ class UserShowPage extends React.Component {
   }
 
   handleFollow() {
-
+    this.props.postFollow(this.props.user.id)
+      .then(() => this.props.fetchUser(this.props.user.id))
   }
 
   render() {
@@ -64,13 +66,12 @@ class UserShowPage extends React.Component {
   }
 
   _generateFollowButton() {
-    debugger;
     if (this.props.currentUser == 'none') {
       // Do something here later
     } else if (this.props.currentUserFollows.indexOf(this.props.user.id) > -1) {
-      return <button>Unfollow</button>
+      return <button className='follow-button'>Unfollow</button>
     } else if (this.props.user.id != this.props.currentUser.id) {
-      return <button onClick={this.handleFollow}>Follow</button>
+      return <button className='follow-button' onClick={this.handleFollow}>Follow</button>
     }
   }
 

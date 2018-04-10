@@ -40,7 +40,8 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch) => ({
   // fetch blogposts here correlating to :userId
   fetchUser: (userId) => dispatch(fetchUser(userId)),
-  fetchUserBlogposts: (blogpostIds) => dispatch(fetchBlogposts(blogpostIds))
+  fetchUserBlogposts: (blogpostIds) => dispatch(fetchBlogposts(blogpostIds)),
+  postFollow: (followeeId) => dispatch(postFollow(followeeId))
 });
 
 export default withRouter(
