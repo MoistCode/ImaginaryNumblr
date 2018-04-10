@@ -93,7 +93,6 @@ class Dashboard extends React.Component {
           </div>
         </div>
         {this._generateForm()}
-
         {this._generateFeed()}
 
       </div>
@@ -117,6 +116,10 @@ class Dashboard extends React.Component {
           showDashboard={() => {this.handleCreationModal('')}}/>
       )
     }
+  }
+
+  _generateRecommendedUsers() {
+
   }
 }
 

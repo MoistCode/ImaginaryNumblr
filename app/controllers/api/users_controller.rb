@@ -1,5 +1,17 @@
 class Api::UsersController < ApplicationController
 
+  def index
+    @users = []
+    if params[:user]
+      params[:user][:userIds].each do |userId|
+        @users << User.find(userId.to_i)
+      end
+      render 'api/users/index'
+    else
+      render status: 422
+    end
+  end
+
   def show
     @user = User.find(params[:id])
 
@@ -28,7 +40,8 @@ class Api::UsersController < ApplicationController
       :username,
       :password,
       :email,
-      :profile_picture_url
+      :profile_picture_url,
+      :userIds
     )
   end
 

@@ -3521,7 +3521,7 @@ module.exports = identity;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.destroyFollow = exports.postFollow = exports.fetchUser = exports.RECEIVE_USER = undefined;
+exports.destroyFollow = exports.postFollow = exports.fetchUsers = exports.fetchUser = exports.RECEIVE_USERS = exports.RECEIVE_USER = undefined;
 
 var _user_util = __webpack_require__(192);
 
@@ -3534,11 +3534,20 @@ var FollowUtil = _interopRequireWildcard(_follow_util);
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 var RECEIVE_USER = exports.RECEIVE_USER = 'RECEIVE_USER';
+var RECEIVE_USERS = exports.RECEIVE_USERS = 'RECEIVE_USERS';
 
 var fetchUser = exports.fetchUser = function fetchUser(userId) {
   return function (dispatch) {
     return UserUtil.fetchUser(userId).then(function (user) {
       return dispatch(receiveUser(user));
+    });
+  };
+};
+
+var fetchUsers = exports.fetchUsers = function fetchUsers(userIds) {
+  return function (dispatch) {
+    return UserUtil.fetchUsers(userIds).then(function (users) {
+      return dispatch(receiveUsers(users));
     });
   };
 };
@@ -3556,6 +3565,13 @@ var destroyFollow = exports.destroyFollow = function destroyFollow(followeeId) {
     return FollowUtil.destroyFollow(followeeId).then(function (user) {
       return dispatch(receiveUser(user));
     });
+  };
+};
+
+var receiveUsers = function receiveUsers(users) {
+  return {
+    type: RECEIVE_USERS,
+    users: users
   };
 };
 
@@ -5361,7 +5377,6 @@ document.addEventListener('DOMContentLoaded', function () {
   } else {
     store = (0, _store2.default)();
   }
-  window.store = store;
   var root = document.getElementById('root');
   _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: store }), root);
 });
@@ -26923,6 +26938,8 @@ var usersReducer = function usersReducer() {
 
   Object.freeze(oldState);
   switch (action.type) {
+    case _user_actions.RECEIVE_USERS:
+      return (0, _merge3.default)({}, oldState, action.users);
     case _user_actions.RECEIVE_USER:
       var receivedUser = Object.values(action.user.users)[0];
       return (0, _merge3.default)({}, oldState, _defineProperty({}, receivedUser.id, receivedUser));
@@ -26943,6 +26960,14 @@ exports.default = usersReducer;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+var fetchUsers = exports.fetchUsers = function fetchUsers(userIds) {
+  return $.ajax({
+    method: 'GET',
+    url: '/api/users',
+    data: { user: { userIds: userIds } }
+  });
+};
+
 var fetchUser = exports.fetchUser = function fetchUser(userId) {
   return $.ajax({
     method: 'GET',
@@ -31033,6 +31058,8 @@ var _reactRedux = __webpack_require__(5);
 
 var _blogpost_actions = __webpack_require__(8);
 
+var _user_actions = __webpack_require__(70);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var _checkCurrentUser = function _checkCurrentUser(currentUser) {
@@ -31244,6 +31271,9 @@ var Dashboard = function (_React$Component) {
           } });
       }
     }
+  }, {
+    key: '_generateRecommendedUsers',
+    value: function _generateRecommendedUsers() {}
   }]);
 
   return Dashboard;
@@ -32135,14 +32165,14 @@ var UserShowPage = function (_React$Component) {
           { className: 'user-info' },
           _react2.default.createElement('img', {
             src: viewUser.profileImageUrl,
-            style: { 'width': '100px', 'height': '100px' } })
+            style: { 'width': '100px', 'height': '100px' } }),
+          this._generateFollowButton()
         ),
         _react2.default.createElement(
           'div',
           { className: 'user-blogs' },
           this._generateUserBlogs()
         ),
-        this._generateFollowButton(),
         _react2.default.createElement('footer', null)
       );
     }

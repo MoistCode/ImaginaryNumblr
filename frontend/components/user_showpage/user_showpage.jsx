@@ -71,11 +71,11 @@ class UserShowPage extends React.Component {
             src={viewUser.profileImageUrl}
             style={{ 'width': '100px', 'height': '100px' }}>
           </img>
+          {this._generateFollowButton()}
         </div>
         <div className='user-blogs'>
           {this._generateUserBlogs()}
         </div>
-        {this._generateFollowButton()}
         <footer></footer>
       </div>
     )

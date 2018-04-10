@@ -1,5 +1,23 @@
 .user-info {
   transform: translate(15%, 135%);
+  display: flex;
+  flex-direction: column;
+  button {
+    margin-top: 7px;
+    width: 100px;
+    border-radius: 4px;
+    color: white;
+    background-color: transparent;
+    border: 1px solid black;
+    cursor: pointer;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+  }
+
+  button:hover {
+    background-color: white;
+    color: black;
+  }
 }
 
 .user-showpage {
@@ -12,8 +30,4 @@
     transform: translateX(41%);
     margin-top: 25px;
   }
-}
-
-.user-blogs {
-  margin-bottom: 0;
 }
