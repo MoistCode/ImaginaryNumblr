@@ -31070,9 +31070,45 @@ var _checkCurrentUser = function _checkCurrentUser(currentUser) {
   }
 };
 
+var _getUserIds = function _getUserIds(currentUser) {
+  if (currentUser != null) {
+    return Object.values(currentUser.users)[0].followeeIds.concat(Object.values(currentUser.users)[0].id);
+  } else {
+    return null;
+  }
+};
+
+var userIdsIncluded = function userIdsIncluded(id, arr) {
+  for (var i = 0; i < arr.length; i++) {
+    if (id == arr[i]) {
+      return true;
+    }
+  }
+  return false;
+};
+
+var _getBlogposts = function _getBlogposts(blogposts, currentUser) {
+  if (Object.values(blogposts).length == 0) {
+    return [];
+  };
+  var userIds = _getUserIds(currentUser);
+
+  if (userIds != null) {
+    var arrOfBlogposts = [];
+    debugger;
+    Object.values(blogposts.blogposts).forEach(function (blogpost) {
+      if (userIdsIncluded(blogpost.authorId, userIds)) {
+        arrOfBlogposts.push(blogpost);
+      }
+    });
+    return arrOfBlogposts;
+  }
+};
+
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    currentUser: _checkCurrentUser(state.session.currentUser)
+    currentUser: _checkCurrentUser(state.session.currentUser),
+    listOfBlogposts: _getBlogposts(state.blogposts, state.session.currentUser)
   };
 };
 
@@ -31080,6 +31116,12 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     clearErrors: function clearErrors() {
       return dispatch((0, _blogpost_actions.clearErrors)());
+    },
+    fetchUsers: function fetchUsers(userIds) {
+      return dispatch((0, _user_actions.fetchUsers)(userIds));
+    },
+    fetchBlogposts: function fetchBlogposts(blogpostIds) {
+      return dispatch((0, _blogpost_actions.fetchBlogposts)(blogpostIds));
     }
   };
 };
@@ -31106,6 +31148,10 @@ var _react2 = _interopRequireDefault(_react);
 var _blogpost_creation_form_container = __webpack_require__(233);
 
 var _blogpost_creation_form_container2 = _interopRequireDefault(_blogpost_creation_form_container);
+
+var _blogpost_item_container = __webpack_require__(239);
+
+var _blogpost_item_container2 = _interopRequireDefault(_blogpost_item_container);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -31134,6 +31180,20 @@ var Dashboard = function (_React$Component) {
   }
 
   _createClass(Dashboard, [{
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      var _this2 = this;
+
+      var arrOfUserIds = this.props.currentUser[0].followeeIds.concat(this.props.currentUser[0].id);
+      this.props.fetchUsers(arrOfUserIds).then(function (payload) {
+        var arrOfBlogpostIds = [];
+        Object.values(payload.users.users).forEach(function (user) {
+          arrOfBlogpostIds = arrOfBlogpostIds.concat(user.blogpostIds);
+        });
+        _this2.props.fetchBlogposts(arrOfBlogpostIds);
+      });
+    }
+  }, {
     key: 'handleCreationModal',
     value: function handleCreationModal(field) {
       this.props.clearErrors();
@@ -31145,8 +31205,9 @@ var Dashboard = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
+      debugger;
       return _react2.default.createElement(
         'div',
         {
@@ -31156,11 +31217,11 @@ var Dashboard = function (_React$Component) {
           { className: 'blog-creation' },
           _react2.default.createElement('img', {
             onClick: function onClick() {
-              if (!_this2.props.currentUser && _this2.props.location.pathname != '/dashboard') {
+              if (!_this3.props.currentUser && _this3.props.location.pathname != '/dashboard') {
                 window.location.reload();
-                _this2.props.history.push('/');
+                _this3.props.history.push('/');
               } else {
-                _this2.props.history.push('/users/' + _this2.props.currentUser[0].id);
+                _this3.props.history.push('/users/' + _this3.props.currentUser[0].id);
               }
             },
             className: 'dash-current-user-image',
@@ -31171,7 +31232,7 @@ var Dashboard = function (_React$Component) {
             _react2.default.createElement(
               'div',
               { onClick: function onClick(e) {
-                  return _this2.handleCreationModal('quote');
+                  return _this3.handleCreationModal('quote');
                 } },
               _react2.default.createElement('i', {
                 className: 'fa fa-quote-left',
@@ -31185,7 +31246,7 @@ var Dashboard = function (_React$Component) {
             _react2.default.createElement(
               'div',
               { onClick: function onClick(e) {
-                  return _this2.handleCreationModal('text');
+                  return _this3.handleCreationModal('text');
                 } },
               _react2.default.createElement('i', {
                 className: 'fa fa-font',
@@ -31199,7 +31260,7 @@ var Dashboard = function (_React$Component) {
             _react2.default.createElement(
               'div',
               { onClick: function onClick(e) {
-                  return _this2.handleCreationModal('audio');
+                  return _this3.handleCreationModal('audio');
                 } },
               _react2.default.createElement(
                 'i',
@@ -31217,7 +31278,7 @@ var Dashboard = function (_React$Component) {
             _react2.default.createElement(
               'div',
               { onClick: function onClick(e) {
-                  return _this2.handleCreationModal('photo');
+                  return _this3.handleCreationModal('photo');
                 } },
               _react2.default.createElement(
                 'i',
@@ -31235,7 +31296,7 @@ var Dashboard = function (_React$Component) {
             _react2.default.createElement(
               'div',
               { onClick: function onClick(e) {
-                  return _this2.handleCreationModal('video');
+                  return _this3.handleCreationModal('video');
                 } },
               _react2.default.createElement('i', {
                 className: 'fa fa-caret-square-o-right',
@@ -31255,19 +31316,23 @@ var Dashboard = function (_React$Component) {
   }, {
     key: '_generateFeed',
     value: function _generateFeed() {
-      return _react2.default.createElement('div', { className: 'followed-users-content' });
+      if (this.props.listOfBlogposts.length > 0) {
+        return this.props.listOfBlogposts.map(function (blogpost) {
+          return _react2.default.createElement(_blogpost_item_container2.default, { key: blogpost.id, blogpost: blogpost });
+        });
+      }
     }
   }, {
     key: '_generateForm',
     value: function _generateForm() {
-      var _this3 = this;
+      var _this4 = this;
 
       var contentType = this.state.modalContentType;
       if (this.state.creationFormModalIsOpen == true) {
         return _react2.default.createElement(_blogpost_creation_form_container2.default, {
           contentType: contentType,
           showDashboard: function showDashboard() {
-            _this3.handleCreationModal('');
+            _this4.handleCreationModal('');
           } });
       }
     }

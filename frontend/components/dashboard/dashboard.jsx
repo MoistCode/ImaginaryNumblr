@@ -1,5 +1,6 @@
 import React from 'react';
 import BlogPostCreationFormContainer from '../forms/blogpost/blogpost_creation_form_container';
+import BlogpostItemContainer from '../blogpost/blogpost_item_container';
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -13,6 +14,20 @@ class Dashboard extends React.Component {
     }
   }
 
+  componentWillMount() {
+    const arrOfUserIds = this.props.currentUser[0].followeeIds.concat(this.props.currentUser[0].id);
+    this.props.fetchUsers(arrOfUserIds)
+      .then(
+        (payload) => {
+          let arrOfBlogpostIds = []
+          Object.values(payload.users.users).forEach((user) => {
+            arrOfBlogpostIds = arrOfBlogpostIds.concat(user.blogpostIds);
+          });
+          this.props.fetchBlogposts(arrOfBlogpostIds);
+        }
+      )
+  }
+
   handleCreationModal(field) {
     this.props.clearErrors();
     this.setState({
@@ -23,6 +38,7 @@ class Dashboard extends React.Component {
   }
 
   render() {
+    debugger;
     return (
       <div
         className='dash-background'>
@@ -100,11 +116,11 @@ class Dashboard extends React.Component {
   }
 
   _generateFeed() {
-    return(
-      <div className='followed-users-content'>
-
-      </div>
-    )
+    if (this.props.listOfBlogposts.length > 0) {
+      return (
+        this.props.listOfBlogposts.map((blogpost) => <BlogpostItemContainer key={blogpost.id} blogpost={blogpost}/>)
+      )
+    }
   }
 
   _generateForm() {
