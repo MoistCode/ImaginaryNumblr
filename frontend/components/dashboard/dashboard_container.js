@@ -52,7 +52,7 @@ const _getUsers = (users, currentUser) => {
     return [];
   };
   const userIds = _getUserIds(currentUser);
-  if (userIds != undefined && userIds != null && userIds.length != 0) {
+  if (userIds != undefined && userIds != null && userIds.length != 0 && users.users != undefined) {
     return userIds.map((id) => users.users[id])
   }
 };

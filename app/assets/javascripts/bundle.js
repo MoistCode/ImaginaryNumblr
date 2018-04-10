@@ -31158,7 +31158,7 @@ var _getUsers = function _getUsers(users, currentUser) {
     return [];
   };
   var userIds = _getUserIds(currentUser);
-  if (userIds != undefined && userIds != null && userIds.length != 0) {
+  if (userIds != undefined && userIds != null && userIds.length != 0 && users.users != undefined) {
     return userIds.map(function (id) {
       return users.users[id];
     });
@@ -32745,6 +32745,8 @@ var UserShowPage = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+      var _this6 = this;
+
       if (this.props.user == 'none') {
         return _react2.default.createElement(
           'div',
@@ -32774,7 +32776,9 @@ var UserShowPage = function (_React$Component) {
             { className: 'user-info-buttons' },
             _react2.default.createElement(
               'button',
-              null,
+              { onClick: function onClick() {
+                  return _this6.props.history.push('/');
+                } },
               'Home'
             ),
             _react2.default.createElement(
@@ -32820,11 +32824,11 @@ var UserShowPage = function (_React$Component) {
   }, {
     key: '_generateUserBlogs',
     value: function _generateUserBlogs() {
-      var _this6 = this;
+      var _this7 = this;
 
       if (this.props.blogposts && this.props.blogposts[0]) {
         return this.props.blogposts.map(function (blogpost) {
-          return _react2.default.createElement(_blogpost_item_container2.default, { key: blogpost.id, blogpost: blogpost, listOfUsers: _this6.props.currentUser });
+          return _react2.default.createElement(_blogpost_item_container2.default, { key: blogpost.id, blogpost: blogpost, listOfUsers: _this7.props.currentUser });
         });
       }
     }
