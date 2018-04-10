@@ -49,7 +49,6 @@ class UserShowPage extends React.Component {
           window.location.reload();
         }
       )
-
   }
 
   render() {
@@ -72,7 +71,10 @@ class UserShowPage extends React.Component {
             style={{ 'width': '100px', 'height': '100px', marginBottom: '7px' }}>
           </img>
           <div className='user-info-buttons'>
-            <button onClick={() => this.props.history.push('/')}>Home</button>
+            <button onClick={() => {
+                this.props.history.push('/');
+                window.location.reload();
+              }}>Home</button>
             <button>Archive</button>
             <button>About Me</button>
             {this._generateFollowButton()}

@@ -92,12 +92,16 @@
 
   .header-follow {
     padding-left: 436px;
-    padding-top: 4px;
+    transform: translateY(-11px);
     color: grey;
     cursor: pointer;
     margin-bottom: 15px;
     font-family: 'Ubuntu', sans-serif;
     font-weight: bold;
+  }
+
+  .header-follow:hover {
+    color: black;
   }
 
   .header-username {

@@ -5356,6 +5356,8 @@ var _reactRouterDom = __webpack_require__(14);
 
 var _blogpost_actions = __webpack_require__(8);
 
+var _user_actions = __webpack_require__(39);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var mapStateToProps = function mapStateToProps(state) {
@@ -5375,6 +5377,12 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     deleteBlogpost: function deleteBlogpost(blogpostId) {
       return dispatch((0, _blogpost_actions.deleteBlogpost)(blogpostId));
+    },
+    destroyFollow: function destroyFollow(followeeId) {
+      return dispatch((0, _user_actions.destroyFollow)(followeeId));
+    },
+    fetchUser: function fetchUser(userId) {
+      return dispatch((0, _user_actions.fetchUser)(userId));
     }
   };
 };
@@ -31849,11 +31857,32 @@ var BlogpostItem = function (_React$Component) {
     _this._generateProfileImageUrl = _this._generateProfileImageUrl.bind(_this);
     _this._currentUserFollow = _this._currentUserFollow.bind(_this);
     _this._generateAuthorOptions = _this._generateAuthorOptions.bind(_this);
-    _this._generateAuthorNamev = _this._generateAuthorName.bind(_this);
+    _this._generateAuthorName = _this._generateAuthorName.bind(_this);
+    _this.handleUnfollow = _this.handleUnfollow.bind(_this);
     return _this;
   }
 
   _createClass(BlogpostItem, [{
+    key: 'handleFollow',
+    value: function handleFollow() {
+      var _this2 = this;
+
+      this.props.postFollow(this.props.user.id).then(function () {
+        _this2.props.fetchUser(_this2.props.user.id);
+        window.location.reload();
+      });
+    }
+  }, {
+    key: 'handleUnfollow',
+    value: function handleUnfollow(followeeId) {
+      var _this3 = this;
+
+      this.props.destroyFollow(followeeId).then(function () {
+        _this3.props.fetchUser(followeeId);
+        window.location.reload();
+      });
+    }
+  }, {
     key: 'closeEditForm',
     value: function closeEditForm() {
       this.setState({ showEditForm: false });
@@ -31866,10 +31895,10 @@ var BlogpostItem = function (_React$Component) {
   }, {
     key: 'update',
     value: function update(field) {
-      var _this2 = this;
+      var _this4 = this;
 
       return function (e) {
-        _this2.setState(_defineProperty({}, field, e.target.value));
+        _this4.setState(_defineProperty({}, field, e.target.value));
       };
     }
   }, {
@@ -31944,14 +31973,14 @@ var BlogpostItem = function (_React$Component) {
   }, {
     key: '_generateProfileImageUrl',
     value: function _generateProfileImageUrl() {
-      var _this3 = this;
+      var _this5 = this;
 
       if (this.props.author != undefined) {
         return _react2.default.createElement('img', {
           className: 'blog-profile-pic',
           src: this.props.author.profileImageUrl,
           onClick: function onClick() {
-            return _this3.props.history.push('/' + _this3.props.author.blogUrl);
+            return _this5.props.history.push('/' + _this5.props.author.blogUrl);
           } });
       } else {
         return '';
@@ -31993,7 +32022,7 @@ var BlogpostItem = function (_React$Component) {
   }, {
     key: '_generateEditForm',
     value: function _generateEditForm() {
-      var _this4 = this;
+      var _this6 = this;
 
       if (this.state.showEditForm == true) {
         return _react2.default.createElement(
@@ -32017,7 +32046,7 @@ var BlogpostItem = function (_React$Component) {
               _react2.default.createElement(
                 'form',
                 { onSubmit: function onSubmit(e) {
-                    return _this4.handleSubmit(e);
+                    return _this6.handleSubmit(e);
                   } },
                 _react2.default.createElement('input', {
                   className: 'edit-title',
@@ -32090,6 +32119,8 @@ var BlogpostItem = function (_React$Component) {
   }, {
     key: '_currentUserFollow',
     value: function _currentUserFollow(id) {
+      var _this7 = this;
+
       if (this.props.match.path == "/users/:userId") {
         return;
         // Maybe do something later here
@@ -32099,10 +32130,22 @@ var BlogpostItem = function (_React$Component) {
       }
       for (var i = 0; i < this.props.author.followerIds.length; i++) {
         if (this.props.author.followerIds[i] == id) {
-          return "Unfollow";
+          return _react2.default.createElement(
+            'p',
+            {
+              onClick: function onClick() {
+                return _this7.handleUnfollow(_this7.props.author.id);
+              }
+            },
+            'Unfollow'
+          );
         }
       }
-      return "Follow";
+      return _react2.default.createElement(
+        'p',
+        null,
+        'Follow'
+      );
     }
   }, {
     key: '_generateAuthorName',
@@ -32827,7 +32870,8 @@ var UserShowPage = function (_React$Component) {
             _react2.default.createElement(
               'button',
               { onClick: function onClick() {
-                  return _this6.props.history.push('/');
+                  _this6.props.history.push('/');
+                  window.location.reload();
                 } },
               'Home'
             ),

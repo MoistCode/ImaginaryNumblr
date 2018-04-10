@@ -13,7 +13,27 @@ class BlogpostItem extends React.Component {
     this._generateProfileImageUrl = this._generateProfileImageUrl.bind(this);
     this._currentUserFollow = this._currentUserFollow.bind(this);
     this._generateAuthorOptions = this._generateAuthorOptions.bind(this);
-    this._generateAuthorNamev = this._generateAuthorName.bind(this);
+    this._generateAuthorName = this._generateAuthorName.bind(this);
+    this.handleUnfollow = this.handleUnfollow.bind(this);
+  }
+
+  handleFollow() {
+    this.props.postFollow(this.props.user.id)
+      .then(() => {
+          this.props.fetchUser(this.props.user.id);
+          window.location.reload();
+        }
+      )
+
+  }
+
+  handleUnfollow(followeeId) {
+    this.props.destroyFollow(followeeId)
+      .then(() => {
+          this.props.fetchUser(followeeId);
+          window.location.reload();
+        }
+      )
   }
 
 
@@ -192,14 +212,16 @@ class BlogpostItem extends React.Component {
       // Maybe do something later here
     }
     if (id == undefined) {
-      return 
+      return
     }
     for(let i = 0; i < this.props.author.followerIds.length; i++) {
       if (this.props.author.followerIds[i] == id) {
-        return "Unfollow";
+        return <p
+          onClick={() => this.handleUnfollow(this.props.author.id)}
+          >Unfollow</p>;
       }
     }
-    return "Follow";
+    return <p>Follow</p>;
   }
 
   _generateAuthorName(author) {
