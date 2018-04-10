@@ -44,6 +44,11 @@ class User < ApplicationRecord
     foreign_key: :followee_id,
     class_name: 'Follow'
 
+  has_many :liked_blogs,
+    primary_key: :id,
+    foreign_key: :liker_id,
+    class_name: 'Like'
+
 
   def self.find_by_credentials(username, password)
     user = User.find_by(username: username)

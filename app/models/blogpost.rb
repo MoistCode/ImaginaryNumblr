@@ -36,6 +36,11 @@ class Blogpost < ApplicationRecord
     class_name: 'User',
     optional: true
 
+  has_many :likers,
+    primary_key: :id,
+    foreign_key: :liked_blog_id,
+    class_name: 'Like'
+
   private
 
   def conditional_attached_file_validation
