@@ -6,10 +6,14 @@
   background-color: #39485D;
   width: 100%;
   min-height: 100vh;
-  height: auto;
+  height: 100%;
 
   footer {
     transform: translateX(41%);
     margin-top: 25px;
   }
+}
+
+.user-blogs {
+  margin-bottom: 0;
 }
