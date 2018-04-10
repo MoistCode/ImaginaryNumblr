@@ -11,6 +11,9 @@ class BlogpostItem extends React.Component {
     this.handleDeletion = this.handleDeletion.bind(this);
     this.toggleDeletion = this.toggleDeletion.bind(this);
     this._generateProfileImageUrl = this._generateProfileImageUrl.bind(this);
+    this._currentUserFollow = this._currentUserFollow.bind(this);
+    this._generateAuthorOptions = this._generateAuthorOptions.bind(this);
+    this._generateAuthorNamev = this._generateAuthorName.bind(this);
   }
 
 
@@ -169,6 +172,41 @@ class BlogpostItem extends React.Component {
               onClick={this.toggleDeletion}
               className="fa fa-close"></i>
           </div>
+        </div>
+      )
+    } else {
+      return (
+        <div className='blogpost-header'>
+          <div className='header-follow'>
+            {this._currentUserFollow(this.props.currentUser)}
+          </div>
+          {this._generateAuthorName(this.props.author)}
+        </div>
+      )
+    }
+  }
+
+  _currentUserFollow(id) {
+    if (this.props.match.path == "/users/:userId") {
+      return
+      // Maybe do something later here
+    }
+    if (id == undefined) {
+      return 
+    }
+    for(let i = 0; i < this.props.author.followerIds.length; i++) {
+      if (this.props.author.followerIds[i] == id) {
+        return "Unfollow";
+      }
+    }
+    return "Follow";
+  }
+
+  _generateAuthorName(author) {
+    if (author != undefined) {
+      return (
+        <div className='header-username'>
+          {author.username}
         </div>
       )
     }

@@ -87,6 +87,29 @@
 }
 
 .blogpost-header {
+  position: absolute;
+  display: flex;
+
+  .header-follow {
+    padding-left: 436px;
+    padding-top: 4px;
+    color: grey;
+    cursor: pointer;
+    margin-bottom: 15px;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+  }
+
+  .header-username {
+    padding-left: 15px;
+    padding-top: 4px;
+    color: grey;
+    cursor: pointer;
+    margin-bottom: 15px;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+  }
+
   .header-remove {
     position: absolute;
     display: flex;

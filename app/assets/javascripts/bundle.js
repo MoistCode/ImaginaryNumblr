@@ -31847,6 +31847,9 @@ var BlogpostItem = function (_React$Component) {
     _this.handleDeletion = _this.handleDeletion.bind(_this);
     _this.toggleDeletion = _this.toggleDeletion.bind(_this);
     _this._generateProfileImageUrl = _this._generateProfileImageUrl.bind(_this);
+    _this._currentUserFollow = _this._currentUserFollow.bind(_this);
+    _this._generateAuthorOptions = _this._generateAuthorOptions.bind(_this);
+    _this._generateAuthorNamev = _this._generateAuthorName.bind(_this);
     return _this;
   }
 
@@ -32070,6 +32073,45 @@ var BlogpostItem = function (_React$Component) {
               onClick: this.toggleDeletion,
               className: 'fa fa-close' })
           )
+        );
+      } else {
+        return _react2.default.createElement(
+          'div',
+          { className: 'blogpost-header' },
+          _react2.default.createElement(
+            'div',
+            { className: 'header-follow' },
+            this._currentUserFollow(this.props.currentUser)
+          ),
+          this._generateAuthorName(this.props.author)
+        );
+      }
+    }
+  }, {
+    key: '_currentUserFollow',
+    value: function _currentUserFollow(id) {
+      if (this.props.match.path == "/users/:userId") {
+        return;
+        // Maybe do something later here
+      }
+      if (id == undefined) {
+        return;
+      }
+      for (var i = 0; i < this.props.author.followerIds.length; i++) {
+        if (this.props.author.followerIds[i] == id) {
+          return "Unfollow";
+        }
+      }
+      return "Follow";
+    }
+  }, {
+    key: '_generateAuthorName',
+    value: function _generateAuthorName(author) {
+      if (author != undefined) {
+        return _react2.default.createElement(
+          'div',
+          { className: 'header-username' },
+          author.username
         );
       }
     }
