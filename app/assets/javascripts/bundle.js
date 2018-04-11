@@ -31562,7 +31562,8 @@ var Dashboard = function (_React$Component) {
           return _react2.default.createElement(_blogpost_item_container2.default, {
             key: blogpost.id,
             blogpost: blogpost,
-            author: _this6._getAuthorFromBlogpost(blogpost.authorId) });
+            author: _this6._getAuthorFromBlogpost(blogpost.authorId),
+            createdSubmitted: _this6._triggerDashRefresh });
         });
       }
     }
@@ -32053,7 +32054,7 @@ var BlogpostItem = function (_React$Component) {
 
       this.props.postFollow(this.props.user.id).then(function () {
         _this2.props.fetchUser(_this2.props.user.id);
-        window.location.reload();
+        _this2.props.createdSubmitted();
       });
     }
   }, {
@@ -32063,7 +32064,7 @@ var BlogpostItem = function (_React$Component) {
 
       this.props.destroyFollow(followeeId).then(function () {
         _this3.props.fetchUser(followeeId);
-        window.location.reload();
+        _this3.props.createdSubmitted();
       });
     }
   }, {

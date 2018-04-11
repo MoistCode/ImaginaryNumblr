@@ -166,7 +166,8 @@ class Dashboard extends React.Component {
         this.props.listOfBlogposts.map((blogpost) => <BlogpostItemContainer
                                                         key={blogpost.id}
                                                         blogpost={blogpost}
-                                                        author={this._getAuthorFromBlogpost(blogpost.authorId)}/>
+                                                        author={this._getAuthorFromBlogpost(blogpost.authorId)}
+                                                        createdSubmitted={this._triggerDashRefresh}/>
                                       )
       )
     }
