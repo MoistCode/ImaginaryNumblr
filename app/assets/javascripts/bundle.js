@@ -5432,6 +5432,12 @@ var _root = __webpack_require__(196);
 
 var _root2 = _interopRequireDefault(_root);
 
+var _user_actions = __webpack_require__(27);
+
+var LikeUtil = _interopRequireWildcard(_user_actions);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -5446,6 +5452,12 @@ document.addEventListener('DOMContentLoaded', function () {
     store = (0, _store2.default)();
   }
   window.store = store;
+  window.postLike = function (blogId) {
+    return store.dispatch(LikeUtil.postLike(blogId));
+  };
+  window.destroyLike = function (blogId) {
+    return store.dispatch(LikeUtil.destroyLike(blogId));
+  };
   var root = document.getElementById('root');
   _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: store }), root);
 });

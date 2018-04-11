@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import configureStore from './store/store';
 import Root from './components/root';
+import * as LikeUtil from './actions/user_actions';
 
 document.addEventListener('DOMContentLoaded', () => {
   let store;
@@ -15,6 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
     store = configureStore();
   }
   window.store = store;
+  window.postLike = (blogId) => store.dispatch(LikeUtil.postLike(blogId));
+  window.destroyLike = (blogId) => store.dispatch(LikeUtil.destroyLike(blogId));
   const root = document.getElementById('root');
   ReactDOM.render(<Root store={store} />, root);
 });
