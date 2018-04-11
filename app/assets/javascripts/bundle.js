@@ -1456,10 +1456,94 @@ module.exports = getMapData;
 
 /***/ }),
 /* 27 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-throw new Error("Module build failed: SyntaxError: `postLike` has already been exported. Exported identifiers must be unique. (33:13)\n\n\u001b[0m \u001b[90m 31 | \u001b[39m  )\n \u001b[90m 32 | \u001b[39m  \n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 33 | \u001b[39m\u001b[36mexport\u001b[39m \u001b[36mconst\u001b[39m postLike \u001b[33m=\u001b[39m (blogId) \u001b[33m=>\u001b[39m (dispatch) \u001b[33m=>\u001b[39m \u001b[33mLikeUtil\u001b[39m\u001b[33m.\u001b[39mpostLike(blogId)\n \u001b[90m    | \u001b[39m             \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 34 | \u001b[39m  \u001b[33m.\u001b[39mthen(\n \u001b[90m 35 | \u001b[39m    (user) \u001b[33m=>\u001b[39m dispatch(receiveUser(user))\n \u001b[90m 36 | \u001b[39m  )\u001b[0m\n");
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.destroyLike = exports.postLike = exports.destroyFollow = exports.postFollow = exports.fetchUsers = exports.fetchUser = exports.RECEIVE_USERS = exports.RECEIVE_USER = undefined;
+
+var _user_util = __webpack_require__(193);
+
+var UserUtil = _interopRequireWildcard(_user_util);
+
+var _follow_util = __webpack_require__(194);
+
+var FollowUtil = _interopRequireWildcard(_follow_util);
+
+var _like_util = __webpack_require__(242);
+
+var LikeUtil = _interopRequireWildcard(_like_util);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+var RECEIVE_USER = exports.RECEIVE_USER = 'RECEIVE_USER';
+var RECEIVE_USERS = exports.RECEIVE_USERS = 'RECEIVE_USERS';
+
+var fetchUser = exports.fetchUser = function fetchUser(userId) {
+  return function (dispatch) {
+    return UserUtil.fetchUser(userId).then(function (user) {
+      return dispatch(receiveUser(user));
+    });
+  };
+};
+
+var fetchUsers = exports.fetchUsers = function fetchUsers(userIds) {
+  return function (dispatch) {
+    return UserUtil.fetchUsers(userIds).then(function (users) {
+      return dispatch(receiveUsers(users));
+    });
+  };
+};
+
+var postFollow = exports.postFollow = function postFollow(followeeId) {
+  return function (dispatch) {
+    return FollowUtil.postFollow(followeeId).then(function (user) {
+      return dispatch(receiveUser(user));
+    });
+  };
+};
+
+var destroyFollow = exports.destroyFollow = function destroyFollow(followeeId) {
+  return function (dispatch) {
+    return FollowUtil.destroyFollow(followeeId).then(function (user) {
+      return dispatch(receiveUser(user));
+    });
+  };
+};
+
+var postLike = exports.postLike = function postLike(blogId) {
+  return function (dispatch) {
+    return LikeUtil.postLike(blogId).then(function (user) {
+      return dispatch(receiveUser(user));
+    });
+  };
+};
+
+var destroyLike = exports.destroyLike = function destroyLike(blogId) {
+  return function (dispatch) {
+    return LikeUtil.destroyLike(blogId).then(function (user) {
+      return dispatch(receiveUser(user));
+    });
+  };
+};
+
+var receiveUsers = function receiveUsers(users) {
+  return {
+    type: RECEIVE_USERS,
+    users: users
+  };
+};
+
+var receiveUser = function receiveUser(user) {
+  return {
+    type: RECEIVE_USER,
+    user: user
+  };
+};
 
 /***/ }),
 /* 28 */
@@ -26936,8 +27020,56 @@ var usersReducer = function usersReducer() {
 exports.default = usersReducer;
 
 /***/ }),
-/* 193 */,
-/* 194 */,
+/* 193 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var fetchUsers = exports.fetchUsers = function fetchUsers(userIds) {
+  return $.ajax({
+    method: 'GET',
+    url: '/api/users',
+    data: { user: { userIds: userIds } }
+  });
+};
+
+var fetchUser = exports.fetchUser = function fetchUser(userId) {
+  return $.ajax({
+    method: 'GET',
+    url: '/api/users/' + userId
+  });
+};
+
+/***/ }),
+/* 194 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var postFollow = exports.postFollow = function postFollow(followeeId) {
+  return $.ajax({
+    method: 'POST',
+    url: '/follows',
+    data: { follow: { followee_id: followeeId } }
+  });
+};
+
+var destroyFollow = exports.destroyFollow = function destroyFollow(followeeId) {
+  return $.ajax({
+    method: 'DELETE',
+    url: '/follows/' + followeeId
+  });
+};
+
+/***/ }),
 /* 195 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -32893,6 +33025,31 @@ var PageDoesNotExist = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = PageDoesNotExist;
+
+/***/ }),
+/* 242 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var postLike = exports.postLike = function postLike(blogId) {
+  return $.ajax({
+    method: 'POST',
+    url: '/likes',
+    data: { like: { liked_blog_id: blogId } }
+  });
+};
+
+var destroyLike = exports.destroyLike = function destroyLike(blogId) {
+  return $.ajax({
+    method: 'DELETE',
+    url: '/likes/' + blogId
+  });
+};
 
 /***/ })
 /******/ ]);

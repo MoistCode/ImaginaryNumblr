@@ -29,8 +29,8 @@ export const postLike = (blogId) => (dispatch) => LikeUtil.postLike(blogId)
   .then(
     (user) => dispatch(receiveUser(user))
   )
-  
-export const postLike = (blogId) => (dispatch) => LikeUtil.postLike(blogId)
+
+export const destroyLike = (blogId) => (dispatch) => LikeUtil.destroyLike(blogId)
   .then(
     (user) => dispatch(receiveUser(user))
   )
