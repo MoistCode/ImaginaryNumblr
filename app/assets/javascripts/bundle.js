@@ -31501,7 +31501,9 @@ var Dashboard = function (_React$Component) {
                   return _this4.props.history.push('/' + user.blogUrl);
                 } }),
               user.username,
-              _react2.default.createElement('i', { className: 'fa fa-plus-square' })
+              _react2.default.createElement('i', {
+                className: 'fa fa-plus-square',
+                style: _this4._generateUserFollowedIconColor })
             );
           })
         )

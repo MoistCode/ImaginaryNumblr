@@ -111,7 +111,10 @@ class Dashboard extends React.Component {
         <div className='recUsers'>
           {this.props.listOfRandomUsers.map((user) => <li><img
             src={user.profileImageUrl}
-            onClick={() => this.props.history.push(`/${user.blogUrl}`)}/>{user.username}<i className='fa fa-plus-square' /></li>)}
+            onClick={() => this.props.history.push(`/${user.blogUrl}`)}/>
+          {user.username}<i
+                            className='fa fa-plus-square'
+                            style={this._generateUserFollowedIconColor} /></li>)}
         </div>
       </div>
     )
