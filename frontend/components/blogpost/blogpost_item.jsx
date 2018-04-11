@@ -16,6 +16,8 @@ class BlogpostItem extends React.Component {
     this._generateAuthorName = this._generateAuthorName.bind(this);
     this.handleUnfollow = this.handleUnfollow.bind(this);
     this._generateLikeIcon = this._generateLikeIcon.bind(this);
+    this.handleLike = this.handleLike.bind(this);
+    this.handleUnlike = this.handleUnlike.bind(this);
   }
 
   handleFollow() {
@@ -37,12 +39,24 @@ class BlogpostItem extends React.Component {
       )
   }
 
-  handleLike() {
+  handleLike(blogpostId) {
+    this.props.postLike(blogpostId)
+      .then(
+        () => {
+          this.props.fetchBlogpost(blogpostId);
+          this.setState({ currentUserLikes: !this.state.currentUserLikes });
+        }
+      )
+    }
 
-  }
-
-  handleUnlike() {
-
+  handleUnlike(blogpostId) {
+    this.props.destroyLike(blogpostId)
+      .then(
+        () => {
+          this.props.fetchBlogpost(blogpostId);
+          this.setState({ currentUserLikes: !this.state.currentUserLikes });
+        }
+      )
   }
 
 
@@ -95,6 +109,7 @@ class BlogpostItem extends React.Component {
 
 
   render() {
+    console.log(this.state.currentUserLikes);
     return (
       <div className='blogpost'>
         {this._generateDeletionConfirmation()}
@@ -115,37 +130,21 @@ class BlogpostItem extends React.Component {
   }
 
   _generateLikeIcon() {
-    let doesCurrentUserLike = (blogId) => {
-      for(let i = 0; i < this.props.arrayOfCurrentUserLikes.length; i++) {
-        if (blogId == this.props.arrayOfCurrentUserLikes[i]) {
-          return true;
-        }
-      }
-      return false;
-    }
-
-    doesCurrentUserLike = doesCurrentUserLike.bind(this);
-
-    if (this.props.currentUser == 'none' || !doesCurrentUserLike(this.props.blogpost.id)) {
+    console.log(this.state.currentUserLikes);
+    if (this.state.currentUserLikes) {
       return (
         <i
           className="fa fa-heart"
-          style={this._toggleLikeColor(false)}></i>
+          onClick={() => this.handleUnlike(this.props.blogpost.id)}
+          style={{fontSize: '24px', color: 'red'}}></i>
         )
     } else {
       return (
         <i
           className="fa fa-heart"
-          style={this._toggleLikeColor(true)}></i>
+          onClick={() => this.handleLike(this.props.blogpost.id)}
+          style={{fontSize: '24px'}}></i>
         )
-    }
-  }
-
-  _toggleLikeColor(currentUserLikes) {
-    if (currentUserLikes) {
-      return {fontSize: '24px', color: 'red'}
-    } else {
-      return {fontSize: '24px'}
     }
   }
 
@@ -264,6 +263,25 @@ class BlogpostItem extends React.Component {
     return <p>Follow</p>;
   }
 
+  _currentUserLikesBool(id) {
+    let doesCurrentUserLike = (blogId) => {
+      for(let i = 0; i < this.props.arrayOfCurrentUserLikes.length; i++) {
+        if (blogId == this.props.arrayOfCurrentUserLikes[i]) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    doesCurrentUserLike = doesCurrentUserLike.bind(this);
+
+    if (this.props.currentUser == 'none' || !doesCurrentUserLike(this.props.blogpost.id)) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
   _generateAuthorName(author) {
     if (author != undefined) {
       return (
@@ -282,7 +300,8 @@ class BlogpostItem extends React.Component {
         quoteSource: this.props.blogpost.quoteSource,
         content_type: this.props.blogpost.contentType,
         showEditForm: false,
-        showDeleteConfirmation: false
+        showDeleteConfirmation: false,
+        currentUserLikes: this._currentUserLikesBool(this.props.blogpost.id)
       }
     } else if (contentType != 'text') {
         return {
@@ -291,7 +310,8 @@ class BlogpostItem extends React.Component {
           content_type: this.props.blogpost.contentType,
           attached_file: this.props.blogpost.attachedFile,
           showEditForm: false,
-          showDeleteConfirmation: false
+          showDeleteConfirmation: false,
+          currentUserLikes: this._currentUserLikesBool(this.props.blogpost.id)
         }
     } else {
         return {
@@ -299,7 +319,8 @@ class BlogpostItem extends React.Component {
           description: this.props.blogpost.description,
           content_type: this.props.blogpost.contentType,
           showEditForm: false,
-          showDeleteConfirmation: false
+          showDeleteConfirmation: false,
+          currentUserLikes: this._currentUserLikesBool(this.props.blogpost.id)
         }
     }
   }

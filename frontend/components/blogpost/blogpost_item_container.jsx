@@ -1,7 +1,7 @@
 import BlogpostItem from './blogpost_item';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { updateBlogpost, deleteBlogpost } from '../../actions/blogpost_actions';
+import { updateBlogpost, deleteBlogpost, fetchBlogpost } from '../../actions/blogpost_actions';
 import {
   fetchUser,
   postFollow,
@@ -31,6 +31,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => ({
   updateBlogpost: (blogpost, blogpostId) => dispatch(updateBlogpost(blogpost, blogpostId)),
   deleteBlogpost: (blogpostId) => dispatch(deleteBlogpost(blogpostId)),
+  fetchBlogpost: (blogpostId) => dispatch(fetchBlogpost(blogpostId)),
   destroyFollow: (followeeId) => dispatch(destroyFollow(followeeId)),
   fetchUser: (userId) => dispatch(fetchUser(userId)),
   postLike: (blogId) => dispatch(postLike(blogId)),
