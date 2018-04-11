@@ -125,8 +125,7 @@ class BlogpostItem extends React.Component {
     }
 
     doesCurrentUserLike = doesCurrentUserLike.bind(this);
-    console.log(this.props.arrayOfCurrentUserLikes);
-    console.log(this.props.blogpost.id);
+
     if (this.props.currentUser == 'none' || !doesCurrentUserLike(this.props.blogpost.id)) {
       return (
         <i

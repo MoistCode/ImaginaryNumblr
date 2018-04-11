@@ -5445,12 +5445,6 @@ var _root = __webpack_require__(197);
 
 var _root2 = _interopRequireDefault(_root);
 
-var _user_actions = __webpack_require__(15);
-
-var LikeUtil = _interopRequireWildcard(_user_actions);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -5464,13 +5458,7 @@ document.addEventListener('DOMContentLoaded', function () {
   } else {
     store = (0, _store2.default)();
   }
-  window.store = store;
-  window.postLike = function (blogId) {
-    return store.dispatch(LikeUtil.postLike(blogId));
-  };
-  window.destroyLike = function (blogId) {
-    return store.dispatch(LikeUtil.destroyLike(blogId));
-  };
+
   var root = document.getElementById('root');
   _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: store }), root);
 });
@@ -27149,7 +27137,6 @@ var blogpostsReducer = function blogpostsReducer() {
     case _blogpost_actions.RECEIVE_BLOGPOSTS:
       return (0, _merge3.default)({}, oldState, action.blogposts);
     case _blogpost_actions.RECEIVE_BLOGPOST:
-      debugger;
       if (action.blogpost.blogposts != undefined) {
         return (0, _merge3.default)({}, oldState, { blogposts: action.blogpost.blogposts });
       }
@@ -32058,8 +32045,7 @@ var BlogpostItem = function (_React$Component) {
       };
 
       doesCurrentUserLike = doesCurrentUserLike.bind(this);
-      console.log(this.props.arrayOfCurrentUserLikes);
-      console.log(this.props.blogpost.id);
+
       if (this.props.currentUser == 'none' || !doesCurrentUserLike(this.props.blogpost.id)) {
         return _react2.default.createElement('i', {
           className: 'fa fa-heart',
