@@ -103,7 +103,6 @@ class Dashboard extends React.Component {
   }
 
   _generateRecommendedUsers() {
-
     return (
       <div className='dash-recommended-users'>
         <header>Recommended Users</header>

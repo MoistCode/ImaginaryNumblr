@@ -59,14 +59,15 @@ const _getUsers = (users, currentUser) => {
 
 
 const _getRandomUsers = (userObjs) => {
-  if (userObjs.length == 0) {
+  if (userObjs.length == 0 || userObjs[userObjs.length -1] == undefined) {
     return [];
   } else {
-    return _randomizeUserObjs(userObjs, 3);
+    return _randomizeUserObjs([userObjs[userObjs.length -1]], 3);
   }
 }
 
 const _randomizeUserObjs = (userObjs, numOfUsers) => {
+
   let arrOfRandomUsers = [];
   while (arrOfRandomUsers.length < numOfUsers) {
     arrOfRandomUsers.push(Object.values(userObjs[0])[Math.floor(Math.random() * Object.values(userObjs[0]).length)])
