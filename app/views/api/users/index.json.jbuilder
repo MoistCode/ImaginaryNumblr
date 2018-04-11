@@ -23,6 +23,12 @@ json.users do
         follows_arr.push(followee.followee_id)
       end
       json.followeeIds follows_arr
+
+      liked_blogs_arr = []
+      user.liked_blogs.each do |liked_blog|
+        liked_blogs_arr.push(liked_blog.liked_blog_id)
+      end
+      json.likedBlogIds liked_blogs_arr
     end
   end
 end
