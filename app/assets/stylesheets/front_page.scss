@@ -1,3 +1,35 @@
+.front-page-side {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  transform: translate(10px, 347px);
+  z-index: 99;
+  font-size: 30px;
+}
+.alinks {
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+  z-index: 99;
+
+}
+.alinks:hover {
+  color: red;
+}
+
+.whatisthis {
+  width: 110%;
+  height: 110%;
+  z-index: 99;
+  background-color: #57BA89;
+  transform: translate(-5%, 402px);
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: bold;
+  color: white;
+  font-size: 20px;
+  text-shadow: 10px 10px 20px black;
+}
+
 .front-page-title {
   z-index: 11;
   position: absolute;

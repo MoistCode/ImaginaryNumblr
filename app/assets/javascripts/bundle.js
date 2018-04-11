@@ -30972,6 +30972,13 @@ var FrontPage = function (_React$Component) {
       );
     }
   }, {
+    key: '_changeSection',
+    value: function _changeSection(num) {
+      var bodyJquery = $('body');
+      var className = bodyJquery.attr('class');
+      bodyJquery.addClass('fp-viewing-' + num).removeClass(className);
+    }
+  }, {
     key: '_firstSection',
     value: function _firstSection(currentPath) {
 
@@ -31053,6 +31060,17 @@ var FrontPage = function (_React$Component) {
                 'div',
                 { className: 'math5' },
                 '\u22C8'
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              {
+                className: 'w3-container w3-center w3-animate-bottom',
+                style: { marginLeft: '0', marginRight: '0' } },
+              _react2.default.createElement(
+                'div',
+                { className: 'whatisthis' },
+                'Scroll Down for More!'
               )
             )
           ),

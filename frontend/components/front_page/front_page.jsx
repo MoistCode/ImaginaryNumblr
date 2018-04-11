@@ -27,16 +27,25 @@ class FrontPage extends React.Component {
     return (
       <div id="front_page">
         {this._firstSection(curPath)}
-        <div className='section'>
-          <img className='photo2'></img>
-        </div>
+        <div className='section' ><img className='photo2'></img></div>
         <div className='section'><img className='photo3'></img></div>
-        <div className='section'><img className='photo4'></img></div>
+        <div className='section' ><img className='photo4'></img></div>
         <div className='section'><img className='photo5'></img></div>
         <div className='section'><img className='photo6'></img></div>
       </div>
     )
   }
+
+
+
+
+  _changeSection(num) {
+    let bodyJquery = $('body');
+    let className = bodyJquery.attr('class');
+    bodyJquery.addClass(`fp-viewing-${num}`).removeClass(className);
+  }
+
+
 
   _firstSection(currentPath) {
 
@@ -66,6 +75,11 @@ class FrontPage extends React.Component {
               <div className='empty'>&empty;</div>
               <div className='math4'>&#x2222;</div>
               <div className='math5'>&#x22C8;</div>
+            </div>
+            <div
+              className="w3-container w3-center w3-animate-bottom"
+              style={{marginLeft: '0', marginRight: '0'}}>
+              <div className='whatisthis'>Scroll Down for More!</div>
             </div>
           </div>
           <img className='photo1' />
