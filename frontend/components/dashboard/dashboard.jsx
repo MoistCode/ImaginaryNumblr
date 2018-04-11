@@ -9,6 +9,7 @@ class Dashboard extends React.Component {
     this._generateForm = this._generateForm.bind(this);
     this._generateFeed = this._generateFeed.bind(this);
     this.handleCreationModal = this.handleCreationModal.bind(this);
+    this._generateRecommendedUsers = this._generateRecommendedUsers.bind(this);
     this.state = {
       creationFormModalIsOpen: false,
       modalContentType: ''
@@ -103,19 +104,15 @@ class Dashboard extends React.Component {
   }
 
   _generateRecommendedUsers() {
-    let arrayOfUserIds = [];
-
-    while (arrayOfUserIds.length < 4) {
-      let num = Math.floor((Math.random() * 12) + 1);
-      if (num != this.props.currentUser[0].id) {
-        arrayOfUserIds.push(num);
-      }
-    }
 
     return (
       <div className='dash-recommended-users'>
         <header>Recommended Users</header>
-        <div className='recUsers'></div>
+        <div className='recUsers'>
+          {this.props.listOfRandomUsers.map((user) => <li><img
+            src={user.profileImageUrl}
+            onClick={() => this.props.history.push(`/${user.blogUrl}`)}/>{user.username}<i className='fa fa-plus-square' /></li>)}
+        </div>
       </div>
     )
   }
@@ -126,6 +123,7 @@ class Dashboard extends React.Component {
         <header>Blogdar</header>
         <div></div>
         <div></div>
+        <button>cdsccdsc</button>
       </div>
     )
   }

@@ -31248,15 +31248,35 @@ var _getUsers = function _getUsers(users, currentUser) {
   }
 };
 
+var _getRandomUsers = function _getRandomUsers(userObjs) {
+  if (userObjs.length == 0) {
+    return [];
+  } else {
+    return _randomizeUserObjs(userObjs, 3);
+  }
+};
+
+var _randomizeUserObjs = function _randomizeUserObjs(userObjs, numOfUsers) {
+  var arrOfRandomUsers = [];
+  while (arrOfRandomUsers.length < numOfUsers) {
+    arrOfRandomUsers.push(Object.values(userObjs[0])[Math.floor(Math.random() * Object.values(userObjs[0]).length)]);
+  }
+  return arrOfRandomUsers;
+};
+
 var mapStateToProps = function mapStateToProps(state) {
+
   return {
     currentUser: _checkCurrentUser(state.session.currentUser),
     listOfBlogposts: _getBlogposts(state.blogposts, state.session.currentUser),
-    listOfUsers: _getUsers(state.users, state.session.currentUser) || []
+    listOfUsers: _getUsers(state.users, state.session.currentUser) || [],
+    listOfRandomUsers: _getRandomUsers(Object.values(state.users))
+
   };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+
   return {
     clearErrors: function clearErrors() {
       return dispatch((0, _blogpost_actions.clearErrors)());
@@ -31266,6 +31286,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     fetchBlogposts: function fetchBlogposts(blogpostIds) {
       return dispatch((0, _blogpost_actions.fetchBlogposts)(blogpostIds));
+    },
+    fetchRandomUsers: function fetchRandomUsers(userIds) {
+      return dispatch((0, _user_actions.fetchUsers)(userIds));
     }
   };
 };
@@ -31317,6 +31340,7 @@ var Dashboard = function (_React$Component) {
     _this._generateForm = _this._generateForm.bind(_this);
     _this._generateFeed = _this._generateFeed.bind(_this);
     _this.handleCreationModal = _this.handleCreationModal.bind(_this);
+    _this._generateRecommendedUsers = _this._generateRecommendedUsers.bind(_this);
     _this.state = {
       creationFormModalIsOpen: false,
       modalContentType: ''
@@ -31454,14 +31478,7 @@ var Dashboard = function (_React$Component) {
   }, {
     key: '_generateRecommendedUsers',
     value: function _generateRecommendedUsers() {
-      var arrayOfUserIds = [];
-
-      while (arrayOfUserIds.length < 4) {
-        var num = Math.floor(Math.random() * 12 + 1);
-        if (num != this.props.currentUser[0].id) {
-          arrayOfUserIds.push(num);
-        }
-      }
+      var _this4 = this;
 
       return _react2.default.createElement(
         'div',
@@ -31471,7 +31488,23 @@ var Dashboard = function (_React$Component) {
           null,
           'Recommended Users'
         ),
-        _react2.default.createElement('div', { className: 'recUsers' })
+        _react2.default.createElement(
+          'div',
+          { className: 'recUsers' },
+          this.props.listOfRandomUsers.map(function (user) {
+            return _react2.default.createElement(
+              'li',
+              null,
+              _react2.default.createElement('img', {
+                src: user.profileImageUrl,
+                onClick: function onClick() {
+                  return _this4.props.history.push('/' + user.blogUrl);
+                } }),
+              user.username,
+              _react2.default.createElement('i', { className: 'fa fa-plus-square' })
+            );
+          })
+        )
       );
     }
   }, {
@@ -31486,20 +31519,25 @@ var Dashboard = function (_React$Component) {
           'Blogdar'
         ),
         _react2.default.createElement('div', null),
-        _react2.default.createElement('div', null)
+        _react2.default.createElement('div', null),
+        _react2.default.createElement(
+          'button',
+          null,
+          'cdsccdsc'
+        )
       );
     }
   }, {
     key: '_generateFeed',
     value: function _generateFeed() {
-      var _this4 = this;
+      var _this5 = this;
 
       if (this.props.listOfBlogposts.length > 0) {
         return this.props.listOfBlogposts.map(function (blogpost) {
           return _react2.default.createElement(_blogpost_item_container2.default, {
             key: blogpost.id,
             blogpost: blogpost,
-            author: _this4._getAuthorFromBlogpost(blogpost.authorId) });
+            author: _this5._getAuthorFromBlogpost(blogpost.authorId) });
         });
       }
     }
@@ -31516,14 +31554,14 @@ var Dashboard = function (_React$Component) {
   }, {
     key: '_generateForm',
     value: function _generateForm() {
-      var _this5 = this;
+      var _this6 = this;
 
       var contentType = this.state.modalContentType;
       if (this.state.creationFormModalIsOpen == true) {
         return _react2.default.createElement(_blogpost_creation_form_container2.default, {
           contentType: contentType,
           showDashboard: function showDashboard() {
-            _this5.handleCreationModal('');
+            _this6.handleCreationModal('');
           } });
       }
     }

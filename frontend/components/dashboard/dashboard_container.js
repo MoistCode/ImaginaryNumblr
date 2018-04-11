@@ -57,16 +57,42 @@ const _getUsers = (users, currentUser) => {
   }
 };
 
-const mapStateToProps = (state) => ({
-  currentUser: _checkCurrentUser(state.session.currentUser),
-  listOfBlogposts: _getBlogposts(state.blogposts, state.session.currentUser),
-  listOfUsers: _getUsers(state.users, state.session.currentUser) || []
-});
 
-const mapDispatchToProps = (dispatch) => ({
-  clearErrors: () => dispatch(clearErrors()),
-  fetchUsers: (userIds) => dispatch(fetchUsers(userIds)),
-  fetchBlogposts: (blogpostIds) => dispatch(fetchBlogposts(blogpostIds))
-});
+const _getRandomUsers = (userObjs) => {
+  if (userObjs.length == 0) {
+    return [];
+  } else {
+    return _randomizeUserObjs(userObjs, 3);
+  }
+}
+
+const _randomizeUserObjs = (userObjs, numOfUsers) => {
+  let arrOfRandomUsers = [];
+  while (arrOfRandomUsers.length < numOfUsers) {
+    arrOfRandomUsers.push(Object.values(userObjs[0])[Math.floor(Math.random() * Object.values(userObjs[0]).length)])
+  }
+  return arrOfRandomUsers;
+}
+
+const mapStateToProps = (state) => {
+
+  return {
+    currentUser: _checkCurrentUser(state.session.currentUser),
+    listOfBlogposts: _getBlogposts(state.blogposts, state.session.currentUser),
+    listOfUsers: _getUsers(state.users, state.session.currentUser) || [],
+    listOfRandomUsers: _getRandomUsers(Object.values(state.users))
+
+  }
+};
+
+const mapDispatchToProps = (dispatch) => {
+
+  return {
+    clearErrors: () => dispatch(clearErrors()),
+    fetchUsers: (userIds) => dispatch(fetchUsers(userIds)),
+    fetchBlogposts: (blogpostIds) => dispatch(fetchBlogposts(blogpostIds)),
+    fetchRandomUsers: (userIds) => dispatch(fetchUsers(userIds))
+  }
+};
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Dashboard));
