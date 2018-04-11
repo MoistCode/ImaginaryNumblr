@@ -29,12 +29,14 @@
     box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
     height: 100%;
     position: relative;
+
     .title {
       margin-top: 25px;
       margin-bottom: 15px;
       font-family: 'Ubuntu', sans-serif;
       font-weight: bold;
-      padding-top: 31px;
+      padding-top: 27px;
+
     }
 
     img {
@@ -50,7 +52,7 @@
       height: 100%;
       font-family: 'Ubuntu', sans-serif;
       font-weight: bold;
-      padding-top: 10px;
+      // padding-top: 27px;
     }
 
     p {
