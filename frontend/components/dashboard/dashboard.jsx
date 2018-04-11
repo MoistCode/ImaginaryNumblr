@@ -10,9 +10,11 @@ class Dashboard extends React.Component {
     this._generateFeed = this._generateFeed.bind(this);
     this.handleCreationModal = this.handleCreationModal.bind(this);
     this._generateRecommendedUsers = this._generateRecommendedUsers.bind(this);
+    this._triggerDashRefresh = this._triggerDashRefresh.bind(this);
     this.state = {
       creationFormModalIsOpen: false,
-      modalContentType: ''
+      modalContentType: '',
+      creationSubmitted: false
     }
   }
 
@@ -28,6 +30,11 @@ class Dashboard extends React.Component {
           this.props.fetchBlogposts(arrOfBlogpostIds);
         }
       )
+
+  }
+
+  componentDidMount() {
+    console.log('running1');
   }
 
   handleCreationModal(field) {
@@ -102,6 +109,21 @@ class Dashboard extends React.Component {
     )
   }
 
+  _triggerDashRefresh() {
+    const arrOfUserIds = this.props.currentUser[0].followeeIds.concat(this.props.currentUser[0].id);
+    this.props.fetchUsers(arrOfUserIds)
+      .then(
+        (payload) => {
+          let arrOfBlogpostIds = []
+          Object.values(payload.users.users).forEach((user) => {
+            arrOfBlogpostIds = arrOfBlogpostIds.concat(user.blogpostIds);
+          });
+          this.props.fetchBlogposts(arrOfBlogpostIds);
+        }
+      )
+
+  }
+
   _generateRecommendedUsers() {
     return (
       <div className='dash-recommended-users'>
@@ -165,7 +187,8 @@ class Dashboard extends React.Component {
       return (
         <BlogPostCreationFormContainer
           contentType={contentType}
-          showDashboard={() => {this.handleCreationModal('')}}/>
+          showDashboard={() => {this.handleCreationModal('')}}
+          createdSubmitted={this._triggerDashRefresh}/>
       )
     }
   }

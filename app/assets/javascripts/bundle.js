@@ -31342,9 +31342,11 @@ var Dashboard = function (_React$Component) {
     _this._generateFeed = _this._generateFeed.bind(_this);
     _this.handleCreationModal = _this.handleCreationModal.bind(_this);
     _this._generateRecommendedUsers = _this._generateRecommendedUsers.bind(_this);
+    _this._triggerDashRefresh = _this._triggerDashRefresh.bind(_this);
     _this.state = {
       creationFormModalIsOpen: false,
-      modalContentType: ''
+      modalContentType: '',
+      creationSubmitted: false
     };
     return _this;
   }
@@ -31362,6 +31364,11 @@ var Dashboard = function (_React$Component) {
         });
         _this2.props.fetchBlogposts(arrOfBlogpostIds);
       });
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      console.log('running1');
     }
   }, {
     key: 'handleCreationModal',
@@ -31476,9 +31483,23 @@ var Dashboard = function (_React$Component) {
       );
     }
   }, {
+    key: '_triggerDashRefresh',
+    value: function _triggerDashRefresh() {
+      var _this4 = this;
+
+      var arrOfUserIds = this.props.currentUser[0].followeeIds.concat(this.props.currentUser[0].id);
+      this.props.fetchUsers(arrOfUserIds).then(function (payload) {
+        var arrOfBlogpostIds = [];
+        Object.values(payload.users.users).forEach(function (user) {
+          arrOfBlogpostIds = arrOfBlogpostIds.concat(user.blogpostIds);
+        });
+        _this4.props.fetchBlogposts(arrOfBlogpostIds);
+      });
+    }
+  }, {
     key: '_generateRecommendedUsers',
     value: function _generateRecommendedUsers() {
-      var _this4 = this;
+      var _this5 = this;
 
       return _react2.default.createElement(
         'div',
@@ -31498,12 +31519,12 @@ var Dashboard = function (_React$Component) {
               _react2.default.createElement('img', {
                 src: user.profileImageUrl,
                 onClick: function onClick() {
-                  return _this4.props.history.push('/' + user.blogUrl);
+                  return _this5.props.history.push('/' + user.blogUrl);
                 } }),
               user.username,
               _react2.default.createElement('i', {
                 className: 'fa fa-plus-square',
-                style: _this4._generateUserFollowedIconColor(user.id) })
+                style: _this5._generateUserFollowedIconColor(user.id) })
             );
           })
         )
@@ -31534,14 +31555,14 @@ var Dashboard = function (_React$Component) {
   }, {
     key: '_generateFeed',
     value: function _generateFeed() {
-      var _this5 = this;
+      var _this6 = this;
 
       if (this.props.listOfBlogposts.length > 0) {
         return this.props.listOfBlogposts.map(function (blogpost) {
           return _react2.default.createElement(_blogpost_item_container2.default, {
             key: blogpost.id,
             blogpost: blogpost,
-            author: _this5._getAuthorFromBlogpost(blogpost.authorId) });
+            author: _this6._getAuthorFromBlogpost(blogpost.authorId) });
         });
       }
     }
@@ -31558,15 +31579,16 @@ var Dashboard = function (_React$Component) {
   }, {
     key: '_generateForm',
     value: function _generateForm() {
-      var _this6 = this;
+      var _this7 = this;
 
       var contentType = this.state.modalContentType;
       if (this.state.creationFormModalIsOpen == true) {
         return _react2.default.createElement(_blogpost_creation_form_container2.default, {
           contentType: contentType,
           showDashboard: function showDashboard() {
-            _this6.handleCreationModal('');
-          } });
+            _this7.handleCreationModal('');
+          },
+          createdSubmitted: this._triggerDashRefresh });
       }
     }
   }]);
@@ -31692,9 +31714,8 @@ var BlogPostCreationForm = function (_React$Component) {
         formData.append('blogpost[description]]', this.state.description);
       }
       this.props.createBlogpost(formData).then(function () {
+        _this2.props.createdSubmitted();
         submitButton.prop("disabled", false);
-        _this2.props.history.push('/dashboard');
-        window.location.reload();
       }, function () {
         return submitButton.prop("disabled", false);
       });
