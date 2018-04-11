@@ -168,7 +168,21 @@ class NavigationBar extends React.Component {
     if (currentUser) {
       return (
         <span className='session-button'>
-          <i className="fa fa-home" style={{fontSize: '39px'}}></i>
+          <i
+            className="fa fa-home"
+            style={{fontSize: '39px'}}
+            onClick={() => {
+                if (
+                  !this.props.currentUser &&
+                  this.props.location.pathname != '/dashboard'
+                ) {
+                  window.location.reload();
+                  this.props.history.push('/');
+                } else {
+                  window.location.reload();
+                  this.props.history.push('/dashboard');
+                }
+              }}></i>
           <i className="fa fa-heart" style={{fontSize: '35px'}}></i>
           <i className="fa fa-commenting" style={{fontSize: '35px'}}></i>
           <i className="fa fa-envelope" style={{fontSize: '35px'}}></i>

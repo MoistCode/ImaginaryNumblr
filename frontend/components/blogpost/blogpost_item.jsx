@@ -44,7 +44,10 @@ class BlogpostItem extends React.Component {
       .then(
         () => {
           this.props.fetchBlogpost(blogpostId);
-          this.setState({ currentUserLikes: !this.state.currentUserLikes });
+          this.setState({
+            currentUserLikes: !this.state.currentUserLikes,
+            likeCount: this.state.likeCount + 1
+          });
         }
       )
     }
@@ -54,7 +57,10 @@ class BlogpostItem extends React.Component {
       .then(
         () => {
           this.props.fetchBlogpost(blogpostId);
-          this.setState({ currentUserLikes: !this.state.currentUserLikes });
+          this.setState({
+            currentUserLikes: !this.state.currentUserLikes,
+            likeCount: this.state.likeCount - 1
+          });
         }
       )
   }
@@ -120,7 +126,7 @@ class BlogpostItem extends React.Component {
           <div className='footer-likes'>
             {this._generateLikeIcon()}
             <div
-              className='like-count'>{this.props.blogpost.likerIds.length}
+              className='like-count'>{this.state.likeCount}
             </div>
           </div>
         </div>
@@ -300,7 +306,8 @@ class BlogpostItem extends React.Component {
         content_type: this.props.blogpost.contentType,
         showEditForm: false,
         showDeleteConfirmation: false,
-        currentUserLikes: this._currentUserLikesBool(this.props.blogpost.id)
+        currentUserLikes: this._currentUserLikesBool(this.props.blogpost.id),
+        likeCount: this.props.blogpost.likerIds.length
       }
     } else if (contentType != 'text') {
         return {
@@ -310,7 +317,8 @@ class BlogpostItem extends React.Component {
           attached_file: this.props.blogpost.attachedFile,
           showEditForm: false,
           showDeleteConfirmation: false,
-          currentUserLikes: this._currentUserLikesBool(this.props.blogpost.id)
+          currentUserLikes: this._currentUserLikesBool(this.props.blogpost.id),
+          likeCount: this.props.blogpost.likerIds.length
         }
     } else {
         return {
@@ -319,7 +327,8 @@ class BlogpostItem extends React.Component {
           content_type: this.props.blogpost.contentType,
           showEditForm: false,
           showDeleteConfirmation: false,
-          currentUserLikes: this._currentUserLikesBool(this.props.blogpost.id)
+          currentUserLikes: this._currentUserLikesBool(this.props.blogpost.id),
+          likeCount: this.props.blogpost.likerIds.length
         }
     }
   }

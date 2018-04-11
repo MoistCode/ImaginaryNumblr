@@ -31969,7 +31969,10 @@ var BlogpostItem = function (_React$Component) {
 
       this.props.postLike(blogpostId).then(function () {
         _this4.props.fetchBlogpost(blogpostId);
-        _this4.setState({ currentUserLikes: !_this4.state.currentUserLikes });
+        _this4.setState({
+          currentUserLikes: !_this4.state.currentUserLikes,
+          likeCount: _this4.state.likeCount + 1
+        });
       });
     }
   }, {
@@ -31979,7 +31982,10 @@ var BlogpostItem = function (_React$Component) {
 
       this.props.destroyLike(blogpostId).then(function () {
         _this5.props.fetchBlogpost(blogpostId);
-        _this5.setState({ currentUserLikes: !_this5.state.currentUserLikes });
+        _this5.setState({
+          currentUserLikes: !_this5.state.currentUserLikes,
+          likeCount: _this5.state.likeCount - 1
+        });
       });
     }
   }, {
@@ -32060,7 +32066,7 @@ var BlogpostItem = function (_React$Component) {
               'div',
               {
                 className: 'like-count' },
-              this.props.blogpost.likerIds.length
+              this.state.likeCount
             )
           )
         )
@@ -32309,7 +32315,8 @@ var BlogpostItem = function (_React$Component) {
           content_type: this.props.blogpost.contentType,
           showEditForm: false,
           showDeleteConfirmation: false,
-          currentUserLikes: this._currentUserLikesBool(this.props.blogpost.id)
+          currentUserLikes: this._currentUserLikesBool(this.props.blogpost.id),
+          likeCount: this.props.blogpost.likerIds.length
         };
       } else if (contentType != 'text') {
         return {
@@ -32319,7 +32326,8 @@ var BlogpostItem = function (_React$Component) {
           attached_file: this.props.blogpost.attachedFile,
           showEditForm: false,
           showDeleteConfirmation: false,
-          currentUserLikes: this._currentUserLikesBool(this.props.blogpost.id)
+          currentUserLikes: this._currentUserLikesBool(this.props.blogpost.id),
+          likeCount: this.props.blogpost.likerIds.length
         };
       } else {
         return {
@@ -32328,7 +32336,8 @@ var BlogpostItem = function (_React$Component) {
           content_type: this.props.blogpost.contentType,
           showEditForm: false,
           showDeleteConfirmation: false,
-          currentUserLikes: this._currentUserLikesBool(this.props.blogpost.id)
+          currentUserLikes: this._currentUserLikesBool(this.props.blogpost.id),
+          likeCount: this.props.blogpost.likerIds.length
         };
       }
     }
@@ -32778,7 +32787,18 @@ var NavigationBar = function (_React$Component) {
         return _react2.default.createElement(
           'span',
           { className: 'session-button' },
-          _react2.default.createElement('i', { className: 'fa fa-home', style: { fontSize: '39px' } }),
+          _react2.default.createElement('i', {
+            className: 'fa fa-home',
+            style: { fontSize: '39px' },
+            onClick: function onClick() {
+              if (!_this4.props.currentUser && _this4.props.location.pathname != '/dashboard') {
+                window.location.reload();
+                _this4.props.history.push('/');
+              } else {
+                window.location.reload();
+                _this4.props.history.push('/dashboard');
+              }
+            } }),
           _react2.default.createElement('i', { className: 'fa fa-heart', style: { fontSize: '35px' } }),
           _react2.default.createElement('i', { className: 'fa fa-commenting', style: { fontSize: '35px' } }),
           _react2.default.createElement('i', { className: 'fa fa-envelope', style: { fontSize: '35px' } }),
