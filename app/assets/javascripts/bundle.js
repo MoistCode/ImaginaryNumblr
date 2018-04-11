@@ -31441,8 +31441,52 @@ var Dashboard = function (_React$Component) {
             )
           )
         ),
+        _react2.default.createElement(
+          'aside',
+          { className: 'dash-right-side' },
+          this._generateRecommendedUsers(),
+          this._generateRecommendedBlogpost()
+        ),
         this._generateForm(),
         this._generateFeed()
+      );
+    }
+  }, {
+    key: '_generateRecommendedUsers',
+    value: function _generateRecommendedUsers() {
+      var arrayOfUserIds = [];
+
+      while (arrayOfUserIds.length < 4) {
+        var num = Math.floor(Math.random() * 12 + 1);
+        if (num != this.props.currentUser[0].id) {
+          arrayOfUserIds.push(num);
+        }
+      }
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'dash-recommended-users' },
+        _react2.default.createElement(
+          'header',
+          null,
+          'Recommended Users'
+        ),
+        _react2.default.createElement('div', { className: 'recUsers' })
+      );
+    }
+  }, {
+    key: '_generateRecommendedBlogpost',
+    value: function _generateRecommendedBlogpost() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'dash-recommended-blogpost' },
+        _react2.default.createElement(
+          'header',
+          null,
+          'Blogdar'
+        ),
+        _react2.default.createElement('div', null),
+        _react2.default.createElement('div', null)
       );
     }
   }, {
@@ -31483,9 +31527,6 @@ var Dashboard = function (_React$Component) {
           } });
       }
     }
-  }, {
-    key: '_generateRecommendedUsers',
-    value: function _generateRecommendedUsers() {}
   }]);
 
   return Dashboard;
@@ -33021,9 +33062,7 @@ var UserShowPage = function (_React$Component) {
         );
       }
       var viewUser = this.props.user;
-      // Create an if statement that returns a loading screen if the fetching has
-      // not been done yet
-      // Also create a condition where if there is no user by that id
+
       return _react2.default.createElement(
         'div',
         { className: 'user-showpage' },

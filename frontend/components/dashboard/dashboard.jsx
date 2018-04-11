@@ -90,12 +90,42 @@ class Dashboard extends React.Component {
               <p>Video</p>
             </div>
 
-
           </div>
         </div>
+        <aside className='dash-right-side'>
+          {this._generateRecommendedUsers()}
+          {this._generateRecommendedBlogpost()}
+        </aside>
         {this._generateForm()}
         {this._generateFeed()}
+      </div>
+    )
+  }
 
+  _generateRecommendedUsers() {
+    let arrayOfUserIds = [];
+
+    while (arrayOfUserIds.length < 4) {
+      let num = Math.floor((Math.random() * 12) + 1);
+      if (num != this.props.currentUser[0].id) {
+        arrayOfUserIds.push(num);
+      }
+    }
+
+    return (
+      <div className='dash-recommended-users'>
+        <header>Recommended Users</header>
+        <div className='recUsers'></div>
+      </div>
+    )
+  }
+
+  _generateRecommendedBlogpost() {
+    return (
+      <div className='dash-recommended-blogpost'>
+        <header>Blogdar</header>
+        <div></div>
+        <div></div>
       </div>
     )
   }
@@ -132,9 +162,6 @@ class Dashboard extends React.Component {
     }
   }
 
-  _generateRecommendedUsers() {
-
-  }
 }
 
 export default Dashboard;
