@@ -32167,7 +32167,6 @@ var BlogpostItem = function (_React$Component) {
     value: function _generateLikeIcon() {
       var _this7 = this;
 
-      console.log(this.state.currentUserLikes);
       if (this.state.currentUserLikes) {
         return _react2.default.createElement('i', {
           className: 'fa fa-heart',

@@ -135,7 +135,6 @@ class BlogpostItem extends React.Component {
   }
 
   _generateLikeIcon() {
-    console.log(this.state.currentUserLikes);
     if (this.state.currentUserLikes) {
       return (
         <i
