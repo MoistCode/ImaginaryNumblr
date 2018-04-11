@@ -31503,11 +31503,20 @@ var Dashboard = function (_React$Component) {
               user.username,
               _react2.default.createElement('i', {
                 className: 'fa fa-plus-square',
-                style: _this4._generateUserFollowedIconColor })
+                style: _this4._generateUserFollowedIconColor(user.id) })
             );
           })
         )
       );
+    }
+  }, {
+    key: '_generateUserFollowedIconColor',
+    value: function _generateUserFollowedIconColor(id) {
+      for (var i = 0; i < this.props.currentUser[0].followeeIds.length; i++) {
+        if (id == this.props.currentUser[0].followeeIds[i]) {
+          return { color: '#A7CAE9' };
+        }
+      }
     }
   }, {
     key: '_generateRecommendedBlogpost',

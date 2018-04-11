@@ -114,10 +114,18 @@ class Dashboard extends React.Component {
             onClick={() => this.props.history.push(`/${user.blogUrl}`)}/>
           {user.username}<i
                             className='fa fa-plus-square'
-                            style={this._generateUserFollowedIconColor} /></li>)}
+                            style={this._generateUserFollowedIconColor(user.id)} /></li>)}
         </div>
       </div>
     )
+  }
+
+  _generateUserFollowedIconColor(id) {
+    for(let i = 0; i < this.props.currentUser[0].followeeIds.length; i++) {
+      if (id == this.props.currentUser[0].followeeIds[i]) {
+        return { color: '#A7CAE9' };
+      }
+    }
   }
 
   _generateRecommendedBlogpost() {
