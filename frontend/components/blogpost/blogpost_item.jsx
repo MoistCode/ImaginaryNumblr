@@ -109,7 +109,6 @@ class BlogpostItem extends React.Component {
 
 
   render() {
-    console.log(this.state.currentUserLikes);
     return (
       <div className='blogpost'>
         {this._generateDeletionConfirmation()}
@@ -121,7 +120,7 @@ class BlogpostItem extends React.Component {
           <div className='footer-likes'>
             {this._generateLikeIcon()}
             <div
-              className='like-count'>{Math.floor((Math.random() * 500) + 100)}
+              className='like-count'>{this.props.blogpost.likerIds.length}
             </div>
           </div>
         </div>

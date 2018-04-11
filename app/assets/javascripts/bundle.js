@@ -32041,7 +32041,6 @@ var BlogpostItem = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      console.log(this.state.currentUserLikes);
       return _react2.default.createElement(
         'div',
         { className: 'blogpost' },
@@ -32061,7 +32060,7 @@ var BlogpostItem = function (_React$Component) {
               'div',
               {
                 className: 'like-count' },
-              Math.floor(Math.random() * 500 + 100)
+              this.props.blogpost.likerIds.length
             )
           )
         )
