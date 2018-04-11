@@ -31468,8 +31468,7 @@ var Dashboard = function (_React$Component) {
         _react2.default.createElement(
           'aside',
           { className: 'dash-right-side' },
-          this._generateRecommendedUsers(),
-          this._generateRecommendedBlogpost()
+          this._generateRecommendedUsers()
         ),
         this._generateForm(),
         this._generateFeed()
@@ -31518,26 +31517,19 @@ var Dashboard = function (_React$Component) {
         }
       }
     }
-  }, {
-    key: '_generateRecommendedBlogpost',
-    value: function _generateRecommendedBlogpost() {
-      return _react2.default.createElement(
-        'div',
-        { className: 'dash-recommended-blogpost' },
-        _react2.default.createElement(
-          'header',
-          null,
-          'Blogdar'
-        ),
-        _react2.default.createElement('div', null),
-        _react2.default.createElement('div', null),
-        _react2.default.createElement(
-          'button',
-          null,
-          'cdsccdsc'
-        )
-      );
-    }
+
+    // {this._generateRecommendedBlogpost()}
+    // _generateRecommendedBlogpost() {
+    //   return (
+    //     <div className='dash-recommended-blogpost'>
+    //       <header>Blogdar</header>
+    //       <div></div>
+    //       <div></div>
+    //       <button>cdsccdsc</button>
+    //     </div>
+    //   )
+    // }
+
   }, {
     key: '_generateFeed',
     value: function _generateFeed() {

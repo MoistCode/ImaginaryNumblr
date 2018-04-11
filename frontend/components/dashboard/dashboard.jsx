@@ -95,7 +95,6 @@ class Dashboard extends React.Component {
         </div>
         <aside className='dash-right-side'>
           {this._generateRecommendedUsers()}
-          {this._generateRecommendedBlogpost()}
         </aside>
         {this._generateForm()}
         {this._generateFeed()}
@@ -128,16 +127,17 @@ class Dashboard extends React.Component {
     }
   }
 
-  _generateRecommendedBlogpost() {
-    return (
-      <div className='dash-recommended-blogpost'>
-        <header>Blogdar</header>
-        <div></div>
-        <div></div>
-        <button>cdsccdsc</button>
-      </div>
-    )
-  }
+  // {this._generateRecommendedBlogpost()}
+  // _generateRecommendedBlogpost() {
+  //   return (
+  //     <div className='dash-recommended-blogpost'>
+  //       <header>Blogdar</header>
+  //       <div></div>
+  //       <div></div>
+  //       <button>cdsccdsc</button>
+  //     </div>
+  //   )
+  // }
 
   _generateFeed() {
     if (this.props.listOfBlogposts.length > 0) {
