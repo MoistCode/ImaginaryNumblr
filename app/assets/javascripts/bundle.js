@@ -32747,6 +32747,12 @@ var NavigationBar = function (_React$Component) {
         return _react2.default.createElement(
           'span',
           { className: 'session-button' },
+          _react2.default.createElement('i', { className: 'fa fa-home', style: { fontSize: '39px' } }),
+          _react2.default.createElement('i', { className: 'fa fa-heart', style: { fontSize: '35px' } }),
+          _react2.default.createElement('i', { className: 'fa fa-commenting', style: { fontSize: '35px' } }),
+          _react2.default.createElement('i', { className: 'fa fa-envelope', style: { fontSize: '35px' } }),
+          _react2.default.createElement('i', { className: 'fa fa-user', style: { fontSize: '35px' } }),
+          _react2.default.createElement('i', { className: 'fa fa-cogs', style: { fontSize: '35px' } }),
           logoutButton
         );
       } else {

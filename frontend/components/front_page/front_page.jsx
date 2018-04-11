@@ -27,7 +27,7 @@ class FrontPage extends React.Component {
     return (
       <div id="front_page">
         {this._firstSection(curPath)}
-        <div className='section'>
+        <div className='section' >
           <img className='photo2'></img>
         </div>
         <div className='section'><img className='photo3'></img></div>

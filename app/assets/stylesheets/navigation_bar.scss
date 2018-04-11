@@ -69,6 +69,7 @@
   float: right;
 }
 
+
 .session-button {
   float: right;
   margin-right: 0;
@@ -77,7 +78,16 @@
   outline: 0;
   font-family: 'Ubuntu', sans-serif;
   font-weight: bold;
+}
 
+.session-button > i {
+  margin-right: 20px;
+  color: #9CA3AE;
+  cursor: pointer;
+}
+
+.session-button > i:hover {
+  color: black;
 }
 
 .session-form button {
@@ -124,6 +134,7 @@
   margin: 5px 6px;
   height: 32px;
   width: 100px;
+  padding-left: 5px;
   -webkit-box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
   -moz-box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
   box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
