@@ -15,6 +15,7 @@ class BlogpostItem extends React.Component {
     this._generateAuthorOptions = this._generateAuthorOptions.bind(this);
     this._generateAuthorName = this._generateAuthorName.bind(this);
     this.handleUnfollow = this.handleUnfollow.bind(this);
+    this._generateLikeIcon = this._generateLikeIcon.bind(this);
   }
 
   handleFollow() {
@@ -34,6 +35,14 @@ class BlogpostItem extends React.Component {
           window.location.reload();
         }
       )
+  }
+
+  handleLike() {
+
+  }
+
+  handleUnlike() {
+
   }
 
 
@@ -95,11 +104,7 @@ class BlogpostItem extends React.Component {
         {this._renderContentType()}
         <div className='blogpost-footer'>
           <div className='footer-likes'>
-            <i
-              className="fa fa-heart"
-              style={{
-                fontSize:"24px",
-              }}></i>
+            {this._generateLikeIcon()}
             <div
               className='like-count'>{Math.floor((Math.random() * 500) + 100)}
             </div>
@@ -107,6 +112,42 @@ class BlogpostItem extends React.Component {
         </div>
       </div>
     )
+  }
+
+  _generateLikeIcon() {
+    let doesCurrentUserLike = (blogId) => {
+      for(let i = 0; i < this.props.arrayOfCurrentUserLikes.length; i++) {
+        if (blogId == this.props.arrayOfCurrentUserLikes[i]) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    doesCurrentUserLike = doesCurrentUserLike.bind(this);
+    console.log(this.props.arrayOfCurrentUserLikes);
+    console.log(this.props.blogpost.id);
+    if (this.props.currentUser == 'none' || !doesCurrentUserLike(this.props.blogpost.id)) {
+      return (
+        <i
+          className="fa fa-heart"
+          style={this._toggleLikeColor(false)}></i>
+        )
+    } else {
+      return (
+        <i
+          className="fa fa-heart"
+          style={this._toggleLikeColor(true)}></i>
+        )
+    }
+  }
+
+  _toggleLikeColor(currentUserLikes) {
+    if (currentUserLikes) {
+      return {fontSize: '24px', color: 'red'}
+    } else {
+      return {fontSize: '24px'}
+    }
   }
 
   _generateProfileImageUrl() {

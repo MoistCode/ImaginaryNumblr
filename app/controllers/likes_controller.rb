@@ -6,7 +6,9 @@ class LikesController < ApplicationController
     elsif Blogpost.find(params[:like][:liked_blog_id])
       @like = Like.new(liked_blog_id: params[:like][:liked_blog_id])
       @like.liker_id = current_user.id
-      if @like.save
+      if Like.find_by(liker_id: current_user.id, liked_blog_id: @like.liked_blog_id)
+        render json: ['Cannot like a blog twice'], status: 422
+      elsif @like.save
         @user = User.find(current_user.id)
         render 'api/users/show'
       else

@@ -5384,9 +5384,16 @@ var mapStateToProps = function mapStateToProps(state) {
   var currentUser = void 0;
   if (state.session.currentUser != undefined) {
     currentUser = Object.keys(state.session.currentUser.users)[0];
-    return { currentUser: currentUser, errors: state.errors.blogpost };
+    return {
+      currentUser: currentUser,
+      errors: state.errors.blogpost,
+      arrayOfCurrentUserLikes: Object.values(state.session.currentUser.users)[0].likedBlogIds
+    };
   } else {
-    return { currentUser: 'none', errors: state.errors.blogpost };
+    return { currentUser: 'none',
+      errors: state.errors.blogpost,
+      arrayOfCurrentUserLikes: []
+    };
   }
 };
 
@@ -5403,6 +5410,12 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     fetchUser: function fetchUser(userId) {
       return dispatch((0, _user_actions.fetchUser)(userId));
+    },
+    postLike: function postLike(blogId) {
+      return dispatch((0, _user_actions.postLike)(blogId));
+    },
+    destroyLike: function destroyLike(blogId) {
+      return dispatch((0, _user_actions.destroyLike)(blogId));
     }
   };
 };
@@ -31891,6 +31904,7 @@ var BlogpostItem = function (_React$Component) {
     _this._generateAuthorOptions = _this._generateAuthorOptions.bind(_this);
     _this._generateAuthorName = _this._generateAuthorName.bind(_this);
     _this.handleUnfollow = _this.handleUnfollow.bind(_this);
+    _this._generateLikeIcon = _this._generateLikeIcon.bind(_this);
     return _this;
   }
 
@@ -31914,6 +31928,12 @@ var BlogpostItem = function (_React$Component) {
         window.location.reload();
       });
     }
+  }, {
+    key: 'handleLike',
+    value: function handleLike() {}
+  }, {
+    key: 'handleUnlike',
+    value: function handleUnlike() {}
   }, {
     key: 'closeEditForm',
     value: function closeEditForm() {
@@ -31987,11 +32007,7 @@ var BlogpostItem = function (_React$Component) {
           _react2.default.createElement(
             'div',
             { className: 'footer-likes' },
-            _react2.default.createElement('i', {
-              className: 'fa fa-heart',
-              style: {
-                fontSize: "24px"
-              } }),
+            this._generateLikeIcon(),
             _react2.default.createElement(
               'div',
               {
@@ -32003,16 +32019,52 @@ var BlogpostItem = function (_React$Component) {
       );
     }
   }, {
+    key: '_generateLikeIcon',
+    value: function _generateLikeIcon() {
+      var _this5 = this;
+
+      var doesCurrentUserLike = function doesCurrentUserLike(blogId) {
+        for (var i = 0; i < _this5.props.arrayOfCurrentUserLikes.length; i++) {
+          if (blogId == _this5.props.arrayOfCurrentUserLikes[i]) {
+            return true;
+          }
+        }
+        return false;
+      };
+
+      doesCurrentUserLike = doesCurrentUserLike.bind(this);
+      console.log(this.props.arrayOfCurrentUserLikes);
+      console.log(this.props.blogpost.id);
+      if (this.props.currentUser == 'none' || !doesCurrentUserLike(this.props.blogpost.id)) {
+        return _react2.default.createElement('i', {
+          className: 'fa fa-heart',
+          style: this._toggleLikeColor(false) });
+      } else {
+        return _react2.default.createElement('i', {
+          className: 'fa fa-heart',
+          style: this._toggleLikeColor(true) });
+      }
+    }
+  }, {
+    key: '_toggleLikeColor',
+    value: function _toggleLikeColor(currentUserLikes) {
+      if (currentUserLikes) {
+        return { fontSize: '24px', color: 'red' };
+      } else {
+        return { fontSize: '24px' };
+      }
+    }
+  }, {
     key: '_generateProfileImageUrl',
     value: function _generateProfileImageUrl() {
-      var _this5 = this;
+      var _this6 = this;
 
       if (this.props.author != undefined) {
         return _react2.default.createElement('img', {
           className: 'blog-profile-pic',
           src: this.props.author.profileImageUrl,
           onClick: function onClick() {
-            return _this5.props.history.push('/' + _this5.props.author.blogUrl);
+            return _this6.props.history.push('/' + _this6.props.author.blogUrl);
           } });
       } else {
         return '';
@@ -32054,7 +32106,7 @@ var BlogpostItem = function (_React$Component) {
   }, {
     key: '_generateEditForm',
     value: function _generateEditForm() {
-      var _this6 = this;
+      var _this7 = this;
 
       if (this.state.showEditForm == true) {
         return _react2.default.createElement(
@@ -32078,7 +32130,7 @@ var BlogpostItem = function (_React$Component) {
               _react2.default.createElement(
                 'form',
                 { onSubmit: function onSubmit(e) {
-                    return _this6.handleSubmit(e);
+                    return _this7.handleSubmit(e);
                   } },
                 _react2.default.createElement('input', {
                   className: 'edit-title',
@@ -32151,7 +32203,7 @@ var BlogpostItem = function (_React$Component) {
   }, {
     key: '_currentUserFollow',
     value: function _currentUserFollow(id) {
-      var _this7 = this;
+      var _this8 = this;
 
       if (this.props.match.path == "/users/:userId") {
         return;
@@ -32166,7 +32218,7 @@ var BlogpostItem = function (_React$Component) {
             'p',
             {
               onClick: function onClick() {
-                return _this7.handleUnfollow(_this7.props.author.id);
+                return _this8.handleUnfollow(_this8.props.author.id);
               }
             },
             'Unfollow'
