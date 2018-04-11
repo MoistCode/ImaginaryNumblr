@@ -13,5 +13,9 @@ Rails.application.routes.draw do
              defaults: { format: :json },
              only: [:create, :destroy]
 
+  resources :likes,
+            defaults: { format: :json },
+            only: [:create, :destroy]
+
   root 'static_pages#root'
 end
