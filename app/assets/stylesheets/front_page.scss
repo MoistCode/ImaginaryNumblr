@@ -17,12 +17,19 @@
   color: red;
 }
 
+.sqrt {
+  display: inline;
+  background-image: url('/assets/sqrt.png');
+  width: 100px;
+  height: 100px;
+}
+
 .whatisthis {
   width: 110%;
   height: 110%;
   z-index: 99;
   background-color: #57BA89;
-  transform: translate(-5%, 402px);
+  transform: translate(-5%, 397px);
   font-family: 'Ubuntu', sans-serif;
   font-weight: bold;
   color: white;

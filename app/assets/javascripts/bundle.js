@@ -31065,8 +31065,7 @@ var FrontPage = function (_React$Component) {
             _react2.default.createElement(
               'div',
               {
-                className: 'w3-container w3-center w3-animate-bottom',
-                style: { marginLeft: '0', marginRight: '0' } },
+                className: 'w3-container w3-center w3-animate-bottom' },
               _react2.default.createElement(
                 'div',
                 { className: 'whatisthis' },
