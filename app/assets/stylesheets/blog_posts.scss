@@ -34,6 +34,7 @@
       margin-bottom: 15px;
       font-family: 'Ubuntu', sans-serif;
       font-weight: bold;
+      padding-top: 31px;
     }
 
     img {
@@ -49,6 +50,7 @@
       height: 100%;
       font-family: 'Ubuntu', sans-serif;
       font-weight: bold;
+      padding-top: 10px;
     }
 
     p {
@@ -90,7 +92,7 @@
   position: absolute;
   display: flex;
   transform: translate(437px, 0px);
-
+  margin-bottom: 10px;
   .header-follow {
     transform: translate(-2px,-11px);
     color: grey;
