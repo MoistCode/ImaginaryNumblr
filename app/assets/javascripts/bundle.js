@@ -32776,6 +32776,7 @@ var NavigationBar = function (_React$Component) {
     _this.state = {
       searchBar: ''
     };
+    _this._generateNavButtonStyles = _this._generateNavButtonStyles.bind(_this);
     return _this;
   }
 
@@ -32940,7 +32941,7 @@ var NavigationBar = function (_React$Component) {
           { className: 'session-button' },
           _react2.default.createElement('i', {
             className: 'fa fa-home',
-            style: { fontSize: '39px' },
+            style: this._generateNavButtonStyles('home'),
             onClick: function onClick() {
               if (!_this4.props.currentUser && _this4.props.location.pathname != '/dashboard') {
 
@@ -32952,14 +32953,14 @@ var NavigationBar = function (_React$Component) {
             } }),
           _react2.default.createElement('i', {
             className: 'fa fa-heart',
-            style: { fontSize: '35px' },
+            style: this._generateNavButtonStyles('likes'),
             onClick: function onClick() {
               return _this4.props.history.push('/likes');
             } }),
-          _react2.default.createElement('i', { className: 'fa fa-commenting', style: { fontSize: '35px' } }),
-          _react2.default.createElement('i', { className: 'fa fa-envelope', style: { fontSize: '35px' } }),
-          _react2.default.createElement('i', { className: 'fa fa-user', style: { fontSize: '35px' } }),
-          _react2.default.createElement('i', { className: 'fa fa-cogs', style: { fontSize: '35px' } }),
+          _react2.default.createElement('i', { className: 'fa fa-commenting', style: this._generateNavButtonStyles('comment') }),
+          _react2.default.createElement('i', { className: 'fa fa-envelope', style: this._generateNavButtonStyles('envelope') }),
+          _react2.default.createElement('i', { className: 'fa fa-user', style: this._generateNavButtonStyles('user') }),
+          _react2.default.createElement('i', { className: 'fa fa-cogs', style: this._generateNavButtonStyles('cogs') }),
           logoutButton
         );
       } else {
@@ -32968,6 +32969,17 @@ var NavigationBar = function (_React$Component) {
           { className: 'session-button' },
           renderedButton()
         );
+      }
+    }
+  }, {
+    key: '_generateNavButtonStyles',
+    value: function _generateNavButtonStyles(iconType) {
+      if (iconType == 'home' && this.props.location.pathname == '/dashboard') {
+        return { fontSize: '36px', color: '#A7CAE9' };
+      } else if (iconType == 'likes' && this.props.location.pathname == '/likes') {
+        return { fontSize: '36px', color: '#A7CAE9' };
+      } else {
+        return { fontSize: '36px' };
       }
     }
   }, {

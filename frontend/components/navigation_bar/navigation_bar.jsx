@@ -6,6 +6,7 @@ class NavigationBar extends React.Component {
     this.state = {
       searchBar: ''
     }
+    this._generateNavButtonStyles = this._generateNavButtonStyles.bind(this);
   }
 
   update(field) {
@@ -151,7 +152,7 @@ class NavigationBar extends React.Component {
         <span className='session-button'>
           <i
             className="fa fa-home"
-            style={{fontSize: '39px'}}
+            style={this._generateNavButtonStyles('home')}
             onClick={() => {
                 if (
                   !this.props.currentUser &&
@@ -166,12 +167,12 @@ class NavigationBar extends React.Component {
               }}></i>
           <i
             className="fa fa-heart"
-            style={{fontSize: '35px'}}
+            style={this._generateNavButtonStyles('likes')}
             onClick={() => this.props.history.push('/likes')}></i>
-          <i className="fa fa-commenting" style={{fontSize: '35px'}}></i>
-          <i className="fa fa-envelope" style={{fontSize: '35px'}}></i>
-          <i className="fa fa-user" style={{fontSize: '35px'}}></i>
-          <i className="fa fa-cogs" style={{fontSize: '35px'}}></i>
+          <i className="fa fa-commenting" style={this._generateNavButtonStyles('comment')}></i>
+          <i className="fa fa-envelope" style={this._generateNavButtonStyles('envelope')}></i>
+          <i className="fa fa-user" style={this._generateNavButtonStyles('user')}></i>
+          <i className="fa fa-cogs" style={this._generateNavButtonStyles('cogs')}></i>
           { logoutButton }
         </span>
       )
@@ -181,6 +182,16 @@ class NavigationBar extends React.Component {
           { renderedButton() }
         </span>
       )
+    }
+  }
+
+  _generateNavButtonStyles(iconType) {
+    if (iconType == 'home' && this.props.location.pathname == '/dashboard') {
+      return { fontSize: '36px', color: '#A7CAE9' };
+    } else if (iconType == 'likes' && this.props.location.pathname == '/likes') {
+      return { fontSize: '36px', color: '#A7CAE9' };
+    } else {
+      return { fontSize: '36px' };
     }
   }
 
