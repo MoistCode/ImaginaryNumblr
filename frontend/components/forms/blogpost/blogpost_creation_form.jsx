@@ -13,24 +13,29 @@ class BlogPostCreationForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const submitButton = $(".create-submit-button");
-    submitButton.prop("disabled", true);
-    const formData = new FormData();
-    formData.append('blogpost[title]', this.state.title);
-    formData.append('blogpost[content_type]', this.state.content_type);
-    if(this.state.content_type != 'quote' && this.state.content_type != 'text') {
-      formData.append('blogpost[description]]', this.state.description);
-      formData.append('blogpost[attached_file]', this.state.attached_file);
-    } else if (this.state.content_type == 'quote') {
-      formData.append('blogpost[quote]', this.state.quote);
-      formData.append('blogpost[quote_source]', this.state.quoteSource)
-    } else {
-      formData.append('blogpost[description]]', this.state.description);
+    if (e.key == 'Enter' || e.key == undefined) {
+      const submitButton = $(".create-submit-button");
+      submitButton.prop("disabled", true);
+      const formData = new FormData();
+      formData.append('blogpost[title]', this.state.title);
+      formData.append('blogpost[content_type]', this.state.content_type);
+      if(this.state.content_type != 'quote' && this.state.content_type != 'text') {
+        formData.append('blogpost[description]]', this.state.description);
+        formData.append('blogpost[attached_file]', this.state.attached_file);
+      } else if (this.state.content_type == 'quote') {
+        formData.append('blogpost[quote]', this.state.quote);
+        formData.append('blogpost[quote_source]', this.state.quoteSource)
+      } else {
+        formData.append('blogpost[description]]', this.state.description);
+      }
+      this.props.createBlogpost(formData).then(() => {
+        this.props.createdSubmitted();
+        submitButton.prop("disabled", false);
+        this.props.showDashboard();
+        this.props.clearErrors();
+      }, () => submitButton.prop("disabled", false));
     }
-    this.props.createBlogpost(formData).then(() => {
-      this.props.createdSubmitted();
-      submitButton.prop("disabled", false);
-    }, () => submitButton.prop("disabled", false));
+    submitButton.prop("disabled", false)
   }
 
   update(field) {
@@ -64,6 +69,7 @@ class BlogPostCreationForm extends React.Component {
                 style={{ fontSize: '28px' }} />
               {this._generateForm(this.props.contentType)}
               <button
+                type='submit'
                 className='create-submit-button'>Submit</button>
               {this._generateErrors(this.props.errors)}
             </form>
