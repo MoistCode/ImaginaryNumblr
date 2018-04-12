@@ -164,7 +164,7 @@ class BlogPostCreationForm extends React.Component {
       case 'video':
         return (
           <div>
-            <video controls src={this.state.video} />
+            <video controls src={this.state.video} style={{width: '500px', height: '100%' }}/>
             <input
               type='file'
               onChange={this._handleVideoChange} />
