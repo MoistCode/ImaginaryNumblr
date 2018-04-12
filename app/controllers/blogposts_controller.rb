@@ -48,7 +48,6 @@ class BlogpostsController < ApplicationController
     @blogpost = current_user.blogposts.find(params[:id])
 
     if @blogpost.destroy
-      debugger
       render 'blogposts/show'
     else
       render json: ['Cannot do such thing!'], status: 404

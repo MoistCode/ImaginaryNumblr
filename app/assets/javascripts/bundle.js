@@ -32198,10 +32198,10 @@ var BlogpostItem = function (_React$Component) {
       var _this8 = this;
 
       this.props.deleteBlogpost(this.props.blogpost.id).then(function () {
-        _this8.props.fetchUser(_this8.props.user.id).then(function () {
-          return _this8.props.fetchBlogpost(blogpostId);
-        });
+        debugger;
+        _this8.props.fetchUser(_this8.props.currentUser.id);
       });
+
       this.toggleDeletion();
     }
   }, {
