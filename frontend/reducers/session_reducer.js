@@ -17,6 +17,14 @@ const sessionReducer = (oldState = _nullUser, action) => {
         newState = merge({}, oldState);
       }
       return newState;
+    case RECEIVE_USERS:
+      let newState2;
+      if (oldState.currentUser.users[Object.keys(action.users.users)[0]] != undefined) {
+        newState2 = merge({}, { currentUser: { users: { [Object.keys(oldState.currentUser.users)[0]]: action.users.users[Object.keys(oldState.currentUser.users)[0]]}}} );
+      } else {
+        newState2 = merge({}, oldState);
+      }
+      return newState2;
     default:
       return oldState;
   }

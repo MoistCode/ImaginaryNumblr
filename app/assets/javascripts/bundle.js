@@ -24890,6 +24890,14 @@ var sessionReducer = function sessionReducer() {
         newState = (0, _merge2.default)({}, oldState);
       }
       return newState;
+    case _user_actions.RECEIVE_USERS:
+      var newState2 = void 0;
+      if (oldState.currentUser.users[Object.keys(action.users.users)[0]] != undefined) {
+        newState2 = (0, _merge2.default)({}, { currentUser: { users: _defineProperty({}, Object.keys(oldState.currentUser.users)[0], action.users.users[Object.keys(oldState.currentUser.users)[0]]) } });
+      } else {
+        newState2 = (0, _merge2.default)({}, oldState);
+      }
+      return newState2;
     default:
       return oldState;
   }
