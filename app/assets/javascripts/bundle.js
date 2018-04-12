@@ -32954,7 +32954,12 @@ var NavigationBar = function (_React$Component) {
                 _this4.props.history.push('/dashboard');
               }
             } }),
-          _react2.default.createElement('i', { className: 'fa fa-heart', style: { fontSize: '35px' } }),
+          _react2.default.createElement('i', {
+            className: 'fa fa-heart',
+            style: { fontSize: '35px' },
+            onClick: function onClick() {
+              return _this4.props.history.push('/likes');
+            } }),
           _react2.default.createElement('i', { className: 'fa fa-commenting', style: { fontSize: '35px' } }),
           _react2.default.createElement('i', { className: 'fa fa-envelope', style: { fontSize: '35px' } }),
           _react2.default.createElement('i', { className: 'fa fa-user', style: { fontSize: '35px' } }),

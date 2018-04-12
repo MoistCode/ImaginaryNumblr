@@ -177,7 +177,10 @@ class NavigationBar extends React.Component {
                   this.props.history.push('/dashboard');
                 }
               }}></i>
-          <i className="fa fa-heart" style={{fontSize: '35px'}}></i>
+          <i
+            className="fa fa-heart"
+            style={{fontSize: '35px'}}
+            onClick={() => this.props.history.push('/likes')}></i>
           <i className="fa fa-commenting" style={{fontSize: '35px'}}></i>
           <i className="fa fa-envelope" style={{fontSize: '35px'}}></i>
           <i className="fa fa-user" style={{fontSize: '35px'}}></i>
