@@ -24883,11 +24883,14 @@ var sessionReducer = function sessionReducer() {
       return (0, _merge2.default)({}, { currentUser: action.currentUser });
     case _user_actions.RECEIVE_USER:
       var newState = void 0;
-      if (oldState.currentUsers == null) {
+      if (oldState.currentUser == null) {
+        debugger;
         newState = (0, _merge2.default)({}, oldState);
       } else if (oldState.currentUser.users[Object.keys(action.user.users)[0]] != undefined) {
+        debugger;
         newState = (0, _merge2.default)({}, { currentUser: { users: _defineProperty({}, Object.keys(oldState.currentUser.users)[0], action.user.users[Object.keys(oldState.currentUser.users)[0]]) } });
       } else {
+        debugger;
         newState = (0, _merge2.default)({}, oldState);
       }
       return newState;
@@ -33504,7 +33507,7 @@ var LikeShowPage = function (_React$Component) {
       var _this3 = this;
 
       if (this.props.blogpostObjects.length > 0) {
-        return this.props.blogpostObjects.map(function (blogpost) {
+        return this.props.blogpostObjects.reverse().map(function (blogpost) {
           return _react2.default.createElement(_blogpost_item_container2.default, {
             key: blogpost.id,
             blogpost: blogpost,

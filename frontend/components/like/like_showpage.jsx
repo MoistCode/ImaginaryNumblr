@@ -45,7 +45,7 @@ class LikeShowPage extends React.Component {
   _generateFeed() {
     if (this.props.blogpostObjects.length > 0) {
       return (
-        this.props.blogpostObjects.map((blogpost) => <BlogpostItemContainer
+        this.props.blogpostObjects.reverse().map((blogpost) => <BlogpostItemContainer
                                                         key={blogpost.id}
                                                         blogpost={blogpost}
                                                         author={this._getAuthorFromBlogpost(blogpost.authorId)}
