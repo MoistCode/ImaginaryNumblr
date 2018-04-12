@@ -30846,7 +30846,7 @@ var App = function App() {
       null,
       _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/404meansthispagedoesnotexist', component: _page_does_not_exist2.default }),
       _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/users/:userId', component: _user_showpage_container2.default }),
-      _react2.default.createElement(_reactRouterDom.Route, { path: '/likes', component: _like_showpage_container2.default }),
+      _react2.default.createElement(_route_util.ProtectedRoute, { path: '/likes', component: _like_showpage_container2.default }),
       _react2.default.createElement(_route_util.ProtectedRoute, { exact: true, path: '/dashboard', component: _dashboard_container2.default }),
       _react2.default.createElement(_route_util.AuthRoute, { path: '/login', component: _front_page2.default }),
       _react2.default.createElement(_route_util.AuthRoute, { path: '/signup', component: _front_page2.default }),
@@ -32874,6 +32874,7 @@ var NavigationBar = function (_React$Component) {
           className: 'nav-button',
           onClick: function onClick() {
             _this4.props.logout();
+            _this4.props.history.push('/');
           },
           style: buttonColor() },
         'Log Out',

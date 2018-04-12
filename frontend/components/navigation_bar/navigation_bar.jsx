@@ -87,7 +87,7 @@ class NavigationBar extends React.Component {
         className='nav-button'
         onClick={() => {
           this.props.logout();
-
+          this.props.history.push('/');
         }}
         style={buttonColor()} >Log Out
         <i
