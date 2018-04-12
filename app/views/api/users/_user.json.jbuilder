@@ -3,7 +3,13 @@ json.users do
     json.id user.id
     json.username user.username
     json.blogUrl "users/#{user.id}"
-    json.profileImageUrl asset_path(user.profile_picture_url.url(:original))
+
+    if user.seed_image == nil
+      json.profileImageUrl asset_path(user.profile_picture_url.url(:original))
+    else
+      json.profileImageUrl user.seed_image
+    end
+
 
     blog_arr = []
     user.blogposts.each do |blogpost|

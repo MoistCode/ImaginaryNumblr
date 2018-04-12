@@ -14,6 +14,7 @@
 #  profile_picture_url_content_type :string
 #  profile_picture_url_file_size    :integer
 #  profile_picture_url_updated_at   :datetime
+#  seed_image                       :string
 #
 
 require 'test_helper'
