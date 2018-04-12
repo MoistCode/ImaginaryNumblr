@@ -150,7 +150,7 @@
   }
 
   .empty {
-    transform: translate(400%, -2%);
+    transform: translate(401%, -7%);
     font-size: 2vw;
     -webkit-animation-name: example; /* Safari 4.0 - 8.0 */
     -webkit-animation-duration: 3s; /* Safari 4.0 - 8.0 */
@@ -178,7 +178,8 @@
 }
 
 .photo1 {
-  background-image: url('/assets/math1.png');
+  // background-image: url('/assets/math1.png');
+  background-color: #3C4A5D;
   height: 100vh;
   width: 100%;
   background-size:     cover;                      /* <------ */
