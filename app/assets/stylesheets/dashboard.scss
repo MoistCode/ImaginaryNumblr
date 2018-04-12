@@ -52,6 +52,7 @@
       margin-left: 26px;
       font-family: 'Ubuntu', sans-serif;
       font-weight: bold;
+      word-wrap: break-word;
     }
   }
 }
@@ -83,6 +84,7 @@
     font-family: 'Ubuntu', sans-serif;
     font-weight: bold;
     color: #606C7D;
+    word-wrap: break-word;
   }
   li {
     margin-top: 5px;
@@ -111,6 +113,7 @@
     font-weight: bold;
     color: #8F97A3;
     cursor: pointer;
+    word-wrap: break-word;
   }
 
   p:hover {
@@ -129,6 +132,7 @@
     font-family: 'Ubuntu', sans-serif;
     font-weight: bold;
     color: #606C7D;
+    word-wrap: break-word;
   }
 
   .rec-bp-user-info {
@@ -173,6 +177,15 @@
     height: 100%;
     padding-top: 1px;
     margin-top: 11px;
+
+    .rec-title {
+      word-wrap: break-word;
+    }
+
+    p {
+      word-wrap: break-word;
+    }
+
     img {
       width: 100%;
     }
