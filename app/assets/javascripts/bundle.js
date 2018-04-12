@@ -30844,7 +30844,7 @@ var App = function App() {
       null,
       _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/404meansthispagedoesnotexist', component: _page_does_not_exist2.default }),
       _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/users/:userId', component: _user_showpage_container2.default }),
-      _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/likes', component: _like_showpage_container2.default }),
+      _react2.default.createElement(_reactRouterDom.Route, { path: '/likes', component: _like_showpage_container2.default }),
       _react2.default.createElement(_route_util.ProtectedRoute, { exact: true, path: '/dashboard', component: _dashboard_container2.default }),
       _react2.default.createElement(_route_util.AuthRoute, { path: '/login', component: _front_page2.default }),
       _react2.default.createElement(_route_util.AuthRoute, { path: '/signup', component: _front_page2.default }),
@@ -31579,7 +31579,14 @@ var Dashboard = function (_React$Component) {
     value: function _generateFeed() {
       var _this7 = this;
 
-      if (this.props.listOfBlogposts.length > 0) {
+      var undefinedBlogs = false;
+
+      for (var i = 0; i < this.props.listOfBlogposts.length; i++) {
+        if (this.props.listOfBlogposts[i] == undefined) {
+          undefinedBlogs = true;
+        }
+      }
+      if (!undefinedBlogs) {
         return this.props.listOfBlogposts.map(function (blogpost) {
           return _react2.default.createElement(_blogpost_item_container2.default, {
             key: blogpost.id,
@@ -33313,10 +33320,214 @@ exports.default = PageDoesNotExist;
 
 /***/ }),
 /* 243 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-throw new Error("Module build failed: SyntaxError: Unexpected token (13:0)\n\n\u001b[0m \u001b[90m 11 | \u001b[39m  blogpostObjects\u001b[33m:\u001b[39m\n \u001b[90m 12 | \u001b[39m  authorObjects\u001b[33m:\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 13 | \u001b[39m}\u001b[33m;\u001b[39m\n \u001b[90m    | \u001b[39m\u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 14 | \u001b[39m\n \u001b[90m 15 | \u001b[39m\u001b[36mconst\u001b[39m mapDispatchToProps \u001b[33m=\u001b[39m (dispatch) \u001b[33m=>\u001b[39m {\n \u001b[90m 16 | \u001b[39m\u001b[0m\n");
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _reactRedux = __webpack_require__(5);
+
+var _like_showpage = __webpack_require__(244);
+
+var _like_showpage2 = _interopRequireDefault(_like_showpage);
+
+var _blogpost_actions = __webpack_require__(9);
+
+var _user_actions = __webpack_require__(14);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    currentUser: Object.values(state.session.currentUser.users)[0],
+    blogpostObjects: _getBlogpostObjects(Object.values(state.session.currentUser.users)[0].likedBlogIds, state.blogposts),
+    authorObjects: _getAuthorObjects(Object.values(state.session.currentUser.users)[0].likedBlogIds, state.users, state.blogposts)
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    fetchBlogposts: function fetchBlogposts(blogpostIds) {
+      return dispatch((0, _blogpost_actions.fetchBlogposts)(blogpostIds));
+    },
+    fetchUsers: function fetchUsers(userIds) {
+      return dispatch((0, _user_actions.fetchUsers)(userIds));
+    }
+  };
+};
+
+var _getBlogpostObjects = function _getBlogpostObjects(arrOfCurUserLikes, blogposts) {
+  return arrOfCurUserLikes.map(function (id) {
+    return blogposts[id];
+  });
+};
+
+var _getAuthorObjects = function _getAuthorObjects(arrOfCurUserLikes, users, blogposts) {
+  var arrOfBlogs = arrOfCurUserLikes.map(function (id) {
+    return blogposts[id];
+  });
+
+  var undefinedBlogs = false;
+
+  for (var i = 0; i < arrOfBlogs.length; i++) {
+    if (arrOfBlogs[i] == undefined) {
+      undefinedBlogs = true;
+    }
+  }
+  if (undefinedBlogs) {
+    return 'none';
+  }
+
+  var arrOfAuthorIds = arrOfBlogs.map(function (blog) {
+    return blog.authorId;
+  });
+  if (arrOfAuthorIds[0] == undefined || users[arrOfAuthorIds[0]] == undefined) {
+    return 'none';
+  }
+
+  var uniqArrOfAuthorIds = [];
+
+  for (var _i = 0; _i < arrOfAuthorIds.length; _i++) {
+    var included = false;
+    for (var j = 0; j < uniqArrOfAuthorIds.length; j++) {
+      if (arrOfAuthorIds[_i] == uniqArrOfAuthorIds[j]) {
+        included = true;
+      }
+    }
+    if (!included) {
+      uniqArrOfAuthorIds.push(arrOfAuthorIds[_i]);
+    }
+  }
+
+  return uniqArrOfAuthorIds.map(function (authorId) {
+    return users[authorId];
+  });
+};
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_like_showpage2.default);
+
+/***/ }),
+/* 244 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _merge = __webpack_require__(34);
+
+var _merge2 = _interopRequireDefault(_merge);
+
+var _blogpost_item_container = __webpack_require__(90);
+
+var _blogpost_item_container2 = _interopRequireDefault(_blogpost_item_container);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var LikeShowPage = function (_React$Component) {
+  _inherits(LikeShowPage, _React$Component);
+
+  function LikeShowPage(props) {
+    _classCallCheck(this, LikeShowPage);
+
+    var _this = _possibleConstructorReturn(this, (LikeShowPage.__proto__ || Object.getPrototypeOf(LikeShowPage)).call(this, props));
+
+    _this._getAuthorFromBlogpost = _this._getAuthorFromBlogpost.bind(_this);
+    _this._generateFeed = _this._generateFeed.bind(_this);
+    return _this;
+  }
+
+  _createClass(LikeShowPage, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      this.props.fetchBlogposts(this.props.currentUser.likedBlogIds).then(function (blogposts) {
+        var arrOfUserIds = Object.values(blogposts.blogposts.blogposts).map(function (blogpost) {
+          return blogpost.authorId;
+        });
+        _this2.props.fetchUsers(arrOfUserIds);
+      });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      if (this.props.authorObjects == 'none') {
+        return _react2.default.createElement(
+          'div',
+          null,
+          'Loading'
+        );
+      }
+      var undefinedAuthor = false;
+      for (var i = 0; i < this.props.authorObjects.length; i++) {
+        if (this.props.authorObjects[i] == undefined) {
+          undefinedAuthor = true;
+        }
+      }
+      if (undefinedAuthor) {
+        return _react2.default.createElement(
+          'div',
+          null,
+          'Loading'
+        );
+      }
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'like-showpage' },
+        this._generateFeed()
+      );
+    }
+  }, {
+    key: '_generateFeed',
+    value: function _generateFeed() {
+      var _this3 = this;
+
+      if (this.props.blogpostObjects.length > 0) {
+        return this.props.blogpostObjects.map(function (blogpost) {
+          return _react2.default.createElement(_blogpost_item_container2.default, {
+            key: blogpost.id,
+            blogpost: blogpost,
+            author: _this3._getAuthorFromBlogpost(blogpost.authorId),
+            createdSubmitted: _this3._triggerDashRefresh });
+        });
+      }
+    }
+  }, {
+    key: '_getAuthorFromBlogpost',
+    value: function _getAuthorFromBlogpost(authorId) {
+      for (var i = 0; i < this.props.authorObjects.length; i++) {
+        if (this.props.authorObjects[i].id == authorId) {
+          return this.props.authorObjects[i];
+        }
+      }
+    }
+  }]);
+
+  return LikeShowPage;
+}(_react2.default.Component);
+
+exports.default = LikeShowPage;
 
 /***/ })
 /******/ ]);

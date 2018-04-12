@@ -46,6 +46,8 @@
   justify-content: center;
   flex-direction: column;
   text-align: center;
+  overflow: -webkit-paged-x;
+
   h1 {
     font-family: 'Ubuntu', sans-serif;
     font-weight: bold;
@@ -65,7 +67,6 @@
     justify-content: center;
     text-align: center;
     top: 43%;
-
   }
 
   .exist1 {

@@ -24,7 +24,7 @@ class BlogpostItem extends React.Component {
     this.props.postFollow(this.props.user.id)
       .then(() => {
           this.props.fetchUser(this.props.user.id);
-
+          
         }
       )
 
