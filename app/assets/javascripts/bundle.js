@@ -33224,19 +33224,18 @@ var UserShowPage = function (_React$Component) {
     value: function _generateUserBlogs() {
       var _this7 = this;
 
-      var isUndefined = function isUndefined(arr) {
-        for (var i = 0; i < arr.length; i++) {
-          if (arr[i] == undefined) {
-            return false;
-          }
+      var arr = [];
+
+      for (var i = 0; i < this.props.blogposts.length; i++) {
+        if (this.props.blogposts[i] != undefined) {
+          arr.push(this.props.blogposts[i]);
         }
-        return true;
-      };
-      if (isUndefined(this.props.blogposts)) {
-        return this.props.blogposts.map(function (blogpost) {
-          return _react2.default.createElement(_blogpost_item_container2.default, { key: blogpost.id, blogpost: blogpost, listOfUsers: _this7.props.currentUser });
-        });
       }
+      console.log(arr);
+      console.log(this.props.blogposts);
+      return arr.map(function (blogpost) {
+        return _react2.default.createElement(_blogpost_item_container2.default, { key: blogpost.id, blogpost: blogpost, listOfUsers: _this7.props.currentUser });
+      });
     }
   }]);
 

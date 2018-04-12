@@ -101,19 +101,19 @@ class UserShowPage extends React.Component {
   }
 
   _generateUserBlogs() {
-    const isUndefined = (arr) => {
-      for(let i = 0; i < arr.length; i++) {
-        if (arr[i] == undefined){
-          return false;
-        }
+    let arr = [];
+
+    for(let i = 0; i < this.props.blogposts.length; i++) {
+      if (this.props.blogposts[i] != undefined){
+        arr.push(this.props.blogposts[i]);
       }
-      return true;
     }
-    if (isUndefined(this.props.blogposts)) {
-      return (
-        this.props.blogposts.map((blogpost) => <BlogpostItemContainer key={blogpost.id} blogpost={blogpost} listOfUsers={this.props.currentUser}/>)
-      )
-    }
+    console.log(arr);
+    console.log(this.props.blogposts);
+    return (
+      arr.map((blogpost) => <BlogpostItemContainer key={blogpost.id} blogpost={blogpost} listOfUsers={this.props.currentUser}/>)
+    )
+
   }
 
 }
