@@ -99,14 +99,15 @@ class BlogpostItem extends React.Component {
     this.props.updateBlogpost(formData, this.props.blogpost.id)
       .then(() => {
           submitButton.prop('disabled', false);
-          window.location.reload();
+          this.props.createdSubmitted();
+          this.toggleEditForm();
         }, () => submitButton.prop("disabled", false)
       )
   }
 
   handleDeletion() {
     this.props.deleteBlogpost(this.props.blogpost.id)
-      .then(() => window.location.reload())
+
   }
 
   toggleDeletion() {

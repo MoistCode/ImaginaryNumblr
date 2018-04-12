@@ -32126,6 +32126,8 @@ var BlogpostItem = function (_React$Component) {
   }, {
     key: 'handleSubmit',
     value: function handleSubmit(e) {
+      var _this7 = this;
+
       e.preventDefault();
       var submitButton = $('.edit-submit-button');
       submitButton.prop("disabled", true);
@@ -32143,7 +32145,8 @@ var BlogpostItem = function (_React$Component) {
       }
       this.props.updateBlogpost(formData, this.props.blogpost.id).then(function () {
         submitButton.prop('disabled', false);
-        window.location.reload();
+        _this7.props.createdSubmitted();
+        _this7.toggleEditForm();
       }, function () {
         return submitButton.prop("disabled", false);
       });
@@ -32151,9 +32154,7 @@ var BlogpostItem = function (_React$Component) {
   }, {
     key: 'handleDeletion',
     value: function handleDeletion() {
-      this.props.deleteBlogpost(this.props.blogpost.id).then(function () {
-        return window.location.reload();
-      });
+      this.props.deleteBlogpost(this.props.blogpost.id);
     }
   }, {
     key: 'toggleDeletion',
@@ -32191,20 +32192,20 @@ var BlogpostItem = function (_React$Component) {
   }, {
     key: '_generateLikeIcon',
     value: function _generateLikeIcon() {
-      var _this7 = this;
+      var _this8 = this;
 
       if (this.state.currentUserLikes) {
         return _react2.default.createElement('i', {
           className: 'fa fa-heart',
           onClick: function onClick() {
-            return _this7.handleUnlike(_this7.props.blogpost.id);
+            return _this8.handleUnlike(_this8.props.blogpost.id);
           },
           style: { fontSize: '24px', color: 'red' } });
       } else {
         return _react2.default.createElement('i', {
           className: 'fa fa-heart',
           onClick: function onClick() {
-            return _this7.handleLike(_this7.props.blogpost.id);
+            return _this8.handleLike(_this8.props.blogpost.id);
           },
           style: { fontSize: '24px' } });
       }
@@ -32212,14 +32213,14 @@ var BlogpostItem = function (_React$Component) {
   }, {
     key: '_generateProfileImageUrl',
     value: function _generateProfileImageUrl() {
-      var _this8 = this;
+      var _this9 = this;
 
       if (this.props.author != undefined) {
         return _react2.default.createElement('img', {
           className: 'blog-profile-pic',
           src: this.props.author.profileImageUrl,
           onClick: function onClick() {
-            return _this8.props.history.push('/' + _this8.props.author.blogUrl);
+            return _this9.props.history.push('/' + _this9.props.author.blogUrl);
           } });
       } else {
         return '';
@@ -32261,7 +32262,7 @@ var BlogpostItem = function (_React$Component) {
   }, {
     key: '_generateEditForm',
     value: function _generateEditForm() {
-      var _this9 = this;
+      var _this10 = this;
 
       if (this.state.showEditForm == true) {
         return _react2.default.createElement(
@@ -32285,7 +32286,7 @@ var BlogpostItem = function (_React$Component) {
               _react2.default.createElement(
                 'form',
                 { onSubmit: function onSubmit(e) {
-                    return _this9.handleSubmit(e);
+                    return _this10.handleSubmit(e);
                   } },
                 _react2.default.createElement('input', {
                   className: 'edit-title',
@@ -32358,7 +32359,7 @@ var BlogpostItem = function (_React$Component) {
   }, {
     key: '_currentUserFollow',
     value: function _currentUserFollow(id) {
-      var _this10 = this;
+      var _this11 = this;
 
       if (this.props.match.path == "/users/:userId") {
         return;
@@ -32373,7 +32374,7 @@ var BlogpostItem = function (_React$Component) {
             'p',
             {
               onClick: function onClick() {
-                return _this10.handleUnfollow(_this10.props.author.id);
+                return _this11.handleUnfollow(_this11.props.author.id);
               }
             },
             'Unfollow'
@@ -32389,11 +32390,11 @@ var BlogpostItem = function (_React$Component) {
   }, {
     key: '_currentUserLikesBool',
     value: function _currentUserLikesBool(id) {
-      var _this11 = this;
+      var _this12 = this;
 
       var doesCurrentUserLike = function doesCurrentUserLike(blogId) {
-        for (var i = 0; i < _this11.props.arrayOfCurrentUserLikes.length; i++) {
-          if (blogId == _this11.props.arrayOfCurrentUserLikes[i]) {
+        for (var i = 0; i < _this12.props.arrayOfCurrentUserLikes.length; i++) {
+          if (blogId == _this12.props.arrayOfCurrentUserLikes[i]) {
             return true;
           }
         }
