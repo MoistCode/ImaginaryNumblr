@@ -27161,11 +27161,8 @@ var blogpostsReducer = function blogpostsReducer() {
     case _blogpost_actions.RECEIVE_BLOGPOSTS:
       return (0, _merge3.default)({}, oldState, action.blogposts.blogposts);
     case _blogpost_actions.RECEIVE_BLOGPOST:
-      if (action.blogpost.blogposts != undefined) {
-        return (0, _merge3.default)({}, oldState, { blogposts: action.blogpost.blogposts });
-      }
-
-      return (0, _merge3.default)({}, oldState, _defineProperty({}, action.blogpost.id, action.blogpost));
+      debugger;
+      return (0, _merge3.default)({}, oldState, _defineProperty({}, Object.keys(action.blogpost.blogposts)[0], Object.values(action.blogpost.blogposts)[0]));
     case _blogpost_actions.REMOVE_BLOGPOST:
       var newState = (0, _merge3.default)({}, oldState);
       delete newState[action.blogpostId];
