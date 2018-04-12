@@ -24879,6 +24879,7 @@ var sessionReducer = function sessionReducer() {
   Object.freeze(oldState);
   switch (action.type) {
     case _session_actions.RECEIVE_CURRENT_USER:
+      debugger;
       return (0, _merge2.default)({}, { currentUser: action.currentUser });
     case _user_actions.RECEIVE_USER:
       var newState = void 0;
@@ -31367,7 +31368,18 @@ var Dashboard = function (_React$Component) {
     }
   }, {
     key: 'componentDidMount',
-    value: function componentDidMount() {}
+    value: function componentDidMount() {
+      var _this3 = this;
+
+      var arrOfUserIds = this.props.currentUser[0].followeeIds.concat(this.props.currentUser[0].id);
+      this.props.fetchUsers(arrOfUserIds).then(function (payload) {
+        var arrOfBlogpostIds = [];
+        Object.values(payload.users.users).forEach(function (user) {
+          arrOfBlogpostIds = arrOfBlogpostIds.concat(user.blogpostIds);
+        });
+        _this3.props.fetchBlogposts(arrOfBlogpostIds);
+      });
+    }
   }, {
     key: 'handleCreationModal',
     value: function handleCreationModal(field) {
@@ -31387,7 +31399,7 @@ var Dashboard = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       return _react2.default.createElement(
         'div',
@@ -31401,7 +31413,7 @@ var Dashboard = function (_React$Component) {
             _react2.default.createElement(
               'div',
               { onClick: function onClick(e) {
-                  return _this3.handleCreationModal('quote');
+                  return _this4.handleCreationModal('quote');
                 } },
               _react2.default.createElement('i', {
                 className: 'fa fa-quote-left',
@@ -31415,7 +31427,7 @@ var Dashboard = function (_React$Component) {
             _react2.default.createElement(
               'div',
               { onClick: function onClick(e) {
-                  return _this3.handleCreationModal('text');
+                  return _this4.handleCreationModal('text');
                 } },
               _react2.default.createElement('i', {
                 className: 'fa fa-font',
@@ -31429,7 +31441,7 @@ var Dashboard = function (_React$Component) {
             _react2.default.createElement(
               'div',
               { onClick: function onClick(e) {
-                  return _this3.handleCreationModal('audio');
+                  return _this4.handleCreationModal('audio');
                 } },
               _react2.default.createElement(
                 'i',
@@ -31447,7 +31459,7 @@ var Dashboard = function (_React$Component) {
             _react2.default.createElement(
               'div',
               { onClick: function onClick(e) {
-                  return _this3.handleCreationModal('photo');
+                  return _this4.handleCreationModal('photo');
                 } },
               _react2.default.createElement(
                 'i',
@@ -31465,7 +31477,7 @@ var Dashboard = function (_React$Component) {
             _react2.default.createElement(
               'div',
               { onClick: function onClick(e) {
-                  return _this3.handleCreationModal('video');
+                  return _this4.handleCreationModal('video');
                 } },
               _react2.default.createElement('i', {
                 className: 'fa fa-caret-square-o-right',
@@ -31490,7 +31502,7 @@ var Dashboard = function (_React$Component) {
   }, {
     key: '_triggerDashRefresh',
     value: function _triggerDashRefresh() {
-      var _this4 = this;
+      var _this5 = this;
 
       var arrOfUserIds = this.props.currentUser[0].followeeIds.concat(this.props.currentUser[0].id);
       this.props.fetchUsers(arrOfUserIds).then(function (payload) {
@@ -31498,13 +31510,13 @@ var Dashboard = function (_React$Component) {
         Object.values(payload.users.users).forEach(function (user) {
           arrOfBlogpostIds = arrOfBlogpostIds.concat(user.blogpostIds);
         });
-        _this4.props.fetchBlogposts(arrOfBlogpostIds);
+        _this5.props.fetchBlogposts(arrOfBlogpostIds);
       });
     }
   }, {
     key: '_generateRecommendedUsers',
     value: function _generateRecommendedUsers() {
-      var _this5 = this;
+      var _this6 = this;
 
       return _react2.default.createElement(
         'div',
@@ -31524,12 +31536,12 @@ var Dashboard = function (_React$Component) {
               _react2.default.createElement('img', {
                 src: user.profileImageUrl,
                 onClick: function onClick() {
-                  return _this5.props.history.push('/' + user.blogUrl);
+                  return _this6.props.history.push('/' + user.blogUrl);
                 } }),
               user.username,
               _react2.default.createElement('i', {
                 className: 'fa fa-plus-square',
-                style: _this5._generateUserFollowedIconColor(user.id) })
+                style: _this6._generateUserFollowedIconColor(user.id) })
             );
           })
         )
@@ -31560,15 +31572,15 @@ var Dashboard = function (_React$Component) {
   }, {
     key: '_generateFeed',
     value: function _generateFeed() {
-      var _this6 = this;
+      var _this7 = this;
 
       if (this.props.listOfBlogposts.length > 0) {
         return this.props.listOfBlogposts.map(function (blogpost) {
           return _react2.default.createElement(_blogpost_item_container2.default, {
             key: blogpost.id,
             blogpost: blogpost,
-            author: _this6._getAuthorFromBlogpost(blogpost.authorId),
-            createdSubmitted: _this6._triggerDashRefresh });
+            author: _this7._getAuthorFromBlogpost(blogpost.authorId),
+            createdSubmitted: _this7._triggerDashRefresh });
         });
       }
     }
@@ -31576,7 +31588,6 @@ var Dashboard = function (_React$Component) {
     key: '_getAuthorFromBlogpost',
     value: function _getAuthorFromBlogpost(blogpostAuthorId) {
       for (var i = 0; i < this.props.listOfUsers.length; i++) {
-
         if (this.props.listOfUsers[i].id == blogpostAuthorId) {
           return this.props.listOfUsers[i];
         }
@@ -31585,14 +31596,14 @@ var Dashboard = function (_React$Component) {
   }, {
     key: '_generateForm',
     value: function _generateForm() {
-      var _this7 = this;
+      var _this8 = this;
 
       var contentType = this.state.modalContentType;
       if (this.state.creationFormModalIsOpen == true) {
         return _react2.default.createElement(_blogpost_creation_form_container2.default, {
           contentType: contentType,
           showDashboard: function showDashboard() {
-            _this7.handleCreationModal('');
+            _this8.handleCreationModal('');
           },
           createdSubmitted: this._triggerDashRefresh });
       }
@@ -32874,10 +32885,7 @@ var NavigationBar = function (_React$Component) {
         {
           className: 'nav-button',
           onClick: function onClick() {
-            _this4.props.demoLogin(formData).then(function () {
-
-              _this4.props.history.push('/dashboard');
-            });
+            return _this4.props.demoLogin(formData);
           }
         },
         'Demo',

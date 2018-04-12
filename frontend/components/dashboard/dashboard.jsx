@@ -35,7 +35,17 @@ class Dashboard extends React.Component {
   }
 
   componentDidMount() {
-
+    const arrOfUserIds = this.props.currentUser[0].followeeIds.concat(this.props.currentUser[0].id);
+    this.props.fetchUsers(arrOfUserIds)
+      .then(
+        (payload) => {
+          let arrOfBlogpostIds = []
+          Object.values(payload.users.users).forEach((user) => {
+            arrOfBlogpostIds = arrOfBlogpostIds.concat(user.blogpostIds);
+          });
+          this.props.fetchBlogposts(arrOfBlogpostIds);
+        }
+      )
   }
 
   handleCreationModal(field) {
@@ -181,7 +191,6 @@ class Dashboard extends React.Component {
 
   _getAuthorFromBlogpost(blogpostAuthorId) {
     for(let i = 0; i < this.props.listOfUsers.length; i++) {
-
       if (this.props.listOfUsers[i].id == blogpostAuthorId) {
         return this.props.listOfUsers[i];
       }

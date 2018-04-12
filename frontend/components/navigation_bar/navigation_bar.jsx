@@ -50,7 +50,7 @@ class NavigationBar extends React.Component {
                   !this.props.currentUser &&
                   this.props.location.pathname != '/dashboard'
                 ) {
-                  
+
                   this.props.history.push('/');
                 } else {
                   this.props.history.push(`/users/${this.props.currentUser[0].id}`)
@@ -100,7 +100,7 @@ class NavigationBar extends React.Component {
         className='nav-button'
         onClick={() => {
           this.props.logout();
-          
+
         }}
         style={buttonColor()} >Log Out
         <i
@@ -130,13 +130,7 @@ class NavigationBar extends React.Component {
     const demoButton = (
       <button
         className='nav-button'
-        onClick={() => {
-          this.props.demoLogin(formData)
-            .then(() => {
-              
-              this.props.history.push('/dashboard');
-            })
-          }}
+        onClick={() => this.props.demoLogin(formData)}
         >Demo
         <i
           className="fa fa-superscript"
@@ -176,10 +170,10 @@ class NavigationBar extends React.Component {
                   !this.props.currentUser &&
                   this.props.location.pathname != '/dashboard'
                 ) {
-                  
+
                   this.props.history.push('/');
                 } else {
-                  
+
                   this.props.history.push('/dashboard');
                 }
               }}></i>
@@ -208,10 +202,10 @@ class NavigationBar extends React.Component {
                 !this.props.currentUser &&
                 this.props.location.pathname != '/dashboard'
               ) {
-                
+
                 this.props.history.push('/');
               } else {
-                
+
                 this.props.history.push('/dashboard');
               }
             }
