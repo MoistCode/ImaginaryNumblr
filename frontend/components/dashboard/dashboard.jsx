@@ -54,7 +54,6 @@ class Dashboard extends React.Component {
   }
 
   render() {
-    console.log(this.props.listOfRandomUsers);
     return (
       <div className='dash-background'>
         <div className='blog-creation'>

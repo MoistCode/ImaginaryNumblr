@@ -36,7 +36,7 @@ class UserShowPage extends React.Component {
     this.props.postFollow(this.props.user.id)
       .then(() => {
           this.props.fetchUser(this.props.user.id);
-          window.location.reload();
+          // window.location.reload();
         }
       )
 
@@ -46,7 +46,7 @@ class UserShowPage extends React.Component {
     this.props.destroyFollow(this.props.user.id)
       .then(() => {
           this.props.fetchUser(this.props.user.id);
-          window.location.reload();
+          // window.location.reload();
         }
       )
   }
@@ -93,7 +93,7 @@ class UserShowPage extends React.Component {
 
   _generateFollowButton() {
     if (this.props.currentUser == 'none') {
-      // Do something here later
+      return
     } else if (this.props.currentUserFollows.indexOf(this.props.user.id) > -1) {
       return <button className='follow-button' onClick={this.handleUnfollow}>Unfollow</button>
     } else if (this.props.user.id != this.props.currentUser.id) {

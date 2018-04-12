@@ -1501,16 +1501,16 @@ var fetchUsers = exports.fetchUsers = function fetchUsers(userIds) {
 
 var postFollow = exports.postFollow = function postFollow(followeeId) {
   return function (dispatch) {
-    return FollowUtil.postFollow(followeeId).then(function (user) {
-      return dispatch(receiveUser(user));
+    return FollowUtil.postFollow(followeeId).then(function (users) {
+      return dispatch(receiveUsers(users));
     });
   };
 };
 
 var destroyFollow = exports.destroyFollow = function destroyFollow(followeeId) {
   return function (dispatch) {
-    return FollowUtil.destroyFollow(followeeId).then(function (user) {
-      return dispatch(receiveUser(user));
+    return FollowUtil.destroyFollow(followeeId).then(function (users) {
+      return dispatch(receiveUsers(users));
     });
   };
 };
@@ -24862,11 +24862,15 @@ Object.defineProperty(exports, "__esModule", {
 
 var _session_actions = __webpack_require__(13);
 
+var _user_actions = __webpack_require__(27);
+
 var _merge = __webpack_require__(34);
 
 var _merge2 = _interopRequireDefault(_merge);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var _nullUser = Object.freeze({ currentUser: null });
 
@@ -24878,6 +24882,14 @@ var sessionReducer = function sessionReducer() {
   switch (action.type) {
     case _session_actions.RECEIVE_CURRENT_USER:
       return (0, _merge2.default)({}, { currentUser: action.currentUser });
+    case _user_actions.RECEIVE_USER:
+      var newState = void 0;
+      if (oldState.currentUser.users[Object.keys(action.user.users)[0]] != undefined) {
+        newState = (0, _merge2.default)({}, { currentUser: { users: _defineProperty({}, Object.keys(oldState.currentUser.users)[0], action.user.users[Object.keys(oldState.currentUser.users)[0]]) } });
+      } else {
+        newState = (0, _merge2.default)({}, oldState);
+      }
+      return newState;
     default:
       return oldState;
   }
@@ -27024,7 +27036,10 @@ var usersReducer = function usersReducer() {
   Object.freeze(oldState);
   switch (action.type) {
     case _user_actions.RECEIVE_USERS:
-      return (0, _merge3.default)({}, oldState, action.users.users);
+      if (Object.values(action.users.users) != undefined) {
+        return (0, _merge3.default)({}, oldState.users, action.users.users);
+      }
+      return (0, _merge3.default)({}, oldState, action.users);
     case _user_actions.RECEIVE_USER:
       var receivedUser = Object.values(action.user.users)[0];
       return (0, _merge3.default)({}, oldState, _defineProperty({}, receivedUser.id, receivedUser));
@@ -31370,7 +31385,6 @@ var Dashboard = function (_React$Component) {
     value: function render() {
       var _this3 = this;
 
-      console.log(this.props.listOfRandomUsers);
       return _react2.default.createElement(
         'div',
         { className: 'dash-background' },
@@ -33101,7 +33115,7 @@ var UserShowPage = function (_React$Component) {
 
       this.props.postFollow(this.props.user.id).then(function () {
         _this4.props.fetchUser(_this4.props.user.id);
-        window.location.reload();
+        // window.location.reload();
       });
     }
   }, {
@@ -33111,7 +33125,7 @@ var UserShowPage = function (_React$Component) {
 
       this.props.destroyFollow(this.props.user.id).then(function () {
         _this5.props.fetchUser(_this5.props.user.id);
-        window.location.reload();
+        // window.location.reload();
       });
     }
   }, {
@@ -33196,7 +33210,7 @@ var UserShowPage = function (_React$Component) {
     key: '_generateFollowButton',
     value: function _generateFollowButton() {
       if (this.props.currentUser == 'none') {
-        // Do something here later
+        return;
       } else if (this.props.currentUserFollows.indexOf(this.props.user.id) > -1) {
         return _react2.default.createElement(
           'button',

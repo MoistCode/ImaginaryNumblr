@@ -6,8 +6,8 @@ class FollowsController < ApplicationController
         @follow = Follow.new(followee_id: params[:follow][:followee_id])
         @follow.follower_id = current_user.id
         if @follow.save
-          @user = User.find(current_user.id)
-          render 'api/users/show'
+          @users = [User.find(current_user.id), User.find(params[:follow][:followee_id])]
+          render 'api/users/index'
         else
           render json: @follow.errors.full_messages, status: 422
         end
@@ -19,8 +19,8 @@ class FollowsController < ApplicationController
   def destroy
     @follow = Follow.find_by(follower_id: current_user.id, followee_id: params[:id])
     @follow.destroy
-    @user = current_user
-    render 'api/users/show'
+    @users = [current_user, User.find(params[:id])]
+    render 'api/users/index'
   end
 
   private

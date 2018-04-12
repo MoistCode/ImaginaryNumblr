@@ -17,12 +17,12 @@ export const fetchUsers = (userIds) => (dispatch) => UserUtil.fetchUsers(userIds
 
 export const postFollow = (followeeId) => (dispatch) => FollowUtil.postFollow(followeeId)
   .then(
-    (user) => dispatch(receiveUser(user))
+    (users) => dispatch(receiveUsers(users))
   )
 
 export const destroyFollow = (followeeId) => (dispatch) => FollowUtil.destroyFollow(followeeId)
   .then(
-    (user) => dispatch(receiveUser(user))
+    (users) => dispatch(receiveUsers(users))
   )
 
 export const postLike = (blogId) => (dispatch) => LikeUtil.postLike(blogId)
