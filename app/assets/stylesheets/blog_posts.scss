@@ -29,6 +29,8 @@
     box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
     height: 100%;
     position: relative;
+    text-align: -webkit-center;
+
 
     .title {
       margin-top: 25px;
@@ -59,6 +61,9 @@
       word-wrap: break-word;
       font-family: 'Ubuntu', sans-serif;
       margin-bottom: 50px;
+      word-wrap: break-word;
+      text-align: -webkit-center;
+      width: 80%;
     }
 }
 
