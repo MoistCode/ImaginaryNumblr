@@ -111,10 +111,9 @@ class BlogpostItem extends React.Component {
   handleDeletion() {
     this.props.deleteBlogpost(this.props.blogpost.id)
       .then(() => {
-        debugger;
         this.props.fetchUser(this.props.currentUser.id);
       })
-
+    this.props.fetchUser(this.props.currentUser);
     this.toggleDeletion();
   }
 
