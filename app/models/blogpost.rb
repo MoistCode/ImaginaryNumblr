@@ -39,7 +39,8 @@ class Blogpost < ApplicationRecord
   has_many :likers,
     primary_key: :id,
     foreign_key: :liked_blog_id,
-    class_name: 'Like'
+    class_name: 'Like',
+    dependent: :destroy
 
   private
 

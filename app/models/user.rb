@@ -32,22 +32,26 @@ class User < ApplicationRecord
   has_many :blogposts,
     primary_key: :id,
     foreign_key: :author_id,
-    class_name: 'Blogpost'
+    class_name: 'Blogpost',
+    dependent: :destroy
 
   has_many :follows,
     primary_key: :id,
     foreign_key: :follower_id,
-    class_name: 'Follow'
+    class_name: 'Follow',
+    dependent: :destroy
 
   has_many :followers,
     primary_key: :id,
     foreign_key: :followee_id,
-    class_name: 'Follow'
+    class_name: 'Follow',
+    dependent: :destroy
 
   has_many :liked_blogs,
     primary_key: :id,
     foreign_key: :liker_id,
-    class_name: 'Like'
+    class_name: 'Like',
+    dependent: :destroy
 
 
   def self.find_by_credentials(username, password)
