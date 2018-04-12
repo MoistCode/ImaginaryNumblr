@@ -24879,18 +24879,17 @@ var sessionReducer = function sessionReducer() {
   Object.freeze(oldState);
   switch (action.type) {
     case _session_actions.RECEIVE_CURRENT_USER:
-      debugger;
       return (0, _merge2.default)({}, { currentUser: action.currentUser });
     case _user_actions.RECEIVE_USER:
       var newState = void 0;
       if (oldState.currentUser == null) {
-        debugger;
+
         newState = (0, _merge2.default)({}, oldState);
       } else if (oldState.currentUser.users[Object.keys(action.user.users)[0]] != undefined) {
-        debugger;
+
         newState = (0, _merge2.default)({}, { currentUser: { users: _defineProperty({}, Object.keys(oldState.currentUser.users)[0], action.user.users[Object.keys(oldState.currentUser.users)[0]]) } });
       } else {
-        debugger;
+
         newState = (0, _merge2.default)({}, oldState);
       }
       return newState;
@@ -27169,7 +27168,6 @@ var blogpostsReducer = function blogpostsReducer() {
     case _blogpost_actions.RECEIVE_BLOGPOST:
       return (0, _merge3.default)({}, oldState, _defineProperty({}, Object.keys(action.blogpost.blogposts)[0], Object.values(action.blogpost.blogposts)[0]));
     case _blogpost_actions.REMOVE_BLOGPOST:
-      debugger;
       var newState = (0, _merge3.default)({}, oldState);
       delete newState[action.blogpostId];
       return newState;
@@ -33270,8 +33268,6 @@ var UserShowPage = function (_React$Component) {
           arr.push(this.props.blogposts[i]);
         }
       }
-      console.log(arr);
-      console.log(this.props.blogposts);
       return arr.map(function (blogpost) {
         return _react2.default.createElement(_blogpost_item_container2.default, { key: blogpost.id, blogpost: blogpost, listOfUsers: _this7.props.currentUser });
       });

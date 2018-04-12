@@ -108,8 +108,6 @@ class UserShowPage extends React.Component {
         arr.push(this.props.blogposts[i]);
       }
     }
-    console.log(arr);
-    console.log(this.props.blogposts);
     return (
       arr.map((blogpost) => <BlogpostItemContainer key={blogpost.id} blogpost={blogpost} listOfUsers={this.props.currentUser}/>)
     )
