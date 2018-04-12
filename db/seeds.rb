@@ -25,7 +25,7 @@ seed_image_arr = [
   "https://s3-us-west-1.amazonaws.com/imaginarynumblr/seeddata/profilepicture/r24.jpeg",
   "https://s3-us-west-1.amazonaws.com/imaginarynumblr/seeddata/profilepicture/r34.jpeg",
   "https://s3-us-west-1.amazonaws.com/imaginarynumblr/seeddata/profilepicture/r47.jpeg",
-  "https://s3-us-west-1.amazonaws.com/imaginarynumblr/seeddata/profilepicture/rockt.png"
+  "https://s3-us-west-1.amazonaws.com/imaginarynumblr/seeddata/profilepicture/rockt.png",
   "https://s3-us-west-1.amazonaws.com/imaginarynumblr/seeddata/profilepicture/rando.jpeg"
 ]
 
@@ -41,5 +41,55 @@ User.create(
     password: 'password',
     email: Faker::Internet.safe_email,
     seed_image: seed_image_arr[Random.rand(20)]
+  )
+end
+
+# 500 times (Content)
+# Randomize user ID
+# Randomize Content Type
+  # 1 = quote
+  # 2 = text
+  # 3 = audio
+  # 4 = photo
+  # 5 = video
+
+# 1000 times (Likes)
+# Generate pairs of two numbers
+# Push into an array if it's not in there
+# Create Like
+like_arr = []
+
+5000.times do
+  generated_arr = [Random.rand(100) + 1, Random.rand(500) + 1]
+  while like_arr.include?(generated_arr)
+    generated_arr = [Random.rand(100) + 1, Random.rand(100) + 1]
+  end
+  like_arr << generated_arr
+end
+
+like_arr.each do |arr|
+  Like.create(
+    liker_id: arr[0],
+    liked_blog_id: arr[1]
+  )
+end
+
+# 500 times (Follows)
+  # Generate pairs of two numbers
+  # Push into an array if it's not in there
+  # Create Follow
+follow_arr = []
+1000.times do
+  generated_arr = [Random.rand(100) + 1, Random.rand(100) + 1]
+  while follow_arr.include?(generated_arr) && generated_arr[0] == generated_arr[1]
+    generated_arr = [Random.rand(100) + 1, Random.rand(100) + 1]
+  end
+  follow_arr << generated_arr
+end
+
+follow_arr.each do |arr|
+  Follow.create(
+    follower_id: arr[0],
+    followee_id: arr[1]
   )
 end

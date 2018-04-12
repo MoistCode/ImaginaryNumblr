@@ -31373,6 +31373,11 @@ var Dashboard = function (_React$Component) {
         });
         _this2.props.fetchBlogposts(arrOfBlogpostIds);
       });
+      var allusers = [];
+      for (var i = 1; i < 100; i++) {
+        allusers.push(i);
+      }
+      this.props.fetchUsers(allusers);
     }
   }, {
     key: 'componentDidMount',

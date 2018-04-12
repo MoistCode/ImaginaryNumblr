@@ -32,7 +32,11 @@ class Dashboard extends React.Component {
           this.props.fetchBlogposts(arrOfBlogpostIds);
         }
       )
-
+    const allusers = [];
+    for(let i = 1; i < 100; i++) {
+      allusers.push(i)
+    }
+    this.props.fetchUsers(allusers);
   }
 
   componentDidMount() {
