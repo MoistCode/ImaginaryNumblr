@@ -31582,14 +31582,21 @@ var Dashboard = function (_React$Component) {
     value: function _generateFeed() {
       var _this7 = this;
 
-      var undefinedBlogs = false;
+      var undefinedItem = false;
 
       for (var i = 0; i < this.props.listOfBlogposts.length; i++) {
         if (this.props.listOfBlogposts[i] == undefined) {
-          undefinedBlogs = true;
+          undefinedItem = true;
         }
       }
-      if (!undefinedBlogs) {
+
+      for (var _i = 0; _i < this.props.listOfUsers.length; _i++) {
+        if (this.props.listOfUsers[_i] == undefined) {
+          undefinedItem = true;
+        }
+      }
+
+      if (!undefinedItem) {
         return this.props.listOfBlogposts.map(function (blogpost) {
           return _react2.default.createElement(_blogpost_item_container2.default, {
             key: blogpost.id,
@@ -32107,6 +32114,10 @@ var BlogpostItem = function (_React$Component) {
 
       this.props.destroyFollow(followeeId).then(function () {
         _this3.props.fetchUser(followeeId);
+        _this3.setState({
+          currentUserLikes: !_this3.state.currentUserLikes,
+          likeCount: _this3.state.likeCount - 1
+        });
       });
     }
   }, {

@@ -177,14 +177,21 @@ class Dashboard extends React.Component {
   // }
 
   _generateFeed() {
-    let undefinedBlogs = false;
+    let undefinedItem = false;
 
     for(let i = 0; i < this.props.listOfBlogposts.length; i++) {
       if (this.props.listOfBlogposts[i] == undefined) {
-        undefinedBlogs = true;
+        undefinedItem = true;
       }
     }
-    if (!undefinedBlogs) {
+
+    for(let i = 0; i < this.props.listOfUsers.length; i++) {
+      if (this.props.listOfUsers[i] == undefined) {
+        undefinedItem = true;
+      }
+    }
+
+    if (!undefinedItem) {
       return (
         this.props.listOfBlogposts.map((blogpost) => <BlogpostItemContainer
                                                         key={blogpost.id}

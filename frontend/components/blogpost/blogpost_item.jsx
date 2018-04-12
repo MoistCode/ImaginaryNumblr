@@ -24,7 +24,7 @@ class BlogpostItem extends React.Component {
     this.props.postFollow(this.props.user.id)
       .then(() => {
           this.props.fetchUser(this.props.user.id);
-          
+
         }
       )
 
@@ -34,7 +34,10 @@ class BlogpostItem extends React.Component {
     this.props.destroyFollow(followeeId)
       .then(() => {
           this.props.fetchUser(followeeId);
-
+          this.setState({
+            currentUserLikes: !this.state.currentUserLikes,
+            likeCount: this.state.likeCount - 1
+          });
         }
       )
   }
