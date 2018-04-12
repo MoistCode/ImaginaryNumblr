@@ -48,6 +48,12 @@ class BlogPostCreationForm extends React.Component {
     // this.dragElement(document.getElementById(("creation-modal")));
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.contentType != nextProps.contentType) {
+      this.setState(this._generateState(nextProps.contentType));
+    }
+  }
+
   render() {
     return (
         <div id='creation-modal'>

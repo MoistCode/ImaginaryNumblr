@@ -27138,13 +27138,13 @@ var blogpostsReducer = function blogpostsReducer() {
   Object.freeze(oldState);
   switch (action.type) {
     case _blogpost_actions.RECEIVE_BLOGPOSTS:
-      debugger;
+
       return (0, _merge3.default)({}, oldState, action.blogposts);
     case _blogpost_actions.RECEIVE_BLOGPOST:
       if (action.blogpost.blogposts != undefined) {
         return (0, _merge3.default)({}, oldState, { blogposts: action.blogpost.blogposts });
       }
-      debugger;
+
       return (0, _merge3.default)({}, oldState, _defineProperty({}, action.blogpost.id, action.blogpost));
     case _blogpost_actions.REMOVE_BLOGPOST:
       var newState = (0, _merge3.default)({}, oldState);
@@ -31750,6 +31750,13 @@ var BlogPostCreationForm = function (_React$Component) {
       // this.dragElement(document.getElementById(("creation-modal")));
     }
   }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      if (this.props.contentType != nextProps.contentType) {
+        this.setState(this._generateState(nextProps.contentType));
+      }
+    }
+  }, {
     key: 'render',
     value: function render() {
       var _this4 = this;
@@ -32274,7 +32281,6 @@ var BlogpostItem = function (_React$Component) {
       var _this11 = this;
 
       if (this.state.showEditForm == true) {
-        debugger;
         return _react2.default.createElement(
           'div',
           { id: 'edit-modal' },

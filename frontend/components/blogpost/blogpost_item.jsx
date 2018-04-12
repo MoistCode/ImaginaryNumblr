@@ -189,7 +189,6 @@ class BlogpostItem extends React.Component {
 
   _generateEditForm() {
     if (this.state.showEditForm == true) {
-      debugger;
       return (
         <div id='edit-modal'>
           <div className='w3-container w3-center w3-animate-opacity'>
