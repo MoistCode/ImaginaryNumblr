@@ -32198,7 +32198,7 @@ var BlogpostItem = function (_React$Component) {
       var _this8 = this;
 
       this.props.deleteBlogpost(this.props.blogpost.id).then(function () {
-        _this8.props.fetchUser(_this8.props.currentUser.id);
+        _this8.props.fetchUser(_this8.props.currentUser);
       });
       this.props.fetchUser(this.props.currentUser);
       this.toggleDeletion();
