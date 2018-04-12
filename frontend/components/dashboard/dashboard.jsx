@@ -34,7 +34,7 @@ class Dashboard extends React.Component {
   }
 
   componentDidMount() {
-    console.log('running1');
+    
   }
 
   handleCreationModal(field) {

@@ -31367,9 +31367,7 @@ var Dashboard = function (_React$Component) {
     }
   }, {
     key: 'componentDidMount',
-    value: function componentDidMount() {
-      console.log('running1');
-    }
+    value: function componentDidMount() {}
   }, {
     key: 'handleCreationModal',
     value: function handleCreationModal(field) {
