@@ -9,11 +9,13 @@ const blogpostsReducer = (oldState = {}, action) => {
   Object.freeze(oldState);
   switch(action.type) {
     case RECEIVE_BLOGPOSTS:
+      debugger;
       return merge({}, oldState, action.blogposts);
     case RECEIVE_BLOGPOST:
       if (action.blogpost.blogposts != undefined) {
         return merge({}, oldState, { blogposts: action.blogpost.blogposts });
       }
+      debugger;
       return merge({}, oldState, { [action.blogpost.id]: action.blogpost });
     case REMOVE_BLOGPOST:
       let newState = merge({}, oldState);

@@ -13,7 +13,7 @@ json.blogposts do
       blogpost.likers.each do |like|
         liker_arr.push(like.liker_id)
       end
-
+      
       json.likerIds liker_arr
       json.attachedFile asset_path(blogpost.attached_file.url(:original))
     end

@@ -27138,11 +27138,13 @@ var blogpostsReducer = function blogpostsReducer() {
   Object.freeze(oldState);
   switch (action.type) {
     case _blogpost_actions.RECEIVE_BLOGPOSTS:
+      debugger;
       return (0, _merge3.default)({}, oldState, action.blogposts);
     case _blogpost_actions.RECEIVE_BLOGPOST:
       if (action.blogpost.blogposts != undefined) {
         return (0, _merge3.default)({}, oldState, { blogposts: action.blogpost.blogposts });
       }
+      debugger;
       return (0, _merge3.default)({}, oldState, _defineProperty({}, action.blogpost.id, action.blogpost));
     case _blogpost_actions.REMOVE_BLOGPOST:
       var newState = (0, _merge3.default)({}, oldState);
@@ -31707,9 +31709,9 @@ var BlogPostCreationForm = function (_React$Component) {
       var _this2 = this;
 
       e.preventDefault();
+      var submitButton = $(".create-submit-button");
       if (e.key == 'Enter' || e.key == undefined) {
-        var _submitButton = $(".create-submit-button");
-        _submitButton.prop("disabled", true);
+        submitButton.prop("disabled", true);
         var formData = new FormData();
         formData.append('blogpost[title]', this.state.title);
         formData.append('blogpost[content_type]', this.state.content_type);
@@ -31724,11 +31726,11 @@ var BlogPostCreationForm = function (_React$Component) {
         }
         this.props.createBlogpost(formData).then(function () {
           _this2.props.createdSubmitted();
-          _submitButton.prop("disabled", false);
+          submitButton.prop("disabled", false);
           _this2.props.showDashboard();
           _this2.props.clearErrors();
         }, function () {
-          return _submitButton.prop("disabled", false);
+          return submitButton.prop("disabled", false);
         });
       }
       submitButton.prop("disabled", false);
@@ -32272,6 +32274,7 @@ var BlogpostItem = function (_React$Component) {
       var _this11 = this;
 
       if (this.state.showEditForm == true) {
+        debugger;
         return _react2.default.createElement(
           'div',
           { id: 'edit-modal' },

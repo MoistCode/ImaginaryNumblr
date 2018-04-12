@@ -13,8 +13,8 @@ class BlogPostCreationForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    const submitButton = $(".create-submit-button");
     if (e.key == 'Enter' || e.key == undefined) {
-      const submitButton = $(".create-submit-button");
       submitButton.prop("disabled", true);
       const formData = new FormData();
       formData.append('blogpost[title]', this.state.title);
