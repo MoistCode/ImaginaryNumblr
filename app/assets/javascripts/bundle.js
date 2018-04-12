@@ -31278,8 +31278,8 @@ var mapStateToProps = function mapStateToProps(state) {
     currentUser: _checkCurrentUser(state.session.currentUser),
     listOfBlogposts: _getBlogposts(state.blogposts, state.session.currentUser),
     listOfUsers: _getUsers(state.users, state.session.currentUser) || [],
-    listOfRandomUsers: _getRandomUsers(Object.values(state.users))
-
+    listOfRandomUsers: _getRandomUsers(Object.values(state.users)),
+    randomBlogpost: _getBlogposts(state.blogposts, state.session.currentUser)[0]
   };
 };
 
@@ -31349,6 +31349,7 @@ var Dashboard = function (_React$Component) {
     _this._generateFeed = _this._generateFeed.bind(_this);
     _this.handleCreationModal = _this.handleCreationModal.bind(_this);
     _this._generateRecommendedUsers = _this._generateRecommendedUsers.bind(_this);
+    _this._generateRecommendedBlogpost = _this._generateRecommendedBlogpost.bind(_this);
     _this._triggerDashRefresh = _this._triggerDashRefresh.bind(_this);
     _this.state = {
       creationFormModalIsOpen: false,
@@ -31500,7 +31501,8 @@ var Dashboard = function (_React$Component) {
         _react2.default.createElement(
           'aside',
           { className: 'dash-right-side' },
-          this._generateRecommendedUsers()
+          this._generateRecommendedUsers(),
+          this._generateRecommendedBlogpost()
         ),
         this._generateForm(),
         this._generateFeed()
@@ -31539,7 +31541,7 @@ var Dashboard = function (_React$Component) {
           this.props.listOfRandomUsers.map(function (user) {
             return _react2.default.createElement(
               'li',
-              { key: Math.random() },
+              { key: Math.random() * Math.random() },
               _react2.default.createElement('img', {
                 src: user.profileImageUrl,
                 onClick: function onClick() {
@@ -31563,23 +31565,57 @@ var Dashboard = function (_React$Component) {
         }
       }
     }
+  }, {
+    key: '_generateRecommendedBlogpost',
+    value: function _generateRecommendedBlogpost() {
+      var _this7 = this;
 
-    // {this._generateRecommendedBlogpost()}
-    // _generateRecommendedBlogpost() {
-    //   return (
-    //     <div className='dash-recommended-blogpost'>
-    //       <header>Blogdar</header>
-    //       <div></div>
-    //       <div></div>
-    //       <button>cdsccdsc</button>
-    //     </div>
-    //   )
-    // }
+      var blogpost = this.props.randomBlogpost;
+      if (blogpost != undefined && this.props.listOfUsers[0] != undefined) {
+        var author = void 0;
+        for (var i = 0; i < this.props.listOfUsers.length; i++) {
+          if (this.props.listOfUsers[i].id == blogpost.authorId) {
+            author = this.props.listOfUsers[i];
+          }
+        }
 
+        return _react2.default.createElement(
+          'div',
+          { className: 'dash-recommended-blogpost' },
+          _react2.default.createElement(
+            'header',
+            null,
+            'Blogdar'
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'rec-bp-user-info' },
+            _react2.default.createElement(
+              'li',
+              { key: Math.random() * Math.random() },
+              _react2.default.createElement('img', {
+                src: author.profileImageUrl,
+                onClick: function onClick() {
+                  return _this7.props.history.push('/' + author.blogUrl);
+                } }),
+              author.username,
+              _react2.default.createElement('i', {
+                className: 'fa fa-plus-square',
+                style: this._generateUserFollowedIconColor(author.id) })
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'rec-bp' },
+            this._renderRandomBlog(blogpost)
+          )
+        );
+      }
+    }
   }, {
     key: '_generateFeed',
     value: function _generateFeed() {
-      var _this7 = this;
+      var _this8 = this;
 
       var undefinedItem = false;
 
@@ -31600,8 +31636,8 @@ var Dashboard = function (_React$Component) {
           return _react2.default.createElement(_blogpost_item_container2.default, {
             key: blogpost.id,
             blogpost: blogpost,
-            author: _this7._getAuthorFromBlogpost(blogpost.authorId),
-            createdSubmitted: _this7._triggerDashRefresh });
+            author: _this8._getAuthorFromBlogpost(blogpost.authorId),
+            createdSubmitted: _this8._triggerDashRefresh });
         });
       }
     }
@@ -31617,16 +31653,124 @@ var Dashboard = function (_React$Component) {
   }, {
     key: '_generateForm',
     value: function _generateForm() {
-      var _this8 = this;
+      var _this9 = this;
 
       var contentType = this.state.modalContentType;
       if (this.state.creationFormModalIsOpen == true) {
         return _react2.default.createElement(_blogpost_creation_form_container2.default, {
           contentType: contentType,
           showDashboard: function showDashboard() {
-            _this8.handleCreationModal('');
+            _this9.handleCreationModal('');
           },
           createdSubmitted: this._triggerDashRefresh });
+      }
+    }
+  }, {
+    key: '_renderRandomBlog',
+    value: function _renderRandomBlog(blogpost) {
+      var title = blogpost.title,
+          contentType = blogpost.contentType,
+          description = blogpost.description,
+          quote = blogpost.quote,
+          attachedFile = blogpost.attachedFile;
+
+      if (contentType == 'quote') {
+        return _react2.default.createElement(
+          'div',
+          { className: 'rec-blogpost-item' },
+          _react2.default.createElement(
+            'h1',
+            {
+              className: 'rec-title',
+              style: { fontSize: '22px' } },
+            title
+          ),
+          _react2.default.createElement(
+            'h1',
+            {
+              className: 'rec-quote',
+              style: {
+                fontStyle: 'italic',
+                marginBottom: '10px'
+              } },
+            '"',
+            quote,
+            '"'
+          ),
+          _react2.default.createElement(
+            'p',
+            null,
+            '- ',
+            this.props.blogpost.quoteSource
+          )
+        );
+      } else if (contentType == 'text') {
+        return _react2.default.createElement(
+          'div',
+          { className: 'rec-blogpost-item' },
+          _react2.default.createElement(
+            'h1',
+            { className: 'rec-title' },
+            title
+          ),
+          _react2.default.createElement(
+            'p',
+            null,
+            description
+          )
+        );
+      } else if (contentType == 'audio') {
+        return _react2.default.createElement(
+          'div',
+          { className: 'rec-blogpost-item' },
+          _react2.default.createElement(
+            'h1',
+            { className: 'rec-title' },
+            title
+          ),
+          _react2.default.createElement(
+            'audio',
+            { controls: true },
+            _react2.default.createElement('source', { src: attachedFile })
+          ),
+          _react2.default.createElement(
+            'p',
+            null,
+            description
+          )
+        );
+      } else if (contentType == 'photo') {
+        return _react2.default.createElement(
+          'div',
+          { className: 'rec-blogpost-item' },
+          _react2.default.createElement(
+            'h1',
+            { className: 'rec-title' },
+            title
+          ),
+          _react2.default.createElement('img', { src: attachedFile }),
+          _react2.default.createElement(
+            'p',
+            null,
+            description
+          )
+        );
+      } else if (contentType == 'video') {
+        return _react2.default.createElement(
+          'div',
+          { className: 'rec-blogpost-item' },
+          _react2.default.createElement(
+            'h1',
+            { className: 'rec-title' },
+            title
+          ),
+          _react2.default.createElement('video', { controls: true, src: attachedFile }),
+          _react2.default.createElement(
+            'p',
+            null,
+            description
+          )
+        );
       }
     }
   }]);

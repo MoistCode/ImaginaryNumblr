@@ -109,7 +109,64 @@
 }
 
 .dash-recommended-blogpost {
-  width: 320px;
+  width: 340px;
   height: auto;
-  border: 1px solid black;
+
+  header {
+    width: 340px;
+    height: 27px;
+    border-bottom: 2px solid grey;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    color: #606C7D;
+  }
+
+  .rec-bp-user-info {
+    height: 52px;
+    margin-top: -11px;
+    img {
+      width: 46px;
+      height: 46px;
+      margin-right: 15px;
+      cursor: pointer;
+    }
+    li {
+      margin-top: 27px;
+      list-style: none;
+      width: 340px;
+      height:53px;
+      font-family: 'Ubuntu', sans-serif;
+      font-weight: bold;
+      color: #8F97A3;
+      i {
+        margin-top: 8px;
+        float: right;
+        font-size: 32px;
+        cursor: pointer;
+        color: #8F97A3;
+      }
+
+      i:hover {
+        color: #A7CAE9;
+      }
+
+    }
+  }
+
+  .rec-blogpost-item {
+    background-color: white;
+    text-align: center;
+    -webkit-box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 13px -9px rgba(0,0,0,0.75);
+    border-radius: 8px;
+    img {
+      width: 100%;
+    }
+
+    video {
+      width: 100%;
+    }
+  }
+
 }

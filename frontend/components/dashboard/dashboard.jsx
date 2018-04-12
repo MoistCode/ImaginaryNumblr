@@ -10,6 +10,7 @@ class Dashboard extends React.Component {
     this._generateFeed = this._generateFeed.bind(this);
     this.handleCreationModal = this.handleCreationModal.bind(this);
     this._generateRecommendedUsers = this._generateRecommendedUsers.bind(this);
+    this._generateRecommendedBlogpost = this._generateRecommendedBlogpost.bind(this);
     this._triggerDashRefresh = this._triggerDashRefresh.bind(this);
     this.state = {
       creationFormModalIsOpen: false,
@@ -119,6 +120,7 @@ class Dashboard extends React.Component {
         </div>
         <aside className='dash-right-side'>
           {this._generateRecommendedUsers()}
+          {this._generateRecommendedBlogpost()}
         </aside>
         {this._generateForm()}
         {this._generateFeed()}
@@ -145,7 +147,7 @@ class Dashboard extends React.Component {
       <div className='dash-recommended-users'>
         <header>Recommended Users</header>
         <div className='recUsers'>
-          {this.props.listOfRandomUsers.map((user) => <li key={Math.random()}><img
+          {this.props.listOfRandomUsers.map((user) => <li key={Math.random() * Math.random()}><img
             src={user.profileImageUrl}
             onClick={() => this.props.history.push(`/${user.blogUrl}`)}/>
           {user.username}<i
@@ -164,17 +166,35 @@ class Dashboard extends React.Component {
     }
   }
 
-  // {this._generateRecommendedBlogpost()}
-  // _generateRecommendedBlogpost() {
-  //   return (
-  //     <div className='dash-recommended-blogpost'>
-  //       <header>Blogdar</header>
-  //       <div></div>
-  //       <div></div>
-  //       <button>cdsccdsc</button>
-  //     </div>
-  //   )
-  // }
+
+  _generateRecommendedBlogpost() {
+    const blogpost = this.props.randomBlogpost;
+    if (blogpost != undefined && this.props.listOfUsers[0] != undefined) {
+      let author;
+      for(let i = 0; i < this.props.listOfUsers.length; i++) {
+        if(this.props.listOfUsers[i].id == blogpost.authorId) {
+          author = this.props.listOfUsers[i];
+        }
+      }
+
+      return (
+        <div className='dash-recommended-blogpost'>
+          <header>Blogdar</header>
+          <div className='rec-bp-user-info'>
+            <li key={Math.random() * Math.random()}><img
+              src={author.profileImageUrl}
+              onClick={() => this.props.history.push(`/${author.blogUrl}`)}/>
+            {author.username}<i
+                              className='fa fa-plus-square'
+                              style={this._generateUserFollowedIconColor(author.id)} /></li>
+          </div>
+          <div className='rec-bp'>
+            {this._renderRandomBlog(blogpost)}
+          </div>
+        </div>
+      )
+    }
+  }
 
   _generateFeed() {
     let undefinedItem = false;
@@ -219,6 +239,67 @@ class Dashboard extends React.Component {
           contentType={contentType}
           showDashboard={() => {this.handleCreationModal('')}}
           createdSubmitted={this._triggerDashRefresh}/>
+      )
+    }
+  }
+
+  _renderRandomBlog(blogpost) {
+
+    const {
+      title,
+      contentType,
+      description,
+      quote,
+      attachedFile
+    } = blogpost;
+    if (contentType == 'quote') {
+      return (
+        <div className='rec-blogpost-item'>
+          <h1
+            className='rec-title'
+            style={{fontSize: '22px'}}>{title}
+          </h1>
+          <h1
+            className='rec-quote'
+            style={{
+              fontStyle: 'italic',
+              marginBottom: '10px'
+            }}>"{quote}"</h1>
+          <p>- {this.props.blogpost.quoteSource}</p>
+        </div>
+      )
+    } else if (contentType == 'text') {
+      return (
+        <div className='rec-blogpost-item'>
+          <h1 className='rec-title'>{title}</h1>
+          <p>{description}</p>
+        </div>
+      )
+    } else if (contentType == 'audio') {
+      return (
+        <div className='rec-blogpost-item'>
+          <h1 className='rec-title'>{title}</h1>
+          <audio controls>
+            <source src={attachedFile}></source>
+          </audio>
+          <p>{description}</p>
+        </div>
+      )
+    } else if (contentType == 'photo') {
+      return (
+        <div className='rec-blogpost-item'>
+          <h1 className='rec-title'>{title}</h1>
+          <img src={attachedFile} />
+          <p>{description}</p>
+        </div>
+      )
+    } else if (contentType == 'video') {
+      return (
+        <div className='rec-blogpost-item'>
+          <h1 className='rec-title'>{title}</h1>
+          <video controls src={attachedFile} />
+          <p>{description}</p>
+        </div>
       )
     }
   }

@@ -81,8 +81,8 @@ const mapStateToProps = (state) => {
     currentUser: _checkCurrentUser(state.session.currentUser),
     listOfBlogposts: _getBlogposts(state.blogposts, state.session.currentUser),
     listOfUsers: _getUsers(state.users, state.session.currentUser) || [],
-    listOfRandomUsers: _getRandomUsers(Object.values(state.users))
-
+    listOfRandomUsers: _getRandomUsers(Object.values(state.users)),
+    randomBlogpost:  _getBlogposts(state.blogposts, state.session.currentUser)[0]
   }
 };
 
