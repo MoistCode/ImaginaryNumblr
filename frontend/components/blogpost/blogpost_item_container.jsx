@@ -33,6 +33,7 @@ const mapDispatchToProps = (dispatch) => ({
   updateBlogpost: (blogpost, blogpostId) => dispatch(updateBlogpost(blogpost, blogpostId)),
   deleteBlogpost: (blogpostId) => dispatch(deleteBlogpost(blogpostId)),
   fetchBlogpost: (blogpostId) => dispatch(fetchBlogpost(blogpostId)),
+  postFollow: (followeeId) => dispatch(postFollow(followeeId)),
   destroyFollow: (followeeId) => dispatch(destroyFollow(followeeId)),
   fetchUser: (userId) => dispatch(fetchUser(userId)),
   fetchUsers: (userIds) => dispatch(fetchUsers(userIds)),

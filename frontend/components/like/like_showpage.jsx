@@ -17,6 +17,16 @@ class LikeShowPage extends React.Component {
       })
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.currentUser.followeeIds.length != nextProps.currentUser.followeeIds.length) {
+      this.props.fetchBlogposts(nextProps.currentUser.likedBlogIds)
+        .then((blogposts) => {
+          let arrOfUserIds = Object.values(blogposts.blogposts.blogposts).map((blogpost) => blogpost.authorId);
+          this.props.fetchUsers(arrOfUserIds);
+        })
+    }
+  }
+
   render() {
     if (this.props.authorObjects == 'none') {
       return (

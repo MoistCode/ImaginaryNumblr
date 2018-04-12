@@ -2728,6 +2728,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     fetchBlogpost: function fetchBlogpost(blogpostId) {
       return dispatch((0, _blogpost_actions.fetchBlogpost)(blogpostId));
     },
+    postFollow: function postFollow(followeeId) {
+      return dispatch((0, _user_actions.postFollow)(followeeId));
+    },
     destroyFollow: function destroyFollow(followeeId) {
       return dispatch((0, _user_actions.destroyFollow)(followeeId));
     },
@@ -32273,6 +32276,7 @@ var BlogpostItem = function (_React$Component) {
     _this._currentUserFollow = _this._currentUserFollow.bind(_this);
     _this._generateAuthorOptions = _this._generateAuthorOptions.bind(_this);
     _this._generateAuthorName = _this._generateAuthorName.bind(_this);
+    _this.handleFollow = _this.handleFollow.bind(_this);
     _this.handleUnfollow = _this.handleUnfollow.bind(_this);
     _this._generateLikeIcon = _this._generateLikeIcon.bind(_this);
     _this.handleLike = _this.handleLike.bind(_this);
@@ -32285,18 +32289,30 @@ var BlogpostItem = function (_React$Component) {
     value: function handleFollow() {
       var _this2 = this;
 
-      this.props.postFollow(this.props.user.id).then(function () {
-        _this2.props.fetchUser(_this2.props.user.id);
-      });
+      if (this.props.user == undefined) {
+        this.props.postFollow(this.props.author.id).then(function () {
+          _this2.props.fetchUser(_this2.props.author.id);
+        });
+      } else {
+        this.props.postFollow(this.props.user.id).then(function () {
+          _this2.props.fetchUser(_this2.props.user.id);
+        });
+      }
     }
   }, {
     key: 'handleUnfollow',
     value: function handleUnfollow(followeeId) {
       var _this3 = this;
 
-      this.props.destroyFollow(followeeId).then(function () {
-        _this3.props.fetchUser(followeeId);
-      });
+      if (this.props.user == undefined) {
+        this.props.destroyFollow(this.props.author.id).then(function () {
+          _this3.props.fetchUser(_this3.props.author.id);
+        });
+      } else {
+        this.props.destroyFollow(this.props.user.id).then(function () {
+          _this3.props.fetchUser(_this3.props.user.id);
+        });
+      }
     }
   }, {
     key: 'handleLike',
@@ -32609,7 +32625,11 @@ var BlogpostItem = function (_React$Component) {
       }
       return _react2.default.createElement(
         'p',
-        null,
+        {
+          onClick: function onClick() {
+            return _this12.handleFollow(_this12.props.author.id);
+          }
+        },
         'Follow'
       );
     }
@@ -33677,6 +33697,20 @@ var LikeShowPage = function (_React$Component) {
       });
     }
   }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      var _this3 = this;
+
+      if (this.props.currentUser.followeeIds.length != nextProps.currentUser.followeeIds.length) {
+        this.props.fetchBlogposts(nextProps.currentUser.likedBlogIds).then(function (blogposts) {
+          var arrOfUserIds = Object.values(blogposts.blogposts.blogposts).map(function (blogpost) {
+            return blogpost.authorId;
+          });
+          _this3.props.fetchUsers(arrOfUserIds);
+        });
+      }
+    }
+  }, {
     key: 'render',
     value: function render() {
       if (this.props.authorObjects == 'none') {
@@ -33709,15 +33743,15 @@ var LikeShowPage = function (_React$Component) {
   }, {
     key: '_generateFeed',
     value: function _generateFeed() {
-      var _this3 = this;
+      var _this4 = this;
 
       if (this.props.blogpostObjects.length > 0) {
         return this.props.blogpostObjects.reverse().map(function (blogpost) {
           return _react2.default.createElement(_blogpost_item_container2.default, {
             key: blogpost.id,
             blogpost: blogpost,
-            author: _this3._getAuthorFromBlogpost(blogpost.authorId),
-            createdSubmitted: _this3._triggerDashRefresh });
+            author: _this4._getAuthorFromBlogpost(blogpost.authorId),
+            createdSubmitted: _this4._triggerDashRefresh });
         });
       }
     }

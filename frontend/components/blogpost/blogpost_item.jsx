@@ -14,6 +14,7 @@ class BlogpostItem extends React.Component {
     this._currentUserFollow = this._currentUserFollow.bind(this);
     this._generateAuthorOptions = this._generateAuthorOptions.bind(this);
     this._generateAuthorName = this._generateAuthorName.bind(this);
+    this.handleFollow = this.handleFollow.bind(this);
     this.handleUnfollow = this.handleUnfollow.bind(this);
     this._generateLikeIcon = this._generateLikeIcon.bind(this);
     this.handleLike = this.handleLike.bind(this);
@@ -21,22 +22,31 @@ class BlogpostItem extends React.Component {
   }
 
   handleFollow() {
-    this.props.postFollow(this.props.user.id)
-      .then(() => {
+    if (this.props.user == undefined) {
+      this.props.postFollow(this.props.author.id)
+        .then(() => {
+          this.props.fetchUser(this.props.author.id);
+        })
+    } else {
+      this.props.postFollow(this.props.user.id)
+        .then(() => {
           this.props.fetchUser(this.props.user.id);
-
-        }
-      )
-
+        })
+    }
   }
 
   handleUnfollow(followeeId) {
-    this.props.destroyFollow(followeeId)
-      .then(() => {
-          this.props.fetchUser(followeeId);
-        }
-      )
-
+    if (this.props.user == undefined) {
+      this.props.destroyFollow(this.props.author.id)
+        .then(() => {
+          this.props.fetchUser(this.props.author.id);
+        })
+    } else {
+      this.props.destroyFollow(this.props.user.id)
+        .then(() => {
+          this.props.fetchUser(this.props.user.id);
+        })
+    }
   }
 
   handleLike(blogpostId) {
@@ -269,7 +279,9 @@ class BlogpostItem extends React.Component {
           >Unfollow</p>;
       }
     }
-    return <p>Follow</p>;
+    return <p
+      onClick={() => this.handleFollow(this.props.author.id)}
+      >Follow</p>;
   }
 
   _currentUserLikesBool(id) {
