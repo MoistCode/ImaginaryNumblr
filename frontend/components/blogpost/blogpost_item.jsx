@@ -24,7 +24,7 @@ class BlogpostItem extends React.Component {
     this.props.postFollow(this.props.user.id)
       .then(() => {
           this.props.fetchUser(this.props.user.id);
-    
+
         }
       )
 
@@ -34,7 +34,7 @@ class BlogpostItem extends React.Component {
     this.props.destroyFollow(followeeId)
       .then(() => {
           this.props.fetchUser(followeeId);
-    
+
         }
       )
   }
@@ -99,18 +99,15 @@ class BlogpostItem extends React.Component {
     this.props.updateBlogpost(formData, this.props.blogpost.id)
       .then(() => {
           submitButton.prop('disabled', false);
-    
+
           this.toggleEditForm();
         }, () => submitButton.prop("disabled", false)
       )
   }
 
   handleDeletion() {
-    this.props.deleteBlogpost(this.props.blogpost.id)
-      .then(() => {
-  
-        this.toggleDeletion();
-      })
+    this.props.deleteBlogpost(this.props.blogpost.id);
+    this.toggleDeletion();
   }
 
   toggleDeletion() {

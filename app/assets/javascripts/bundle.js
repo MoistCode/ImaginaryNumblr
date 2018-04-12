@@ -24882,7 +24882,9 @@ var sessionReducer = function sessionReducer() {
       return (0, _merge2.default)({}, { currentUser: action.currentUser });
     case _user_actions.RECEIVE_USER:
       var newState = void 0;
-      if (oldState.currentUser.users[Object.keys(action.user.users)[0]] != undefined) {
+      if (oldState.currentUsers == null) {
+        newState = (0, _merge2.default)({}, oldState);
+      } else if (oldState.currentUser.users[Object.keys(action.user.users)[0]] != undefined) {
         newState = (0, _merge2.default)({}, { currentUser: { users: _defineProperty({}, Object.keys(oldState.currentUser.users)[0], action.user.users[Object.keys(oldState.currentUser.users)[0]]) } });
       } else {
         newState = (0, _merge2.default)({}, oldState);
@@ -27161,12 +27163,11 @@ var blogpostsReducer = function blogpostsReducer() {
     case _blogpost_actions.RECEIVE_BLOGPOSTS:
       return (0, _merge3.default)({}, oldState, action.blogposts.blogposts);
     case _blogpost_actions.RECEIVE_BLOGPOST:
-      debugger;
       return (0, _merge3.default)({}, oldState, _defineProperty({}, Object.keys(action.blogpost.blogposts)[0], Object.values(action.blogpost.blogposts)[0]));
     case _blogpost_actions.REMOVE_BLOGPOST:
+      debugger;
       var newState = (0, _merge3.default)({}, oldState);
       delete newState[action.blogpostId];
-      delete newState.blogposts[action.blogpostId];
       return newState;
     default:
       return oldState;
@@ -32158,12 +32159,8 @@ var BlogpostItem = function (_React$Component) {
   }, {
     key: 'handleDeletion',
     value: function handleDeletion() {
-      var _this8 = this;
-
-      this.props.deleteBlogpost(this.props.blogpost.id).then(function () {
-
-        _this8.toggleDeletion();
-      });
+      this.props.deleteBlogpost(this.props.blogpost.id);
+      this.toggleDeletion();
     }
   }, {
     key: 'toggleDeletion',
@@ -32201,20 +32198,20 @@ var BlogpostItem = function (_React$Component) {
   }, {
     key: '_generateLikeIcon',
     value: function _generateLikeIcon() {
-      var _this9 = this;
+      var _this8 = this;
 
       if (this.state.currentUserLikes) {
         return _react2.default.createElement('i', {
           className: 'fa fa-heart',
           onClick: function onClick() {
-            return _this9.handleUnlike(_this9.props.blogpost.id);
+            return _this8.handleUnlike(_this8.props.blogpost.id);
           },
           style: { fontSize: '24px', color: 'red' } });
       } else {
         return _react2.default.createElement('i', {
           className: 'fa fa-heart',
           onClick: function onClick() {
-            return _this9.handleLike(_this9.props.blogpost.id);
+            return _this8.handleLike(_this8.props.blogpost.id);
           },
           style: { fontSize: '24px' } });
       }
@@ -32222,14 +32219,14 @@ var BlogpostItem = function (_React$Component) {
   }, {
     key: '_generateProfileImageUrl',
     value: function _generateProfileImageUrl() {
-      var _this10 = this;
+      var _this9 = this;
 
       if (this.props.author != undefined) {
         return _react2.default.createElement('img', {
           className: 'blog-profile-pic',
           src: this.props.author.profileImageUrl,
           onClick: function onClick() {
-            return _this10.props.history.push('/' + _this10.props.author.blogUrl);
+            return _this9.props.history.push('/' + _this9.props.author.blogUrl);
           } });
       } else {
         return '';
@@ -32271,7 +32268,7 @@ var BlogpostItem = function (_React$Component) {
   }, {
     key: '_generateEditForm',
     value: function _generateEditForm() {
-      var _this11 = this;
+      var _this10 = this;
 
       if (this.state.showEditForm == true) {
         return _react2.default.createElement(
@@ -32295,7 +32292,7 @@ var BlogpostItem = function (_React$Component) {
               _react2.default.createElement(
                 'form',
                 { onSubmit: function onSubmit(e) {
-                    return _this11.handleSubmit(e);
+                    return _this10.handleSubmit(e);
                   } },
                 _react2.default.createElement('input', {
                   className: 'edit-title',
@@ -32368,7 +32365,7 @@ var BlogpostItem = function (_React$Component) {
   }, {
     key: '_currentUserFollow',
     value: function _currentUserFollow(id) {
-      var _this12 = this;
+      var _this11 = this;
 
       if (this.props.match.path == "/users/:userId") {
         return;
@@ -32383,7 +32380,7 @@ var BlogpostItem = function (_React$Component) {
             'p',
             {
               onClick: function onClick() {
-                return _this12.handleUnfollow(_this12.props.author.id);
+                return _this11.handleUnfollow(_this11.props.author.id);
               }
             },
             'Unfollow'
@@ -32399,11 +32396,11 @@ var BlogpostItem = function (_React$Component) {
   }, {
     key: '_currentUserLikesBool',
     value: function _currentUserLikesBool(id) {
-      var _this13 = this;
+      var _this12 = this;
 
       var doesCurrentUserLike = function doesCurrentUserLike(blogId) {
-        for (var i = 0; i < _this13.props.arrayOfCurrentUserLikes.length; i++) {
-          if (blogId == _this13.props.arrayOfCurrentUserLikes[i]) {
+        for (var i = 0; i < _this12.props.arrayOfCurrentUserLikes.length; i++) {
+          if (blogId == _this12.props.arrayOfCurrentUserLikes[i]) {
             return true;
           }
         }
@@ -33227,7 +33224,15 @@ var UserShowPage = function (_React$Component) {
     value: function _generateUserBlogs() {
       var _this7 = this;
 
-      if (this.props.blogposts && this.props.blogposts[0]) {
+      var isUndefined = function isUndefined(arr) {
+        for (var i = 0; i < arr.length; i++) {
+          if (arr[i] == undefined) {
+            return false;
+          }
+        }
+        return true;
+      };
+      if (isUndefined(this.props.blogposts)) {
         return this.props.blogposts.map(function (blogpost) {
           return _react2.default.createElement(_blogpost_item_container2.default, { key: blogpost.id, blogpost: blogpost, listOfUsers: _this7.props.currentUser });
         });

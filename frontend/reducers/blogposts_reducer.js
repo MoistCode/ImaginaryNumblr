@@ -11,12 +11,11 @@ const blogpostsReducer = (oldState = {}, action) => {
     case RECEIVE_BLOGPOSTS:
       return merge({}, oldState, action.blogposts.blogposts);
     case RECEIVE_BLOGPOST:
-      debugger;
       return merge({}, oldState, { [Object.keys(action.blogpost.blogposts)[0]]: Object.values(action.blogpost.blogposts)[0] });
     case REMOVE_BLOGPOST:
+      debugger;
       let newState = merge({}, oldState);
       delete newState[action.blogpostId];
-      delete newState.blogposts[action.blogpostId];
       return newState;
     default:
       return oldState;

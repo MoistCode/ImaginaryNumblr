@@ -36,7 +36,7 @@ class UserShowPage extends React.Component {
     this.props.postFollow(this.props.user.id)
       .then(() => {
           this.props.fetchUser(this.props.user.id);
-          
+
         }
       )
 
@@ -46,7 +46,7 @@ class UserShowPage extends React.Component {
     this.props.destroyFollow(this.props.user.id)
       .then(() => {
           this.props.fetchUser(this.props.user.id);
-          
+
         }
       )
   }
@@ -101,7 +101,15 @@ class UserShowPage extends React.Component {
   }
 
   _generateUserBlogs() {
-    if (this.props.blogposts && this.props.blogposts[0]) {
+    const isUndefined = (arr) => {
+      for(let i = 0; i < arr.length; i++) {
+        if (arr[i] == undefined){
+          return false;
+        }
+      }
+      return true;
+    }
+    if (isUndefined(this.props.blogposts)) {
       return (
         this.props.blogposts.map((blogpost) => <BlogpostItemContainer key={blogpost.id} blogpost={blogpost} listOfUsers={this.props.currentUser}/>)
       )
