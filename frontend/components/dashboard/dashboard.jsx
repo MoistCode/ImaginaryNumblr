@@ -21,36 +21,36 @@ class Dashboard extends React.Component {
   }
 
   componentWillMount() {
-    const arrOfUserIds = this.props.currentUser[0].followeeIds.concat(this.props.currentUser[0].id);
-    this.props.fetchUsers(arrOfUserIds)
-      .then(
-        (payload) => {
-          let arrOfBlogpostIds = []
-          Object.values(payload.users.users).forEach((user) => {
-            arrOfBlogpostIds = arrOfBlogpostIds.concat(user.blogpostIds);
-          });
-          this.props.fetchBlogposts(arrOfBlogpostIds);
-        }
-      )
-    const allusers = [];
-    for(let i = 1; i < 100; i++) {
-      allusers.push(i)
-    }
-    this.props.fetchUsers(allusers);
   }
 
   componentDidMount() {
     const arrOfUserIds = this.props.currentUser[0].followeeIds.concat(this.props.currentUser[0].id);
     this.props.fetchUsers(arrOfUserIds)
-      .then(
-        (payload) => {
-          let arrOfBlogpostIds = []
-          Object.values(payload.users.users).forEach((user) => {
-            arrOfBlogpostIds = arrOfBlogpostIds.concat(user.blogpostIds);
-          });
-          this.props.fetchBlogposts(arrOfBlogpostIds);
-        }
-      )
+    .then(
+      (payload) => {
+        let arrOfBlogpostIds = []
+        Object.values(payload.users.users).forEach((user) => {
+          arrOfBlogpostIds = arrOfBlogpostIds.concat(user.blogpostIds);
+        });
+        this.props.fetchBlogposts(arrOfBlogpostIds);
+      }
+    )
+    const allusers = [];
+    for(let i = 1; i < 100; i++) {
+      allusers.push(i)
+    }
+    this.props.fetchUsers(allusers);
+    // const arrOfUserIds = this.props.currentUser[0].followeeIds.concat(this.props.currentUser[0].id);
+    // this.props.fetchUsers(arrOfUserIds)
+    //   .then(
+    //     (payload) => {
+    //       let arrOfBlogpostIds = []
+    //       Object.values(payload.users.users).forEach((user) => {
+    //         arrOfBlogpostIds = arrOfBlogpostIds.concat(user.blogpostIds);
+    //       });
+    //       this.props.fetchBlogposts(arrOfBlogpostIds);
+    //     }
+    //   )
   }
 
   componentWillReceiveProps(nextProps) {
