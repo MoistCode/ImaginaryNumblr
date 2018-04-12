@@ -62,9 +62,9 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  position: fixed;
+  position: absolute;
   transform: translate(1074px, 24px);
-  z-index: 999;
+  z-index: 98;
 }
 
 .dash-recommended-users {
