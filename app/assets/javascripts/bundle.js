@@ -24884,7 +24884,6 @@ var sessionReducer = function sessionReducer() {
 
     case _user_actions.RECEIVE_USERS:
       var newState2 = void 0;
-      debugger;
       var currentUserId = Object.keys(oldState.currentUser.users)[0];
       if (action.users.users[currentUserId] != undefined) {
         newState2 = (0, _merge2.default)({}, { currentUser: { users: _defineProperty({}, currentUserId, action.users.users[currentUserId]) } });
