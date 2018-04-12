@@ -36,7 +36,7 @@ class UserShowPage extends React.Component {
     this.props.postFollow(this.props.user.id)
       .then(() => {
           this.props.fetchUser(this.props.user.id);
-          // window.location.reload();
+          
         }
       )
 
@@ -46,7 +46,7 @@ class UserShowPage extends React.Component {
     this.props.destroyFollow(this.props.user.id)
       .then(() => {
           this.props.fetchUser(this.props.user.id);
-          // window.location.reload();
+          
         }
       )
   }
@@ -71,7 +71,6 @@ class UserShowPage extends React.Component {
           <div className='user-info-buttons'>
             <button onClick={() => {
                 this.props.history.push('/');
-                window.location.reload();
               }}>Home</button>
             <button>Archive</button>
             <button>About Me</button>

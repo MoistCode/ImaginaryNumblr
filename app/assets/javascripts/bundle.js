@@ -5181,9 +5181,7 @@ var SessionForm = function (_React$Component) {
       }
       this.props.clearErrors();
 
-      this.props.processForm(formData).then(function () {
-        // window.location.reload();
-      });
+      this.props.processForm(formData);
     }
   }, {
     key: 'errorMessages',
@@ -32076,7 +32074,6 @@ var BlogpostItem = function (_React$Component) {
 
       this.props.postFollow(this.props.user.id).then(function () {
         _this2.props.fetchUser(_this2.props.user.id);
-        _this2.props.createdSubmitted();
       });
     }
   }, {
@@ -32086,7 +32083,6 @@ var BlogpostItem = function (_React$Component) {
 
       this.props.destroyFollow(followeeId).then(function () {
         _this3.props.fetchUser(followeeId);
-        _this3.props.createdSubmitted();
       });
     }
   }, {
@@ -32156,7 +32152,7 @@ var BlogpostItem = function (_React$Component) {
       }
       this.props.updateBlogpost(formData, this.props.blogpost.id).then(function () {
         submitButton.prop('disabled', false);
-        _this7.props.createdSubmitted();
+
         _this7.toggleEditForm();
       }, function () {
         return submitButton.prop("disabled", false);
@@ -32168,7 +32164,7 @@ var BlogpostItem = function (_React$Component) {
       var _this8 = this;
 
       this.props.deleteBlogpost(this.props.blogpost.id).then(function () {
-        _this8.props.createdSubmitted();
+
         _this8.toggleDeletion();
       });
     }
@@ -32802,7 +32798,7 @@ var NavigationBar = function (_React$Component) {
           _react2.default.createElement('img', {
             onClick: function onClick() {
               if (!_this3.props.currentUser && _this3.props.location.pathname != '/dashboard') {
-                // window.location.reload();
+
                 _this3.props.history.push('/');
               } else {
                 _this3.props.history.push('/users/' + _this3.props.currentUser[0].id);
@@ -32852,7 +32848,6 @@ var NavigationBar = function (_React$Component) {
           className: 'nav-button',
           onClick: function onClick() {
             _this4.props.logout();
-            // window.location.reload();
           },
           style: buttonColor() },
         'Log Out',
@@ -32886,7 +32881,7 @@ var NavigationBar = function (_React$Component) {
           className: 'nav-button',
           onClick: function onClick() {
             _this4.props.demoLogin(formData).then(function () {
-              // window.location.reload();
+
               _this4.props.history.push('/dashboard');
             });
           }
@@ -32924,10 +32919,10 @@ var NavigationBar = function (_React$Component) {
             style: { fontSize: '39px' },
             onClick: function onClick() {
               if (!_this4.props.currentUser && _this4.props.location.pathname != '/dashboard') {
-                // window.location.reload();
+
                 _this4.props.history.push('/');
               } else {
-                // window.location.reload();
+
                 _this4.props.history.push('/dashboard');
               }
             } }),
@@ -32954,10 +32949,10 @@ var NavigationBar = function (_React$Component) {
       return _react2.default.createElement('img', {
         onClick: function onClick() {
           if (!_this5.props.currentUser && _this5.props.location.pathname != '/dashboard') {
-            // window.location.reload();
+
             _this5.props.history.push('/');
           } else {
-            // window.location.reload();
+
             _this5.props.history.push('/dashboard');
           }
         },
@@ -33123,7 +33118,6 @@ var UserShowPage = function (_React$Component) {
 
       this.props.postFollow(this.props.user.id).then(function () {
         _this4.props.fetchUser(_this4.props.user.id);
-        // window.location.reload();
       });
     }
   }, {
@@ -33133,7 +33127,6 @@ var UserShowPage = function (_React$Component) {
 
       this.props.destroyFollow(this.props.user.id).then(function () {
         _this5.props.fetchUser(_this5.props.user.id);
-        // window.location.reload();
       });
     }
   }, {
@@ -33170,7 +33163,6 @@ var UserShowPage = function (_React$Component) {
               'button',
               { onClick: function onClick() {
                   _this6.props.history.push('/');
-                  window.location.reload();
                 } },
               'Home'
             ),
