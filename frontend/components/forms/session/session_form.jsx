@@ -9,17 +9,17 @@ class SessionForm extends React.Component {
   }
 
   componentWillMount() {
-    if($('html').hasClass('fp-enabled')){
-      $.fn.fullpage.destroy('all');
-    }
-    $('#front_page').fullpage();
+    // if($('html').hasClass('fp-enabled')){
+    //   $.fn.fullpage.destroy('all');
+    // }
+    // $('#front_page').fullpage();
   }
 
   componentDidMount() {
-    if($('html').hasClass('fp-enabled')){
-      $.fn.fullpage.destroy('all');
-    }
-    $('#front_page').fullpage();
+    // if($('html').hasClass('fp-enabled')){
+    //   $.fn.fullpage.destroy('all');
+    // }
+    // $('#front_page').fullpage();
   }
 
   update(field) {

@@ -10,9 +10,9 @@ class UserShowPage extends React.Component {
   }
 
   componentDidMount() {
-    if($('html').hasClass('fp-enabled')){
-      $.fn.fullpage.destroy('all');
-    }
+    // if($('html').hasClass('fp-enabled')){
+    //   $.fn.fullpage.destroy('all');
+    // }
     this.props.fetchUser(this.props.match.params.userId)
       .then(
         () => this.props.fetchUserBlogposts(this.props.user.blogpostIds),

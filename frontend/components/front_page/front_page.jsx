@@ -9,17 +9,17 @@ class FrontPage extends React.Component {
   }
 
   componentDidMount() {
-    if($('html').hasClass('fp-enabled')){
-      $.fn.fullpage.destroy('all');
-    }
-    $('#front_page').fullpage();
+    // if($('html').hasClass('fp-enabled')){
+    //   $.fn.fullpage.destroy('all');
+    // }
+    // $('#front_page').fullpage();
   }
 
   componentWillReceiveProps(nextProps) {
-    if($('html').hasClass('fp-enabled')){
-      $.fn.fullpage.destroy('all');
-    }
-    $('#front_page').fullpage();
+    // if($('html').hasClass('fp-enabled')){
+    //   $.fn.fullpage.destroy('all');
+    // }
+    // $('#front_page').fullpage();
   }
 
   render() {
@@ -44,7 +44,7 @@ class FrontPage extends React.Component {
   _changeSection(num) {
     let bodyJquery = $('body');
     let className = bodyJquery.attr('class');
-    bodyJquery.addClass(`fp-viewing-${num}`).removeClass(className);
+    // bodyJquery.addClass(`fp-viewing-${num}`).removeClass(className);
   }
 
 
