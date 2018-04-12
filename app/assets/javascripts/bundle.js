@@ -31373,11 +31373,18 @@ var Dashboard = function (_React$Component) {
   }, {
     key: 'handleCreationModal',
     value: function handleCreationModal(field) {
+      if (field == '') {
+        this.setState({
+          creationFormModalIsOpen: false,
+          modalContentType: field
+        });
+      } else {
+        this.setState({
+          creationFormModalIsOpen: true,
+          modalContentType: field
+        });
+      }
       this.props.clearErrors();
-      this.setState({
-        creationFormModalIsOpen: !this.state.creationFormModalIsOpen,
-        modalContentType: field
-      });
     }
   }, {
     key: 'render',
