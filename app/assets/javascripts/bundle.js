@@ -31975,8 +31975,19 @@ var BlogPostCreationForm = function (_React$Component) {
               this._generateErrors(this.props.errors)
             )
           )
-        )
+        ),
+        this._addEnterEventListener()
       );
+    }
+  }, {
+    key: '_addEnterEventListener',
+    value: function _addEnterEventListener() {
+      $('form').keypress(function (e) {
+        if (e.which == 13) {
+          $('form').submit();
+          return false;
+        }
+      });
     }
   }, {
     key: '_generateErrors',

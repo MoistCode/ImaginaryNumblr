@@ -81,8 +81,18 @@ class BlogPostCreationForm extends React.Component {
             </form>
           </div>
         </div>
+        {this._addEnterEventListener()}
       </div>
     )
+  }
+
+  _addEnterEventListener() {
+    $('form').keypress(function (e) {
+      if (e.which == 13) {
+        $('form').submit();
+        return false;
+      }
+    });
   }
 
   _generateErrors(errArr = []) {
