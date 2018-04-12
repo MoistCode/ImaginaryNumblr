@@ -53,6 +53,22 @@ class Dashboard extends React.Component {
       )
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.currentUser[0].followeeIds.length != nextProps.currentUser[0].followeeIds.length) {
+      const arrOfUserIds = this.props.currentUser[0].followeeIds.concat(this.props.currentUser[0].id);
+      this.props.fetchUsers(arrOfUserIds)
+      .then(
+        (payload) => {
+          let arrOfBlogpostIds = []
+          Object.values(payload.users.users).forEach((user) => {
+            arrOfBlogpostIds = arrOfBlogpostIds.concat(user.blogpostIds);
+          });
+          this.props.fetchBlogposts(arrOfBlogpostIds);
+        }
+      )
+    }
+  }
+
   handleCreationModal(field) {
     if (field == '') {
       this.setState({

@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { updateBlogpost, deleteBlogpost, fetchBlogpost } from '../../actions/blogpost_actions';
 import {
   fetchUser,
+  fetchUsers,
   postFollow,
   destroyFollow,
   postLike,
@@ -34,6 +35,7 @@ const mapDispatchToProps = (dispatch) => ({
   fetchBlogpost: (blogpostId) => dispatch(fetchBlogpost(blogpostId)),
   destroyFollow: (followeeId) => dispatch(destroyFollow(followeeId)),
   fetchUser: (userId) => dispatch(fetchUser(userId)),
+  fetchUsers: (userIds) => dispatch(fetchUsers(userIds)),
   postLike: (blogId) => dispatch(postLike(blogId)),
   destroyLike: (blogId) => dispatch(destroyLike(blogId)),
 });

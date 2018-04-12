@@ -34,12 +34,9 @@ class BlogpostItem extends React.Component {
     this.props.destroyFollow(followeeId)
       .then(() => {
           this.props.fetchUser(followeeId);
-          this.setState({
-            currentUserLikes: !this.state.currentUserLikes,
-            likeCount: this.state.likeCount - 1
-          });
         }
       )
+
   }
 
   handleLike(blogpostId) {
@@ -314,7 +311,8 @@ class BlogpostItem extends React.Component {
         showEditForm: false,
         showDeleteConfirmation: false,
         currentUserLikes: this._currentUserLikesBool(this.props.blogpost.id),
-        likeCount: this.props.blogpost.likerIds.length
+        likeCount: this.props.blogpost.likerIds.length,
+        followTrigger: false
       }
     } else if (contentType != 'text') {
         return {
@@ -325,7 +323,8 @@ class BlogpostItem extends React.Component {
           showEditForm: false,
           showDeleteConfirmation: false,
           currentUserLikes: this._currentUserLikesBool(this.props.blogpost.id),
-          likeCount: this.props.blogpost.likerIds.length
+          likeCount: this.props.blogpost.likerIds.length,
+          followTrigger: false
         }
     } else {
         return {
@@ -335,7 +334,8 @@ class BlogpostItem extends React.Component {
           showEditForm: false,
           showDeleteConfirmation: false,
           currentUserLikes: this._currentUserLikesBool(this.props.blogpost.id),
-          likeCount: this.props.blogpost.likerIds.length
+          likeCount: this.props.blogpost.likerIds.length,
+          followTrigger: false
         }
     }
   }

@@ -2734,6 +2734,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     fetchUser: function fetchUser(userId) {
       return dispatch((0, _user_actions.fetchUser)(userId));
     },
+    fetchUsers: function fetchUsers(userIds) {
+      return dispatch((0, _user_actions.fetchUsers)(userIds));
+    },
     postLike: function postLike(blogId) {
       return dispatch((0, _user_actions.postLike)(blogId));
     },
@@ -31394,6 +31397,22 @@ var Dashboard = function (_React$Component) {
       });
     }
   }, {
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      var _this4 = this;
+
+      if (this.props.currentUser[0].followeeIds.length != nextProps.currentUser[0].followeeIds.length) {
+        var arrOfUserIds = this.props.currentUser[0].followeeIds.concat(this.props.currentUser[0].id);
+        this.props.fetchUsers(arrOfUserIds).then(function (payload) {
+          var arrOfBlogpostIds = [];
+          Object.values(payload.users.users).forEach(function (user) {
+            arrOfBlogpostIds = arrOfBlogpostIds.concat(user.blogpostIds);
+          });
+          _this4.props.fetchBlogposts(arrOfBlogpostIds);
+        });
+      }
+    }
+  }, {
     key: 'handleCreationModal',
     value: function handleCreationModal(field) {
       if (field == '') {
@@ -31412,7 +31431,7 @@ var Dashboard = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-      var _this4 = this;
+      var _this5 = this;
 
       return _react2.default.createElement(
         'div',
@@ -31426,7 +31445,7 @@ var Dashboard = function (_React$Component) {
             _react2.default.createElement(
               'div',
               { onClick: function onClick(e) {
-                  return _this4.handleCreationModal('quote');
+                  return _this5.handleCreationModal('quote');
                 } },
               _react2.default.createElement('i', {
                 className: 'fa fa-quote-left',
@@ -31440,7 +31459,7 @@ var Dashboard = function (_React$Component) {
             _react2.default.createElement(
               'div',
               { onClick: function onClick(e) {
-                  return _this4.handleCreationModal('text');
+                  return _this5.handleCreationModal('text');
                 } },
               _react2.default.createElement('i', {
                 className: 'fa fa-font',
@@ -31454,7 +31473,7 @@ var Dashboard = function (_React$Component) {
             _react2.default.createElement(
               'div',
               { onClick: function onClick(e) {
-                  return _this4.handleCreationModal('audio');
+                  return _this5.handleCreationModal('audio');
                 } },
               _react2.default.createElement(
                 'i',
@@ -31472,7 +31491,7 @@ var Dashboard = function (_React$Component) {
             _react2.default.createElement(
               'div',
               { onClick: function onClick(e) {
-                  return _this4.handleCreationModal('photo');
+                  return _this5.handleCreationModal('photo');
                 } },
               _react2.default.createElement(
                 'i',
@@ -31490,7 +31509,7 @@ var Dashboard = function (_React$Component) {
             _react2.default.createElement(
               'div',
               { onClick: function onClick(e) {
-                  return _this4.handleCreationModal('video');
+                  return _this5.handleCreationModal('video');
                 } },
               _react2.default.createElement('i', {
                 className: 'fa fa-caret-square-o-right',
@@ -31516,7 +31535,7 @@ var Dashboard = function (_React$Component) {
   }, {
     key: '_triggerDashRefresh',
     value: function _triggerDashRefresh() {
-      var _this5 = this;
+      var _this6 = this;
 
       var arrOfUserIds = this.props.currentUser[0].followeeIds.concat(this.props.currentUser[0].id);
       this.props.fetchUsers(arrOfUserIds).then(function (payload) {
@@ -31524,13 +31543,13 @@ var Dashboard = function (_React$Component) {
         Object.values(payload.users.users).forEach(function (user) {
           arrOfBlogpostIds = arrOfBlogpostIds.concat(user.blogpostIds);
         });
-        _this5.props.fetchBlogposts(arrOfBlogpostIds);
+        _this6.props.fetchBlogposts(arrOfBlogpostIds);
       });
     }
   }, {
     key: '_generateRecommendedUsers',
     value: function _generateRecommendedUsers() {
-      var _this6 = this;
+      var _this7 = this;
 
       return _react2.default.createElement(
         'div',
@@ -31550,12 +31569,12 @@ var Dashboard = function (_React$Component) {
               _react2.default.createElement('img', {
                 src: user.profileImageUrl,
                 onClick: function onClick() {
-                  return _this6.props.history.push('/' + user.blogUrl);
+                  return _this7.props.history.push('/' + user.blogUrl);
                 } }),
               user.username,
               _react2.default.createElement('i', {
                 className: 'fa fa-plus-square',
-                style: _this6._generateUserFollowedIconColor(user.id) })
+                style: _this7._generateUserFollowedIconColor(user.id) })
             );
           })
         ),
@@ -31578,7 +31597,7 @@ var Dashboard = function (_React$Component) {
   }, {
     key: '_generateRecommendedBlogpost',
     value: function _generateRecommendedBlogpost() {
-      var _this7 = this;
+      var _this8 = this;
 
       var blogpost = this.props.randomBlogpost;
       if (blogpost != undefined && this.props.listOfUsers[0] != undefined) {
@@ -31606,7 +31625,7 @@ var Dashboard = function (_React$Component) {
               _react2.default.createElement('img', {
                 src: author.profileImageUrl,
                 onClick: function onClick() {
-                  return _this7.props.history.push('/' + author.blogUrl);
+                  return _this8.props.history.push('/' + author.blogUrl);
                 } }),
               author.username,
               _react2.default.createElement('i', {
@@ -31625,7 +31644,7 @@ var Dashboard = function (_React$Component) {
   }, {
     key: '_generateFeed',
     value: function _generateFeed() {
-      var _this8 = this;
+      var _this9 = this;
 
       var undefinedItem = false;
 
@@ -31646,8 +31665,8 @@ var Dashboard = function (_React$Component) {
           return _react2.default.createElement(_blogpost_item_container2.default, {
             key: blogpost.id,
             blogpost: blogpost,
-            author: _this8._getAuthorFromBlogpost(blogpost.authorId),
-            createdSubmitted: _this8._triggerDashRefresh });
+            author: _this9._getAuthorFromBlogpost(blogpost.authorId),
+            createdSubmitted: _this9._triggerDashRefresh });
         });
       }
     }
@@ -31663,14 +31682,14 @@ var Dashboard = function (_React$Component) {
   }, {
     key: '_generateForm',
     value: function _generateForm() {
-      var _this9 = this;
+      var _this10 = this;
 
       var contentType = this.state.modalContentType;
       if (this.state.creationFormModalIsOpen == true) {
         return _react2.default.createElement(_blogpost_creation_form_container2.default, {
           contentType: contentType,
           showDashboard: function showDashboard() {
-            _this9.handleCreationModal('');
+            _this10.handleCreationModal('');
           },
           createdSubmitted: this._triggerDashRefresh });
       }
@@ -32277,10 +32296,6 @@ var BlogpostItem = function (_React$Component) {
 
       this.props.destroyFollow(followeeId).then(function () {
         _this3.props.fetchUser(followeeId);
-        _this3.setState({
-          currentUserLikes: !_this3.state.currentUserLikes,
-          likeCount: _this3.state.likeCount - 1
-        });
       });
     }
   }, {
@@ -32643,7 +32658,8 @@ var BlogpostItem = function (_React$Component) {
           showEditForm: false,
           showDeleteConfirmation: false,
           currentUserLikes: this._currentUserLikesBool(this.props.blogpost.id),
-          likeCount: this.props.blogpost.likerIds.length
+          likeCount: this.props.blogpost.likerIds.length,
+          followTrigger: false
         };
       } else if (contentType != 'text') {
         return {
@@ -32654,7 +32670,8 @@ var BlogpostItem = function (_React$Component) {
           showEditForm: false,
           showDeleteConfirmation: false,
           currentUserLikes: this._currentUserLikesBool(this.props.blogpost.id),
-          likeCount: this.props.blogpost.likerIds.length
+          likeCount: this.props.blogpost.likerIds.length,
+          followTrigger: false
         };
       } else {
         return {
@@ -32664,7 +32681,8 @@ var BlogpostItem = function (_React$Component) {
           showEditForm: false,
           showDeleteConfirmation: false,
           currentUserLikes: this._currentUserLikesBool(this.props.blogpost.id),
-          likeCount: this.props.blogpost.likerIds.length
+          likeCount: this.props.blogpost.likerIds.length,
+          followTrigger: false
         };
       }
     }
@@ -33393,12 +33411,14 @@ var UserShowPage = function (_React$Component) {
             _react2.default.createElement(
               'p',
               null,
-              'Followers: '
+              'Followers: ',
+              this.props.user.followerIds.length
             ),
             _react2.default.createElement(
               'p',
               null,
-              'Following:'
+              'Following: ',
+              this.props.user.followeeIds.length
             )
           )
         ),
