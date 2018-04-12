@@ -32776,7 +32776,6 @@ var NavigationBar = function (_React$Component) {
     _this.state = {
       searchBar: ''
     };
-    _this._generateStyle = _this._generateStyle.bind(_this);
     return _this;
   }
 
@@ -32796,7 +32795,7 @@ var NavigationBar = function (_React$Component) {
         'div',
         {
           className: 'main-nav-bar',
-          style: this._generateStyle() },
+          style: { borderBottom: '1px solid grey', backgroundColor: '#39485D' } },
         _react2.default.createElement(
           'div',
           { className: 'nav-header-left' },
@@ -32842,14 +32841,6 @@ var NavigationBar = function (_React$Component) {
             className: 'profile-picture',
             src: this.props.currentUser[0].profileImageUrl })
         );
-      }
-    }
-  }, {
-    key: '_generateStyle',
-    value: function _generateStyle() {
-      var curPath = this.props.location.pathname;
-      if (curPath != '/signup' && curPath != '/login' && curPath != '/' && curPath != '/404meansthispagedoesnotexist') {
-        return { borderBottom: '1px solid grey', backgroundColor: '#39485D' };
       }
     }
   }, {

@@ -6,7 +6,6 @@ class NavigationBar extends React.Component {
     this.state = {
       searchBar: ''
     }
-    this._generateStyle = this._generateStyle.bind(this);
   }
 
   update(field) {
@@ -19,7 +18,7 @@ class NavigationBar extends React.Component {
     return (
       <div
         className='main-nav-bar'
-        style={this._generateStyle()}>
+        style={{ borderBottom : '1px solid grey', backgroundColor: '#39485D' }}>
         <div className='nav-header-left'>
           {this._mainIcon()}
           <div className='around-search-bar'>
@@ -60,18 +59,6 @@ class NavigationBar extends React.Component {
             src={this.props.currentUser[0].profileImageUrl} />
         </span>
       )
-    }
-  }
-
-  _generateStyle() {
-    const curPath = this.props.location.pathname;
-    if (
-      curPath != '/signup' &&
-      curPath != '/login' &&
-      curPath != '/' &&
-      curPath != '/404meansthispagedoesnotexist'
-    ) {
-      return { borderBottom : '1px solid grey', backgroundColor: '#39485D' };
     }
   }
 
