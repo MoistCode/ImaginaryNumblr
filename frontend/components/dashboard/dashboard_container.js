@@ -38,7 +38,7 @@ const _getBlogposts = (blogposts, currentUser) => {
 
   if (userIds != null) {
     let arrOfBlogposts = [];
-    Object.values(blogposts.blogposts).reverse().forEach((blogpost) => {
+    Object.values(blogposts).reverse().forEach((blogpost) => {
       if (userIdsIncluded(blogpost.authorId, userIds)) {
         arrOfBlogposts.push(blogpost);
       }
@@ -52,8 +52,8 @@ const _getUsers = (users, currentUser) => {
     return [];
   };
   const userIds = _getUserIds(currentUser);
-  if (userIds != undefined && userIds != null && userIds.length != 0 && users.users != undefined) {
-    return userIds.map((id) => users.users[id])
+  if (userIds != undefined && userIds != null && userIds.length != 0 && users != undefined) {
+    return userIds.map((id) => users[id])
   }
 };
 
@@ -62,7 +62,7 @@ const _getRandomUsers = (userObjs) => {
   if (userObjs.length == 0 || userObjs[userObjs.length -1] == undefined) {
     return [];
   } else {
-    return _randomizeUserObjs([userObjs[userObjs.length -1]], 3);
+    return _randomizeUserObjs(userObjs, 3);
   }
 }
 
@@ -70,7 +70,7 @@ const _randomizeUserObjs = (userObjs, numOfUsers) => {
 
   let arrOfRandomUsers = [];
   while (arrOfRandomUsers.length < numOfUsers) {
-    arrOfRandomUsers.push(Object.values(userObjs[0])[Math.floor(Math.random() * Object.values(userObjs[0]).length)])
+    arrOfRandomUsers.push(userObjs[Math.floor(Math.random() * Object.values(userObjs).length)])
   }
   return arrOfRandomUsers;
 }

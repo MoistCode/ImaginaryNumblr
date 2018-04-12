@@ -27,17 +27,17 @@ class FrontPage extends React.Component {
     return (
       <div id="front_page">
         {this._firstSection(curPath)}
-        <div className='section' >
-          <img className='photo2'></img>
-        </div>
-        <div className='section'><img className='photo3'></img></div>
-        <div className='section' ><img className='photo4'></img></div>
-        <div className='section'><img className='photo5'></img></div>
-        <div className='section'><img className='photo6'></img></div>
       </div>
     )
   }
 
+  // <div className='section' >
+  //   <img className='photo2'></img>
+  // </div>
+  // <div className='section'><img className='photo3'></img></div>
+  // <div className='section' ><img className='photo4'></img></div>
+  // <div className='section'><img className='photo5'></img></div>
+  // <div className='section'><img className='photo6'></img></div>
 
 
 
@@ -80,7 +80,6 @@ class FrontPage extends React.Component {
             </div>
             <div
               className="w3-container w3-center w3-animate-bottom">
-              <div className='whatisthis'>Scroll Down for More!</div>
             </div>
           </div>
           <img className='photo1' />
@@ -90,5 +89,6 @@ class FrontPage extends React.Component {
   }
 
 }
+// <div className='whatisthis'>Scroll Down for More!</div>
 
 export default FrontPage;

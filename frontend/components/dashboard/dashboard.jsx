@@ -54,6 +54,7 @@ class Dashboard extends React.Component {
   }
 
   render() {
+    console.log(this.props.listOfRandomUsers);
     return (
       <div className='dash-background'>
         <div className='blog-creation'>
@@ -135,7 +136,7 @@ class Dashboard extends React.Component {
       <div className='dash-recommended-users'>
         <header>Recommended Users</header>
         <div className='recUsers'>
-          {this.props.listOfRandomUsers.map((user) => <li><img
+          {this.props.listOfRandomUsers.map((user) => <li key={Math.random()}><img
             src={user.profileImageUrl}
             onClick={() => this.props.history.push(`/${user.blogUrl}`)}/>
           {user.username}<i

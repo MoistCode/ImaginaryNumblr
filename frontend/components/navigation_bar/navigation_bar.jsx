@@ -50,7 +50,7 @@ class NavigationBar extends React.Component {
                   !this.props.currentUser &&
                   this.props.location.pathname != '/dashboard'
                 ) {
-                  window.location.reload();
+                  // window.location.reload();
                   this.props.history.push('/');
                 } else {
                   this.props.history.push(`/users/${this.props.currentUser[0].id}`)
@@ -100,7 +100,7 @@ class NavigationBar extends React.Component {
         className='nav-button'
         onClick={() => {
           this.props.logout();
-          window.location.reload();
+          // window.location.reload();
         }}
         style={buttonColor()} >Log Out
         <i
@@ -133,7 +133,7 @@ class NavigationBar extends React.Component {
         onClick={() => {
           this.props.demoLogin(formData)
             .then(() => {
-              window.location.reload();
+              // window.location.reload();
               this.props.history.push('/dashboard');
             })
           }}
@@ -176,10 +176,10 @@ class NavigationBar extends React.Component {
                   !this.props.currentUser &&
                   this.props.location.pathname != '/dashboard'
                 ) {
-                  window.location.reload();
+                  // window.location.reload();
                   this.props.history.push('/');
                 } else {
-                  window.location.reload();
+                  // window.location.reload();
                   this.props.history.push('/dashboard');
                 }
               }}></i>
@@ -208,10 +208,10 @@ class NavigationBar extends React.Component {
                 !this.props.currentUser &&
                 this.props.location.pathname != '/dashboard'
               ) {
-                window.location.reload();
+                // window.location.reload();
                 this.props.history.push('/');
               } else {
-                window.location.reload();
+                // window.location.reload();
                 this.props.history.push('/dashboard');
               }
             }

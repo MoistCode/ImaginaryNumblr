@@ -5182,7 +5182,7 @@ var SessionForm = function (_React$Component) {
       this.props.clearErrors();
 
       this.props.processForm(formData).then(function () {
-        window.location.reload();
+        // window.location.reload();
       });
     }
   }, {
@@ -27024,7 +27024,7 @@ var usersReducer = function usersReducer() {
   Object.freeze(oldState);
   switch (action.type) {
     case _user_actions.RECEIVE_USERS:
-      return (0, _merge3.default)({}, oldState, action.users);
+      return (0, _merge3.default)({}, oldState, action.users.users);
     case _user_actions.RECEIVE_USER:
       var receivedUser = Object.values(action.user.users)[0];
       return (0, _merge3.default)({}, oldState, _defineProperty({}, receivedUser.id, receivedUser));
@@ -27138,8 +27138,7 @@ var blogpostsReducer = function blogpostsReducer() {
   Object.freeze(oldState);
   switch (action.type) {
     case _blogpost_actions.RECEIVE_BLOGPOSTS:
-
-      return (0, _merge3.default)({}, oldState, action.blogposts);
+      return (0, _merge3.default)({}, oldState, action.blogposts.blogposts);
     case _blogpost_actions.RECEIVE_BLOGPOST:
       if (action.blogpost.blogposts != undefined) {
         return (0, _merge3.default)({}, oldState, { blogposts: action.blogpost.blogposts });
@@ -30949,34 +30948,19 @@ var FrontPage = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         { id: 'front_page' },
-        this._firstSection(curPath),
-        _react2.default.createElement(
-          'div',
-          { className: 'section' },
-          _react2.default.createElement('img', { className: 'photo2' })
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'section' },
-          _react2.default.createElement('img', { className: 'photo3' })
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'section' },
-          _react2.default.createElement('img', { className: 'photo4' })
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'section' },
-          _react2.default.createElement('img', { className: 'photo5' })
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'section' },
-          _react2.default.createElement('img', { className: 'photo6' })
-        )
+        this._firstSection(curPath)
       );
     }
+
+    // <div className='section' >
+    //   <img className='photo2'></img>
+    // </div>
+    // <div className='section'><img className='photo3'></img></div>
+    // <div className='section' ><img className='photo4'></img></div>
+    // <div className='section'><img className='photo5'></img></div>
+    // <div className='section'><img className='photo6'></img></div>
+
+
   }, {
     key: '_changeSection',
     value: function _changeSection(num) {
@@ -31068,16 +31052,8 @@ var FrontPage = function (_React$Component) {
                 '\u22C8'
               )
             ),
-            _react2.default.createElement(
-              'div',
-              {
-                className: 'w3-container w3-center w3-animate-bottom' },
-              _react2.default.createElement(
-                'div',
-                { className: 'whatisthis' },
-                'Scroll Down for More!'
-              )
-            )
+            _react2.default.createElement('div', {
+              className: 'w3-container w3-center w3-animate-bottom' })
           ),
           _react2.default.createElement('img', { className: 'photo1' })
         );
@@ -31087,6 +31063,7 @@ var FrontPage = function (_React$Component) {
 
   return FrontPage;
 }(_react2.default.Component);
+// <div className='whatisthis'>Scroll Down for More!</div>
 
 exports.default = FrontPage;
 
@@ -31230,7 +31207,7 @@ var _getBlogposts = function _getBlogposts(blogposts, currentUser) {
 
   if (userIds != null) {
     var arrOfBlogposts = [];
-    Object.values(blogposts.blogposts).reverse().forEach(function (blogpost) {
+    Object.values(blogposts).reverse().forEach(function (blogpost) {
       if (userIdsIncluded(blogpost.authorId, userIds)) {
         arrOfBlogposts.push(blogpost);
       }
@@ -31244,9 +31221,9 @@ var _getUsers = function _getUsers(users, currentUser) {
     return [];
   };
   var userIds = _getUserIds(currentUser);
-  if (userIds != undefined && userIds != null && userIds.length != 0 && users.users != undefined) {
+  if (userIds != undefined && userIds != null && userIds.length != 0 && users != undefined) {
     return userIds.map(function (id) {
-      return users.users[id];
+      return users[id];
     });
   }
 };
@@ -31255,7 +31232,7 @@ var _getRandomUsers = function _getRandomUsers(userObjs) {
   if (userObjs.length == 0 || userObjs[userObjs.length - 1] == undefined) {
     return [];
   } else {
-    return _randomizeUserObjs([userObjs[userObjs.length - 1]], 3);
+    return _randomizeUserObjs(userObjs, 3);
   }
 };
 
@@ -31263,7 +31240,7 @@ var _randomizeUserObjs = function _randomizeUserObjs(userObjs, numOfUsers) {
 
   var arrOfRandomUsers = [];
   while (arrOfRandomUsers.length < numOfUsers) {
-    arrOfRandomUsers.push(Object.values(userObjs[0])[Math.floor(Math.random() * Object.values(userObjs[0]).length)]);
+    arrOfRandomUsers.push(userObjs[Math.floor(Math.random() * Object.values(userObjs).length)]);
   }
   return arrOfRandomUsers;
 };
@@ -31393,6 +31370,7 @@ var Dashboard = function (_React$Component) {
     value: function render() {
       var _this3 = this;
 
+      console.log(this.props.listOfRandomUsers);
       return _react2.default.createElement(
         'div',
         { className: 'dash-background' },
@@ -31524,7 +31502,7 @@ var Dashboard = function (_React$Component) {
           this.props.listOfRandomUsers.map(function (user) {
             return _react2.default.createElement(
               'li',
-              null,
+              { key: Math.random() },
               _react2.default.createElement('img', {
                 src: user.profileImageUrl,
                 onClick: function onClick() {
@@ -32802,7 +32780,7 @@ var NavigationBar = function (_React$Component) {
           _react2.default.createElement('img', {
             onClick: function onClick() {
               if (!_this3.props.currentUser && _this3.props.location.pathname != '/dashboard') {
-                window.location.reload();
+                // window.location.reload();
                 _this3.props.history.push('/');
               } else {
                 _this3.props.history.push('/users/' + _this3.props.currentUser[0].id);
@@ -32852,7 +32830,7 @@ var NavigationBar = function (_React$Component) {
           className: 'nav-button',
           onClick: function onClick() {
             _this4.props.logout();
-            window.location.reload();
+            // window.location.reload();
           },
           style: buttonColor() },
         'Log Out',
@@ -32886,7 +32864,7 @@ var NavigationBar = function (_React$Component) {
           className: 'nav-button',
           onClick: function onClick() {
             _this4.props.demoLogin(formData).then(function () {
-              window.location.reload();
+              // window.location.reload();
               _this4.props.history.push('/dashboard');
             });
           }
@@ -32924,10 +32902,10 @@ var NavigationBar = function (_React$Component) {
             style: { fontSize: '39px' },
             onClick: function onClick() {
               if (!_this4.props.currentUser && _this4.props.location.pathname != '/dashboard') {
-                window.location.reload();
+                // window.location.reload();
                 _this4.props.history.push('/');
               } else {
-                window.location.reload();
+                // window.location.reload();
                 _this4.props.history.push('/dashboard');
               }
             } }),
@@ -32954,10 +32932,10 @@ var NavigationBar = function (_React$Component) {
       return _react2.default.createElement('img', {
         onClick: function onClick() {
           if (!_this5.props.currentUser && _this5.props.location.pathname != '/dashboard') {
-            window.location.reload();
+            // window.location.reload();
             _this5.props.history.push('/');
           } else {
-            window.location.reload();
+            // window.location.reload();
             _this5.props.history.push('/dashboard');
           }
         },
@@ -33009,9 +32987,9 @@ var _checkCurrentUserFollows = function _checkCurrentUserFollows(currentUser) {
 };
 
 var _generateUserBlogposts = function _generateUserBlogposts(blogposts, usersBlogpostIds) {
-  if (blogposts.blogposts != undefined) {
+  if (blogposts != undefined) {
     return usersBlogpostIds.map(function (id) {
-      return blogposts.blogposts[id];
+      return blogposts[id];
     });
   }
 };

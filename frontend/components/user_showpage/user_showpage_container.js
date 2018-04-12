@@ -17,8 +17,8 @@ const _checkCurrentUserFollows = (currentUser) => {
 }
 
 const _generateUserBlogposts = (blogposts, usersBlogpostIds) => {
-  if (blogposts.blogposts != undefined) {
-    return usersBlogpostIds.map((id) => blogposts.blogposts[id])
+  if (blogposts != undefined) {
+    return usersBlogpostIds.map((id) => blogposts[id])
   }
 };
 
