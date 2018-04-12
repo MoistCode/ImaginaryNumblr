@@ -362,7 +362,7 @@ class BlogpostItem extends React.Component {
               fontStyle: 'italic',
               marginBottom: '10px'
             }}>"{quote}"</h1>
-          <p>- {this.props.blogpost.quoteSource}</p>
+          <p>{this.props.blogpost.quoteSource}</p>
         </div>
       )
     } else if (contentType == 'text') {

@@ -154,6 +154,7 @@ class Dashboard extends React.Component {
                             className='fa fa-plus-square'
                             style={this._generateUserFollowedIconColor(user.id)} /></li>)}
         </div>
+        <p>Explore All of ImaginaryNumblr</p>
       </div>
     )
   }
@@ -265,7 +266,7 @@ class Dashboard extends React.Component {
               fontStyle: 'italic',
               marginBottom: '10px'
             }}>"{quote}"</h1>
-          <p>- {this.props.blogpost.quoteSource}</p>
+          <p>{blogpost.quoteSource}</p>
         </div>
       )
     } else if (contentType == 'text') {

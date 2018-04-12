@@ -31553,6 +31553,11 @@ var Dashboard = function (_React$Component) {
                 style: _this6._generateUserFollowedIconColor(user.id) })
             );
           })
+        ),
+        _react2.default.createElement(
+          'p',
+          null,
+          'Explore All of ImaginaryNumblr'
         )
       );
     }
@@ -31700,8 +31705,7 @@ var Dashboard = function (_React$Component) {
           _react2.default.createElement(
             'p',
             null,
-            '- ',
-            this.props.blogpost.quoteSource
+            blogpost.quoteSource
           )
         );
       } else if (contentType == 'text') {
@@ -32684,7 +32688,6 @@ var BlogpostItem = function (_React$Component) {
           _react2.default.createElement(
             'p',
             null,
-            '- ',
             this.props.blogpost.quoteSource
           )
         );

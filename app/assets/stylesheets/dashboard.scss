@@ -69,7 +69,7 @@
 .dash-recommended-users {
   width: 340px;
   height: 243px;
-  margin-bottom: 50px;
+  margin-bottom: 13px;
   img {
     width: 46px;
     height: 46px;
@@ -105,6 +105,16 @@
       color: #A7CAE9;
     }
 
+  }
+  p {
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: bold;
+    color: #8F97A3;
+    cursor: pointer;
+  }
+
+  p:hover {
+    color: #A7CAE9;
   }
 }
 
