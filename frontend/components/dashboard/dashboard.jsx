@@ -14,7 +14,8 @@ class Dashboard extends React.Component {
     this.state = {
       creationFormModalIsOpen: false,
       modalContentType: '',
-      creationSubmitted: false
+      creationSubmitted: false,
+      listOfBlogposts: this.props.listOfBlogposts
     }
   }
 
@@ -34,7 +35,7 @@ class Dashboard extends React.Component {
   }
 
   componentDidMount() {
-    
+
   }
 
   handleCreationModal(field) {
@@ -127,7 +128,6 @@ class Dashboard extends React.Component {
           this.props.fetchBlogposts(arrOfBlogpostIds);
         }
       )
-
   }
 
   _generateRecommendedUsers() {

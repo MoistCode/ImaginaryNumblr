@@ -107,7 +107,10 @@ class BlogpostItem extends React.Component {
 
   handleDeletion() {
     this.props.deleteBlogpost(this.props.blogpost.id)
-
+      .then(() => {
+        this.props.createdSubmitted();
+        this.toggleDeletion();
+      })
   }
 
   toggleDeletion() {

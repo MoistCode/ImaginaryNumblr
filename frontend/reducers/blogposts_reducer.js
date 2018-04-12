@@ -18,6 +18,7 @@ const blogpostsReducer = (oldState = {}, action) => {
     case REMOVE_BLOGPOST:
       let newState = merge({}, oldState);
       delete newState[action.blogpostId];
+      delete newState.blogposts[action.blogpostId];
       return newState;
     default:
       return oldState;
