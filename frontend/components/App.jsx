@@ -6,6 +6,7 @@ import DashboardContainer from './dashboard/dashboard_container';
 import NavigationBarContainer from './navigation_bar/navigation_bar_container';
 import UserShowPageContainer from './user_showpage/user_showpage_container';
 import PageDoesNotExist from './page_does_not_exist';
+import UserLikesShowPageContainer from './like/like_showpage_container';
 
 const App = () => (
   <div>
@@ -14,6 +15,7 @@ const App = () => (
     <Switch>
       <Route exact path='/404meansthispagedoesnotexist' component={ PageDoesNotExist } />
       <Route exact path='/users/:userId' component={ UserShowPageContainer } />
+      <Route exact path='/likes' component={ UserLikesShowPageContainer } />
       <ProtectedRoute exact path='/dashboard' component={ DashboardContainer } />
       <AuthRoute path='/login' component={ FrontPage } />
       <AuthRoute path='/signup' component={ FrontPage } />

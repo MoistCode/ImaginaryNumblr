@@ -30828,6 +30828,10 @@ var _page_does_not_exist = __webpack_require__(242);
 
 var _page_does_not_exist2 = _interopRequireDefault(_page_does_not_exist);
 
+var _like_showpage_container = __webpack_require__(243);
+
+var _like_showpage_container2 = _interopRequireDefault(_like_showpage_container);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var App = function App() {
@@ -30840,6 +30844,7 @@ var App = function App() {
       null,
       _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/404meansthispagedoesnotexist', component: _page_does_not_exist2.default }),
       _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/users/:userId', component: _user_showpage_container2.default }),
+      _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/likes', component: _like_showpage_container2.default }),
       _react2.default.createElement(_route_util.ProtectedRoute, { exact: true, path: '/dashboard', component: _dashboard_container2.default }),
       _react2.default.createElement(_route_util.AuthRoute, { path: '/login', component: _front_page2.default }),
       _react2.default.createElement(_route_util.AuthRoute, { path: '/signup', component: _front_page2.default }),
@@ -33305,6 +33310,13 @@ var PageDoesNotExist = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = PageDoesNotExist;
+
+/***/ }),
+/* 243 */
+/***/ (function(module, exports) {
+
+"use strict";
+throw new Error("Module build failed: SyntaxError: Unexpected token (13:0)\n\n\u001b[0m \u001b[90m 11 | \u001b[39m  blogpostObjects\u001b[33m:\u001b[39m\n \u001b[90m 12 | \u001b[39m  authorObjects\u001b[33m:\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 13 | \u001b[39m}\u001b[33m;\u001b[39m\n \u001b[90m    | \u001b[39m\u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 14 | \u001b[39m\n \u001b[90m 15 | \u001b[39m\u001b[36mconst\u001b[39m mapDispatchToProps \u001b[33m=\u001b[39m (dispatch) \u001b[33m=>\u001b[39m {\n \u001b[90m 16 | \u001b[39m\u001b[0m\n");
 
 /***/ })
 /******/ ]);
