@@ -24,9 +24,9 @@
      Create some posts using our many upload types such as videos, photos, and audio
   <h4>
   <p align='center'>
+    Navigation yourself seemlessly as creation is automatically updated and refreshed to show the most recently updated posts on your dashboard.
     <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/readme_gifs/Creation%20bar.gif">
   </p>
-   <p>Navigation yourself seemlessly as creation is automatically updated and refreshed to show the most recently updated posts on your dashboard.<p>
   
   <h4 align='center'>
     <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/app/assets/images/favicon.png">
