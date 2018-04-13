@@ -41,7 +41,6 @@ Navigation yourself seemlessly as creation is automatically updated and refreshe
 </h4>
 <p align='center'>
   <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/readme_gifs/edit%20delete.gif">
-  <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/readme_gifs/delete.gif">
 </p>
 
 ***
