@@ -23,24 +23,24 @@
      Create some posts using our many upload types such as videos, photos, and audio
 </h4>
 
-Navigation yourself seemlessly as creation is automatically updated and refreshed to show the most recently updated posts on your dashboard.
+Navigation yourself seemlessly as creation is automatically updated and refreshed to show the most recently updated posts on your dashboard.  
 
 <p align='center'>
   <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/readme_gifs/Creation%20bar.gif">
-</p>
+</p>  
 
 ***
 
 <h4 align='center'>
   <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/app/assets/images/favicon.png">
   Edit and delete on the fly as the website will automatically generate your changes without browser refresh
-</h4>
+</h4>  
 
-With the power of React's state, we can create, edit, delete and whatever else we want to do without ever having to refresh to see the updates! This is done by manipulating the state of the current component which trickles an avalache effect where React compares the changes to the previous information and make changes as necessary.
+With the power of React's state, we can create, edit, delete and whatever else we want to do without ever having to refresh to see the updates! This is done by manipulating the state of the current component which trickles an avalache effect where React compares the changes to the previous information and make changes as necessary.  
 
 <p align='center'>
   <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/readme_gifs/edit%20delete.gif">
-</p>
+</p>  
 
 ***
   
