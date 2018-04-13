@@ -96,4 +96,4 @@ Ruby on Rails|React|Redux|HTML/CSS/JavaScript|PostgreSQL|Amazon Web Services S3
 * Reblogs and shares
 * Messaging
 * Tags to improve recommendation algorithm
-
+* LaTeX integration
