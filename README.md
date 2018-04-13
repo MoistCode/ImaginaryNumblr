@@ -24,10 +24,10 @@ Ruby on Rails|React|Redux|HTML/CSS/JavaScript|PostgreSQL|Amazon Web Services S3
 
 <h2>Features</h2>
 
-[create an anchor](#post-creation)
-[create an anchor](#post-edit-delete)
-[create an anchor](#user-follows)
-[create an anchor](#post-likes)
+- [Creating a post](#post-creation)
+- [Editing and deleting a post](#post-edit-delete)
+- [Following a user](#user-follows)
+- [Liking a post](#post-likes)
 
 <a name="post-creation">
   <h4 align='center'>
