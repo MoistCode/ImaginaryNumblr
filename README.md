@@ -19,9 +19,9 @@
   
   <h4>Sign up, log in, or simply demo the site by using demo log in credentials provided<h4>
   
-  <h4>Create some posts using our many upload types such as videos, photos, and audio<h4>
+  <h4 align='center'>Create some posts using our many upload types such as videos, photos, and audio<h4>
   <p align='center'>
-  <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/readme_gifs/Creation%20bar.gif">
+    <img style="width: 100px;" src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/readme_gifs/Creation%20bar.gif">
   </p>
    <p>Navigation yourself seemlessly as creation is automatically updated and refreshed to show the most recently updated posts on your dashboard.<p>
   
