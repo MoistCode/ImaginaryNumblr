@@ -18,7 +18,7 @@
 #
 
 class Blogpost < ApplicationRecord
-  # validate :conditional_attached_file_validation
+  validate :conditional_attached_file_validation
 
   validates :content_type, presence: true
 
@@ -44,14 +44,14 @@ class Blogpost < ApplicationRecord
 
   private
 
-  # def conditional_attached_file_validation
-  #   if (( content_type != 'text' && content_type != 'quote') && attached_file.url == "/attached_files/original/missing.png")
-  #     errors.add(:attached_file, "must be present for type audio, photo, and video")
-  #   elsif content_type == 'text'&& description.empty?
-  #     errors.add(:description, "must not be empty")
-  #   elsif content_type == 'quote' && quote.empty?
-  #     errors.add(:quote, "must not be empty")
-  #   end
-  # end
+  def conditional_attached_file_validation
+    if (( content_type != 'text' && content_type != 'quote') && attached_file.url == "/attached_files/original/missing.png")
+      errors.add(:attached_file, "must be present for type audio, photo, and video")
+    elsif content_type == 'text'&& description.empty?
+      errors.add(:description, "must not be empty")
+    elsif content_type == 'quote' && quote.empty?
+      errors.add(:quote, "must not be empty")
+    end
+  end
 
 end
