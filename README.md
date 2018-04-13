@@ -2,8 +2,8 @@
   <a href="https://imaginarynumblr.herokuapp.com/">
     <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/app/assets/images/default_user.png">
   </a>
-  <h1 align="center">Imaginary Numblr</h1>
-  <h2 align="center"><i>"Where nerds use numbers to speak to other nerds"</i></h2>
+  <h1 align="center" border-bottom='0'>Imaginary Numblr</h1>
+  <h2 align="center" border-bottom='0'><i>"Where nerds use numbers to speak to other nerds"</i></h2>
 </p>  
 
 ***
