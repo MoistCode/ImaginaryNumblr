@@ -87,8 +87,6 @@ Ruby on Rails|React|Redux|HTML/CSS/JavaScript|PostgreSQL|Amazon Web Services S3
 
 ***
 <a name="project-direction">
-  <h2
-    Project Direction
-  </h2>
+  <h2>Project Direction</h2>
 </a>
 
