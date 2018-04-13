@@ -35,7 +35,7 @@ Ruby on Rails|React|Redux|HTML/CSS/JavaScript|PostgreSQL|Amazon Web Services S3
        Post Creation
   </h4>
 </a>
-  Navigation yourself seemlessly as creation is automatically updated and refreshed to show the most recently updated posts on your dashboard. Currently supported types are quotes, long texts, audios, videos, and photos.
+  Navigation yourself seemlessly as creation is automatically updated and refreshed to show the most recently updated posts on your dashboard. Currently supported types are quotes, long texts, audios, videos, and photos.  
 
 <p align='center'>
   <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/readme_gifs/Creation%20bar.gif">
