@@ -35,8 +35,8 @@ Ruby on Rails|React|Redux|HTML/CSS/JavaScript|PostgreSQL|Amazon Web Services S3
        Post Creation
   </h4>
 </a>
-  Navigation yourself seemlessly as creation is automatically updated and refreshed to show the most recently updated posts on your dashboard. Currently supported types are quotes, long texts, audios, videos, and photos.  
-  
+  Navigation yourself seemlessly as creation is automatically updated and refreshed to show the most recently updated posts on your dashboard. Currently supported types are quotes, long texts, audios, videos, and photos.\
+  \
 <p align='center'>
   <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/readme_gifs/Creation%20bar.gif">
 </p>  
@@ -48,8 +48,8 @@ Ruby on Rails|React|Redux|HTML/CSS/JavaScript|PostgreSQL|Amazon Web Services S3
     Post Edition/Deletion
   </h4>  
 </a>
-  With the power of React's state, we can create, edit, delete and whatever else we want to do without ever having to refresh to see the updates! This is done by manipulating the state of the current component which trickles an avalache effect where React compares the changes to the previous information and make changes as necessary.  
-  
+  With the power of React's state, we can create, edit, delete and whatever else we want to do without ever having to refresh to see the updates! This is done by manipulating the state of the current component which trickles an avalache effect where React compares the changes to the previous information and make changes as necessary.\ 
+\
 <p align='center'>
   <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/readme_gifs/edit%20delete.gif">
 </p>  
@@ -61,8 +61,8 @@ Ruby on Rails|React|Redux|HTML/CSS/JavaScript|PostgreSQL|Amazon Web Services S3
     User Follows
   </h4>
 </a>
-  Following a user allows access to every post associated with that user in real time. If you were to ever unfollow a user, your dash would instantly remove such posts on your dashboard.
-  
+  Following a user allows access to every post associated with that user in real time. If you were to ever unfollow a user, your dash would instantly remove such posts on your dashboard.\
+\
 <p align='center'>
   <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/readme_gifs/unfollow.gif">  
 </p>
@@ -74,8 +74,8 @@ Ruby on Rails|React|Redux|HTML/CSS/JavaScript|PostgreSQL|Amazon Web Services S3
     Post Likes
   </h4>
 </a>
-  Enjoy a post? By liking a post, you will not only show appreciation for the author but will also save that post for future reference for everlasting entertainment!
-  
+  Enjoy a post? By liking a post, you will not only show appreciation for the author but will also save that post for future reference for everlasting entertainment!\
+\
 <p align='center'>
   <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/readme_gifs/like.gif">  
 </p>
