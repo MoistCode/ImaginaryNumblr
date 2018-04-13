@@ -85,4 +85,10 @@ Ruby on Rails|React|Redux|HTML/CSS/JavaScript|PostgreSQL|Amazon Web Services S3
   <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/readme_gifs/like.gif">  
 </p>
 
+***
+<a name="project-direction">
+  <h4 align='center'>
+    Project Direction
+  </h4>
+</a>
 
