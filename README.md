@@ -5,7 +5,7 @@
   
   <br>
   <h1 align="center">Imaginary Numblr</h1>
-  <h2 align="center" font-style="italic"><i>"Where nerds use numbers to speak to other nerds"</i></h2>
+  <h2 align="center"><i>"Where nerds use numbers to speak to other nerds"</i></h2>
 </p>  
 
 ***
