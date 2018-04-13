@@ -249,6 +249,12 @@ seed_video_arr = [
   "https://s3-us-west-1.amazonaws.com/imaginarynumblr/seeddata/video/739124510.mp4"
 ]
 
+
+User.create(
+  username: 'username',
+  password: 'password',
+  email: 'demouser@demouser.demo.uk'
+)
 image_num = 0
 100.times do
   User.create(
@@ -271,7 +277,7 @@ end
 500.times do
   content_type = Random.rand(5) + 1
   seed_data = Random.rand(5) +1
-  author = Random.rand(100) + 1
+  author = Random.rand(99) + 2
 
   case content_type
   when 1
