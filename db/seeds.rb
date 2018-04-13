@@ -283,11 +283,8 @@ end
 500.times do
   content_type = Random.rand(5) + 1
   seed_data = Random.rand(5) +1
-<<<<<<< HEAD
   author = Random.rand(120) + 2
-=======
   author = Random.rand(99) + 2
->>>>>>> 481d0be197c6e090fcbbddc6a6a9cbe23992119c
 
   case content_type
   when 1
