@@ -21,6 +21,22 @@
     <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/readme_gifs/Webp.net-resizeimage%20(2).png">
      Ruby on Rails
 </p>
+<p>
+    <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/readme_gifs/Webp.net-resizeimage.png">
+     React
+</p>
+<p>
+    <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/readme_gifs/Webp.net-resizeimage%20(1).png">
+     Redux
+</p>
+<p>
+    <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/readme_gifs/Webp.net-resizeimage%20(4).png">
+     HTML/CSS/JavaScript
+</p>
+<p>
+    <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/readme_gifs/Webp.net-resizeimage%20(3).png">
+     PostgreSQL
+</p>
   
 <h2>Features</h2>
 
