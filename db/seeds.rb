@@ -277,7 +277,7 @@ end
 500.times do
   content_type = Random.rand(5) + 1
   seed_data = Random.rand(5) +1
-  author = Random.rand(100) + 1
+  author = Random.rand(120) + 2
 
   case content_type
   when 1
