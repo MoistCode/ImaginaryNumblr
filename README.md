@@ -18,10 +18,6 @@
   
 <h2>Features</h2>
 
-<h4>Sign up, log in, or simply demo the site by using demo log in credentials provided</h4>
-
-***
-
 <h4 align='center'>
     <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/app/assets/images/favicon.png">
      Create some posts using our many upload types such as videos, photos, and audio
