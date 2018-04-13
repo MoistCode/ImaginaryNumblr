@@ -24,13 +24,14 @@ Ruby on Rails|React|Redux|HTML/CSS/JavaScript|PostgreSQL|Amazon Web Services S3
 
 <h2>Features</h2>
 
-[create an anchor](#Anchors-in-markdown)
+[create an anchor](#post-creation)
 
+<a name="post-creation">
 <h4 align='center'>
     <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/app/assets/images/favicon.png">
      Post Creation
 </h4>
-
+</a>
   Navigation yourself seemlessly as creation is automatically updated and refreshed to show the most recently updated posts on your dashboard. Currently supported types are quotes, long texts, audios, videos, and photos.
 
 <p align='center'>
