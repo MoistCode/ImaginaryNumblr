@@ -89,6 +89,7 @@ Ruby on Rails|React|Redux|HTML/CSS/JavaScript|PostgreSQL|Amazon Web Services S3
 <a name="project-direction">
   <h2>Project Direction</h2>
 </a>
+
 * Chatting with other users
 * Allowing users to edit their own show page
 * User settings (i.e., option to change password, username, profile picture)
