@@ -30,7 +30,7 @@ Ruby on Rails|React|Redux|HTML/CSS/JavaScript|PostgreSQL|Amazon Web Services S3
 - [Liking a post](#post-likes)
 
 <a name="post-creation">
-  <br>
+  <br />
   <h4 align='center'>
       <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/app/assets/images/favicon.png">
        Post Creation
