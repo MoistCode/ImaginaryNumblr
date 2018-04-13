@@ -24,6 +24,8 @@ Ruby on Rails|React|Redux|HTML/CSS/JavaScript|PostgreSQL|Amazon Web Services S3
 
 <h2>Features</h2>
 
+[create an anchor](#Anchors-in-markdown)
+
 <h4 align='center'>
     <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/app/assets/images/favicon.png">
      Post Creation
