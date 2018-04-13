@@ -122,8 +122,7 @@ seed_video_arr = [
 User.create(
   username: 'username',
   password: 'password',
-  email: 'demouser@demouser.demo.uk',
-  seed_image: "https://s3-us-west-1.amazonaws.com/imaginarynumblr/seeddata/profilepicture/rand2.jpeg"
+  email: 'demouser@demouser.demo.uk'
 )
 
 100.times do
