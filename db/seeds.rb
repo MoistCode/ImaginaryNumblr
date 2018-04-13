@@ -126,7 +126,7 @@ User.create(
 )
 image_num = 0
 100.times do
-  User.new(
+  User.create(
     username:Faker::Internet.user_name,
     password: 'password',
     email: Faker::Internet.safe_email,
