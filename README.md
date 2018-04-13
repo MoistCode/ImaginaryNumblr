@@ -35,18 +35,24 @@ Navigation yourself seemlessly as creation is automatically updated and refreshe
   <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/app/assets/images/favicon.png">
   Edit and delete on the fly as the website will automatically generate your changes without browser refresh
 </h4>
+
 <p align='center'>
   <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/readme_gifs/edit%20delete.gif">
 </p>
 
 ***
   
-  <h4 align='center'>
-    <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/app/assets/images/favicon.png">
-    Follow users and get access to all their posts
-  </h4>
+<h4 align='center'>
+  <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/app/assets/images/favicon.png">
+  Follow users and get access to all their posts
+</h4>
+
+<p align='center'>
   <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/readme_gifs/unfollow.gif">  
-  
+</p>
+
+***
+
   <h4 align='center'>
     <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/app/assets/images/favicon.png">
     Like a post? Simply click on hearts to save that post on your likes page for later entertainment
