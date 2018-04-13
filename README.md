@@ -49,7 +49,7 @@ Ruby on Rails|React|Redux|HTML/CSS/JavaScript|PostgreSQL|Amazon Web Services S3
     Post Edition/Deletion
   </h4>  
 </a>
-  With the power of React's state, we can create, edit, delete and whatever else we want to do without ever having to refresh to see the updates! This is done by manipulating the state of the current component which trickles an avalache effect where React compares the changes to the previous information and make changes as necessary.
+  With the power of React's state, we can create, edit, delete, etc., without ever having to refresh to see the updates! This is done by manipulating the state of the current component which trickles an avalache effect where React compares the changes to the previous information and make changes as necessary.
 <p align='center'>
   <br />
   <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/readme_gifs/edit%20delete.gif">
