@@ -374,7 +374,7 @@ end
   # Push into an array if it's not in there
   # Create Follow
 follow_arr = []
-1000.times do
+3000.times do
   generated_arr = [Random.rand(100) + 1, Random.rand(100) + 1]
   while follow_arr.include?(generated_arr) && generated_arr[0] == generated_arr[1]
     generated_arr = [Random.rand(100) + 1, Random.rand(100) + 1]

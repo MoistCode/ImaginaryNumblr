@@ -31375,11 +31375,6 @@ var Dashboard = function (_React$Component) {
       var _this2 = this;
 
       var arrOfUserIds = this.props.currentUser[0].followeeIds.concat(this.props.currentUser[0].id);
-      var allusers = [];
-      for (var i = 1; i < 100; i++) {
-        allusers.push(i);
-      }
-      this.props.fetchUsers(allusers);
       this.props.fetchUsers(arrOfUserIds).then(function (payload) {
         var arrOfBlogpostIds = [];
         Object.values(payload.users.users).forEach(function (user) {

@@ -27,11 +27,6 @@ class Dashboard extends React.Component {
 
   componentDidMount() {
     const arrOfUserIds = this.props.currentUser[0].followeeIds.concat(this.props.currentUser[0].id);
-    const allusers = [];
-    for(let i = 1; i < 100; i++) {
-      allusers.push(i)
-    }
-    this.props.fetchUsers(allusers);
     this.props.fetchUsers(arrOfUserIds)
     .then(
       (payload) => {
