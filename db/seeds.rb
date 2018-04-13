@@ -6,6 +6,12 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+User.create(
+  username:'username',
+  password: 'password',
+  email: Faker::Internet.safe_email
+)
+
 seed_image_arr = [
   "https://s3-us-west-1.amazonaws.com/imaginarynumblr/seeddata/profilepicture/penguin.png",
   "https://s3-us-west-1.amazonaws.com/imaginarynumblr/seeddata/profilepicture/r36.jpeg",
@@ -250,7 +256,7 @@ seed_video_arr = [
 ]
 
 image_num = 0
-100.times do
+150.times do
   User.create(
     username:Faker::Internet.user_name,
     password: 'password',
