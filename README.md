@@ -32,6 +32,7 @@ Ruby on Rails|React|Redux|HTML/CSS/JavaScript|PostgreSQL|Amazon Web Services S3
 - [Editing and deleting a post](#post-edit-delete)
 - [Following a user](#user-follows)
 - [Liking a post](#post-likes)
+- [Project direction](#project-direction)
 
 <a name="post-creation">
   <h4 align='center'>
