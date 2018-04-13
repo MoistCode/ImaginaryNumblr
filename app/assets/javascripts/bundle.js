@@ -33140,11 +33140,11 @@ var NavigationBar = function (_React$Component) {
             style: this._generateNavButtonStyles('home'),
             onClick: function onClick() {
               if (!_this4.props.currentUser && _this4.props.location.pathname != '/dashboard') {
-
                 _this4.props.history.push('/');
+                window.location.reload();
               } else {
-
                 _this4.props.history.push('/dashboard');
+                window.location.reload();
               }
             } }),
           _react2.default.createElement('i', {
@@ -33186,11 +33186,11 @@ var NavigationBar = function (_React$Component) {
       return _react2.default.createElement('img', {
         onClick: function onClick() {
           if (!_this5.props.currentUser && _this5.props.location.pathname != '/dashboard') {
-
             _this5.props.history.push('/');
+            window.location.reload();
           } else {
-
             _this5.props.history.push('/dashboard');
+            window.location.reload();
           }
         },
         className: 'main-nav-icon',

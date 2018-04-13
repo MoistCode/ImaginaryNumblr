@@ -158,11 +158,11 @@ class NavigationBar extends React.Component {
                   !this.props.currentUser &&
                   this.props.location.pathname != '/dashboard'
                 ) {
-
                   this.props.history.push('/');
+                  window.location.reload();
                 } else {
-
                   this.props.history.push('/dashboard');
+                  window.location.reload();
                 }
               }}></i>
           <i
@@ -203,11 +203,11 @@ class NavigationBar extends React.Component {
                 !this.props.currentUser &&
                 this.props.location.pathname != '/dashboard'
               ) {
-
                 this.props.history.push('/');
+                window.location.reload();
               } else {
-
                 this.props.history.push('/dashboard');
+                window.location.reload();
               }
             }
           }
