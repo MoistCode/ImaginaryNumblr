@@ -91,7 +91,7 @@ Ruby on Rails|React|Redux|HTML/CSS/JavaScript|PostgreSQL|Amazon Web Services S3
 </a>
 
 * Chatting with other users
-* Allowing users to edit their own show page
+* Allowing users to choose a theme for their show page
 * User settings (i.e., option to change password, username, profile picture)
 * Reblogs and shares
 * Messaging
