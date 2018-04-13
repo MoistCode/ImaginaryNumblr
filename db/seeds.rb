@@ -249,12 +249,6 @@ seed_video_arr = [
   "https://s3-us-west-1.amazonaws.com/imaginarynumblr/seeddata/video/739124510.mp4"
 ]
 
-
-User.create(
-  username: 'username',
-  password: 'password',
-  email: 'demouser@demouser.demo.uk'
-)
 image_num = 0
 100.times do
   User.create(
