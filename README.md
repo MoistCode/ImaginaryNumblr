@@ -47,6 +47,49 @@ Ruby on Rails|React|Redux|HTML/CSS/JavaScript|PostgreSQL|Amazon Web Services S3
   <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/readme_gifs/Creation%20bar.gif">
 </p>  
 
+``` javascript
+  render() {
+    return (
+        <div id='creation-modal'>
+          <div
+            className='w3-container w3-center w3-animate-opacity'>
+          <div id='creation-form'>
+            <i
+              onClick={() => {
+                this.props.showDashboard();
+                this.props.clearErrors();
+              }}
+              className="fa fa-close"></i>
+            <form onSubmit={(e) => this.handleSubmit(e)}>
+              <input
+                type='text'
+                placeholder='Title'
+                value={this.state.title}
+                onChange={this.update('title')}
+                style={{ fontSize: '28px' }} />
+              {this._generateForm(this.props.contentType)}
+              <button
+                type='submit'
+                className='create-submit-button'>Submit</button>
+              {this._generateErrors(this.props.errors)}
+            </form>
+          </div>
+        </div>
+        {this._addEnterEventListener()}
+      </div>
+    )
+  }
+
+  _addEnterEventListener() {
+    $('form').keypress(function (e) {
+      if (e.which == 13) {
+        $('form').submit();
+        return false;
+      }
+    });
+  }
+```
+
 ***
 <a name="post-edit-delete">
   <h4 align='center'>
