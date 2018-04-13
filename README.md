@@ -116,6 +116,18 @@ Ruby on Rails|React|Redux|HTML/CSS/JavaScript|PostgreSQL|Amazon Web Services S3
   <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/readme_gifs/unfollow.gif">  
 </p>
 
+```javascript
+  _generateFollowButton() {
+    if (this.props.currentUser == 'none') {
+      return
+    } else if (this.props.currentUserFollows.indexOf(this.props.user.id) > -1) {
+      return <button className='follow-button' onClick={this.handleUnfollow}>Unfollow</button>
+    } else if (this.props.user.id != this.props.currentUser.id) {
+      return <button className='follow-button' onClick={this.handleFollow}>Follow</button>
+    }
+  }
+```
+
 ***
 <a name="post-likes">
   <h4 align='center'>
