@@ -19,7 +19,9 @@
 <h2>Features</h2>
 
 <h4>Sign up, log in, or simply demo the site by using demo log in credentials provided</h4>
-  
+
+***
+
 <h4 align='center'>
     <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/app/assets/images/favicon.png">
      Create some posts using our many upload types such as videos, photos, and audio
@@ -30,13 +32,19 @@ Navigation yourself seemlessly as creation is automatically updated and refreshe
 <p align='center'>
   <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/readme_gifs/Creation%20bar.gif">
 </p>
-  
-  <h4 align='center'>
-    <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/app/assets/images/favicon.png">
-    Edit and delete on the fly as the website will automatically generate your changes without browser refresh
-  </h4>
+
+***
+
+<h4 align='center'>
+  <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/app/assets/images/favicon.png">
+  Edit and delete on the fly as the website will automatically generate your changes without browser refresh
+</h4>
+<p align='center'>
   <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/readme_gifs/edit%20delete.gif">
   <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/readme_gifs/delete.gif">
+</p>
+
+***
   
   <h4 align='center'>
     <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/app/assets/images/favicon.png">
