@@ -28,15 +28,25 @@
   </p>
    <p>Navigation yourself seemlessly as creation is automatically updated and refreshed to show the most recently updated posts on your dashboard.<p>
   
-  <h4>Edit and delete on the fly as the website will automatically generate your changes without browser refresh</h4>
-  <h4>Follow users and get access to all their posts</h4>
-  <h4>Like a post? Simply click on hearts to save that post on your likes page for later entertainment</h4>
-  
-  
+  <h4 align='center'>
+    <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/app/assets/images/favicon.png">
+    Edit and delete on the fly as the website will automatically generate your changes without browser refresh
+  </h4>
   <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/readme_gifs/edit%20delete.gif">
   <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/readme_gifs/delete.gif">
-  <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/readme_gifs/like.gif">
-  <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/readme_gifs/unfollow.gif">
+  
+  <h4 align='center'>
+    <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/app/assets/images/favicon.png">
+    Follow users and get access to all their posts
+  </h4>
+  <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/readme_gifs/unfollow.gif">  
+  
+  <h4 align='center'>
+    <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/app/assets/images/favicon.png">
+    Like a post? Simply click on hearts to save that post on your likes page for later entertainment
+  </h4>
+  <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/readme_gifs/like.gif">  
+
 </p>  
 
 
