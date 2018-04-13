@@ -66,7 +66,7 @@ Ruby on Rails|React|Redux|HTML/CSS/JavaScript|PostgreSQL|Amazon Web Services S3
     User Follows
   </h4>
 </a>
-  Following a user allows access to every post associated with that user in real time. If you were to ever unfollow a user, your dash would instantly remove such posts on your dashboard.
+  Following a user allows access to every post associated with that user in real time. If you were to ever unfollow a user, your dash would instantly remove all their posts from your dashboard.
 <p align='center'>
   <br />
   <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/readme_gifs/unfollow.gif">  
@@ -89,10 +89,10 @@ Ruby on Rails|React|Redux|HTML/CSS/JavaScript|PostgreSQL|Amazon Web Services S3
 <a name="project-direction">
   <h2>Project Direction</h2>
 </a>
-- [] Chatting with other users
-- [] Allowing users to edit their own show page
-- [] User settings (i.e., option to change password, username, profile picture)
-- [] Reblogs and shares
-- [] Messaging
-- [] Tags to improve recommendation algorithm
+* Chatting with other users
+* Allowing users to edit their own show page
+* User settings (i.e., option to change password, username, profile picture)
+* Reblogs and shares
+* Messaging
+* Tags to improve recommendation algorithm
 
