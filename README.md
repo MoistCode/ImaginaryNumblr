@@ -20,29 +20,36 @@
 <p align='center'>
   <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/readme_gifs/Webp.net-resizeimage%20(2).png">
 </p>
-Ruby on Rails
+
+<p align='center'>Ruby on Rails</p>
+
 
 <p align='center'>
   <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/readme_gifs/Webp.net-resizeimage.png">
 </p>
-React
+<p align='center'>React</p>
+
 
 <p align='center'>
   <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/readme_gifs/Webp.net-resizeimage%20(1).png">
 </p>
-Redux
+<p align='center'>Redux</p>
+
+
 
 <p align='center'>
   <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/readme_gifs/Webp.net-resizeimage%20(4).png">
 </p>
-HTML/CSS/JavaScript
+<p align='center'>HTML/CSS/JavaScript</p>
+
+
 
 <p align='center'>
   <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/readme_gifs/Webp.net-resizeimage%20(3).png">
 </p>
-PostgreSQL
+<p align='center'>PostgreSQL</p>
 
-  
+
 <h2>Features</h2>
 
 <h4 align='center'>
