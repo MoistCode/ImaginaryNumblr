@@ -16,6 +16,10 @@
   
 <p>A website primarily inspired by Tumblr that takes a more mathematical modus operandi! Although the theme may initially come off as favoring only blogs pertaining to mathematics, it actually takes a much deeper approach. Mathematics is everywhere. From the fluid dynamics naturally taken into consideration by Vincent van Gogh when painting <i>Starry Night</i>, to what we all know and love, Calculus. There are absolutely no boundaries for entry and we welcome mathematicians of all levels, even if you <b>dislike</b> mathematics. So sign up, get that painting you've been working on for months or a photo of your dog and get some analysis from our top-notch <b>Numblrs</b>, maybe not of your dogs...dogs are just cute..</p>
 
+<p align='center'>
+  <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/readme_gifs/screenie.png">
+</p>  
+
 <h2>Technologies</h2>
   
 Ruby on Rails|React|Redux|HTML/CSS/JavaScript|PostgreSQL|Amazon Web Services S3
