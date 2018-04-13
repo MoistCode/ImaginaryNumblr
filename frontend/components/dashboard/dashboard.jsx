@@ -18,13 +18,20 @@ class Dashboard extends React.Component {
       creationSubmitted: false,
       listOfBlogposts: this.props.listOfBlogposts
     }
+
   }
 
   componentWillMount() {
+
   }
 
   componentDidMount() {
     const arrOfUserIds = this.props.currentUser[0].followeeIds.concat(this.props.currentUser[0].id);
+    const allusers = [];
+    for(let i = 1; i < 100; i++) {
+      allusers.push(i)
+    }
+    this.props.fetchUsers(allusers);
     this.props.fetchUsers(arrOfUserIds)
     .then(
       (payload) => {
@@ -35,11 +42,6 @@ class Dashboard extends React.Component {
         this.props.fetchBlogposts(arrOfBlogpostIds);
       }
     )
-    const allusers = [];
-    for(let i = 1; i < 100; i++) {
-      allusers.push(i)
-    }
-    this.props.fetchUsers(allusers);
     // const arrOfUserIds = this.props.currentUser[0].followeeIds.concat(this.props.currentUser[0].id);
     // this.props.fetchUsers(arrOfUserIds)
     //   .then(
@@ -64,6 +66,7 @@ class Dashboard extends React.Component {
             arrOfBlogpostIds = arrOfBlogpostIds.concat(user.blogpostIds);
           });
           this.props.fetchBlogposts(arrOfBlogpostIds);
+
         }
       )
     }
@@ -149,6 +152,7 @@ class Dashboard extends React.Component {
   }
 
   _triggerDashRefresh() {
+
     const arrOfUserIds = this.props.currentUser[0].followeeIds.concat(this.props.currentUser[0].id);
     this.props.fetchUsers(arrOfUserIds)
       .then(

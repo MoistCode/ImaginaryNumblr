@@ -31290,7 +31290,6 @@ var mapStateToProps = function mapStateToProps(state) {
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-
   return {
     clearErrors: function clearErrors() {
       return dispatch((0, _blogpost_actions.clearErrors)());
@@ -31363,6 +31362,7 @@ var Dashboard = function (_React$Component) {
       creationSubmitted: false,
       listOfBlogposts: _this.props.listOfBlogposts
     };
+
     return _this;
   }
 
@@ -31375,6 +31375,11 @@ var Dashboard = function (_React$Component) {
       var _this2 = this;
 
       var arrOfUserIds = this.props.currentUser[0].followeeIds.concat(this.props.currentUser[0].id);
+      var allusers = [];
+      for (var i = 1; i < 100; i++) {
+        allusers.push(i);
+      }
+      this.props.fetchUsers(allusers);
       this.props.fetchUsers(arrOfUserIds).then(function (payload) {
         var arrOfBlogpostIds = [];
         Object.values(payload.users.users).forEach(function (user) {
@@ -31382,11 +31387,6 @@ var Dashboard = function (_React$Component) {
         });
         _this2.props.fetchBlogposts(arrOfBlogpostIds);
       });
-      var allusers = [];
-      for (var i = 1; i < 100; i++) {
-        allusers.push(i);
-      }
-      this.props.fetchUsers(allusers);
       // const arrOfUserIds = this.props.currentUser[0].followeeIds.concat(this.props.currentUser[0].id);
       // this.props.fetchUsers(arrOfUserIds)
       //   .then(

@@ -87,7 +87,6 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-
   return {
     clearErrors: () => dispatch(clearErrors()),
     fetchUsers: (userIds) => dispatch(fetchUsers(userIds)),
