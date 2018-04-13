@@ -25,12 +25,15 @@ Ruby on Rails|React|Redux|HTML/CSS/JavaScript|PostgreSQL|Amazon Web Services S3
 <h2>Features</h2>
 
 [create an anchor](#post-creation)
+[create an anchor](#post-edit-delete)
+[create an anchor](#user-follows)
+[create an anchor](#post-likes)
 
 <a name="post-creation">
-<h4 align='center'>
-    <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/app/assets/images/favicon.png">
-     Post Creation
-</h4>
+  <h4 align='center'>
+      <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/app/assets/images/favicon.png">
+       Post Creation
+  </h4>
 </a>
   Navigation yourself seemlessly as creation is automatically updated and refreshed to show the most recently updated posts on your dashboard. Currently supported types are quotes, long texts, audios, videos, and photos.
 
@@ -39,12 +42,12 @@ Ruby on Rails|React|Redux|HTML/CSS/JavaScript|PostgreSQL|Amazon Web Services S3
 </p>  
 
 ***
-
-<h4 align='center'>
-  <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/app/assets/images/favicon.png">
-  Post Edition/Deletion
-</h4>  
-
+<a name="post-edit-delete">
+  <h4 align='center'>
+    <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/app/assets/images/favicon.png">
+    Post Edition/Deletion
+  </h4>  
+</a>
   With the power of React's state, we can create, edit, delete and whatever else we want to do without ever having to refresh to see the updates! This is done by manipulating the state of the current component which trickles an avalache effect where React compares the changes to the previous information and make changes as necessary.  
 
 <p align='center'>
@@ -52,12 +55,12 @@ Ruby on Rails|React|Redux|HTML/CSS/JavaScript|PostgreSQL|Amazon Web Services S3
 </p>  
 
 ***
-  
-<h4 align='center'>
-  <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/app/assets/images/favicon.png">
-  User Follows
-</h4>
-
+<a name="user-follows">
+  <h4 align='center'>
+    <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/app/assets/images/favicon.png">
+    User Follows
+  </h4>
+</a>
   Following a user allows access to every post associated with that user in real time. If you were to ever unfollow a user, your dash would instantly remove such posts on your dashboard.
 
 <p align='center'>
@@ -65,12 +68,12 @@ Ruby on Rails|React|Redux|HTML/CSS/JavaScript|PostgreSQL|Amazon Web Services S3
 </p>
 
 ***
-
-<h4 align='center'>
-  <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/app/assets/images/favicon.png">
-  Post Likes
-</h4>
-
+<a name="post-likes">
+  <h4 align='center'>
+    <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/app/assets/images/favicon.png">
+    Post Likes
+  </h4>
+</a>
   Enjoy a post? By liking a post, you will not only show appreciation for the author but will also save that post for future reference for everlasting entertainment!
 
 <p align='center'>
