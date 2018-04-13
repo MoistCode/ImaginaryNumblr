@@ -53,11 +53,12 @@ Navigation yourself seemlessly as creation is automatically updated and refreshe
 
 ***
 
-  <h4 align='center'>
-    <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/app/assets/images/favicon.png">
-    Like a post? Simply click on hearts to save that post on your likes page for later entertainment
-  </h4>
+<h4 align='center'>
+  <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/app/assets/images/favicon.png">
+  Like a post? Simply click on hearts to save that post on your likes page for later entertainment
+</h4>
+<p align='center'>
   <img src="https://github.com/MoistCode/ImaginaryNumblr/blob/master/readme_gifs/like.gif">  
-
+</p>
 
 
