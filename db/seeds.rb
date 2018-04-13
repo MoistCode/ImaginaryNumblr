@@ -124,14 +124,15 @@ User.create(
   password: 'password',
   email: 'demouser@demouser.demo.uk'
 )
-
+image_num = 0
 100.times do
   User.create(
     username:Faker::Internet.user_name(5..8),
     password: 'password',
     email: Faker::Internet.safe_email,
-    seed_image: seed_image_arr[Random.rand(100)]
+    seed_image: seed_image_arr[image_num]
   )
+  image_num += 1
 end
 
 # 1000 times (Content)
