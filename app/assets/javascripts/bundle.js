@@ -31022,6 +31022,11 @@ var FrontPage = function (_React$Component) {
               'Imaginary Numblr'
             ),
             _react2.default.createElement(
+              'h2',
+              { className: 'slogan' },
+              '"Where nerds use numbers to speak to other nerds"'
+            ),
+            _react2.default.createElement(
               'div',
               { className: 'math-icons' },
               _react2.default.createElement(

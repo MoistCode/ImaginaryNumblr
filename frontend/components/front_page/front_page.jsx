@@ -64,6 +64,7 @@ class FrontPage extends React.Component {
         <div className='section'>
           <div className='front-page-title'>
             <h1>Imaginary Numblr</h1>
+            <h2 className='slogan'>"Where nerds use numbers to speak to other nerds"</h2>
             <div className='math-icons'>
               <div className='exist1'>&exist;</div>
               <div className='forall'>&forall;</div>
