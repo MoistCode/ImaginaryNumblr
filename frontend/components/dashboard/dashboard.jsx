@@ -22,7 +22,17 @@ class Dashboard extends React.Component {
   }
 
   componentWillMount() {
-
+    const arrOfUserIds = this.props.currentUser[0].followeeIds.concat(this.props.currentUser[0].id);
+    this.props.fetchUsers(arrOfUserIds)
+    .then(
+      (payload) => {
+        let arrOfBlogpostIds = []
+        Object.values(payload.users.users).forEach((user) => {
+          arrOfBlogpostIds = arrOfBlogpostIds.concat(user.blogpostIds);
+        });
+        this.props.fetchBlogposts(arrOfBlogpostIds);
+      }
+    )
   }
 
   componentDidMount() {
@@ -189,14 +199,16 @@ class Dashboard extends React.Component {
 
   _generateRecommendedBlogpost() {
     const blogpost = this.props.randomBlogpost;
-    if (blogpost != undefined && this.props.listOfUsers[0] != undefined) {
-      let author;
-      for(let i = 0; i < this.props.listOfUsers.length; i++) {
-        if(this.props.listOfUsers[i].id == blogpost.authorId) {
-          author = this.props.listOfUsers[i];
+    let cleanListOfUsers = this._cleanUsers(this.props.listOfUsers)
+    if (blogpost != undefined && cleanListOfUsers[0] != undefined) {
+      let author = cleanListOfUsers[0];
+      for(let i = 0; i < cleanListOfUsers.length; i++) {
+        if(cleanListOfUsers[i].id == blogpost.authorId) {
+          author = cleanListOfUsers[i];
         }
       }
-
+      console.log(cleanListOfUsers);
+      console.log(author);
       return (
         <div className='dash-recommended-blogpost'>
           <header>Blogdar</header>
@@ -214,6 +226,16 @@ class Dashboard extends React.Component {
         </div>
       )
     }
+  }
+
+  _cleanUsers(listOfUsers) {
+    let cleanList = [];
+    for(let i = 0; i < listOfUsers.length; i++) {
+      if (listOfUsers[i] != undefined) {
+        cleanList.push(listOfUsers[i]);
+      }
+    }
+    return cleanList;
   }
 
   _generateFeed() {
