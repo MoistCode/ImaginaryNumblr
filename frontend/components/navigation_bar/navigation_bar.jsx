@@ -167,10 +167,12 @@ class NavigationBar extends React.Component {
             className="fa fa-heart"
             style={this._generateNavButtonStyles('likes')}
             onClick={() => this.props.history.push('/likes')}></i>
-          <i className="fa fa-commenting" style={this._generateNavButtonStyles('comment')}></i>
-          <i className="fa fa-envelope" style={this._generateNavButtonStyles('envelope')}></i>
-          <i className="fa fa-user" style={this._generateNavButtonStyles('user')}></i>
-          <i className="fa fa-cogs" style={this._generateNavButtonStyles('cogs')}></i>
+          {/* <i className="fa fa-commenting" style={this._generateNavButtonStyles('comment')}></i>
+          <i className="fa fa-envelope" style={this._generateNavButtonStyles('envelope')}></i> */}
+          <i className="fa fa-user" style={this._generateNavButtonStyles('user')}
+                                    onClick={ () =>this.props.history.push(`/users/${this.props.currentUser[0].id}`) }>
+          </i>
+          {/* <i className="fa fa-cogs" style={this._generateNavButtonStyles('cogs')}></i> */}
           { logoutButton }
         </span>
       )

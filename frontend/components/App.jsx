@@ -15,7 +15,7 @@ const App = () => (
     <Switch>
       <Route exact path='/404meansthispagedoesnotexist' component={ PageDoesNotExist } />
       <Route exact path='/users/:userId' component={ UserShowPageContainer } />
-      <ProtectedRoute path='/likes' component={ UserLikesShowPageContainer } />
+      <ProtectedRoute exact path='/likes' component={ UserLikesShowPageContainer } />
       <ProtectedRoute exact path='/dashboard' component={ DashboardContainer } />
       <AuthRoute path='/login' component={ FrontPage } />
       <AuthRoute path='/signup' component={ FrontPage } />

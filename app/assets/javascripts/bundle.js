@@ -30852,7 +30852,7 @@ var App = function App() {
       null,
       _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/404meansthispagedoesnotexist', component: _page_does_not_exist2.default }),
       _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/users/:userId', component: _user_showpage_container2.default }),
-      _react2.default.createElement(_route_util.ProtectedRoute, { path: '/likes', component: _like_showpage_container2.default }),
+      _react2.default.createElement(_route_util.ProtectedRoute, { exact: true, path: '/likes', component: _like_showpage_container2.default }),
       _react2.default.createElement(_route_util.ProtectedRoute, { exact: true, path: '/dashboard', component: _dashboard_container2.default }),
       _react2.default.createElement(_route_util.AuthRoute, { path: '/login', component: _front_page2.default }),
       _react2.default.createElement(_route_util.AuthRoute, { path: '/signup', component: _front_page2.default }),
@@ -33151,10 +33151,10 @@ var NavigationBar = function (_React$Component) {
             onClick: function onClick() {
               return _this4.props.history.push('/likes');
             } }),
-          _react2.default.createElement('i', { className: 'fa fa-commenting', style: this._generateNavButtonStyles('comment') }),
-          _react2.default.createElement('i', { className: 'fa fa-envelope', style: this._generateNavButtonStyles('envelope') }),
-          _react2.default.createElement('i', { className: 'fa fa-user', style: this._generateNavButtonStyles('user') }),
-          _react2.default.createElement('i', { className: 'fa fa-cogs', style: this._generateNavButtonStyles('cogs') }),
+          _react2.default.createElement('i', { className: 'fa fa-user', style: this._generateNavButtonStyles('user'),
+            onClick: function onClick() {
+              return _this4.props.history.push('/users/' + _this4.props.currentUser[0].id);
+            } }),
           logoutButton
         );
       } else {
