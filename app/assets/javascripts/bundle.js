@@ -31622,8 +31622,6 @@ var Dashboard = function (_React$Component) {
             author = cleanListOfUsers[i];
           }
         }
-        console.log(cleanListOfUsers);
-        console.log(author);
         return _react2.default.createElement(
           'div',
           { className: 'dash-recommended-blogpost' },

@@ -207,8 +207,6 @@ class Dashboard extends React.Component {
           author = cleanListOfUsers[i];
         }
       }
-      console.log(cleanListOfUsers);
-      console.log(author);
       return (
         <div className='dash-recommended-blogpost'>
           <header>Blogdar</header>
