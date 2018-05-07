@@ -83,7 +83,7 @@ class FrontPage extends React.Component {
               className="w3-container w3-center w3-animate-bottom">
             </div>
           </div>
-          <img className='photo1' />
+          {/* <img className='photo1' /> */}
         </div>
       )
     }
