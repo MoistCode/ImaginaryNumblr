@@ -33075,7 +33075,7 @@ var NavigationBar = function (_React$Component) {
         null,
         _react2.default.createElement(
           'a',
-          { href: 'https://github.com/MoistCode' },
+          { href: 'https://github.com/MoistCode/ImaginaryNumblr' },
           _react2.default.createElement('i', { 'class': 'fa fa-github',
             style: { fontSize: '36px', marginRight: '10px', color: '#A7CAE9' } })
         ),

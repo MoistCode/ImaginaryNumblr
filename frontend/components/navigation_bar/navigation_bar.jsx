@@ -68,7 +68,7 @@ class NavigationBar extends React.Component {
     return (
       <div>
 
-        <a href="https://github.com/MoistCode">
+        <a href="https://github.com/MoistCode/ImaginaryNumblr">
           <i class="fa fa-github" 
              style={{ fontSize: '36px', marginRight: '10px', color: '#A7CAE9' }}>
           </i>
