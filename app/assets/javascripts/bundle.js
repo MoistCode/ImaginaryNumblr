@@ -33035,10 +33035,10 @@ var NavigationBar = function (_React$Component) {
               onChange: this.update('searchBar') })
           )
         ),
+        this._gitAndLinkedIcons(),
         _react2.default.createElement(
           'div',
           { className: 'nav-header-right' },
-          this._gitAndLinkedIcons(),
           this._createSessionButtons(this.props.currentUser),
           this._showCurrentUser()
         )
@@ -33076,12 +33076,14 @@ var NavigationBar = function (_React$Component) {
         _react2.default.createElement(
           'a',
           { href: 'https://github.com/MoistCode' },
-          _react2.default.createElement('i', { 'class': 'fa fa-github', style: this._generateNavButtonStyles('user') })
+          _react2.default.createElement('i', { 'class': 'fa fa-github',
+            style: { fontSize: '36px', marginRight: '10px', color: '#A7CAE9' } })
         ),
         _react2.default.createElement(
           'a',
           { href: 'https://www.linkedin.com/in/tommy-long-pham-4b7737158/' },
-          _react2.default.createElement('i', { 'class': 'fa fa-linkedin-square', style: this._generateNavButtonStyles('user') })
+          _react2.default.createElement('i', { 'class': 'fa fa-linkedin-square',
+            style: { fontSize: '36px', color: '#A7CAE9' } })
         )
       );
     }

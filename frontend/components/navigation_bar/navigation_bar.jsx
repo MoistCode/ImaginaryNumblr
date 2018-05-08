@@ -32,8 +32,8 @@ class NavigationBar extends React.Component {
               onChange={this.update('searchBar')} />
           </div>
         </div>
+        {this._gitAndLinkedIcons()}
         <div className='nav-header-right'>
-          {this._gitAndLinkedIcons()}
           {this._createSessionButtons(this.props.currentUser)}
           {this._showCurrentUser()}
         </div>
@@ -67,12 +67,19 @@ class NavigationBar extends React.Component {
   _gitAndLinkedIcons() {
     return (
       <div>
+
         <a href="https://github.com/MoistCode">
-          <i class="fa fa-github" style={this._generateNavButtonStyles('user')}></i>
+          <i class="fa fa-github" 
+             style={{ fontSize: '36px', marginRight: '10px', color: '#A7CAE9' }}>
+          </i>
         </a>
+
         <a href="https://www.linkedin.com/in/tommy-long-pham-4b7737158/">
-          <i class="fa fa-linkedin-square" style={this._generateNavButtonStyles('user')}></i>
+          <i class="fa fa-linkedin-square" 
+             style={{ fontSize: '36px', color: '#A7CAE9' }}>
+          </i>
         </a>
+
       </div>
     )
   }
