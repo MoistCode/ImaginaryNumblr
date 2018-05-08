@@ -33076,12 +33076,12 @@ var NavigationBar = function (_React$Component) {
         _react2.default.createElement(
           'a',
           { href: 'https://github.com/MoistCode' },
-          _react2.default.createElement('i', { 'class': 'fa fa-github' })
+          _react2.default.createElement('i', { 'class': 'fa fa-github', style: this._generateNavButtonStyles('user') })
         ),
         _react2.default.createElement(
           'a',
           { href: 'https://www.linkedin.com/in/tommy-long-pham-4b7737158/' },
-          _react2.default.createElement('i', { 'class': 'fa fa-linkedin-square' })
+          _react2.default.createElement('i', { 'class': 'fa fa-linkedin-square', style: this._generateNavButtonStyles('user') })
         )
       );
     }

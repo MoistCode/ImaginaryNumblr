@@ -68,10 +68,10 @@ class NavigationBar extends React.Component {
     return (
       <div>
         <a href="https://github.com/MoistCode">
-          <i class="fa fa-github"></i>
+          <i class="fa fa-github" style={this._generateNavButtonStyles('user')}></i>
         </a>
         <a href="https://www.linkedin.com/in/tommy-long-pham-4b7737158/">
-          <i class="fa fa-linkedin-square"></i>
+          <i class="fa fa-linkedin-square" style={this._generateNavButtonStyles('user')}></i>
         </a>
       </div>
     )
