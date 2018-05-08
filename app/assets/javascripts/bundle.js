@@ -33038,6 +33038,7 @@ var NavigationBar = function (_React$Component) {
         _react2.default.createElement(
           'div',
           { className: 'nav-header-right' },
+          this._gitAndLinkedIcons(),
           this._createSessionButtons(this.props.currentUser),
           this._showCurrentUser()
         )
@@ -33065,6 +33066,24 @@ var NavigationBar = function (_React$Component) {
             src: this.props.currentUser[0].profileImageUrl })
         );
       }
+    }
+  }, {
+    key: '_gitAndLinkedIcons',
+    value: function _gitAndLinkedIcons() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(
+          'a',
+          { href: 'https://github.com/MoistCode' },
+          _react2.default.createElement('i', { 'class': 'fa fa-github' })
+        ),
+        _react2.default.createElement(
+          'a',
+          { href: 'https://www.linkedin.com/in/tommy-long-pham-4b7737158/' },
+          _react2.default.createElement('i', { 'class': 'fa fa-linkedin-square' })
+        )
+      );
     }
   }, {
     key: '_createSessionButtons',

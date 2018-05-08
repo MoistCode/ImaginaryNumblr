@@ -33,6 +33,7 @@ class NavigationBar extends React.Component {
           </div>
         </div>
         <div className='nav-header-right'>
+          {this._gitAndLinkedIcons()}
           {this._createSessionButtons(this.props.currentUser)}
           {this._showCurrentUser()}
         </div>
@@ -63,6 +64,18 @@ class NavigationBar extends React.Component {
     }
   }
 
+  _gitAndLinkedIcons() {
+    return (
+      <div>
+        <a href="https://github.com/MoistCode">
+          <i class="fa fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/tommy-long-pham-4b7737158/">
+          <i class="fa fa-linkedin-square"></i>
+        </a>
+      </div>
+    )
+  }
   _createSessionButtons(currentUser) {
     const buttonColor = () => {
       if (this.props.location.pathname == '/404meansthispagedoesnotexist') {
